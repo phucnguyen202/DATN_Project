@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+body {
+  font-family: "Gill Sans", sans-serif !important;
+}
+
+.ant-dropdown-menu-item {
+  padding: 14px !important;
+}
+
+.text-gray-custom {
+  @apply text-custom !important;
+}
+
+.ant-space {
+  @apply flex items-center !important;
+}
+
+.ant-drawer-body {
+  @apply p-0 !important;
+}

@@ -1,13 +1,16 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Footer, Header } from '../components'
+import { Layout } from 'antd'
+import HeaderComponent from '../components/Header/HeaderComponent'
+import FooterComponent from '../components/Footer/FooterComponent'
 
 const Main = () => {
   return (
     <>
-      <Header />
+      <HeaderComponent />
       <Outlet />
-      <Footer />
+      <FooterComponent />
+
     </>
   )
 }
