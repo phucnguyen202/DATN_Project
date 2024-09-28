@@ -1,11 +1,12 @@
-import { Badge, Dropdown, Input, Space, Menu, Drawer } from 'antd';
+import { Badge, Dropdown, Input, Menu, Space } from 'antd';
 import React, { useState } from 'react';
-import { AiOutlineEnvironment, AiOutlineSetting, AiOutlineCloseSquare, AiOutlineMenu, AiOutlineDown, AiOutlineLogout, AiOutlineTag, AiOutlineAppstore, AiOutlineUser, AiOutlinePhone } from "react-icons/ai";
-import { BiLogoFacebook, BiLogoInstagram, BiLogoPinterest, BiLogoTwitter, BiLogoYoutube, BiSearch } from "react-icons/bi";
-import { FaRegHeart, FaRegUser } from "react-icons/fa";
+import { AiOutlineAppstore, AiOutlineDown, AiOutlineEnvironment, AiOutlineLogout, AiOutlineMenu, AiOutlineSetting, AiOutlineTag, AiOutlineUser } from "react-icons/ai";
+import { BiSearch } from "react-icons/bi";
+import { FaHotjar, FaRegHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import { FaHotjar } from "react-icons/fa";
+import DrawerMobile from './components/DrawerMobile';
+import HeaderTop from './components/HeaderTop';
 const itemsCart = [
   {
     key: '1',
@@ -175,7 +176,7 @@ const items = [
 ];
 
 const HeaderComponent = () => {
-  const [current, setCurrent] = useState('mail');
+  const [current, setCurrent] = useState(0);
   const [open, setOpen] = useState(false);
   const onClick = (e) => {
     console.log('click ', e);
@@ -195,44 +196,7 @@ const HeaderComponent = () => {
             <p className='text-slate-50 text-sm p-2'>Grand opening, <b>up to 15%</b>  off all items, Only <b>3 days</b> left</p>
           </div>
         </div>
-        <div className='border-b-[1px] hidden md:block' >
-          <div className='grid grid-cols-12'>
-            <div className='col-span-6'>
-              <div className="flex justify-start space-x-2 px-2 py-[10px] text-custom">
-                <Link to='/about' className="hover:text-customText text-[13px]">
-                  About Us
-                </Link>
-                <span className='text-sm'>|</span>
-                <Link to="/account" className="hover:text-customText text-[13px]">
-                  My Account
-                </Link>
-                <span className='text-sm'>|</span>
-                <Link to="/wishlist" className="hover:text-customText text-[13px]">
-                  Wishlist
-                </Link>
-                <span className='text-sm'>|</span>
-                <Link to="/order-tracking" className="hover:text-customText text-[13px]">
-                  Order Tracking
-                </Link>
-              </div>
-            </div>
-            <div className='col-span-6'>
-              <div className="flex justify-end space-x-2 px-2 py-[10px] text-custom">
-                <Link to='/about' className="hover:text-customText text-[13px]">
-                  Need help? Call Vn: <span>0365228025</span>
-                </Link>
-                <span className='text-sm'>|</span>
-                <Link to="/account" className="hover:text-customText text-[13px]">
-                  English
-                </Link>
-                <span className='text-sm'>|</span>
-                <Link to="/wishlist" className="hover:text-customText text-[13px]">
-                  VND
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HeaderTop />
         <div className='border-b-[1px]'>
           <div className='grid grid-cols-12 px-4 md:py-8 py-3 '>
             <div className='col-span-2 md:hidden flex items-center'>
@@ -339,7 +303,6 @@ const HeaderComponent = () => {
                 selectedKeys={[current]}
                 mode="horizontal" items={items} />
             </div>
-
             <div className='col-span-2 hidden xl:flex gap-3 justify-end items-center '>
               <img className='text-customText' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/icon-headphone.svg" alt="" />
               <div>
@@ -352,64 +315,8 @@ const HeaderComponent = () => {
           </div>
         </div>
       </header>
-      <Drawer
-        placement='left'
-        closable={false}
-        onClose={onClose}
-        open={open}
-        key='left'
-      >
-        <div className='border-b-[1px]'>
-          <div className='flex justify-between items-center py-4 px-5'>
-            <Link to='/'>
-              <img className=' w-[130px]' src="https://www.niraagayurveda.com/assets/imgs/theme/logo.svg" alt="" />
-            </Link>
-            <AiOutlineCloseSquare onClick={onClose} className='flex cursor-pointer text-greenCustom ' size={26} />
-          </div>
-        </div>
-        <div className='px-5 pt-5'>
-          <Input
-            variant="borderless"
-            className='py-3 text-customText bg-custombggray'
-            placeholder="Search for items..."
-            suffix={<BiSearch className="text-slate-500" size={25} />}
-          />
-        </div>
-        <div className='m-5'>
-          <Menu onClick={onClick}
-            selectedKeys={[current]}
-            mode="inline" items={items} />
-        </div>
-        <div className='m-5 border rounded-md p-5 flex flex-col gap-4'>
-          <div className='flex gap-2 items-center'>
-            <AiOutlineEnvironment className='text-greenCustom' size={16} />
-            <p className='text-sm text-customText'>Our location</p>
-          </div>
-          <div className='flex gap-2 items-center'>
-            <AiOutlineUser className='text-greenCustom' size={16} />
-            <Link to='/login' className='text-sm text-customText'>Log In</Link>
-            <span>/</span>
-            <Link to='/signup' className='text-sm text-customText'>Sign Up</Link>
-          </div>
-          <div className='flex gap-2 items-center'>
-            <AiOutlinePhone className='text-greenCustom ' size={16} />
-            <p className='text-sm'>(+01)-2345-6789</p>
-          </div>
-        </div>
-        <div className='m-5'>
-          <p className='font-medium text-lg'>Follow Us</p>
-          <div className='flex gap-4 mt-3'>
-            <Link className='bg-customBg rounded-full p-2'><BiLogoFacebook className='text-slate-50 ' size={16} /></Link>
-            <Link className='bg-customBg rounded-full p-2'><BiLogoTwitter className='text-slate-50 ' size={16} /></Link>
-            <Link className='bg-customBg rounded-full p-2'><BiLogoInstagram className='text-slate-50 ' size={16} /></Link>
-            <Link className='bg-customBg rounded-full p-2'><BiLogoPinterest className='text-slate-50 ' size={16} /></Link>
-            <Link className='bg-customBg rounded-full p-2'><BiLogoYoutube className='text-slate-50 ' size={16} /></Link>
-          </div>
-        </div>
-        <div className='m-5'>
-          <p className='text-custom text-xs leading-loose'>Copyright 2022 © Nest. All rights reserved. Powered by AliThemes.</p>
-        </div>
-      </Drawer>
+      <DrawerMobile onClose={onClose} open={open}
+        openMenu={onClick} current={current} items={items} />
     </>
   )
 }
