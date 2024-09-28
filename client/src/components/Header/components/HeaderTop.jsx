@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const HeaderTop = () => {
   return (
     <>
-      <div className='border-b-[1px] hidden md:block' >
+      <div className='border-b-[1px] px-2 hidden md:block' >
         <div className='grid grid-cols-12'>
           <div className='col-span-6'>
             <div className="flex justify-start space-x-2 px-2 py-[10px] text-custom">

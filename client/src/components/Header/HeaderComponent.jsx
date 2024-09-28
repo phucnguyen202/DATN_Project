@@ -277,7 +277,7 @@ const HeaderComponent = () => {
           </div>
         </div>
         <div className='border-b-[1px] hidden md:block'>
-          <div className='grid grid-cols-12 px-2 py-4'>
+          <div className='grid grid-cols-12 px-4 py-4'>
             <div className='col-span-2 hidden xl:flex items-center'>
               <Dropdown
                 menu={{ items: itemsCategory, }}

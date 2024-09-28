@@ -20,7 +20,7 @@ const BannerHome = () => {
   };
   return (
     <>
-      <div className='px-4 mt-8'>
+      <div className='px-4 my-8 overflow-hidden'>
         <Slider {...settings} className='slide-banner'>
           <div>
             <div className='slide-banner-home1 h-[350px] xl:h-[530px]'>

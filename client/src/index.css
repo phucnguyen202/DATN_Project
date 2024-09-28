@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 body {
   font-family: "Quicksand", sans-serif !important;
@@ -62,7 +62,6 @@ body {
 .slide-banner-home1 {
   background-image: url(https://www.niraagayurveda.com/assets/imgs/slider/slider-1.png);
   width: 100%;
-  /* height: 530px; */
   border-radius: 30px;
   background-size: cover;
   background-position: center center;
@@ -71,8 +70,11 @@ body {
 .slide-banner-home2 {
   background-image: url(https://www.niraagayurveda.com/assets/imgs/slider/slider-2.png);
   width: 100%;
-  /* height: 530px; */
   border-radius: 30px;
   background-size: cover;
   background-position: center center;
+}
+
+.featuredCategories .slick-slide {
+  padding: 0 8px;
 }
