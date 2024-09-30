@@ -78,3 +78,25 @@ body {
 .featuredCategories .slick-slide {
   padding: 0 8px;
 }
+
+
+.banner-featuredCategory1 {
+  background-image: url(https://www.niraagayurveda.com/assets/imgs/banner/banner-1.png);
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.banner-featuredCategory2 {
+  background-image: url(https://www.niraagayurveda.com/assets/imgs/banner/banner-2.png);
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.banner-featuredCategory3 {
+  background-image: url(https://www.niraagayurveda.com/assets/imgs/banner/banner-3.png);
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+}

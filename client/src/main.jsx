@@ -14,7 +14,7 @@ createRoot(document.getElementById('root')).render(
             horizontalItemHoverColor: '#3BB77E',
             horizontalItemSelectedColor: '#3BB77E',
             itemSelectedColor: '#3BB77E',
-          }
+          },
         }
       }}>
       <BrowserRouter>
