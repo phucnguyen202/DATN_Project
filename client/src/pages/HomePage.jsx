@@ -1,12 +1,13 @@
 import React from 'react'
 
-import { BannerHome, FeaturedCategories } from '../components';
+import { BannerHome, FeaturedCategories, PopularProducts } from '../components';
 const HomePage = () => {
 
   return (
     <>
       <BannerHome />
       <FeaturedCategories />
+      <PopularProducts />
     </>
   )
 }

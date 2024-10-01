@@ -100,3 +100,39 @@ body {
   background-size: cover;
   background-position: center center;
 }
+
+.tabs-extra-demo-button {
+  margin-inline-end: 16px;
+}
+
+.ant-row-rtl .tabs-extra-demo-button {
+  margin-inline-end: 0;
+  margin-inline-start: 16px;
+}
+
+.ant-tabs {
+  border-bottom: none !important;
+  /* Xóa border của toàn bộ Tabs */
+}
+
+.ant-tabs-nav {
+  border-bottom: none !important;
+  /* Xóa border của thanh điều hướng Tabs */
+}
+
+.ant-tabs-content-holder {
+  border: none !important;
+  /* Đảm bảo không còn border nào khác */
+}
+
+.custom-card-meta .ant-card-meta-title {
+  /* Giới hạn chiều cao của title để hiển thị tối đa 2 dòng */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* Số dòng muốn hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  /* Cho phép hiển thị nhiều dòng */
+}

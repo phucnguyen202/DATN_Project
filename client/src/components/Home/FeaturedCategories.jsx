@@ -52,11 +52,11 @@ const FeaturedCategories = () => {
     }
   };
   return (
-    <div className="px-4 mb-10 overflow-hidden">
+    <div className="px-4 mb-6 overflow-hidden">
       <div className=" flex justify-between items-center">
         <Title level={2}
           style={{ margin: '0px' }}
-          className="!text-customText">Featured Categories</Title>
+          className="!text-customText">Danh Mục Nổi Bật</Title>
         <div className="flex gap-4 items-center max-md:hidden">
           <Button className="rounded-full" onClick={handlePrev}>
             <MdChevronLeft className="" size={20} />
@@ -66,7 +66,7 @@ const FeaturedCategories = () => {
           </Button>
         </div>
       </div>
-      <div className="featuredCategories py-11">
+      <div className="featuredCategories py-10">
         <Slider ref={sliderRef} {...settings}>
           {
             featuredCategoriesDB.length !== 0 && featuredCategoriesDB.map((item, index) => (
@@ -107,9 +107,6 @@ const FeaturedCategories = () => {
                 icon={<GrFormNextLink size={20} />}>Shop Now</Button>
             </div>
           </div>
-
-
-
           <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory2">
             <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
               <p
