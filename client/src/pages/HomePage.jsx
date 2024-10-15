@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BannerHome, FeaturedCategories, PopularProducts } from '../components';
+import { BannerHome, BestSellingProduct, DealsOfTheDayHome, FeaturedCategories, PopularProducts } from '../components';
 const HomePage = () => {
 
   return (
@@ -8,6 +8,8 @@ const HomePage = () => {
       <BannerHome />
       <FeaturedCategories />
       <PopularProducts />
+      <BestSellingProduct />
+      <DealsOfTheDayHome />
     </>
   )
 }

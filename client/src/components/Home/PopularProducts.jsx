@@ -278,7 +278,6 @@ const PopularProducts = () => {
     </div >
   );
 
-
   return (
     <div className="px-4 py-6">
       <Tabs

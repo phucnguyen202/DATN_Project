@@ -75,7 +75,8 @@ body {
   background-position: center center;
 }
 
-.featuredCategories .slick-slide {
+/* .featuredCategories  */
+.slick-slide {
   padding: 0 8px;
 }
 
@@ -135,4 +136,11 @@ body {
   text-overflow: ellipsis;
   white-space: normal;
   /* Cho phép hiển thị nhiều dòng */
+}
+
+.banner_bestSellingProduct {
+  background-image: url(https://www.niraagayurveda.com/assets/imgs/banner/banner-4.png);
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
 }
