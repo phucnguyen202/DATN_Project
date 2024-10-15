@@ -6,8 +6,8 @@ const DealsOfTheDayHome = () => {
   return (
     <>
       <div className="px-4 py-6">
-        <Title level={2} style={{ margin: '0px', color: '#253D4E' }} className=' pb-10'>Sản Phẩm Phổ Biến</Title>
-        <div className='grid max-md:grid-cols-1 grid-cols-3 xl:grid-cols-4  gap-6'>
+        <Title level={2} style={{ margin: '0px', color: '#253D4E' }} className=' pb-10'>Khuyến Mãi Trong Ngày</Title>
+        <div className='grid max-md:grid-cols-1 grid-cols-3 xl:grid-cols-4 gap-6'>
           <div className='relative group max-md:mb-24'>
             <div className=''>
               <img className='flex rounded-xl' src="https://www.niraagayurveda.com/assets/imgs/banner/banner-5.png" alt="" />
@@ -131,7 +131,7 @@ const DealsOfTheDayHome = () => {
               </Card>
             </div>
           </div>
-          <div className='relative group max-md:hidden hidden'>
+          <div className='relative group max-md:hidden hidden xl:block'>
             <div className=''>
               <img className='flex rounded-xl' src="https://www.niraagayurveda.com/assets/imgs/banner/banner-8.png" alt="" />
             </div>
