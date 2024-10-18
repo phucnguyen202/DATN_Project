@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BannerHome, BestSellingProduct, DealsOfTheDayHome, FeaturedCategories, PopularProducts, ProductSectionHome } from '../components';
+import { BannerHome, BestSellingProduct, DealsOfTheDayHome, FeaturedCategories, PopularProducts, ProductSectionHome, PromotionalSectionHome } from '../components';
 const HomePage = () => {
 
   return (
@@ -11,7 +11,7 @@ const HomePage = () => {
       <BestSellingProduct />
       <DealsOfTheDayHome />
       <ProductSectionHome />
-
+      <PromotionalSectionHome />
     </>
   )
 }

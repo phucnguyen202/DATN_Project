@@ -5,7 +5,7 @@ const { Title, Text } = Typography;
 const ProductSectionHome = () => {
   return (
     <>
-      <div className='xl:mt-28 mt-[164px] max-md:py-6 px-4 pb-4'>
+      <div className='xl:mt-28 lg:mt-[164px] max-md:py-6 px-4 pb-4'>
         <div className='grid xl:grid-cols-4 grid-cols-2 max-md:grid-cols-1 gap-6 '>
           <div>
             <div className="relative">

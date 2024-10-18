@@ -23,7 +23,9 @@ const BannerHome = () => {
       <div className='px-4 my-8 overflow-hidden'>
         <Slider {...settings} className='slide-banner'>
           <div>
-            <div className='slide-banner-home1 h-[350px] xl:h-[530px]'>
+            <div className='slide-banner-home1 h-[350px] xl:h-[530px]' style={{
+              backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/slider/slider-1.png)"
+            }}>
               <div className=' absolute max-md:px-8 pt-12 px-14 xl:pt-20 xl:px-20'>
                 <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Don't miss amazing </p>
                 <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>grocery deals</p>
@@ -42,7 +44,9 @@ const BannerHome = () => {
             </div>
           </div>
           <div>
-            <div className='slide-banner-home2 h-[350px] xl:h-[530px]'>
+            <div className='slide-banner-home1 h-[350px] xl:h-[530px]' style={{
+              backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/slider/slider-2.png)"
+            }}>
               <div className=' absolute max-md:px-8 pt-12 px-14 xl:pt-20 xl:px-20'>
                 <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Fresh Vegetables</p>
                 <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Big discount</p>

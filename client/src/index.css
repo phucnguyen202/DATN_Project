@@ -60,15 +60,6 @@ body {
 } */
 
 .slide-banner-home1 {
-  background-image: url(https://www.niraagayurveda.com/assets/imgs/slider/slider-1.png);
-  width: 100%;
-  border-radius: 30px;
-  background-size: cover;
-  background-position: center center;
-}
-
-.slide-banner-home2 {
-  background-image: url(https://www.niraagayurveda.com/assets/imgs/slider/slider-2.png);
   width: 100%;
   border-radius: 30px;
   background-size: cover;
@@ -81,22 +72,7 @@ body {
 }
 
 
-.banner-featuredCategory1 {
-  background-image: url(https://www.niraagayurveda.com/assets/imgs/banner/banner-1.png);
-  width: 100%;
-  background-size: cover;
-  background-position: center center;
-}
-
-.banner-featuredCategory2 {
-  background-image: url(https://www.niraagayurveda.com/assets/imgs/banner/banner-2.png);
-  width: 100%;
-  background-size: cover;
-  background-position: center center;
-}
-
-.banner-featuredCategory3 {
-  background-image: url(https://www.niraagayurveda.com/assets/imgs/banner/banner-3.png);
+.banner-featuredCategory {
   width: 100%;
   background-size: cover;
   background-position: center center;

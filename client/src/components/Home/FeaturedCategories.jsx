@@ -93,7 +93,9 @@ const FeaturedCategories = () => {
 
       <div className="">
         <div className="grid max-md:grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory1">
+          <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory" style={{
+            backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-1.png)"
+          }}>
             <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
               <p
                 style={{ margin: '0px' }}
@@ -107,7 +109,9 @@ const FeaturedCategories = () => {
                 icon={<GrFormNextLink size={20} />}>Shop Now</Button>
             </div>
           </div>
-          <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory2">
+          <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory" style={{
+            backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-2.png)"
+          }}>
             <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
               <p
                 style={{ margin: '0px' }}
@@ -120,7 +124,9 @@ const FeaturedCategories = () => {
                 icon={<GrFormNextLink size={20} />}>Shop Now</Button>
             </div>
           </div>
-          <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory3">
+          <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory" style={{
+            backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-3.png)"
+          }}>
             <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
               <p
                 style={{ margin: '0px' }}
