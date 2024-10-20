@@ -295,7 +295,8 @@ const HeaderComponent = () => {
               </div>
             </div>
             <div className=' col-span-12 xl:col-span-8'>
-              <Menu onClick={onClick}
+              <Menu
+                onClick={onClick}
                 style={{
                   display: 'flex',
                   justifyContent: 'center'

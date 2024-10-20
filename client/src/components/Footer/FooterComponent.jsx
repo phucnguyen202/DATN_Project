@@ -107,7 +107,7 @@ const FooterComponent = () => {
               </div>
             </div>
           </div>
-          <div className=''>
+          <div className='max-md:mt-5'>
             <div className='flex items-center max-md:justify-center lg:justify-end gap-3'>
               <p className='text-lg font-semibold'>Follow Us</p>
               <ul className='flex gap-1'>

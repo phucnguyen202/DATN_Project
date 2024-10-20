@@ -1,23 +1,23 @@
 
 const express = require('express');
-require('dotenv').config();
 const app = express();
+const authRouter = require('./routers/authRouter')
+const cors = require('cors');
+require('dotenv').config();
 
 
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 3001;
+// const port = 3001
+
 app.use(express.json());
 
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+  optionsSuccessStatus: 200,
+}));
 
-// const db = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
-//   database: 'DB_DATN'
-// }).then(() => {
-//   console.log('Connected to the database');
-// }).catch(err =>
-//   console.error('Error connecting to the database', err)
-// )
+app.use('/v1/api', authRouter)
 
 app.listen(port, () => {
   console.log(`running on port ${port}`);

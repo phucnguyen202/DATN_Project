@@ -1,6 +1,9 @@
 import React from 'react'
 
-import { BannerHome, BestSellingProduct, DealsOfTheDayHome, FeaturedCategories, PopularProducts, ProductSectionHome, PromotionalSectionHome } from '../components';
+import {
+  BannerHome, BestSellingProduct, DealsOfTheDayHome, FeaturedCategories,
+  PopularProducts, ProductSectionHome, PromotionalSectionHome
+} from '../components';
 const HomePage = () => {
 
   return (
