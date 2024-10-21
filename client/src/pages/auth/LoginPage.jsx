@@ -1,15 +1,31 @@
-import React, { useState } from 'react'
+import { Button, Checkbox, Form, Input, message } from 'antd';
+import React, { useState } from 'react';
 import { IoMdPersonAdd } from "react-icons/io";
-import { Link } from 'react-router-dom';
-import { Button, Checkbox, Form, Input } from 'antd'
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import handleAPI from '../../apis/HandleAPI';
+import { addAuth } from '../../redux/reducers/authReducer';
 import SocialLogin from './components/SocialLogin';
 
 const LoginPage = () => {
   const [form] = Form.useForm()
   const [isLoading, setIsLoading] = useState(false)
   const [isRemember, setIsRemember] = useState(false)
-  const handleLogin = (val) => {
-    console.log("val::", val)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogin = async (value) => {
+    console.log("val::", value)
+    setIsLoading(true);
+    try {
+      const res = await handleAPI('/auth/login', value, 'post')
+      res.data && dispatch(addAuth(res.data))
+      message.success(res.message)
+      navigate('/')
+    } catch (e) {
+      message.error(e.message)
+    } finally {
+      setIsLoading(false)
+    }
   }
   return (
     <>

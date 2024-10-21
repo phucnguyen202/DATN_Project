@@ -1,12 +1,12 @@
 const User = require('../models/AuthModel')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = 'your_jwt_secret';
+// const JWT_SECRET = 'your_jwt_secret';
 
 class AuthController {
   async register(req, res) {
     try {
-      const { email, name, password } = req.body
+      const { email, name, password, phone } = req.body
       User.findUserByEmail(email, async (err, result) => {
         if (err) {
           return res.status(500).json({ message: 'Lỗi hệ thống' });
@@ -21,7 +21,8 @@ class AuthController {
         const newUser = {
           ten: name,
           email: email,
-          matkhau: hashedPassword
+          matkhau: hashedPassword,
+          soDT: phone
         };
         User.createUser(newUser, (err, result) => {
           if (err) {
@@ -41,11 +42,13 @@ class AuthController {
                 id: user.id,
                 email: user.email,
                 quyen: user.quyen
-              }, JWT_SECRET);
+              }, process.env.JWT_SECRET);
             return res.status(201).json({
               message: 'Đăng ký thành công',
-              token,
-              data: user
+              data: {
+                user,
+                token
+              }
             });
           })
         })
@@ -86,11 +89,13 @@ class AuthController {
               id: user.id,
               email: user.email,
               quyen: user.quyen
-            }, JWT_SECRET);
+            }, process.env.JWT_SECRET);
           return res.status(201).json({
             message: 'Đăng nhập thành công',
-            token,
-            data: user
+            data: {
+              user,
+              token
+            }
           });
         })
       })
