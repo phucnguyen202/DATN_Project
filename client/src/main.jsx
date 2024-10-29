@@ -16,6 +16,18 @@ createRoot(document.getElementById('root')).render(
             horizontalItemSelectedColor: '#3BB77E',
             itemSelectedColor: '#3BB77E',
           },
+          Slider: {
+            dotActiveBorderColor: '#3BB77E',
+            dotBorderColor: '#3BB77E',
+            handleActiveColor: '#3BB77E'
+          },
+          Tabs: {
+            inkBarColor: '#3BB77E',
+            itemActiveColor: '#253D4E',
+            itemHoverColor: '#3BB77E',
+            itemSelectedColor: '#3BB77E',
+            titleFontSize: '18px'
+          },
         }
       }}>
       <Provider store={store}>
