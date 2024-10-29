@@ -141,21 +141,21 @@ const DetailPage = () => {
             <div className='flex max-md:flex-col gap-12'>
               <div className='w-1/2 max-md:w-full'>
                 <div className=' flex justify-center border-[1px] rounded-2xl'>
-                  <img className='w-[480px] h-[480px] max-md:h-[360px]' src="https://www.niraagayurveda.com/assets/imgs/shop/product-16-2.jpg" alt="" />
+                  <img className='w-[480px] h-[480px] max-md:h-[360px] rounded-2xl' src="https://www.niraagayurveda.com/assets/imgs/shop/product-16-2.jpg" alt="" />
                 </div>
                 <div className='mt-8'>
                   <div className=' grid grid-cols-4 gap-4'>
                     <div className='border-[1px] rounded-md'>
-                      <img src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-4.jpg" alt="" />
+                      <img className='rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-4.jpg" alt="" />
                     </div>
                     <div className='border-[1px] rounded-md'>
-                      <img src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-5.jpg" alt="" />
+                      <img className='rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-5.jpg" alt="" />
                     </div>
                     <div className='border-[1px] rounded-md'>
-                      <img src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-6.jpg" alt="" />
+                      <img className='rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-6.jpg" alt="" />
                     </div>
                     <div className='border-[1px] rounded-md'>
-                      <img src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-7.jpg" alt="" />
+                      <img className='rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-7.jpg" alt="" />
                     </div>
                   </div>
                 </div>
