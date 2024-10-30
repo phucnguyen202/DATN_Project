@@ -263,7 +263,7 @@ const BestSellingProduct = () => {
                   <div className='flex justify-center'>
                     <img
                       className='transform w-[200px] transition-transform duration-1000 ease-in-out hover:scale-110'
-                      src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
+                      src="https://www.niraagayurveda.com/assets/imgs/shop/product-3-1.jpg"
                       alt=""
                     />
                   </div>
@@ -320,7 +320,7 @@ const BestSellingProduct = () => {
                   <div className='flex justify-center'>
                     <img
                       className='transform w-[200px] transition-transform duration-1000 ease-in-out hover:scale-110'
-                      src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
+                      src="https://www.niraagayurveda.com/assets/imgs/shop/product-4-1.jpg"
                       alt=""
                     />
                   </div>
