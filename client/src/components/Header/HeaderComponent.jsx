@@ -3,20 +3,11 @@ import React, { useState } from 'react';
 import { AiOutlineAppstore, AiOutlineDown, AiOutlineEnvironment, AiOutlineLogout, AiOutlineMenu, AiOutlineSetting, AiOutlineTag, AiOutlineUser } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { FaHotjar, FaRegHeart } from "react-icons/fa";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import CartComponent from '../CartComponent';
 import DrawerMobile from './components/DrawerMobile';
 import HeaderTop from './components/HeaderTop';
-const itemsCart = [
-  {
-    key: '1',
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-        1st menu item
-      </a>
-    ),
-  },
-];
+
 const itemsAccount = [
   {
     key: '1',
@@ -246,20 +237,7 @@ const HeaderComponent = () => {
                 </Badge>
                 <span className='text-base text-custom max-md:hidden font-medium'>Wishlist</span>
               </div>
-              <Dropdown
-                className=' cursor-pointer'
-                menu={{
-                  items: itemsCart,
-                }}
-                placement="bottomLeft"
-              >
-                <div className='flex gap-2 items-center'>
-                  <Badge color='#3BB77E' count={6} >
-                    <MdOutlineShoppingCart className='text-[#343a40]' size={25} />
-                  </Badge>
-                  <span className='text-base text-custom font-medium hidden xl:flex'>Cart</span>
-                </div>
-              </Dropdown>
+              <CartComponent />
               <Dropdown
                 className=' cursor-pointer max-md:hidden'
                 menu={{
