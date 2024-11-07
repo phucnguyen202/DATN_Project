@@ -7,168 +7,173 @@ import { Link } from 'react-router-dom';
 import CartComponent from '../CartComponent';
 import DrawerMobile from './components/DrawerMobile';
 import HeaderTop from './components/HeaderTop';
+import { useSelector } from 'react-redux'
 
-const itemsAccount = [
-  {
-    key: '1',
-    icon: <AiOutlineUser className='text-[#343a40]' size={16} />,
-    label: (
-      <Link className='text-[#343a40]' to='/'>
-        My Account
-      </Link>
-    ),
-  },
-  {
-    key: '2',
-    icon: <AiOutlineEnvironment className='text-[#343a40]' size={16} />,
-    label: (
-      <Link to='/'>
-        Order Tracking
-      </Link>
-    ),
-  },
-  {
-    key: '3',
-    icon: <AiOutlineTag className='text-[#343a40]' size={16} />,
-    label: (
-      <Link to='/'>
-        My Voucher
-      </Link>
-    ),
-  },
-  {
-    key: '4',
-    icon: <FaRegHeart className='text-[#343a40]' size={16} />,
-    label: (
-      <Link to='/'>
-        My Wishlist
-      </Link>
-    ),
-  },
-  {
-    key: '5',
-    icon: <AiOutlineSetting className='text-[#343a40]' size={16} />,
-    label: (
-      <Link to='/'>
-        Setting
-      </Link>
-    ),
-  },
-  {
-    key: '6',
-    icon: <AiOutlineLogout className='text-[#343a40]' size={16} />,
-    label: (
-      <Link to='/'>
-        Sign out
-      </Link>
-    ),
-  },
-];
-const itemsCategory = [
-  {
-    label: <a href="" className='text-gray-custom flex gap-3 items-center'>
-      <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-1.svg" alt="" />
-      <span>All Categories</span>
-    </a>,
-    key: '0',
-  },
-  {
-    label:
-      <a href="" className='text-gray-custom flex gap-3 items-center'>
-        <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-1.svg" alt="" />
-        <span>Milks and Dairies</span>
-      </a>,
-    key: '1',
-  },
-  {
-    label:
-      <a href="" className='text-gray-custom flex gap-3 items-center'>
-        <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-6.svg" alt="" />
-        <span>Wines & Alcohol</span>
-      </a>,
-    key: '2',
-  },
-  {
-    label:
-      <a href="" className='text-gray-custom flex gap-3 items-center'>
-        <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-2.svg" alt="" />
-        <span>Clothing & Beauty</span>
-      </a>,
-    key: '3',
-  },
-];
-const items = [
-  {
-    icon: <FaHotjar size={20} style={{
-      color: '#3BB77E'
-    }} />,
-    label: <Link
-      style={{
-        color: '#253D4E'
-      }}
-      className='text-base font-medium' to='/'>Khuyến mại</Link>,
-    key: 0,
-  },
-  {
-    label: <Link style={{
-      color: '#253D4E'
-    }} className='text-base  font-medium' to='/'>Trang chủ</Link>,
-    key: 1,
-  },
-  {
-    label: <Link style={{
-      color: '#253D4E'
-    }} className='text-base  font-medium' to='/'>Về chúng tôi</Link>,
-    key: 2,
-  },
-  {
-    label: <Link style={{
-      color: '#253D4E'
-    }}
-      className='text-base  font-medium' to='/'>Cửa hàng</Link>,
-    key: 3,
-    children: [
-      {
-        label: 'Item 1',
-        key: 'as'
-      }
-    ],
-  },
-  {
-    key: 4,
-    label: <Link style={{
-      color: '#253D4E'
-    }} className='text-base  font-medium' to='/'>Nhà cung cấp</Link>,
-  },
-  // {
-  //   key: 5,
-  //   label: <Link style={{
-  //     color: '#253D4E'
-  //   }} className='text-base  font-medium' to='/' > Thực đơn Mega</Link >,
-  // },
-  {
-    key: 6,
-    label: <Link style={{
-      color: '#253D4E'
-    }} className='text-base  font-medium' to='/'>Blog</Link>,
-  },
-  {
-    key: 7,
-    label: <Link style={{
-      color: '#253D4E'
-    }} className='text-base  font-medium' to='/'>Liên hệ</Link>,
-  },
-  {
-    key: 8,
-    label: <Link style={{
-      color: '#253D4E'
-    }} className='text-base  font-medium' to='/'>Dành cho bạn</Link>,
-  },
-];
 
 const HeaderComponent = () => {
   const [current, setCurrent] = useState(0);
   const [open, setOpen] = useState(false);
+  const user = useSelector(state => state?.auth?.currentData?.user)
+  console.log(user)
+  const itemsAccount = [
+    (user?.quyen === 'khachhang' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
+      key: '1',
+      icon: <AiOutlineUser className='text-[#343a40]' size={16} />,
+      label: (
+        <Link className='text-[#343a40]' to={user?.quyen === 'khachhang' ? '/dashboard-khachhang' : user?.quyen === 'banhang' ? '/dashboard-nhabanhang' : '/dashboard-nhacungcap'}>
+          My Account
+        </Link>
+      ),
+    },
+    {
+      key: '2',
+      icon: <AiOutlineEnvironment className='text-[#343a40]' size={16} />,
+      label: (
+        <Link to='/'>
+          Order Tracking
+        </Link>
+      ),
+    },
+    {
+      key: '3',
+      icon: <AiOutlineTag className='text-[#343a40]' size={16} />,
+      label: (
+        <Link to='/'>
+          My Voucher
+        </Link>
+      ),
+    },
+    {
+      key: '4',
+      icon: <FaRegHeart className='text-[#343a40]' size={16} />,
+      label: (
+        <Link to='/'>
+          My Wishlist
+        </Link>
+      ),
+    },
+    (user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
+      key: '5',
+      icon: <AiOutlineSetting className='text-[#343a40]' size={16} />,
+      label: (
+        <Link to={user?.quyen === 'banhang' ? '/dashboard-nhabanhang' : '/dashboard-nhacungcap'}>
+          Dashboard
+        </Link>
+      ),
+    },
+    {
+      key: '6',
+      icon: <AiOutlineLogout className='text-[#343a40]' size={16} />,
+      label: (
+        <Link to='/'>  Sign out  </Link>
+      ),
+    },
+  ];
+  const itemsCategory = [
+    {
+      label: <a href="" className='text-gray-custom flex gap-3 items-center'>
+        <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-1.svg" alt="" />
+        <span>All Categories</span>
+      </a>,
+      key: '0',
+    },
+    {
+      label:
+        <a href="" className='text-gray-custom flex gap-3 items-center'>
+          <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-1.svg" alt="" />
+          <span>Milks and Dairies</span>
+        </a>,
+      key: '1',
+    },
+    {
+      label:
+        <a href="" className='text-gray-custom flex gap-3 items-center'>
+          <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-6.svg" alt="" />
+          <span>Wines & Alcohol</span>
+        </a>,
+      key: '2',
+    },
+    {
+      label:
+        <a href="" className='text-gray-custom flex gap-3 items-center'>
+          <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-2.svg" alt="" />
+          <span>Clothing & Beauty</span>
+        </a>,
+      key: '3',
+    },
+  ];
+  const items = [
+    {
+      icon: <FaHotjar size={20} style={{ color: '#3BB77E' }} />,
+      label: <Link style={{ color: '#253D4E' }}
+        className='text-base font-medium' to='/'>Khuyến mại</Link>,
+      key: 0,
+    },
+    {
+      label: <Link style={{ color: '#253D4E' }}
+        className='text-base  font-medium' to='/'>Trang chủ</Link>,
+      key: 1,
+    },
+    // {
+    //   label: <Link style={{
+    //     color: '#253D4E'
+    //   }} className='text-base  font-medium' to='/'>Về chúng tôi</Link>,
+    //   key: 2,
+    // },
+    {
+      label: <Link style={{
+        color: '#253D4E'
+      }}
+        className='text-base  font-medium' to='/'>Cửa hàng</Link>,
+      key: 3,
+      children: [
+        {
+          label: 'Item 1',
+          key: 'as'
+        }
+      ],
+    },
+    {
+      key: 4,
+      label: <Link style={{
+        color: '#253D4E'
+      }} className='text-base  font-medium' to='/'>Nhà cung cấp</Link>,
+    },
+    // {
+    //   key: 5,
+    //   label: <Link style={{
+    //     color: '#253D4E'
+    //   }} className='text-base  font-medium' to='/' > Thực đơn Mega</Link >,
+    // },
+    {
+      key: 6,
+      label: <Link style={{
+        color: '#253D4E'
+      }} className='text-base  font-medium' to='/'>Blog</Link>,
+    },
+    {
+      key: 7,
+      label: <Link style={{
+        color: '#253D4E'
+      }} className='text-base  font-medium' to='/'>Liên hệ</Link>,
+    },
+    {
+      key: 8,
+      label: <Link style={{
+        color: '#253D4E'
+      }} className='text-base  font-medium' to='/'>Dành cho bạn</Link>,
+      children: [
+        {
+          label: 'Tạo cửa hàng của bạn',
+          key: '001'
+        },
+        {
+          label: 'Trờ thành nhà cung cấp',
+          key: '002'
+        }
+      ],
+    },
+  ];
   const onClick = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
