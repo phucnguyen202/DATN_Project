@@ -27,7 +27,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path='/detail/:id_product' element={<DetailPage />} />
           <Route path='/cart' element={<CartPage />} />
-          <Route path="/sellerpage" element={<SellerPage />} />
+          <Route path="/storepage/:infostore" element={<SellerPage />} />
         </Route>
 
         <Route path="/" element={<PageAdmin />}>

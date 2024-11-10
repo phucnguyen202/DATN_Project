@@ -14,7 +14,7 @@ const HeaderComponent = () => {
   const [current, setCurrent] = useState(0);
   const [open, setOpen] = useState(false);
   const user = useSelector(state => state?.auth?.currentData?.user)
-  console.log(user)
+
   const itemsAccount = [
     (user?.quyen === 'khachhang' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
       key: '1',
