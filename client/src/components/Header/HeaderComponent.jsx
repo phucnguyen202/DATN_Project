@@ -15,12 +15,19 @@ const HeaderComponent = () => {
   const [open, setOpen] = useState(false);
   const user = useSelector(state => state?.auth?.currentData?.user)
 
+  const dashboardRoutes = {
+    khachhang: '/dashboard-khachhang',
+    banhang: '/dashboard-nhabanhang',
+    admin: '/admin/all-account',
+    nhacungcap: '/dashboard-nhacungcap',
+  };
+
   const itemsAccount = [
-    (user?.quyen === 'khachhang' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
+    (user?.quyen != 'admin' || 'khachhang' || 'banhang' || 'nhacungcap') && {
       key: '1',
       icon: <AiOutlineUser className='text-[#343a40]' size={16} />,
       label: (
-        <Link className='text-[#343a40]' to={user?.quyen === 'khachhang' ? '/dashboard-khachhang' : user?.quyen === 'banhang' ? '/dashboard-nhabanhang' : '/dashboard-nhacungcap'}>
+        <Link className='text-[#343a40]' to={dashboardRoutes[user?.quyen] || '/dashboard-nhacungcap'}>
           My Account
         </Link>
       ),

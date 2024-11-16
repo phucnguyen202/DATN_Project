@@ -96,7 +96,7 @@ const AccountUser = () => {
   // };
   return (
     <>
-      <div className='p-4'>
+      <div>
         <div className='grid grid-cols-3 mb-4 gap-4'>
           <div className='border-[1px] p-5 rounded-lg col-span-1'>
             <Statistic

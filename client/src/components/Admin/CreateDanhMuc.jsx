@@ -93,7 +93,7 @@ const CreateDanhMuc = () => {
   }
   return (
     <>
-      <div className="p-4">
+      <div >
         <h2 className="text-2xl font-bold mb-4">Danh mục sản phẩm</h2>
         <Form
           onFinish={handleLogin}

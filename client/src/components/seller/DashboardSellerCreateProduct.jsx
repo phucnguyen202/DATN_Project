@@ -57,7 +57,7 @@ const DashboardSellerCreateProduct = () => {
   };
   return (
     <>
-      <div className="p-4 bg-white rounded-lg shadow-md">
+      <div>
         <h2 className="text-2xl font-bold mb-4">Thêm sản phẩm mới</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

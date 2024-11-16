@@ -27,6 +27,11 @@ body {
   position: relative !important;
 }
 
+.ant-menu-item{
+  display: flex !important;
+  align-items:center !important;
+}
+
 /*
 .slide-banner:hover .slick-arrow {
   right: 2% !important;

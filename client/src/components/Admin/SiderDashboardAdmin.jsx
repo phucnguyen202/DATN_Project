@@ -1,7 +1,10 @@
 import { Menu, Typography } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import React from 'react'
-import { BiHomeAlt } from 'react-icons/bi'
+import { AiOutlineUser } from 'react-icons/ai'
+import { BiStore } from 'react-icons/bi'
+import { MdUpdate } from 'react-icons/md'
+import { RiBuildingLine } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
 const { Text } = Typography
 const SiderDashboardAdmin = () => {
@@ -9,22 +12,22 @@ const SiderDashboardAdmin = () => {
     {
       key: '1',
       label: <Link className=" font-medium" to={'/admin/all-account'}>Quản lý tài khoản</Link>,
-      icon: <BiHomeAlt size={20} />,
+      icon: <AiOutlineUser size={20} />,
     },
     {
       key: '2',
       label: <Link className=" font-medium" to={'/admin/account-nhacungcap'}>Duyệt nhà cung cấp</Link>,
-      icon: <BiHomeAlt size={20} />,
+      icon: <RiBuildingLine size={20} />,
     },
     {
       key: '3',
       label: <Link className=" font-medium" to={'/admin/account-nhabanhang'}>Duyệt tài khoản bán hàng</Link>,
-      icon: <BiHomeAlt size={20} />,
+      icon: <BiStore size={20} />,
     },
     {
       key: '4',
       label: <Link className=" font-medium" to={'/admin/danhmuc'}>Cập nhật danh mục</Link>,
-      icon: <BiHomeAlt size={20} />,
+      icon: <MdUpdate size={20} />,
     }
   ]
   return (

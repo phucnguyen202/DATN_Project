@@ -16,7 +16,7 @@ const PageSellerDashboard = () => {
           <Affix offsetTop={0}>
             <HeaderDashboardSeller />
           </Affix>
-          <Content className="m-4 bg-white">
+          <Content className="m-4 bg-white p-4 rounded-lg shadow-md">
             <Outlet />
           </Content>
         </Layout>
