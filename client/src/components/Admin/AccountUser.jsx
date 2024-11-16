@@ -35,7 +35,7 @@ const AccountUser = () => {
       render: (quyen) =>
         quyen === 'khachhang' ?
           <Tag color="green">Khách hàng</Tag> : quyen === 'nhacungcap' ?
-            <Tag color="cyan">Nhà cung cấp</Tag> : <Tag color="blue">Chủ cửa hàng</Tag>
+            <Tag color="cyan">Nhà cung cấp</Tag> : quyen === 'admin' ? <Tag color="red">Admin</Tag> : <Tag color="blue">Chủ cửa hàng</Tag>
     },
     {
       title: 'Số điện thoại',
@@ -77,7 +77,7 @@ const AccountUser = () => {
   const getAllAccount = async () => {
     setIsLoading(true);
     try {
-      const res = await handleAPI('/user', '', 'get')
+      const res = await handleAPI('/admin/user', '', 'get')
       res.data && setDataSource(res?.data?.result)
     } catch (e) {
       message.error(e.message)

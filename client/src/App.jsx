@@ -8,6 +8,9 @@ import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { addAuth } from './redux/reducers/authReducer'
+import PageSellerDashboard from './pages/seller/PageSellerDashboard'
+import DashboardSellerCreateProduct from './components/seller/DashboardSellerCreateProduct'
+import CreateDanhMuc from './components/Admin/CreateDanhMuc'
 
 function App() {
   // const user = useSelector(state => state?.auth?.currentData?.user)
@@ -31,13 +34,17 @@ function App() {
         </Route>
 
         <Route path="/" element={<PageAdmin />}>
-          <Route path="/all-account" element={<AccountUser />} />
-          <Route path="/account-nhacungcap" element={<Account_NhaCungCap />} />
-          <Route path="/danhmuc" element={<AccountUser />} />
-          <Route path="/account-nhabanhang" element={<Account_Nhabanhang />} />
+          <Route path="/admin/all-account" element={<AccountUser />} />
+          <Route path="/admin/account-nhacungcap" element={<Account_NhaCungCap />} />
+          <Route path="/admin/danhmuc" element={<CreateDanhMuc />} />
+          <Route path="/admin/account-nhabanhang" element={<Account_Nhabanhang />} />
         </Route>
-        <Route path="/dashboard-khachhang" element={<AccountUser />} />
 
+        <Route path="/" element={<PageSellerDashboard />}>
+          <Route path="/dashboard/seller/create" element={<DashboardSellerCreateProduct />} />
+        </Route>
+
+        {/* <Route path="/dashboard-khachhang" element={<AccountUser />} /> */}
 
 
         <Route path="/login" element={<LoginPage />} />

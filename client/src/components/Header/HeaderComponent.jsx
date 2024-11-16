@@ -277,7 +277,7 @@ const HeaderComponent = () => {
               <div>
               </div>
             </div>
-            <div className=' col-span-12 xl:col-span-8'>
+            <div className='col-span-12 xl:col-span-8'>
               <Menu
                 onClick={onClick}
                 style={{
@@ -299,8 +299,11 @@ const HeaderComponent = () => {
           </div>
         </div>
       </header>
-      <DrawerMobile onClose={onClose} open={open}
-        openMenu={onClick} current={current} items={items} />
+      <DrawerMobile
+        onClose={onClose}
+        open={open}
+        openMenu={onClick}
+        current={current} items={items} />
     </>
   )
 }

@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const authRouter = require('./routers/authRouter')
-const userRouter = require('./routers/userRouter')
+const adminRouter = require('./routers/admin/AdminRouter')
 const cors = require('cors');
 require('dotenv').config();
 
@@ -19,7 +19,7 @@ app.use(cors({
 }));
 
 app.use('/v1/api', authRouter)
-app.use('/v1/api', userRouter)
+app.use('/v1/api', adminRouter)
 
 app.listen(port, () => {
   console.log(`running on port ${port}`);

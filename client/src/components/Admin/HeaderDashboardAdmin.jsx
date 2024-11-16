@@ -10,11 +10,14 @@ const items = [
     label: 'Đăng xuất',
   },
 ]
-const HeaderComponent = () => {
+const HeaderDashboardAdmin = () => {
 
   return (
     <>
-      <Header >
+      <Header style={{
+        backgroundColor: '#ffff',
+        boxShadow: '0 1px 1px rgba(0, 0, 0, 0.1)'
+      }}>
         <div className="grid grid-cols-12 gap-4">
           <div className="col-span-10">
             <Input
@@ -36,4 +39,4 @@ const HeaderComponent = () => {
   )
 }
 
-export default HeaderComponent
+export default HeaderDashboardAdmin

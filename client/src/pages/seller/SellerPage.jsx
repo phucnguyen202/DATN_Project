@@ -1,16 +1,15 @@
-import { Badge, Breadcrumb, Button, Card, Checkbox, Dropdown, Rate, Select, Slider, Space, Tooltip, Typography } from 'antd'
-import React from 'react'
+import { Badge, Breadcrumb, Card, Checkbox, Rate, Select, Slider, Space, Tooltip, Typography } from 'antd';
+import React from 'react';
 import { CiFilter } from 'react-icons/ci';
-import { FaFacebookF, FaInstagram, FaPinterest, FaTwitter, FaYoutube } from 'react-icons/fa6';
+import { FaFacebookF, FaInstagram, FaPinterest, FaTwitter } from 'react-icons/fa6';
 import { FiHeadphones } from 'react-icons/fi';
 import { GrLinkNext, GrLocation } from 'react-icons/gr';
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { IoCartOutline, IoEyeOutline } from 'react-icons/io5';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom';
 import { DealsOfTheDayHome, PromotionalSectionHome } from '../../components';
 const { Title, Text } = Typography;
 const SellerPage = () => {
-
   const param = useParams()
   return (
     <>
