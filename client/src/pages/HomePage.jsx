@@ -1,5 +1,3 @@
-import React from 'react'
-
 import {
   BannerHome, BestSellingProduct, DealsOfTheDayHome, FeaturedCategories,
   PopularProducts, ProductSectionHome, PromotionalSectionHome

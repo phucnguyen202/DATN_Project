@@ -6,7 +6,7 @@ const router = require('express').Router();
 
 
 router.get('/admin/user', VerifyToken, AdminController.getallusers);
-router.get('/admin/alldanhmuc', VerifyToken, AdminController.getAllDanhMuc);
+router.get('/getAlldanhmuc', AdminController.getAllDanhMuc);
 router.post('/admin/danhmuc', VerifyToken, AdminController.cretaeDanhmuc);
 
 

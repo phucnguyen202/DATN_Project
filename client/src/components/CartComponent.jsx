@@ -35,10 +35,9 @@ const CartComponent = () => {
         setItemsCart(items);
         const initialTotal = cart.reduce((sum, item) => sum + (item.price * item.count), 0);
         setTotal(initialTotal);
-        const count = cart.length
+        const count = cart.length;
         setCount(count);
       } catch (e) {
-        message.error(('hahahahaha'))
       }
     }
     getToCart();

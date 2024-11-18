@@ -2,27 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, Input, message, Space, Table } from 'antd';
 import handleAPI from '../../apis/HandleAPI';
 import { CiEdit, CiSquareRemove } from 'react-icons/ci';
+import { useDispatch } from 'react-redux';
+import { addCategory } from '../../redux/reducers/productReducer';
 
 
 const CreateDanhMuc = () => {
-
   const [form] = Form.useForm()
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
-  // const dataSource = [
-  //   {
-  //     key: '1',
-  //     name: 'Mike',
-  //     age: 32,
-  //     address: '10 Downing Street',
-  //   },
-  //   {
-  //     key: '2',
-  //     name: 'John',
-  //     age: 42,
-  //     address: '10 Downing Street',
-  //   },
-  // ];
 
   const columns = [
     {
@@ -70,7 +58,7 @@ const CreateDanhMuc = () => {
   const getAllDanhMuc = async () => {
     setIsLoading(true);
     try {
-      const res = await handleAPI('/admin/alldanhmuc', '', 'get')
+      const res = await handleAPI('/getAlldanhmuc', '', 'get')
       res.data && setDataSource(res?.data?.result)
     } catch (e) {
       message.error(e.message)
@@ -79,7 +67,7 @@ const CreateDanhMuc = () => {
     }
   }
 
-  const handleLogin = async (value) => {
+  const handleCreateDanhMuc = async (value) => {
     setIsLoading(true);
     try {
       const res = await handleAPI('/admin/danhmuc', value, 'post')
@@ -96,12 +84,12 @@ const CreateDanhMuc = () => {
       <div >
         <h2 className="text-2xl font-bold mb-4">Danh mục sản phẩm</h2>
         <Form
-          onFinish={handleLogin}
+          onFinish={handleCreateDanhMuc}
           form={form}
           name="layout-multiple-horizontal"
           layout="vertical">
           <Form.Item
-            className='block text-gray-700 font-medium mb-2'
+            className='block  font-medium mb-2'
             layout="vertical"
             label="Tên danh mục sản phẩm"
             name="tenDanhMuc"

@@ -1,19 +1,23 @@
-import { Badge, Dropdown, Input, Menu, Space } from 'antd';
-import React, { useState } from 'react';
+import { Badge, Dropdown, Input, Menu, message, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineAppstore, AiOutlineDown, AiOutlineEnvironment, AiOutlineLogout, AiOutlineMenu, AiOutlineSetting, AiOutlineTag, AiOutlineUser } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { FaHotjar, FaRegHeart } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import handleAPI from '../../apis/HandleAPI';
 import CartComponent from '../CartComponent';
 import DrawerMobile from './components/DrawerMobile';
 import HeaderTop from './components/HeaderTop';
-import { useSelector } from 'react-redux'
 
 
 const HeaderComponent = () => {
   const [current, setCurrent] = useState(0);
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const user = useSelector(state => state?.auth?.currentData?.user)
+  const [dataSource, setDataSource] = useState([]);
+  const [category, setCategory] = useState([]);
 
   const dashboardRoutes = {
     khachhang: '/dashboard-khachhang',
@@ -21,7 +25,6 @@ const HeaderComponent = () => {
     admin: '/admin/all-account',
     nhacungcap: '/dashboard-nhacungcap',
   };
-
   const itemsAccount = [
     (user?.quyen != 'admin' || 'khachhang' || 'banhang' || 'nhacungcap') && {
       key: '1',
@@ -76,39 +79,60 @@ const HeaderComponent = () => {
       ),
     },
   ];
+
+  //category
+  useEffect(() => {
+    const getAllCategory = async () => {
+      setIsLoading(true);
+      try {
+        const res = await handleAPI('/getAlldanhmuc', '', 'get');
+        if (res.data) {
+          setDataSource(res.data.result);
+        }
+      } catch (e) {
+        message.error(e.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getAllCategory();
+  }, []);
+
+  useEffect(() => {
+    const getToCategory = () => {
+      if (dataSource?.length) {
+        const items = dataSource.map((item, index) => (
+          {
+            key: `${item.idDanhMuc}`,
+            label: (
+              <a
+                href="" className="text-gray-custom flex gap-3 items-center">
+                <img className="w-7 h-7" src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-1.svg" alt="" />
+                <span>{item.tenDanhMuc}</span>
+              </a>
+            ),
+          }
+        ));
+        setCategory(items);
+      }
+    };
+    if (dataSource) {
+      getToCategory();
+    }
+  }, [dataSource]);
+
   const itemsCategory = [
     {
-      label: <a href="" className='text-gray-custom flex gap-3 items-center'>
+      key: 0,
+      label: (<a href="" className='text-gray-custom flex gap-3 items-center'>
         <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-1.svg" alt="" />
-        <span>All Categories</span>
-      </a>,
-      key: '0',
+        <span>Tất cả sản phẩm</span>
+      </a>),
     },
-    {
-      label:
-        <a href="" className='text-gray-custom flex gap-3 items-center'>
-          <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-1.svg" alt="" />
-          <span>Milks and Dairies</span>
-        </a>,
-      key: '1',
-    },
-    {
-      label:
-        <a href="" className='text-gray-custom flex gap-3 items-center'>
-          <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-6.svg" alt="" />
-          <span>Wines & Alcohol</span>
-        </a>,
-      key: '2',
-    },
-    {
-      label:
-        <a href="" className='text-gray-custom flex gap-3 items-center'>
-          <img className='w-7 h-7' src="https://www.niraagayurveda.com/assets/imgs/theme/icons/category-2.svg" alt="" />
-          <span>Clothing & Beauty</span>
-        </a>,
-      key: '3',
-    },
+    ...category,
   ];
+
+
   const items = [
     {
       icon: <FaHotjar size={20} style={{ color: '#3BB77E' }} />,
@@ -121,12 +145,6 @@ const HeaderComponent = () => {
         className='text-base  font-medium' to='/'>Trang chủ</Link>,
       key: 1,
     },
-    // {
-    //   label: <Link style={{
-    //     color: '#253D4E'
-    //   }} className='text-base  font-medium' to='/'>Về chúng tôi</Link>,
-    //   key: 2,
-    // },
     {
       label: <Link style={{
         color: '#253D4E'
@@ -146,12 +164,6 @@ const HeaderComponent = () => {
         color: '#253D4E'
       }} className='text-base  font-medium' to='/'>Nhà cung cấp</Link>,
     },
-    // {
-    //   key: 5,
-    //   label: <Link style={{
-    //     color: '#253D4E'
-    //   }} className='text-base  font-medium' to='/' > Thực đơn Mega</Link >,
-    // },
     {
       key: 6,
       label: <Link style={{
@@ -162,7 +174,7 @@ const HeaderComponent = () => {
       key: 7,
       label: <Link style={{
         color: '#253D4E'
-      }} className='text-base  font-medium' to='/'>Liên hệ</Link>,
+      }} className='text-base  font-medium' to='/'>Sản phẩm</Link>,
     },
     {
       key: 8,
@@ -191,6 +203,7 @@ const HeaderComponent = () => {
   const onClose = () => {
     setOpen(false);
   };
+
   return (
     <>
       <header >
@@ -211,16 +224,11 @@ const HeaderComponent = () => {
               </Link>
             </div>
             <div
-              style={{
-                borderRadius: '3px',
-                border: '2px solid #BCE3C9',
-              }}
+              style={{ borderRadius: '3px', border: '2px solid #BCE3C9', }}
               className='col-span-7 hidden md:flex justify-center items-center gap-2 '>
               <Dropdown
                 className=' w-[30%] xl:w-[20%] cursor-pointer'
-                menu={{
-                  items: itemsCategory,
-                }}
+                menu={{ items: itemsCategory, }}
                 trigger={['click']}
               >
                 <a onClick={(e) => e.preventDefault()}>
@@ -230,12 +238,9 @@ const HeaderComponent = () => {
                   </Space>
                 </a>
               </Dropdown>
-
               <span className='w-[1px] h-6 bg-slate-300'></span>
               <Input
-                style={{
-                  border: 'none',
-                }}
+                style={{ border: 'none', }}
                 variant="borderless"
                 className='py-3 text-customText placeholder-[#a74040]'
                 placeholder="Search for items..."
@@ -252,9 +257,7 @@ const HeaderComponent = () => {
               <CartComponent />
               <Dropdown
                 className=' cursor-pointer max-md:hidden'
-                menu={{
-                  items: itemsAccount,
-                }}
+                menu={{ items: itemsAccount, }}
                 placement="bottomLeft"
               >
                 <div className='flex gap-1 items-center'>
@@ -269,9 +272,7 @@ const HeaderComponent = () => {
         <div className='border-b-[1px] hidden md:block'>
           <div className='grid grid-cols-12 px-4 py-4'>
             <div className='col-span-2 hidden xl:flex items-center'>
-              <Dropdown
-                menu={{ items: itemsCategory, }}
-                trigger={['click']}
+              <Dropdown menu={{ items: itemsCategory, }} trigger={['click']}
               >
                 <a onClick={(e) => e.preventDefault()}>
                   <Space className='text-base font-semibold text-slate-50 bg-customBg p-3 rounded-md'>
@@ -287,10 +288,7 @@ const HeaderComponent = () => {
             <div className='col-span-12 xl:col-span-8'>
               <Menu
                 onClick={onClick}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center'
-                }}
+                style={{ display: 'flex', justifyContent: 'center' }}
                 selectedKeys={[current]}
                 mode="horizontal" items={items} />
             </div>

@@ -63,11 +63,6 @@ class AdminController {
 
   async getAllDanhMuc(req, res) {
     try {
-      if (req?.user?.quyen != "admin") {
-        return res.status(403).json({
-          message: 'Bạn không có quyền truy cập',
-        })
-      }
       AdminData.getAllDanhMuc(async (err, result) => {
         if (err) {
           return res.status(500).json({ message: 'Lỗi hệ thống' });

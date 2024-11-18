@@ -54,7 +54,6 @@ const SellerPage = () => {
                   <p className='font-semibold text-3xl '>{param.infostore}</p>
                   <p className='text-sm text-custom'>Người theo dõi: <span className=' text-greenCustom'>30</span></p>
                   <p className='text-sm text-customText font-medium my-6'>Got a smooth, buttery spread in your fridge? Chances are good that it's Good Chef. This brand made Lionto's list of the most popular grocery brands across the country.</p>
-
                   <div className='mb-6'>
                     <p className='text-lg font-semibold mb-2'>Follow Us</p>
                     <ul className='flex gap-2'>
@@ -62,7 +61,6 @@ const SellerPage = () => {
                       <li className='w-8 h-8 p-2 flex justify-center items-center  bg-[#55ACE3]  rounded-full'><FaTwitter size={20} className='text-white' /></li>
                       <li className='w-8 h-8 p-2 flex justify-center items-center  bg-[#FD1D1D] rounded-full'><FaInstagram size={20} className='text-white' /></li>
                       <li className='w-8 h-8 p-2 flex justify-center items-center  bg-[#E60023] rounded-full'><FaPinterest size={20} className='text-white' /></li>
-
                     </ul>
                   </div>
                   <div className='mb-6'>
@@ -80,7 +78,6 @@ const SellerPage = () => {
                     <button className='px-10 py-2 flex items-center gap-3 rounded-md bg-customBg text-white font-medium'>Liên hệ <GrLinkNext /></button>
                   </div>
                 </div>
-
                 <div className='flex flex-col gap-4'>
                   <div className='border-[1px] rounded-2xl p-4'>
                     <div className="relative">
@@ -230,7 +227,6 @@ const SellerPage = () => {
                   </div>
                 </div>
                 <div>
-
                   <div className='grid grid-cols-5 gap-4'>
                     <div className='relative group'>
                       <Link to={`/detail/${123}`}>
@@ -253,7 +249,7 @@ const SellerPage = () => {
                               className="custom-card-meta py-2"
                               title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
                             <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-sm' />
+                              <Rate value={3} className='text-xs' />
                               <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
                             </Space>
                             <Space className='flex justify-between items-center pt-2'>
@@ -296,50 +292,7 @@ const SellerPage = () => {
                               className="custom-card-meta py-2"
                               title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
                             <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-sm' />
-                              <Link to={`/storepage/MaxFood`} className='text-custom'>By <span className='text-greenCustom'>MaxFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-sm' />
+                              <Rate value={3} className='text-xs' />
                               <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
                             </Space>
                             <Space className='flex justify-between items-center pt-2'>
@@ -382,50 +335,7 @@ const SellerPage = () => {
                               className="custom-card-meta py-2"
                               title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
                             <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-sm' />
-                              <Link to={`/storepage/HaloFood`} className='text-custom'>By <span className='text-greenCustom'>HaloFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-sm' />
+                              <Rate value={3} className='text-xs' />
                               <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
                             </Space>
                             <Space className='flex justify-between items-center pt-2'>
@@ -468,7 +378,7 @@ const SellerPage = () => {
                               className="custom-card-meta py-2"
                               title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
                             <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-sm' />
+                              <Rate value={3} className='text-xs' />
                               <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
                             </Space>
                             <Space className='flex justify-between items-center pt-2'>
@@ -511,7 +421,7 @@ const SellerPage = () => {
                               className="custom-card-meta py-2"
                               title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
                             <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-sm' />
+                              <Rate value={3} className='text-xs' />
                               <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
                             </Space>
                             <Space className='flex justify-between items-center pt-2'>
@@ -554,7 +464,265 @@ const SellerPage = () => {
                               className="custom-card-meta py-2"
                               title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
                             <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-sm' />
+                              <Rate value={3} className='text-xs' />
+                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
+                            </Space>
+                            <Space className='flex justify-between items-center pt-2'>
+                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
+                                <IoCartOutline size={17} />
+                                Add
+                              </button>
+                            </Space>
+                          </Card>
+                        </Badge.Ribbon>
+                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
+                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
+                          </Tooltip>
+                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
+                          </Tooltip>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className='relative group'>
+                      <Link to={`/detail/${123}`}>
+                        <Badge.Ribbon text={'sale'}>
+                          <Card
+                            hoverable
+                          >
+                            <img
+                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
+                              alt=""
+                            />
+                            <img
+                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
+                              alt=""
+                            />
+                            <Text type="secondary">Snack</Text>
+                            <Card.Meta
+                              className="custom-card-meta py-2"
+                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                            <Space className='flex justify-between py-2'>
+                              <Rate value={3} className='text-xs' />
+                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
+                            </Space>
+                            <Space className='flex justify-between items-center pt-2'>
+                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
+                                <IoCartOutline size={17} />
+                                Add
+                              </button>
+                            </Space>
+                          </Card>
+                        </Badge.Ribbon>
+                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
+                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
+                          </Tooltip>
+                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
+                          </Tooltip>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className='relative group'>
+                      <Link to={`/detail/${123}`}>
+                        <Badge.Ribbon text={'sale'}>
+                          <Card
+                            hoverable
+                          >
+                            <img
+                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
+                              alt=""
+                            />
+                            <img
+                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
+                              alt=""
+                            />
+                            <Text type="secondary">Snack</Text>
+                            <Card.Meta
+                              className="custom-card-meta py-2"
+                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                            <Space className='flex justify-between py-2'>
+                              <Rate value={3} className='text-xs' />
+                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
+                            </Space>
+                            <Space className='flex justify-between items-center pt-2'>
+                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
+                                <IoCartOutline size={17} />
+                                Add
+                              </button>
+                            </Space>
+                          </Card>
+                        </Badge.Ribbon>
+                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
+                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
+                          </Tooltip>
+                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
+                          </Tooltip>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className='relative group'>
+                      <Link to={`/detail/${123}`}>
+                        <Badge.Ribbon text={'sale'}>
+                          <Card
+                            hoverable
+                          >
+                            <img
+                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
+                              alt=""
+                            />
+                            <img
+                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
+                              alt=""
+                            />
+                            <Text type="secondary">Snack</Text>
+                            <Card.Meta
+                              className="custom-card-meta py-2"
+                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                            <Space className='flex justify-between py-2'>
+                              <Rate value={3} className='text-xs' />
+                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
+                            </Space>
+                            <Space className='flex justify-between items-center pt-2'>
+                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
+                                <IoCartOutline size={17} />
+                                Add
+                              </button>
+                            </Space>
+                          </Card>
+                        </Badge.Ribbon>
+                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
+                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
+                          </Tooltip>
+                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
+                          </Tooltip>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className='relative group'>
+                      <Link to={`/detail/${123}`}>
+                        <Badge.Ribbon text={'sale'}>
+                          <Card
+                            hoverable
+                          >
+                            <img
+                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
+                              alt=""
+                            />
+                            <img
+                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
+                              alt=""
+                            />
+                            <Text type="secondary">Snack</Text>
+                            <Card.Meta
+                              className="custom-card-meta py-2"
+                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                            <Space className='flex justify-between py-2'>
+                              <Rate value={3} className='text-xs' />
+                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
+                            </Space>
+                            <Space className='flex justify-between items-center pt-2'>
+                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
+                                <IoCartOutline size={17} />
+                                Add
+                              </button>
+                            </Space>
+                          </Card>
+                        </Badge.Ribbon>
+                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
+                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
+                          </Tooltip>
+                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
+                          </Tooltip>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className='relative group'>
+                      <Link to={`/detail/${123}`}>
+                        <Badge.Ribbon text={'sale'}>
+                          <Card
+                            hoverable
+                          >
+                            <img
+                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
+                              alt=""
+                            />
+                            <img
+                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
+                              alt=""
+                            />
+                            <Text type="secondary">Snack</Text>
+                            <Card.Meta
+                              className="custom-card-meta py-2"
+                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                            <Space className='flex justify-between py-2'>
+                              <Rate value={3} className='text-xs' />
+                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
+                            </Space>
+                            <Space className='flex justify-between items-center pt-2'>
+                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
+                                <IoCartOutline size={17} />
+                                Add
+                              </button>
+                            </Space>
+                          </Card>
+                        </Badge.Ribbon>
+                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
+                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
+                          </Tooltip>
+                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
+                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
+                          </Tooltip>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className='relative group'>
+                      <Link to={`/detail/${123}`}>
+                        <Badge.Ribbon text={'sale'}>
+                          <Card
+                            hoverable
+                          >
+                            <img
+                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
+                              alt=""
+                            />
+                            <img
+                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
+                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
+                              alt=""
+                            />
+                            <Text type="secondary">Snack</Text>
+                            <Card.Meta
+                              className="custom-card-meta py-2"
+                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                            <Space className='flex justify-between py-2'>
+                              <Rate value={3} className='text-xs' />
                               <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
                             </Space>
                             <Space className='flex justify-between items-center pt-2'>

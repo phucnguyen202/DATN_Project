@@ -89,6 +89,16 @@ const BestSellingProduct = () => {
             <div className='relative group'>
               <Badge.Ribbon text={'Save 15%'}>
                 <Card>
+                  {/* <img
+                    className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
+                    src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
+                    alt=""
+                  />
+                  <img
+                    className='hidden group-hover:block transform transition-transform duration-700 ease-in-out hover:scale-110'
+                    src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
+                    alt=""
+                  /> */}
                   <div className='flex justify-center'>
                     <img
                       className='transform w-[200px] transition-transform duration-1000 ease-in-out hover:scale-110'
@@ -96,11 +106,7 @@ const BestSellingProduct = () => {
                       alt=""
                     />
                   </div>
-                  {/* <img
-                    className=' hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                    src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                    alt=""
-                  /> */}
+
                   <Text type="secondary">Snack</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"

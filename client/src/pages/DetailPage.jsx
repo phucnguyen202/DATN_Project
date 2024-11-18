@@ -1,4 +1,4 @@
-import { Badge, Breadcrumb, Card, Checkbox, Divider, Input, InputNumber, Progress, Rate, Slider, Space, Tabs, Tag, Tooltip, Typography } from 'antd';
+import { Badge, Breadcrumb, Card, Checkbox, Divider, Input, InputNumber, Rate, Slider, Space, Tabs, Tag, Tooltip, Typography } from 'antd';
 import { CiFilter } from "react-icons/ci";
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { IoCartOutline, IoEyeOutline } from 'react-icons/io5';
