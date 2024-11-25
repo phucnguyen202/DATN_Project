@@ -6,26 +6,36 @@ import { BiPackage } from 'react-icons/bi'
 import { BsCardChecklist } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 const { Text } = Typography
-const SiderDashboardSeller = () => {
+const SiderDashboardNhanVien = () => {
   const items = [
     {
+      key: '6',
+      label: <Link className=" font-medium" to={'/dashboard-listProducts'}>Danh sách sản phẩm</Link>,
+      icon: <BiPackage size={20} />,
+    },
+    {
       key: '1',
-      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Tạo sản phẩm</Link>,
+      label: <Link className=" font-medium" to={'/dashboard-nhanvien'}>Tạo sản phẩm</Link>,
       icon: <BiPackage size={20} />,
     },
     {
       key: '2',
-      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Lịch sử bán hàng</Link>,
+      label: <Link className=" font-medium" to={'/dashboard-nhanvien'}>Lịch sử bán hàng</Link>,
       icon: <AiOutlineHistory size={20} />,
     },
     {
       key: '3',
-      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Đơn hàng</Link>,
+      label: <Link className=" font-medium" to={'/dashboard-nhanvien'}>Đơn hàng</Link>,
       icon: <BsCardChecklist size={20} />,
     },
     {
       key: '4',
-      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Thông tin gian hàng</Link>,
+      label: <Link className=" font-medium" to={'/dashboard-nhanvien'}>Thông tin gian hàng</Link>,
+      icon: <AiOutlineShop size={20} />,
+    },
+    {
+      key: '5',
+      label: <Link className=" font-medium" to={'/'}>Trang chủ</Link>,
       icon: <AiOutlineShop size={20} />,
     }
   ]
@@ -40,7 +50,7 @@ const SiderDashboardSeller = () => {
             src={'https://www.niraagayurveda.com/assets/imgs/theme/logo.svg'} alt="" />
         </div>
         <Menu
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={['6']}
           theme="light"
           items={items}
         />
@@ -49,4 +59,4 @@ const SiderDashboardSeller = () => {
   )
 }
 
-export default SiderDashboardSeller
+export default SiderDashboardNhanVien

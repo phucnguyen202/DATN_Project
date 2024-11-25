@@ -15,7 +15,7 @@ const findUserByEmail = (email, callback) => {
 
 // Hàm để tìm người dùng để tạo JWT token
 const findUserForJWT = (email, callback) => {
-  const sql = 'SELECT idNguoiDung AS id, email, ten, quyen FROM nguoiDung WHERE email = ?';
+  const sql = 'SELECT idNguoiDung AS id, email, ten, quyen, soDT, hinhAnh FROM nguoiDung WHERE email = ?';
   db.query(sql, [email], (err, results) => {
     if (err) {
       return callback(err, null);

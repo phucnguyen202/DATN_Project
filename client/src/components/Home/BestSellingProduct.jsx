@@ -86,7 +86,7 @@ const BestSellingProduct = () => {
         </div>
         <div className='lg:col-span-9 max-md:col-span-12'>
           <Slider ref={sliderRef} {...settings}>
-            <div className='relative group'>
+            <div className='relative group' >
               <Badge.Ribbon text={'Save 15%'}>
                 <Card>
                   {/* <img

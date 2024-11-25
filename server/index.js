@@ -6,7 +6,6 @@ const adminRouter = require('./routers/admin/AdminRouter')
 const cors = require('cors');
 require('dotenv').config();
 
-
 const port = process.env.PORT || 3001;
 // const port = 3001
 

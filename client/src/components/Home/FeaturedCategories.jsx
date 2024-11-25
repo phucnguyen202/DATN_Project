@@ -1,6 +1,7 @@
 import { Button, Typography } from "antd";
 import { useRef } from "react";
 import Slider from "react-slick";
+import { motion } from 'framer-motion';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import { featuredCategoriesDB } from '../../db/FeaturedCategories.db';
@@ -51,6 +52,7 @@ const FeaturedCategories = () => {
       sliderRef.current.slickPrev();
     }
   };
+
   return (
     <div className="px-4 mb-6 overflow-hidden">
       <div className=" flex justify-between items-center">
@@ -93,52 +95,75 @@ const FeaturedCategories = () => {
 
       <div className="">
         <div className="grid max-md:grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory" style={{
-            backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-1.png)"
-          }}>
-            <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
-              <p
-                style={{ margin: '0px' }}
-                className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
-                Everyday Fresh &amp; <br />
-                Clean with Our<br />
-                Products
-              </p>
-              <Button
-                className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
-                icon={<GrFormNextLink size={20} />}>Shop Now</Button>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.1 }}
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            <div className=" xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory"
+              style={{
+                backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-1.png)"
+              }}>
+              <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
+                <p
+                  style={{ margin: '0px' }}
+                  className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
+                  Everyday Fresh &amp; <br />
+                  Clean with Our<br />
+                  Products
+                </p>
+                <Button
+                  className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
+                  icon={<GrFormNextLink size={20} />}>Shop Now</Button>
+              </div>
             </div>
-          </div>
-          <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory" style={{
-            backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-2.png)"
-          }}>
-            <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
-              <p
-                style={{ margin: '0px' }}
-                className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
-                Make your Breakfast <br />
-                Healthy and Easy <br />
-              </p>
-              <Button
-                className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
-                icon={<GrFormNextLink size={20} />}>Shop Now</Button>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}>
+            <div className=" xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory"
+              style={{
+                backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-2.png)"
+              }}>
+              <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
+                <p
+                  style={{ margin: '0px' }}
+                  className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
+                  Make your Breakfast <br />
+                  Healthy and Easy <br />
+                </p>
+                <Button
+                  className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
+                  icon={<GrFormNextLink size={20} />}>Shop Now</Button>
+              </div>
             </div>
-          </div>
-          <div className="xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory" style={{
-            backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-3.png)"
-          }}>
-            <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
-              <p
-                style={{ margin: '0px' }}
-                className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
-                The best Organic  <br />
-                Products Online<br />
-              </p>
-              <Button
-                className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
-                icon={<GrFormNextLink size={20} />}>Shop Now</Button>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            <div className=" xl:h-[300px] max-md:h-[215px] lg:h-[174px] rounded-lg banner-featuredCategory"
+              style={{
+                backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-3.png)"
+              }}>
+              <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
+                <p
+                  style={{ margin: '0px' }}
+                  className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
+                  The best Organic  <br />
+                  Products Online<br />
+                </p>
+                <Button
+                  className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
+                  icon={<GrFormNextLink size={20} />}>Shop Now</Button>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

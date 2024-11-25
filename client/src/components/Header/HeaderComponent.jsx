@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineAppstore, AiOutlineDown, AiOutlineEnvironment, AiOutlineLogout, AiOutlineMenu, AiOutlineSetting, AiOutlineTag, AiOutlineUser } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { FaHotjar, FaRegHeart } from "react-icons/fa";
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import handleAPI from '../../apis/HandleAPI';
 import CartComponent from '../CartComponent';
 import DrawerMobile from './components/DrawerMobile';
 import HeaderTop from './components/HeaderTop';
+import { remoAuth } from '../../redux/reducers/authReducer';
 
 
 const HeaderComponent = () => {
@@ -18,19 +19,22 @@ const HeaderComponent = () => {
   const user = useSelector(state => state?.auth?.currentData?.user)
   const [dataSource, setDataSource] = useState([]);
   const [category, setCategory] = useState([]);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const dashboardRoutes = {
     khachhang: '/dashboard-khachhang',
     banhang: '/dashboard-nhabanhang',
     admin: '/admin/all-account',
     nhacungcap: '/dashboard-nhacungcap',
+    nhanvien: '/dashboard-nhanvien'
   };
   const itemsAccount = [
-    (user?.quyen != 'admin' || 'khachhang' || 'banhang' || 'nhacungcap') && {
+    (user?.quyen === 'admin' || user?.quyen === 'khachhang' || user?.quyen === 'nhanvien' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
       key: '1',
       icon: <AiOutlineUser className='text-[#343a40]' size={16} />,
       label: (
-        <Link className='text-[#343a40]' to={dashboardRoutes[user?.quyen] || '/dashboard-nhacungcap'}>
+        <Link className='text-[#343a40]' to={dashboardRoutes[user?.quyen]}>
           My Account
         </Link>
       ),
@@ -75,10 +79,23 @@ const HeaderComponent = () => {
       key: '6',
       icon: <AiOutlineLogout className='text-[#343a40]' size={16} />,
       label: (
-        <Link to='/'>  Sign out  </Link>
+        <Link
+          to='/'
+          onClick={{
+            onClick: () => {
+              handleLogOut();
+            },
+          }}
+        > Sign out  </Link >
       ),
     },
   ];
+
+  const handleLogOut = async () => {
+    dispatch(remoAuth())
+    localStorage.setItem('authData', '')
+    navigate('/login')
+  }
 
   //category
   useEffect(() => {

@@ -19,7 +19,11 @@ const LoginPage = () => {
       const res = await handleAPI('/auth/login', value, 'post')
       res.data && dispatch(addAuth(res.data))
       message.success(res.message)
+      if (res?.data?.user?.quyen === 'admin') {
+        navigate('/admin/all-account')
+      }
       navigate('/')
+
     } catch (e) {
       message.error(e.message)
     } finally {

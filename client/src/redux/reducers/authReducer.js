@@ -21,7 +21,7 @@ const authSlice = createSlice({
 })
 
 export const authReducer = authSlice.reducer
-export const { addAuth } = authSlice.actions
+export const { addAuth, remoAuth } = authSlice.actions
 
 export const syncLocal = (data) => {
   localStorage.setItem('authData', JSON.stringify(data))

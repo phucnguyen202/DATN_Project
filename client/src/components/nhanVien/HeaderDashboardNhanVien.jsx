@@ -3,29 +3,15 @@ import { Header } from 'antd/es/layout/layout'
 import React from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { GoBell } from 'react-icons/go'
-import { useDispatch } from 'react-redux'
-import { remoAuth } from '../../redux/reducers/authReducer'
-import { useNavigate } from 'react-router-dom'
 
+const items = [
+  {
+    key: 'logout',
+    label: 'Đăng xuất',
+  },
+]
+const HeaderDashboardNhanVien = () => {
 
-const HeaderDashboardAdmin = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const items = [
-    {
-      key: 'logout',
-      label: 'Đăng xuất',
-      onClick: () => {
-        dispatch(remoAuth())
-        localStorage.setItem('authData', '')
-        navigate('/login')
-      }
-    },
-  ]
-
-  const handleDangXuat = () => {
-    dispatch(remoAuth())
-  }
   return (
     <>
       <Header style={{
@@ -53,4 +39,4 @@ const HeaderDashboardAdmin = () => {
   )
 }
 
-export default HeaderDashboardAdmin
+export default HeaderDashboardNhanVien

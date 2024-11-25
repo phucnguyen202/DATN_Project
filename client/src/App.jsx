@@ -11,6 +11,9 @@ import { addAuth } from './redux/reducers/authReducer'
 import PageSellerDashboard from './pages/seller/PageSellerDashboard'
 import DashboardSellerCreateProduct from './components/seller/DashboardSellerCreateProduct'
 import CreateDanhMuc from './components/Admin/CreateDanhMuc'
+import CreateProduct from './components/nhanVien/CreateProduct'
+import PageNhanVienDashboard from './pages/nhanVien/PageNhanVienDashboard'
+import ListProducts from './components/nhanVien/ListProducts'
 
 function App() {
   // const user = useSelector(state => state?.auth?.currentData?.user)
@@ -30,7 +33,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path='/detail/:id_product' element={<DetailPage />} />
           <Route path='/cart' element={<CartPage />} />
-          <Route path="/storepage/:infostore" element={<SellerPage />} />
+          <Route path="/storepage" element={<SellerPage />} />
         </Route>
 
         <Route path="/" element={<PageAdmin />}>
@@ -40,8 +43,13 @@ function App() {
           <Route path="/admin/account-nhabanhang" element={<Account_Nhabanhang />} />
         </Route>
 
+        <Route path="/" element={<PageNhanVienDashboard />}>
+          <Route path="/dashboard-listProducts" element={<ListProducts />} />
+          <Route path="/dashboard-nhanvien" element={<CreateProduct />} />
+        </Route>
+
         <Route path="/" element={<PageSellerDashboard />}>
-          <Route path="/dashboard/seller/create" element={<DashboardSellerCreateProduct />} />
+          {/* <Route path="/dashboard-nhabanhang" element={<DashboardSellerCreateProduct />} /> */}
         </Route>
 
         {/* <Route path="/dashboard-khachhang" element={<AccountUser />} /> */}
