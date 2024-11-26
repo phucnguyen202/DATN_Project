@@ -9,7 +9,7 @@ import CreateProduct from './components/nhanVien/CreateProduct'
 import ListProducts from './components/nhanVien/ListProducts'
 
 import Main from './layout/Main'
-import { AboutPage, CartPage, DetailPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage } from './pages'
+import { AboutPage, CartPage, ContactPage, DetailPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage } from './pages'
 import { addAuth } from './redux/reducers/authReducer'
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
           <Route path='/cart' element={<CartPage />} />
           <Route path="/storepage" element={<SellerPage />} />
           <Route path='/about' element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Route>
 
         <Route path="/" element={<PageAdmin />}>

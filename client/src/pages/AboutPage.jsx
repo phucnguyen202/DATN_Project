@@ -47,7 +47,7 @@ const tagdata = [
   }, {
     id: 6,
     img: 'https://www.niraagayurveda.com/assets/imgs/theme/icons/icon-6.svg',
-    title: 'ưu đãi hàng ngày',
+    title: 'Ưu đãi hàng ngày',
     des: 'Chúng tôi cung cấp các ưu đãi hấp dẫn hàng ngày, giúp bạn tiết kiệm chi phí mỗi khi mua sắm nông sản sạch. Đừng bỏ lỡ cơ hội nhận những ưu đãi tuyệt vời này!'
   },
 ]

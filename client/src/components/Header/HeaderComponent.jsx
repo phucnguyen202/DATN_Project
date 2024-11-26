@@ -186,16 +186,10 @@ const HeaderComponent = () => {
       }} className='text-base  font-medium' to='/about'>Giới thiệu</Link>,
     },
     {
-      key: 7,
-      label: <Link style={{
-        color: '#253D4E'
-      }} className='text-base  font-medium' to='/'>Sản phẩm</Link>,
-    },
-    {
       key: 8,
       label: <Link style={{
         color: '#253D4E'
-      }} className='text-base  font-medium' to='/'>Liên hệ</Link>,
+      }} className='text-base  font-medium' to='/contact'>Liên hệ</Link>,
     },
   ];
   const onClick = (e) => {

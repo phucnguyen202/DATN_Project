@@ -8,9 +8,9 @@ import AboutPage from './AboutPage';
 import PageAdmin from './admin/PageAdmin'
 import PageNhanVienDashboard from './nhanVien/PageNhanVienDashboard';
 import PageSellerDashboard from './seller/PageSellerDashboard';
-
+import ContactPage from "./ContactPage";
 
 export {
-  LoginPage, HomePage, SignupPage, DetailPage,
+  LoginPage, HomePage, SignupPage, DetailPage, ContactPage,
   CartPage, SellerPage, AboutPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard
 } 
