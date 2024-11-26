@@ -183,7 +183,7 @@ const HeaderComponent = () => {
       key: 9,
       label: <Link style={{
         color: '#253D4E'
-      }} className='text-base  font-medium' to='/'>Giới thiệu</Link>,
+      }} className='text-base  font-medium' to='/about'>Giới thiệu</Link>,
     },
     {
       key: 7,

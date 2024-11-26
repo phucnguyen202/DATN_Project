@@ -1,19 +1,16 @@
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Route, Routes, } from 'react-router-dom'
-import { CartPage, DetailPage, HomePage, LoginPage, SellerPage, SignupPage } from './pages'
-import Main from './layout/Main'
-import PageAdmin from './pages/admin/PageAdmin'
 import AccountUser from './components/Admin/AccountUser'
 import Account_NhaCungCap from './components/Admin/Account_NhaCungCap'
 import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { addAuth } from './redux/reducers/authReducer'
-import PageSellerDashboard from './pages/seller/PageSellerDashboard'
-import DashboardSellerCreateProduct from './components/seller/DashboardSellerCreateProduct'
 import CreateDanhMuc from './components/Admin/CreateDanhMuc'
 import CreateProduct from './components/nhanVien/CreateProduct'
-import PageNhanVienDashboard from './pages/nhanVien/PageNhanVienDashboard'
 import ListProducts from './components/nhanVien/ListProducts'
+
+import Main from './layout/Main'
+import { AboutPage, CartPage, DetailPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage } from './pages'
+import { addAuth } from './redux/reducers/authReducer'
 
 function App() {
   // const user = useSelector(state => state?.auth?.currentData?.user)
@@ -34,6 +31,7 @@ function App() {
           <Route path='/detail/:id_product' element={<DetailPage />} />
           <Route path='/cart' element={<CartPage />} />
           <Route path="/storepage" element={<SellerPage />} />
+          <Route path='/about' element={<AboutPage />} />
         </Route>
 
         <Route path="/" element={<PageAdmin />}>
