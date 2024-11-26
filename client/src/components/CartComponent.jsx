@@ -77,9 +77,9 @@ const CartComponent = () => {
       >
         <div className='flex gap-2 items-center'>
           <Badge color='#3BB77E' count={count} >
-            <MdOutlineShoppingCart className='text-[#343a40]' size={25} />
+            <MdOutlineShoppingCart className='text-[#343a40]' size={22} />
           </Badge>
-          <span className='text-base text-custom font-medium hidden xl:flex'>Cart</span>
+          <span className='text-sm text-custom font-medium hidden xl:flex'>Giỏ hàng</span>
         </div>
       </Dropdown >
     </>

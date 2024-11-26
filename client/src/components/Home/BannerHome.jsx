@@ -27,9 +27,9 @@ const BannerHome = () => {
               backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/slider/slider-1.png)"
             }}>
               <div className=' absolute max-md:px-8 pt-12 px-14 xl:pt-20 xl:px-20'>
-                <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Don't miss amazing </p>
-                <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>grocery deals</p>
-                <p className=' text-2xl max-md:text-sm xl:text-3xl text-custom  xl:mt-10 mt-7'>Sign up for the daily newsletter</p>
+                <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Đừng bỏ lỡ điều tuyệt vời </p>
+                <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Giao dịch hàng hóa</p>
+                <p className=' text-2xl max-md:text-sm xl:text-3xl text-custom  xl:mt-10 mt-7'>Đăng ký nhận bản tin hàng ngày</p>
 
                 <div className='flex gap-2 items-center p-3 mt-7 xl:mt-16 rounded-3xl bg-white xl:w-[400px]'>
                   <FiSend size={30} className='text-custom' />
@@ -48,9 +48,9 @@ const BannerHome = () => {
               backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/slider/slider-2.png)"
             }}>
               <div className=' absolute max-md:px-8 pt-12 px-14 xl:pt-20 xl:px-20'>
-                <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Fresh Vegetables</p>
-                <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Big discount</p>
-                <p className=' text-2xl max-md:text-sm xl:text-3xl text-custom  xl:mt-10 mt-7'>Save up to 50% off on your first order</p>
+                <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Thực phẩm sạch</p>
+                <p className='max-md:text-3xl text-5xl xl:text-7xl font-semibold text-customText'>Giảm giá lớn</p>
+                <p className=' text-2xl max-md:text-sm xl:text-3xl text-custom  xl:mt-10 mt-7'>Tiết kiệm tới 50% cho đơn hàng đầu tiên của bạn</p>
                 <div className='flex gap-2 items-center p-3 mt-7 xl:mt-16 rounded-3xl bg-white xl:w-[400px]'>
                   <FiSend size={30} className='text-custom' />
                   <Input

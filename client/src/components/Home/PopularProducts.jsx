@@ -6,13 +6,11 @@ import { Link } from 'react-router-dom';
 const { Title, Text } = Typography;
 const operations = <Title level={2} style={{ margin: '0px', color: '#253D4E' }} className='max-md:hidden'>Sản Phẩm Phổ Biến</Title>
 const items = [
-  { key: '1', label: 'All', },
+  { key: '1', label: 'Tất cả', },
   { key: '2', label: 'Milks & Dairies' },
   { key: '3', label: 'Coffees & Teas' },
   { key: '4', label: 'Pet Foods' },
   { key: '5', label: 'Meats', },
-  { key: '6', label: 'Vegetables' },
-  { key: '7', label: 'Fruits', }
 ];
 
 const PopularProducts = () => {
@@ -21,8 +19,9 @@ const PopularProducts = () => {
     setActiveTab(key);
   };
   const renderCards = (tabkey) => (
-    <div>
-      <div className='grid max-md:grid-cols-1 grid-cols-3 xl:grid-cols-5 gap-6'>
+    // console.log(tabkey)
+    < div >
+      <div className='grid max-md:grid-cols-1 grid-cols-3 xl:grid-cols-5 gap-4'>
         <div className='relative group'>
           <Link to={`/detail/${123}`}>
             <Badge.Ribbon text={'sale'}>
@@ -454,7 +453,7 @@ const PopularProducts = () => {
           </Link>
         </div>
       </div>
-    </div >
+    </ div>
   );
 
   return (

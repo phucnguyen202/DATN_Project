@@ -94,7 +94,7 @@ const FeaturedCategories = () => {
       </div>
 
       <div className="">
-        <div className="grid max-md:grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid max-md:grid-cols-1 lg:grid-cols-3 gap-4">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -105,17 +105,16 @@ const FeaturedCategories = () => {
               style={{
                 backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-1.png)"
               }}>
-              <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
+              <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 px-10">
                 <p
                   style={{ margin: '0px' }}
                   className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
-                  Everyday Fresh &amp; <br />
-                  Clean with Our<br />
-                  Products
+                  Tươi mới hàng ngày &amp; <br />
+                  Sạch sẽ với sản phẩm của chúng tôi
                 </p>
                 <Button
                   className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
-                  icon={<GrFormNextLink size={20} />}>Shop Now</Button>
+                  icon={<GrFormNextLink size={20} />}>Mua ngay</Button>
               </div>
             </div>
           </motion.div>
@@ -128,16 +127,15 @@ const FeaturedCategories = () => {
               style={{
                 backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-2.png)"
               }}>
-              <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
+              <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 px-10">
                 <p
                   style={{ margin: '0px' }}
                   className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
-                  Make your Breakfast <br />
-                  Healthy and Easy <br />
+                  Làm bữa sáng của bạn lành mạnh và dễ dàng
                 </p>
                 <Button
                   className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
-                  icon={<GrFormNextLink size={20} />}>Shop Now</Button>
+                  icon={<GrFormNextLink size={20} />}>Mua ngày</Button>
               </div>
             </div>
           </motion.div>
@@ -151,12 +149,11 @@ const FeaturedCategories = () => {
               style={{
                 backgroundImage: "url(https://www.niraagayurveda.com/assets/imgs/banner/banner-3.png)"
               }}>
-              <div className="xl:pt-16 max-md:pt-10 pt-6 xl:pl-12 pl-10">
+              <div className="xl:pt-16 max-md:pt-10 pt-6 xl:px-12 px-10">
                 <p
                   style={{ margin: '0px' }}
                   className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
-                  The best Organic  <br />
-                  Products Online<br />
+                  Sản phẩm hữu cơ tốt nhất trực tuyến
                 </p>
                 <Button
                   className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"

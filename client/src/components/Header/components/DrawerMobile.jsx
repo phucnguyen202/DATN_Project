@@ -25,7 +25,7 @@ const DrawerMobile = ({ onClose, open, openMenu, current, items }) => {
           <Input
             variant="borderless"
             className='py-3 text-customText bg-custombggray'
-            placeholder="Search for items..."
+            placeholder="Tìm kiếm sản phẩm"
             suffix={<BiSearch className="text-slate-500" size={25} />}
           />
         </div>
@@ -37,13 +37,13 @@ const DrawerMobile = ({ onClose, open, openMenu, current, items }) => {
         <div className='m-5 border rounded-md p-5 flex flex-col gap-4'>
           <div className='flex gap-2 items-center'>
             <AiOutlineEnvironment className='text-greenCustom' size={16} />
-            <p className='text-sm text-customText'>Our location</p>
+            <p className='text-sm text-customText'>Địa chỉ</p>
           </div>
           <div className='flex gap-2 items-center'>
             <AiOutlineUser className='text-greenCustom' size={16} />
-            <Link to='/login' className='text-sm text-customText'>Log In</Link>
+            <Link to='/login' className='text-sm text-customText'>Đăng nhập</Link>
             <span>/</span>
-            <Link to='/signup' className='text-sm text-customText'>Sign Up</Link>
+            <Link to='/signup' className='text-sm text-customText'>Đăng ký</Link>
           </div>
           <div className='flex gap-2 items-center'>
             <AiOutlinePhone className='text-greenCustom ' size={16} />
@@ -51,7 +51,7 @@ const DrawerMobile = ({ onClose, open, openMenu, current, items }) => {
           </div>
         </div>
         <div className='m-5'>
-          <p className='font-medium text-lg'>Follow Us</p>
+          <p className='font-medium text-lg'>Theo dõi chúng tôi</p>
           <div className='flex gap-4 mt-3'>
             <Link className='bg-customBg rounded-full p-2'><BiLogoFacebook className='text-slate-50 ' size={16} /></Link>
             <Link className='bg-customBg rounded-full p-2'><BiLogoTwitter className='text-slate-50 ' size={16} /></Link>

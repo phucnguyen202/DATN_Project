@@ -32,10 +32,10 @@ const HeaderComponent = () => {
   const itemsAccount = [
     (user?.quyen === 'admin' || user?.quyen === 'khachhang' || user?.quyen === 'nhanvien' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
       key: '1',
-      icon: <AiOutlineUser className='text-[#343a40]' size={16} />,
+      icon: <AiOutlineSetting className='text-[#343a40]' size={16} />,
       label: (
         <Link className='text-[#343a40]' to={dashboardRoutes[user?.quyen]}>
-          My Account
+          Dashboard
         </Link>
       ),
     },
@@ -44,7 +44,7 @@ const HeaderComponent = () => {
       icon: <AiOutlineEnvironment className='text-[#343a40]' size={16} />,
       label: (
         <Link to='/'>
-          Order Tracking
+          Đơn hàng
         </Link>
       ),
     },
@@ -53,7 +53,7 @@ const HeaderComponent = () => {
       icon: <AiOutlineTag className='text-[#343a40]' size={16} />,
       label: (
         <Link to='/'>
-          My Voucher
+          Khuyến mãi
         </Link>
       ),
     },
@@ -62,16 +62,16 @@ const HeaderComponent = () => {
       icon: <FaRegHeart className='text-[#343a40]' size={16} />,
       label: (
         <Link to='/'>
-          My Wishlist
+          Danh sách yêu thích
         </Link>
       ),
     },
-    (user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
+    {
       key: '5',
-      icon: <AiOutlineSetting className='text-[#343a40]' size={16} />,
+      icon: <AiOutlineUser className='text-[#343a40]' size={16} />,
       label: (
         <Link to={user?.quyen === 'banhang' ? '/dashboard-nhabanhang' : '/dashboard-nhacungcap'}>
-          Dashboard
+          Tài khoản
         </Link>
       ),
     },
@@ -163,17 +163,9 @@ const HeaderComponent = () => {
       key: 1,
     },
     {
-      label: <Link style={{
-        color: '#253D4E'
-      }}
-        className='text-base  font-medium' to='/'>Cửa hàng</Link>,
+      label: <Link style={{ color: '#253D4E' }}
+        className='text-base  font-medium' to='/storepage'>Cửa hàng</Link>,
       key: 3,
-      children: [
-        {
-          label: 'Item 1',
-          key: 'as'
-        }
-      ],
     },
     {
       key: 4,
@@ -188,6 +180,12 @@ const HeaderComponent = () => {
       }} className='text-base  font-medium' to='/'>Blog</Link>,
     },
     {
+      key: 9,
+      label: <Link style={{
+        color: '#253D4E'
+      }} className='text-base  font-medium' to='/'>Giới thiệu</Link>,
+    },
+    {
       key: 7,
       label: <Link style={{
         color: '#253D4E'
@@ -197,17 +195,7 @@ const HeaderComponent = () => {
       key: 8,
       label: <Link style={{
         color: '#253D4E'
-      }} className='text-base  font-medium' to='/'>Dành cho bạn</Link>,
-      children: [
-        {
-          label: 'Tạo cửa hàng của bạn',
-          key: '001'
-        },
-        {
-          label: 'Trờ thành nhà cung cấp',
-          key: '002'
-        }
-      ],
+      }} className='text-base  font-medium' to='/'>Liên hệ</Link>,
     },
   ];
   const onClick = (e) => {
@@ -226,7 +214,7 @@ const HeaderComponent = () => {
       <header >
         <div className='md:hidden'>
           <div className='bg-customBg flex justify-center items-center'>
-            <p className='text-slate-50 text-sm p-2'>Grand opening, <b>up to 15%</b>  off all items, Only <b>3 days</b> left</p>
+            <p className='text-slate-50 text-center text-xs p-2'>Khai trương, giảm giá <b>lên đến 15%</b> cho tất cả các mặt hàng,<br /> Chỉ còn <b>3 ngày</b> cuối</p>
           </div>
         </div>
         <HeaderTop />
@@ -250,7 +238,7 @@ const HeaderComponent = () => {
               >
                 <a onClick={(e) => e.preventDefault()}>
                   <Space className='text-sm font-[500] flex justify-center text-customText'>
-                    All Categories
+                    Danh mục
                     <AiOutlineDown />
                   </Space>
                 </a>
@@ -260,16 +248,16 @@ const HeaderComponent = () => {
                 style={{ border: 'none', }}
                 variant="borderless"
                 className='py-3 text-customText placeholder-[#a74040]'
-                placeholder="Search for items..."
+                placeholder="Tìm kiếm sản phẩm..."
                 suffix={<BiSearch className="text-slate-500" size={25} />}
               />
             </div>
             <div className='col-span-3 hidden max-md:flex xl:flex gap-6 justify-end'>
               <div className='flex gap-2 items-center'>
                 <Badge color='#3BB77E' count={6} >
-                  <FaRegHeart className='text-[#343a40]' size={25} />
+                  <FaRegHeart className='text-[#343a40]' size={22} />
                 </Badge>
-                <span className='text-base text-custom max-md:hidden font-medium'>Wishlist</span>
+                <span className='text-sm text-custom max-md:hidden font-medium'>Yêu thích</span>
               </div>
               <CartComponent />
               <Dropdown
@@ -278,8 +266,8 @@ const HeaderComponent = () => {
                 placement="bottomLeft"
               >
                 <div className='flex gap-1 items-center'>
-                  <AiOutlineUser className='text-[#343a40]' size={25} />
-                  <span className='text-base text-custom font-medium'>Account</span>
+                  <AiOutlineUser className='text-[#343a40]' size={22} />
+                  <span className='text-sm text-custom font-medium'>Tài khoản</span>
                 </div>
               </Dropdown>
             </div>
@@ -294,7 +282,7 @@ const HeaderComponent = () => {
                 <a onClick={(e) => e.preventDefault()}>
                   <Space className='text-base font-semibold text-slate-50 bg-customBg p-3 rounded-md'>
                     <AiOutlineAppstore size={20} />
-                    Browse All Categories
+                    Duyệt danh mục
                     <AiOutlineDown />
                   </Space>
                 </a>
@@ -315,7 +303,7 @@ const HeaderComponent = () => {
                 <p className='text-greenCustom text-2xl font-bold'>
                   1900 - 888
                 </p>
-                <p className='text-xs text-end text-custom'>24/7 Support Center</p>
+                <p className='text-xs text-end text-custom'>24/7 trung tâm hỗ trợ</p>
               </div>
             </div>
           </div>
