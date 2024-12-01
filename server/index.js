@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const authRouter = require('./routers/authRouter')
 const adminRouter = require('./routers/admin/AdminRouter')
+const nhanVienRouter = require('./routers/nhanVien/NhanVienRouter')
 const cors = require('cors');
 require('dotenv').config();
 
@@ -19,6 +20,7 @@ app.use(cors({
 
 app.use('/v1/api', authRouter)
 app.use('/v1/api', adminRouter)
+app.use('/v1/api', nhanVienRouter)
 
 app.listen(port, () => {
   console.log(`running on port ${port}`);

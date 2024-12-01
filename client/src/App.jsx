@@ -1,13 +1,9 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Route, Routes, } from 'react-router-dom'
-import AccountUser from './components/Admin/AccountUser'
+import { Navigate, Route, Routes, } from 'react-router-dom'
 import Account_NhaCungCap from './components/Admin/Account_NhaCungCap'
 import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
-import CreateDanhMuc from './components/Admin/CreateDanhMuc'
-import CreateProduct from './components/nhanVien/CreateProduct'
-import ListProducts from './components/nhanVien/ListProducts'
-
+import { Account, AccountUser, CreateDanhMuc, CreateProduct, ListProducts } from './components'
 import Main from './layout/Main'
 import { AboutPage, CartPage, ContactPage, DetailPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage } from './pages'
 import { addAuth } from './redux/reducers/authReducer'
@@ -43,17 +39,18 @@ function App() {
         </Route>
 
         <Route path="/" element={<PageNhanVienDashboard />}>
-          <Route path="/dashboard-listProducts" element={<ListProducts />} />
-          <Route path="/dashboard-nhanvien" element={<CreateProduct />} />
+          <Route path="/dashboard/nhanvien/list-products" element={<ListProducts />} />
+          <Route path="/dashboard/nhanvien/create-product" element={<CreateProduct />} />
         </Route>
 
         <Route path="/" element={<PageSellerDashboard />}>
-          {/* <Route path="/dashboard-nhabanhang" element={<DashboardSellerCreateProduct />} /> */}
+          <Route path="/dashboard/seller/taikhoan" element={<Account />} />
+          <Route path="/dashboard/seller/danhmuc" element={<CreateDanhMuc />} />
         </Route>
 
         {/* <Route path="/dashboard-khachhang" element={<AccountUser />} /> */}
 
-
+        <Route path="/*" element={<Navigate to="/" replace />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>

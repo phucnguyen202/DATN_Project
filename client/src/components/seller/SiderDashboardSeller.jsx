@@ -10,17 +10,17 @@ const SiderDashboardSeller = () => {
   const items = [
     {
       key: '1',
-      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Tạo sản phẩm</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/seller/taikhoan'}>Quản lý tài khoản</Link>,
       icon: <BiPackage size={20} />,
     },
     {
       key: '2',
-      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Lịch sử bán hàng</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/seller/danhmuc'}>Thêm danh mục</Link>,
       icon: <AiOutlineHistory size={20} />,
     },
     {
       key: '3',
-      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Đơn hàng</Link>,
+      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Nhập hàng</Link>,
       icon: <BsCardChecklist size={20} />,
     },
     {

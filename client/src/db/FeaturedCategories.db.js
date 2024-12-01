@@ -61,3 +61,22 @@ export const featuredCategoriesDB = [
     color: '#ecffec'
   },
 ]
+
+// [
+//   {
+//     tenSanPham: 'Trái cây tươi',
+//     gia: 1500,
+//     hinhAnh: [
+//       {
+//         src: 'https://www.niraagayurveda.com/assets/imgs/shop/product-1.jpg',
+//         alt: 'Trái cây tươi'
+//       },
+//       {
+//         src: 'https://www.niraagayurveda.com/assets/imgs/shop/product-2.jpg',
+//         alt: 'Trái cây tươi'
+//       }
+//     ],
+//     moTa: 'Trái cây tươi đẹp và mang vị ngọt',
+//     danhMucSanPham: 'Trái cây'
+//   }
+// ]

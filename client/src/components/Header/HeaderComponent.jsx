@@ -24,11 +24,18 @@ const HeaderComponent = () => {
 
   const dashboardRoutes = {
     khachhang: '/dashboard-khachhang',
-    banhang: '/dashboard-nhabanhang',
+    banhang: '/dashboard/seller/taikhoan',
     admin: '/admin/all-account',
     nhacungcap: '/dashboard-nhacungcap',
-    nhanvien: '/dashboard-nhanvien'
+    nhanvien: '/dashboard/nhanvien/list-products'
   };
+
+  const handleLogOut = async () => {
+    dispatch(remoAuth())
+    localStorage.setItem('authData', '')
+    navigate('/login')
+  }
+
   const itemsAccount = [
     (user?.quyen === 'admin' || user?.quyen === 'khachhang' || user?.quyen === 'nhanvien' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
       key: '1',
@@ -79,23 +86,10 @@ const HeaderComponent = () => {
       key: '6',
       icon: <AiOutlineLogout className='text-[#343a40]' size={16} />,
       label: (
-        <Link
-          to='/'
-          onClick={{
-            onClick: () => {
-              handleLogOut();
-            },
-          }}
-        > Sign out  </Link >
+        <Link to='/' onClick={handleLogOut}> Sign out  </Link >
       ),
     },
   ];
-
-  const handleLogOut = async () => {
-    dispatch(remoAuth())
-    localStorage.setItem('authData', '')
-    navigate('/login')
-  }
 
   //category
   useEffect(() => {
@@ -148,7 +142,6 @@ const HeaderComponent = () => {
     },
     ...category,
   ];
-
 
   const items = [
     {
