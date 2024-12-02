@@ -11,6 +11,7 @@ const CreateProduct = () => {
   const [fileList1, setFileList1] = useState([]);
   const [fileList2, setFileList2] = useState([]);
   const [imageUrls, setImageUrls] = useState({ image1: '', image2: '' });
+
   //category
   useEffect(() => {
     const getAllCategory = async () => {
@@ -32,18 +33,14 @@ const CreateProduct = () => {
   const handleUploadChange = async (info, setFileList, imageKey) => {
     let fileList = info.fileList.slice(-1); // Giữ lại file mới nhất
     setFileList(fileList);
-
     if (info.file.status !== 'uploading') {
       const file = info.file.originFileObj || info.file;
-      console.log('file::', file);
       if (!file) {
         message.error('Không thể tìm thấy file ảnh.');
         return;
       }
-
       try {
         const response = await uploadFile(file); // Gọi hàm upload lên Cloudinary
-        console.log('response::', response);
         if (response.secure_url) {
           setImageUrls((prevState) => ({
             ...prevState,
@@ -73,7 +70,6 @@ const CreateProduct = () => {
         hinhAnh: [imageUrls.image1 || '', imageUrls.image2 || ''],
       };
       const res = await handleAPI('/nhanvien/createProduct', productData, 'post');
-      console.log('res::', res);
       if (res) {
         message.success(res.message);
         form.resetFields();
@@ -84,7 +80,6 @@ const CreateProduct = () => {
       message.error(e.message || 'Có lỗi xảy ra khi tạo sản phẩm');
     } finally {
       setIsLoading(false);
-
     }
   };
 

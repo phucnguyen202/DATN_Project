@@ -1,47 +1,82 @@
 import { Table } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import handleAPI from '../../apis/HandleAPI';
 
 const ListProducts = () => {
-  const dataSource = [
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-  ];
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataSource, setDataSource] = useState(null);
+  const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0, });
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: '#',
+      dataIndex: 'idSanPham',
+      key: 'idSanPham',
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'Tên sản phẩm',
+      dataIndex: 'tenSanPham',
+      key: 'tenSanPham',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
+      title: 'Danh mục',
+      dataIndex: 'tenDanhMuc',
+      key: 'tenDanhMuc',
+    }, {
+      title: 'Giá',
+      dataIndex: 'gia',
+      key: 'gia',
+    }
   ];
 
+  const handleTableChange = (pagination) => {
+    const { current, pageSize } = pagination
+    setPagination({
+      current,
+      pageSize,
+      total: pagination.total,
+    });
+    getProductsByPage(current, pageSize)
+  }
+  useEffect(() => {
+    const { current, pageSize } = pagination
+    getProductsByPage(current, pageSize)
+  }, [])
 
+  const getProductsByPage = async (page, limit) => {
+    setIsLoading(true);
+    try {
+      const res = await handleAPI(`nhanvien/getallproduct?page=${page}&limit=${limit}`, '', 'get')
+      if (res.data) {
+        setDataSource(res.data.products);
+        setPagination({
+          ...pagination,
+          current: res.data.page,
+          total: res.data.totalProducts
+        });
+      }
+    } catch (e) {
+      message.error(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
   return (
     <>
       <div>
         <h2 className="text-2xl font-bold mb-4">Danh sách sản phẩm</h2>
 
-        <Table dataSource={dataSource} columns={columns} />
+        <Table
+          loading={isLoading}
+          dataSource={dataSource}
+          columns={columns}
+          pagination={{
+            current: pagination.current,
+            pageSize: pagination.pageSize,
+            total: pagination.total,
+            showSizeChanger: true,
+          }}
+          onChange={handleTableChange}
+        />
       </div>
     </>
   )
