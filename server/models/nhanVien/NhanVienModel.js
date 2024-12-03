@@ -39,4 +39,31 @@ const getTotalProducts = (callback) => {
   db.query(sql, callback);
 }
 
-module.exports = { addProduct, addImage, getProductsByPage, getTotalProducts }
+// update thông tin sản phẩm
+const updateProductById = (product, productId, callback) => {
+  const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId } = product;
+  const sql = 'UPDATE tb_sanpham SET tenSanPham =?, gia =?, moTa =?, dongGoiGiaoHang =?, deXuat =?, canhBao =?, danhMucId =? WHERE idSanPham =?';
+  db.query(sql, [tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, productId], callback);
+}
+// update ảnh sản phẩm
+const updateImageById = (productId, imageSrc, callback) => {
+  const sql = 'UPDATE tb_hinhsanpham SET hinhAnh =? WHERE sanPhamId =?';
+  db.query(sql, [imageSrc, productId], callback);
+}
+
+
+// Xóa img sản phẩm
+const deleteImagesbyId = (productId, callback) => {
+  const deleteImagesSql = 'DELETE FROM tb_hinhsanpham WHERE sanPhamId = ?';
+  db.query(deleteImagesSql, [productId], callback);
+}
+//  xóa sản phẩm bằng id
+const deleteProductById = (productId, callback) => {
+  const deleteProductSql = 'DELETE FROM tb_sanpham WHERE idSanPham = ?'
+  db.query(deleteProductSql, [productId], callback);
+}
+
+module.exports = {
+  updateProductById, updateImageById,
+  addProduct, addImage, getProductsByPage, getTotalProducts, deleteProductById, deleteImagesbyId
+}

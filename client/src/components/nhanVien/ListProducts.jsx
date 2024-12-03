@@ -1,11 +1,18 @@
-import { Table } from 'antd'
+import { Button, message, Modal, Space, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import handleAPI from '../../apis/HandleAPI';
-
+import { CiEdit, CiSquareRemove } from 'react-icons/ci'
+import { BsFilterSquare } from 'react-icons/bs'
+import Title from 'antd/es/typography/Title';
+import ModalEditProduct from './ModalEditProduct';
+const { confirm } = Modal
 const ListProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [dataSource, setDataSource] = useState(null);
   const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0, });
+  const [productSelected, setProductSelected] = useState(null)
+  const [isVisibleModalEdit, setIsVisibleModalEdit] = useState(false);
+
   const columns = [
     {
       title: '#',
@@ -25,8 +32,54 @@ const ListProducts = () => {
       title: 'Giá',
       dataIndex: 'gia',
       key: 'gia',
+    },
+    {
+      key: 'buttonContainer',
+      align: 'right',
+      title: 'Actions',
+      width: 100,
+      dataIndex: '',
+      render: (item) =>
+        <Space>
+          <Button type="text"
+            onClick={() => {
+              setProductSelected(item)
+              setIsVisibleModalEdit(true)
+            }}
+            icon={<CiEdit size={20}
+              className="text-slate-600" />}>
+          </Button>
+          <Button
+            onClick={() => confirm({
+              title: 'Xóa sản phẩm',
+              content: 'Bạn có muốn xóa sản phẩm không?',
+              onOk: () => handleDeleteProduct(item?.idSanPham),
+              onCancel() { },
+            })}
+            type="text"
+            icon={<CiSquareRemove size={20}
+              className="text-slate-600" />}></Button>
+        </Space >
     }
   ];
+
+  const handleDeleteProduct = async (id) => {
+    setIsLoading(true);
+    try {
+      const res = await handleAPI(`/nhanvien/deleteproduct?id=${id}`, '', 'delete')
+      if (res && res.success) {
+        message.success(res.message);
+        getProductsByPage(pagination.current, pagination.pageSize);
+      } else {
+        message.error('Xóa sản phẩm thất bại!');
+      }
+    } catch (e) {
+      message.error(e.message);
+    }
+    finally {
+      setIsLoading(false);
+    }
+  }
 
   const handleTableChange = (pagination) => {
     const { current, pageSize } = pagination
@@ -45,8 +98,8 @@ const ListProducts = () => {
   const getProductsByPage = async (page, limit) => {
     setIsLoading(true);
     try {
-      const res = await handleAPI(`nhanvien/getallproduct?page=${page}&limit=${limit}`, '', 'get')
-      if (res.data) {
+      const res = await handleAPI(`/nhanvien/getallproduct?page=${page}&limit=${limit}`, '', 'get')
+      if (res && res.success) {
         setDataSource(res.data.products);
         setPagination({
           ...pagination,
@@ -55,7 +108,7 @@ const ListProducts = () => {
         });
       }
     } catch (e) {
-      message.error(e.message);
+      message.error(e);
     } finally {
       setIsLoading(false);
     }
@@ -63,8 +116,6 @@ const ListProducts = () => {
   return (
     <>
       <div>
-        <h2 className="text-2xl font-bold mb-4">Danh sách sản phẩm</h2>
-
         <Table
           loading={isLoading}
           dataSource={dataSource}
@@ -76,6 +127,26 @@ const ListProducts = () => {
             showSizeChanger: true,
           }}
           onChange={handleTableChange}
+          title={() => (
+            <div className="flex justify-between">
+              <div>
+                <Title level={3}>Danh sách sản phẩm</Title>
+              </div>
+              <div className="flex gap-2">
+                <Button className=" font-medium" icon={<BsFilterSquare size={20} />}>Filters</Button>
+                <Button className=" font-medium" >Download all</Button>
+              </div>
+            </div>
+          )}
+        />
+
+        <ModalEditProduct
+          productSelected={productSelected}
+          onClose={() => {
+            setProductSelected(undefined)
+            setIsVisibleModalEdit(false)
+          }}
+          isVisible={isVisibleModalEdit}
         />
       </div>
     </>

@@ -64,19 +64,16 @@ export const featuredCategoriesDB = [
 
 // [
 //   {
-//     tenSanPham: 'Trái cây tươi',
-//     gia: 1500,
-//     hinhAnh: [
-//       {
-//         src: 'https://www.niraagayurveda.com/assets/imgs/shop/product-1.jpg',
-//         alt: 'Trái cây tươi'
-//       },
-//       {
-//         src: 'https://www.niraagayurveda.com/assets/imgs/shop/product-2.jpg',
-//         alt: 'Trái cây tươi'
-//       }
-//     ],
-//     moTa: 'Trái cây tươi đẹp và mang vị ngọt',
-//     danhMucSanPham: 'Trái cây'
+//     canhBao: "Trái cây tươi",
+//     danhMucId: 6,
+//     deXuat: "Trái cây tươi",
+//     dongGoiGiaoHang: "Trái cây tươi",
+//     gia: "200000",
+//     hinhAnh: "https://res.cloudinary.com/dmbonuzhm/image/upload/v1733049676/project-DATN_file/eusga6kwttjtekeonrzo.png,https://res.cloudinary.com/dmbonuzhm/image/upload/v1733049679/project-DATN_file/qdg2sscntsoopeszempj.jpg",
+//     idSanPham: 2,
+//     moTa: "Trái cây tươi",
+//     tenDanhMuc: "Đồ ăn nhanh",
+//     tenSanPham: "Trái cây tươi",
+//     yeuThich: 0,
 //   }
 // ]
