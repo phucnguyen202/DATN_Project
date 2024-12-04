@@ -34,6 +34,11 @@ const ListProducts = () => {
       key: 'gia',
     },
     {
+      title: 'Số lượng tôn kho',
+      dataIndex: 'tonKho',
+      key: 'tonKho',
+    },
+    {
       key: 'buttonContainer',
       align: 'right',
       title: 'Actions',
@@ -98,7 +103,7 @@ const ListProducts = () => {
   const getProductsByPage = async (page, limit) => {
     setIsLoading(true);
     try {
-      const res = await handleAPI(`/nhanvien/getallproduct?page=${page}&limit=${limit}`, '', 'get')
+      const res = await handleAPI(`/nhanvien/getproduct?page=${page}&limit=${limit}`, '', 'get')
       if (res && res.success) {
         setDataSource(res.data.products);
         setPagination({
@@ -142,6 +147,7 @@ const ListProducts = () => {
 
         <ModalEditProduct
           productSelected={productSelected}
+          getProductsByPage={getProductsByPage}
           onClose={() => {
             setProductSelected(undefined)
             setIsVisibleModalEdit(false)

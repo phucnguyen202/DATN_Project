@@ -2,9 +2,9 @@ const db = require('../../config/connect')
 
 // them san pham
 const addProduct = (product, callback) => {
-  const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId } = product;
-  const sql = 'INSERT INTO tb_sanpham (tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId) VALUES (?, ?, ?, ?, ?, ?, ?)';
-  db.query(sql, [tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId], callback);
+  const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, tonKho } = product;
+  const sql = 'INSERT INTO tb_sanpham (tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, tonKho) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+  db.query(sql, [tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, tonKho], callback);
 }
 
 // Thêm hình ảnh sản phẩm
@@ -13,7 +13,7 @@ const addImage = (productId, imageSrc, callback) => {
   db.query(sql, [productId, imageSrc], callback);
 }
 
-// Lấy danh sách sản phẩm
+// Lấy danh sách sản phẩm phân trang
 const getProductsByPage = (limit, offset, callback) => {
   const sql = `
   SELECT 
@@ -41,9 +41,9 @@ const getTotalProducts = (callback) => {
 
 // update thông tin sản phẩm
 const updateProductById = (product, productId, callback) => {
-  const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId } = product;
-  const sql = 'UPDATE tb_sanpham SET tenSanPham =?, gia =?, moTa =?, dongGoiGiaoHang =?, deXuat =?, canhBao =?, danhMucId =? WHERE idSanPham =?';
-  db.query(sql, [tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, productId], callback);
+  const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, tonKho } = product;
+  const sql = 'UPDATE tb_sanpham SET tenSanPham =?, gia =?, moTa =?, dongGoiGiaoHang =?, deXuat =?, canhBao =?, danhMucId =?, tonKho =? WHERE idSanPham =?';
+  db.query(sql, [tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, tonKho, productId], callback);
 }
 // update ảnh sản phẩm
 const updateImageById = (productId, imageSrc, callback) => {
@@ -63,7 +63,45 @@ const deleteProductById = (productId, callback) => {
   db.query(deleteProductSql, [productId], callback);
 }
 
+//lấy tất cả sản phẩm
+const getAllProducts = (callback) => {
+  const sql = `
+    SELECT 
+      sp.*,
+      dm.tenDanhMuc,
+      GROUP_CONCAT(hsp.hinhAnh) AS hinhAnh
+    FROM 
+      tb_sanpham sp
+    JOIN 
+      tb_danhmuc dm ON sp.danhMucId = dm.idDanhMuc
+    LEFT JOIN 
+      tb_hinhSanPham hsp ON sp.idSanPham = hsp.sanPhamId
+    GROUP BY 
+      sp.idSanPham`;
+  db.query(sql, callback);
+}
+
+// lấy sản phẩm theo id
+const getProductById = (productId, callback) => {
+  const sql = `
+    SELECT 
+      sp.*,
+      dm.tenDanhMuc,
+      GROUP_CONCAT(hsp.hinhAnh) AS hinhAnh
+    FROM 
+      tb_sanpham sp
+    JOIN 
+      tb_danhmuc dm ON sp.danhMucId = dm.idDanhMuc
+    LEFT JOIN 
+      tb_hinhSanPham hsp ON sp.idSanPham = hsp.sanPhamId
+    WHERE 
+      sp.idSanPham = ?
+    GROUP BY 
+      sp.idSanPham;`;
+  db.query(sql, [productId], callback);
+}
+
 module.exports = {
-  updateProductById, updateImageById,
+  updateProductById, updateImageById, getAllProducts, getProductById,
   addProduct, addImage, getProductsByPage, getTotalProducts, deleteProductById, deleteImagesbyId
 }

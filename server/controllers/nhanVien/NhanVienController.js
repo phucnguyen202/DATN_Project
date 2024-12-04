@@ -1,12 +1,11 @@
-
 const ProductModel = require('../../models/nhanVien/NhanVienModel')
 
 class NhanVienController {
   async createProduct(req, res) {
     try {
-      const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, hinhAnh } = req.body;
+      const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, hinhAnh, tonKho } = req.body;
       ProductModel.addProduct({
-        tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId
+        tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, tonKho
       }, (err, result) => {
         if (err) {
           return res.status(500).json({
@@ -50,7 +49,7 @@ class NhanVienController {
     }
   }
 
-  async getAllProducts(req, res) {
+  async getProducts(req, res) {
     try {
       const page = parseInt(req.query.page) || 1; // trang hiện tại
       const limit = parseInt(req.query.limit) || 10;
@@ -100,11 +99,11 @@ class NhanVienController {
 
   async updateProduct(req, res) {
     try {
-      const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, hinhAnh } = req.body;
+      const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, hinhAnh, tonKho } = req.body;
       const productId = req.query.id;
       ProductModel.updateProductById(
         {
-          tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId
+          tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, tonKho
         }, productId, (err, product) => {
           if (err) {
             return res.status(500).json({
@@ -184,5 +183,63 @@ class NhanVienController {
       })
     }
   }
+
+
+  async getAllProducts(req, res) {
+    try {
+      ProductModel.getAllProducts((err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_ALL_PRODUCTS_ERROR',
+            message: 'Lỗi khi lấy tất cả sản phẩm',
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          code: 'GET_ALL_PRODUCTS_SUCCESS',
+          message: 'Lấy tất cả sản phẩm thành công',
+          data: result
+        });
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'GET_ALL_PRODUCTS_ERROR',
+        message: 'Lỗi khi lấy tất cả sản phẩm',
+      });
+    }
+  }
+
+  async getProductById(req, res) {
+    const { id } = req.query;
+    try {
+      ProductModel.getProductById(id, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_PRODUCT_BY_ID_ERROR',
+            message: 'Lỗi khi lấy sản phẩm theo ID',
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          code: 'GET_PRODUCT_BY_ID_SUCCESS',
+          message: 'Lấy sản phẩm theo ID thành công',
+          data: result
+        });
+      })
+    } catch {
+      return res.status(500).json({
+        success: false,
+        code: 'GET_PRODUCT_BY_ID_ERROR',
+        message: 'Lỗi khi lấy sản phẩm theo ID',
+      });
+    }
+  }
+
+
+
 }
 module.exports = new NhanVienController();

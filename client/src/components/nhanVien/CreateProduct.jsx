@@ -67,6 +67,7 @@ const CreateProduct = () => {
         deXuat: values.deXuat,
         canhBao: values.canhBao,
         danhMucId: values.danhMucId,
+        tonKho: values.tonKho,
         hinhAnh: [imageUrls.image1 || '', imageUrls.image2 || ''],
       };
       const res = await handleAPI('/nhanvien/createProduct', productData, 'post');
@@ -137,7 +138,7 @@ const CreateProduct = () => {
             </div>
           </div>
           <div className='flex gap-4'>
-            <div className='w-1/2'>
+            <div className='w-1/3'>
               <Form.Item
                 name='danhMucId'
                 label={<p className="block text-gray-700 font-medium mb-2">Danh mục sản phẩm</p>}
@@ -153,7 +154,7 @@ const CreateProduct = () => {
                 </Select>
               </Form.Item>
             </div>
-            <div className='w-1/2'>
+            <div className='w-1/3'>
               <Form.Item
                 name='gia'
                 label={<p className="block text-gray-700 font-medium mb-2">Giá sản phẩm</p>}
@@ -161,7 +162,16 @@ const CreateProduct = () => {
                 <Input placeholder='Nhập giá sản phẩm' allowClear maxLength={100} />
               </Form.Item>
             </div>
+            <div className='w-1/3'>
+              <Form.Item
+                name='tonKho'
+                label={<p className="block text-gray-700 font-medium mb-2">Số lượng tôn kho</p>}
+              >
+                <Input placeholder='Nhập số lượng tôn kho' allowClear maxLength={100} />
+              </Form.Item>
+            </div>
           </div>
+
           <div className='flex gap-4'>
             <div className='w-1/2'>
               <Form.Item

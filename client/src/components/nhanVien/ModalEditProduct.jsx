@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { HiOutlinePlus } from "react-icons/hi";
 import handleAPI from '../../apis/HandleAPI';
 import uploadFile from '../../configs/Cloudinary';
-const ModalEditProduct = ({ productSelected, onClose, isVisible }) => {
+const ModalEditProduct = ({ productSelected, onClose, isVisible, getProductsByPage }) => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [dataCategory, setDataCategory] = useState([]);
@@ -43,6 +43,7 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible }) => {
         canhBao: productSelected.canhBao,
         danhMucId: productSelected.danhMucId,
         gia: productSelected.gia,
+        tonKho: productSelected.tonKho,
       });
 
 
@@ -104,6 +105,7 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible }) => {
         deXuat: values.deXuat,
         canhBao: values.canhBao,
         danhMucId: values.danhMucId,
+        tonKho: values.tonKho,
         hinhAnh: [
           imageUrls.image1 || initialImages.image1,
           imageUrls.image2 || initialImages.image2
@@ -114,6 +116,7 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible }) => {
       const res = await handleAPI(`/nhanvien/updateproduct?id=${productSelected.idSanPham}`, productData, 'put');
       if (res && res.success) {
         message.success('Cập nhật sản phẩm thành công!');
+        getProductsByPage();
         onClose();
       } else {
         message.error(res.message || 'Có lỗi xảy ra khi cập nhật sản phẩm');
@@ -190,7 +193,7 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible }) => {
             </div>
           </div>
           <div className='flex gap-4'>
-            <div className='w-1/2'>
+            <div className='w-1/3'>
               <Form.Item
                 name='danhMucId'
                 label={<p className="block text-gray-700 font-medium mb-2">Danh mục sản phẩm</p>}
@@ -206,12 +209,20 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible }) => {
                 </Select>
               </Form.Item>
             </div>
-            <div className='w-1/2'>
+            <div className='w-1/3'>
               <Form.Item
                 name='gia'
                 label={<p className="block text-gray-700 font-medium mb-2">Giá sản phẩm</p>}
               >
                 <Input placeholder='Nhập giá sản phẩm' allowClear maxLength={100} />
+              </Form.Item>
+            </div>
+            <div className='w-1/3'>
+              <Form.Item
+                name='tonKho'
+                label={<p className="block text-gray-700 font-medium mb-2">Số lượng tôn kho</p>}
+              >
+                <Input placeholder='Nhập số lượng tôn kho' allowClear maxLength={100} />
               </Form.Item>
             </div>
           </div>

@@ -127,6 +127,7 @@ const HeaderComponent = () => {
         setCategory(items);
       }
     };
+
     if (dataSource) {
       getToCategory();
     }

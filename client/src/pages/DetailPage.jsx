@@ -1,122 +1,155 @@
-import { Badge, Breadcrumb, Card, Checkbox, Divider, Input, InputNumber, Rate, Slider, Space, Tabs, Tag, Tooltip, Typography } from 'antd';
+import { Badge, Breadcrumb, Card, Checkbox, Divider, Input, InputNumber, message, Rate, Slider, Space, Tabs, Tag, Tooltip, Typography } from 'antd';
 import { CiFilter } from "react-icons/ci";
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { IoCartOutline, IoEyeOutline } from 'react-icons/io5';
 import { Link, useParams } from 'react-router-dom';
 import PromotionalSectionHome from '../components/Home/PromotionalSectionHome';
+import handleAPI from '../apis/HandleAPI';
+import { useEffect, useState } from 'react';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
-const items = [
-  {
-    key: '1',
-    label: 'Mô Tả Sản Phẩm',
-    children:
-      <div>
-        <div className='mt-8'>
-          <p className='text-custom text-base mb-2'>Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart.</p>
-          <p className='text-custom text-base'>Spluttered narrowly yikes left moth in yikes bowed this that grizzly much hello on spoon-fed that alas rethought much decently richly and wow against the frequent fluidly at formidable acceptably flapped besides and much circa far over the bucolically hey precarious goldfinch mastodon goodness gnashed a jellyfish and one however because.</p>
-          <div>
-            <Divider orientation="left"
-              style={{
-                fontSize: '24px',
-                color: '#253D4E'
-              }}>Đóng gói & Giao hàng</Divider>
-            <p className='text-custom text-base mb-2'>Less lion goodness that euphemistically robin expeditiously bluebird smugly scratched far while thus cackled sheepishly rigid after due one assenting regarding censorious while occasional or this more crane went more as this less much amid overhung anathematic because much held one exuberantly sheep goodness so where rat wry well concomitantly.</p>
-            <p className='text-custom text-base'>Scallop or far crud plain remarkably far by thus far iguana lewd precociously and and less rattlesnake contrary caustic wow this near alas and next and pled the yikes articulate about as less cackled dalmatian in much less well jeering for the thanks blindly sentimental whimpered less across objectively fanciful grimaced wildly some wow and rose jeepers outgrew lugubrious luridly irrationally attractively dachshund.</p>
-          </div>
-          <div>
-            <Divider orientation="left"
-              style={{
-                fontSize: '24px',
-                color: '#253D4E'
-              }}>Đề xuất sử dụng</Divider>
-            <p className='text-custom text-base mb-2'>Refrigeration not necessary.</p>
-            <p className='text-custom text-base'>Stir before serving</p>
-          </div>
-          <div>
-            <Divider orientation="left"
-              style={{
-                fontSize: '24px',
-                color: '#253D4E'
-              }}>Cảnh báo</Divider>
-            <p className='text-custom text-base mb-2'>Oil separation occurs naturally. May contain pieces of shell.</p>
-          </div>
-        </div>
-      </div>,
-  },
-  {
-    key: '2',
-    label: 'Đánh Giá',
-    children:
-      <div className='mt-8'>
-        <ul className='flex flex-col gap-6'>
-          <li className='flex gap-4 border-[1px] rounded-md p-6'>
-            <div className='flex flex-col justify-center gap-2'>
-              <img className='w-40' src="https://www.niraagayurveda.com/assets/imgs/blog/author-2.png" alt="" />
-              <p className='text-center text-base font-medium text-greenCustom'>Sienna</p>
-            </div>
-            <div>
-              <div className='flex max-md:flex-col justify-between'>
-                <p className='text-custom1 text-sm mb-4 max-md:mb-2'>December 4, 2022 at 3:12 pm </p>
-                <Rate defaultValue={4} className='text-sm max-md:mb-2' />
-              </div>
-              <p className='text-custom text-base'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? </p>
-            </div>
-          </li>
-          <li className='flex gap-4 border-[1px] rounded-md p-6'>
-            <div className='flex flex-col justify-center gap-2'>
-              <img className='w-40' src="https://www.niraagayurveda.com/assets/imgs/blog/author-2.png" alt="" />
-              <p className='text-center text-base font-medium text-greenCustom'>Sienna</p>
-            </div>
-            <div>
-              <div className='flex max-md:flex-col justify-between'>
-                <p className='text-custom1 text-sm mb-4 max-md:mb-2'>December 4, 2022 at 3:12 pm </p>
-                <Rate defaultValue={4} className='text-sm max-md:mb-2' />
-              </div>
-              <p className='text-custom text-base'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? </p>
-            </div>
-          </li>
-          <li className='flex gap-4 border-[1px] rounded-md p-6'>
-            <div className='flex flex-col justify-center gap-2'>
-              <img className='w-40' src="https://www.niraagayurveda.com/assets/imgs/blog/author-2.png" alt="" />
-              <p className='text-center text-base font-medium text-greenCustom'>Sienna</p>
-            </div>
-            <div>
-              <div className='flex max-md:flex-col justify-between'>
-                <p className='text-custom1 text-sm mb-4 max-md:mb-2'>December 4, 2022 at 3:12 pm </p>
-                <Rate defaultValue={4} className='text-sm max-md:mb-2' />
-              </div>
-              <p className='text-custom text-base'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? </p>
-            </div>
-          </li>
-        </ul>
-        <div className='mt-20'>
-          <h2 className='text-3xl mb-2 text-customText font-semibold'>Thêm Đánh Già</h2>
-          <Rate defaultValue={0} className='text-sm mb-4' />
-          <div className='w-[600px] max-md:w-full flex flex-col gap-4'>
-            <TextArea
-              placeholder="Nhập đánh giá"
-              className="custom"
-              style={{
-                width: '100%',
-                height: 200,
-              }}
-            />
-            <div className='flex gap-4' >
-              <Input placeholder="Tên" />
-              <Input placeholder="Email" />
-            </div>
-            <div>
-              <button className='bg-customBg flex justify-center items-center gap-1 px-4 py-2 text-white text-base font-medium rounded-md'>Gửi Đánh Giá</button>
-            </div>
-          </div>
-        </div>
-      </div>
-  },
-];
+
 const DetailPage = () => {
   const param = useParams()
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const getDetailProduct = async () => {
+      setIsLoading(true);
+      try {
+        const res = await handleAPI(`/nhanvien/getproductbyid?id=${param?.idproduct}`, '', 'get');
+        console.log("res:::", res.data[0]);
+        if (res.success) {
+          setData(res.data[0]);
+          if (res.data[0]?.hinhAnh) {
+            const imageArray = res.data[0].hinhAnh.split(',').map(img => img.trim());
+            setImages(imageArray);
+          }
+        }
+      } catch (e) {
+        message.error(e.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getDetailProduct()
+
+  }, [])
+
+  console.log("data:::", data);
+
+  const items = [
+    {
+      key: '1',
+      label: 'Mô Tả Sản Phẩm',
+      children:
+        <div>
+          <div className='mt-8'>
+            <p className='text-custom text-base mb-2'>{data?.moTa}</p>
+
+            <div>
+              <Divider orientation="left"
+                style={{
+                  fontSize: '24px',
+                  color: '#253D4E'
+                }}>Đóng gói & Giao hàng</Divider>
+              <p className='text-custom text-base mb-2'>{data?.dongGoiGiaoHang}</p>
+            </div>
+            <div>
+              <Divider orientation="left"
+                style={{
+                  fontSize: '24px',
+                  color: '#253D4E'
+                }}>Đề xuất sử dụng</Divider>
+              <p className='text-custom text-base mb-2'>{data?.deXuat}</p>
+            </div>
+            <div>
+              <Divider orientation="left"
+                style={{
+                  fontSize: '24px',
+                  color: '#253D4E'
+                }}>Cảnh báo</Divider>
+              <p className='text-custom text-base mb-2'>{data?.canhBao}</p>
+            </div>
+          </div>
+        </div>,
+    },
+    {
+      key: '2',
+      label: 'Đánh Giá',
+      children:
+        <div className='mt-8'>
+          <ul className='flex flex-col gap-6'>
+            <li className='flex gap-4 border-[1px] rounded-md p-6'>
+              <div className='flex flex-col justify-center gap-2'>
+                <img className='w-40' src="https://www.niraagayurveda.com/assets/imgs/blog/author-2.png" alt="" />
+                <p className='text-center text-base font-medium text-greenCustom'>Sienna</p>
+              </div>
+              <div>
+                <div className='flex max-md:flex-col justify-between'>
+                  <p className='text-custom1 text-sm mb-4 max-md:mb-2'>December 4, 2022 at 3:12 pm </p>
+                  <Rate defaultValue={4} className='text-sm max-md:mb-2' />
+                </div>
+                <p className='text-custom text-base'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? </p>
+              </div>
+            </li>
+            <li className='flex gap-4 border-[1px] rounded-md p-6'>
+              <div className='flex flex-col justify-center gap-2'>
+                <img className='w-40' src="https://www.niraagayurveda.com/assets/imgs/blog/author-2.png" alt="" />
+                <p className='text-center text-base font-medium text-greenCustom'>Sienna</p>
+              </div>
+              <div>
+                <div className='flex max-md:flex-col justify-between'>
+                  <p className='text-custom1 text-sm mb-4 max-md:mb-2'>December 4, 2022 at 3:12 pm </p>
+                  <Rate defaultValue={4} className='text-sm max-md:mb-2' />
+                </div>
+                <p className='text-custom text-base'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? </p>
+              </div>
+            </li>
+            <li className='flex gap-4 border-[1px] rounded-md p-6'>
+              <div className='flex flex-col justify-center gap-2'>
+                <img className='w-40' src="https://www.niraagayurveda.com/assets/imgs/blog/author-2.png" alt="" />
+                <p className='text-center text-base font-medium text-greenCustom'>Sienna</p>
+              </div>
+              <div>
+                <div className='flex max-md:flex-col justify-between'>
+                  <p className='text-custom1 text-sm mb-4 max-md:mb-2'>December 4, 2022 at 3:12 pm </p>
+                  <Rate defaultValue={4} className='text-sm max-md:mb-2' />
+                </div>
+                <p className='text-custom text-base'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? </p>
+              </div>
+            </li>
+          </ul>
+          <div className='mt-20'>
+            <h2 className='text-3xl mb-2 text-customText font-semibold'>Thêm Đánh Già</h2>
+            <Rate defaultValue={0} className='text-sm mb-4' />
+            <div className='w-[600px] max-md:w-full flex flex-col gap-4'>
+              <TextArea
+                placeholder="Nhập đánh giá"
+                className="custom"
+                style={{
+                  width: '100%',
+                  height: 200,
+                }}
+              />
+              <div className='flex gap-4' >
+                <Input placeholder="Tên" />
+                <Input placeholder="Email" />
+              </div>
+              <div>
+                <button className='bg-customBg flex justify-center items-center gap-1 px-4 py-2 text-white text-base font-medium rounded-md'>Gửi Đánh Giá</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    },
+  ];
+  const formatCurrency = (amount) => {
+    return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   return (
     <div className=''>
       <div className='border-b-[1px]'>
@@ -143,12 +176,12 @@ const DetailPage = () => {
               <div className='flex max-md:flex-col gap-12'>
                 <div className='w-1/2 max-md:w-full'>
                   <div className=' flex justify-center border-[1px] rounded-2xl'>
-                    <img className='w-[480px] h-[480px] max-md:h-[360px] rounded-2xl' src="https://www.niraagayurveda.com/assets/imgs/shop/product-16-2.jpg" alt="" />
+                    <img className='w-[480px] h-[480px] max-md:h-[360px] rounded-2xl' src={images[0]} alt="" />
                   </div>
                   <div className='mt-8'>
                     <div className=' grid grid-cols-4 gap-4'>
                       <div className='border-[1px] rounded-md'>
-                        <img className='rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-4.jpg" alt="" />
+                        <img className='rounded-md' src={images[1]} alt="" />
                       </div>
                       <div className='border-[1px] rounded-md'>
                         <img className='rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-5.jpg" alt="" />
@@ -165,13 +198,13 @@ const DetailPage = () => {
                 <div className='w-1/2 max-md:w-full xl:pr-8'>
                   <Tag color="red">Save Off</Tag>
                   <div className='mt-4'>
-                    <h2 className='text-[44px] text-customText font-semibold max-md:text-[32px]'>Seeds of Change Organic Quinoa, Brown</h2>
+                    <h2 className='text-[44px] text-customText font-semibold max-md:text-[32px]'>{data?.tenSanPham}</h2>
                     <Space className='py-4'>
                       <Rate value={3} className='text-sm' />
                       <p className='text-custom1'>(32 reviews)</p>
                     </Space>
                     <div className='flex items-center gap-2 py-6'>
-                      <p className='text-6xl text-greenCustom font-semibold'>$38</p>
+                      <p className='text-6xl text-greenCustom font-semibold'>{formatCurrency(data?.gia)} VNĐ</p>
                       <div>
                         <p className='text-[#FDC040]'>
                           26% Off
@@ -179,7 +212,7 @@ const DetailPage = () => {
                         <p className='text-4xl text-custom1 font-semibold'>$52</p>
                       </div>
                     </div>
-                    <p className='text-lg pb-6 text-custom'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi. </p>
+                    <p className='text-lg pb-6 text-custom'>{data?.moTa}</p>
                     <p className='pb-6 text-custom'><b>Size/weight:</b> 1kg</p>
                     <div className='flex gap-2 items-center'>
                       <div>
@@ -190,8 +223,8 @@ const DetailPage = () => {
                             fontSize: '20px'
                           }
                           }
-                          min={1} max={10}
-                          defaultValue={3}
+                          min={1} max={data?.tonKho}
+                          defaultValue={1}
                           size="large"
                         // onChange={onChange}
                         />
@@ -200,7 +233,8 @@ const DetailPage = () => {
                         <IoCartOutline size={20} />
                         Add To Cart
                       </button>
-                      <button className='text-[#cf1322] bg-[#f8bfbb] rounded-sm p-5 '>
+                      <button
+                        className={`${data?.yeuThich === 0 ? ' text-customText bg-slate-200' : 'text-[#cf1322] bg-[#f8bfbb]'}  rounded-sm p-5 `}>
                         <IoMdHeartEmpty size={20} />
                       </button>
                     </div>
