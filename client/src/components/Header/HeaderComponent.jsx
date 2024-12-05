@@ -109,6 +109,7 @@ const HeaderComponent = () => {
     getAllCategory();
   }, []);
 
+  // hien thi category
   useEffect(() => {
     const getToCategory = () => {
       if (dataSource?.length) {

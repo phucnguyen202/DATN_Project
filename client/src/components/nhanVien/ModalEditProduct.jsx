@@ -13,7 +13,7 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible, getProductsByPa
   const [fileList2, setFileList2] = useState([]);
   const [imageUrls, setImageUrls] = useState({ image1: '', image2: '' });
   const [initialImages, setInitialImages] = useState({ image1: '', image2: '' });
-
+  const [isImageUpdated, setIsImageUpdated] = useState({ image1: false, image2: false });
   console.log('productSelected::', productSelected)
   //category
   useEffect(() => {
@@ -45,58 +45,61 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible, getProductsByPa
         gia: productSelected.gia,
         tonKho: productSelected.tonKho,
       });
+      // // Tách hình ảnh thành mảng và gán vào fileList1 và fileList2
+      // const images = productSelected.hinhAnh ? productSelected.hinhAnh.split(',') : [];
+      // // Set fileList và images cho từng ảnh
+      // if (images.length > 0) {
+      //   setFileList1([{ url: images[0] }]);
+      //   setImageUrls(prev => ({ ...prev, image1: images[0] }));
+      //   setInitialImages(prev => ({ ...prev, image1: images[0] }));
+      // }
 
-
-      // Tách hình ảnh thành mảng và gán vào fileList1 và fileList2
-      const images = productSelected.hinhAnh ? productSelected.hinhAnh.split(',') : [];
-      // Set fileList và images cho từng ảnh
-      if (images[0]) {
-        setFileList1([{ url: images[0] }]);
-        setImageUrls(prev => ({ ...prev, image1: images[0] }));
-        setInitialImages(prev => ({ ...prev, image1: images[0] }));
-      }
-
-      if (images[1]) {
-        setFileList2([{ url: images[1] }]);
-        setImageUrls(prev => ({ ...prev, image2: images[1] }));
-        setInitialImages(prev => ({ ...prev, image2: images[1] }));
-      }
+      // if (images.length > 1) {
+      //   setFileList2([{ url: images[1] }]);
+      //   setImageUrls(prev => ({ ...prev, image2: images[1] }));
+      //   setInitialImages(prev => ({ ...prev, image2: images[1] }));
+      // }
     }
   }, [productSelected, isVisible])
 
-  const handleUploadChange = async (info, setFileList, imageKey) => {
-    if (imageKey === 'image1') {
-      setFileList1(info.fileList.slice(-1));
-    } else {
-      setFileList2(info.fileList.slice(-1));
-    }
+  // const handleUploadChange = async (info, setFileList, imageKey) => {
+  //   const isRemovingFile = info.fileList.length === 0;
+  //   const isNewFile = info.fileList.length > 0 && info.fileList[0].originFileObj;
+  //   // Cập nhật danh sách file theo imageKey
+  //   if (imageKey === 'image1') {
+  //     setFileList1(info.fileList.slice(-1));
+  //   } else {
+  //     setFileList2(info.fileList.slice(-1));
+  //   }
+  //   // Nếu người dùng xóa ảnh, đặt lại trạng thái
+  //   if (isRemovingFile) {
+  //     setImageUrls(prev => ({ ...prev, [imageKey]: '' }));
+  //     setIsImageUpdated(prev => ({ ...prev, [imageKey]: true })); // Đánh dấu ảnh đã thay đổi
+  //     return;
+  //   }
+  //   // Nếu không phải file mới, không upload
+  //   if (!isNewFile) return;
 
-    // Nếu đang xóa file
-    if (info.fileList.length === 0) {
-      setImageUrls(prev => ({ ...prev, [imageKey]: '' }));
-      return;
-    }
-    // Xử lý upload file mới
-    const file = info.file.originFileObj;
-    if (!file) return;
+  //   const file = info.file.originFileObj;
+  //   if (!file) return;
 
-    try {
-      const response = await uploadFile(file);
-      if (response.secure_url) {
-        setImageUrls(prev => ({ ...prev, [imageKey]: response.secure_url }));
-        message.success('Upload hình ảnh thành công!');
-      } else {
-        message.error('Không nhận được link ảnh từ Cloudinary.');
-      }
-    } catch (error) {
-      message.error('Có lỗi khi tải lên Cloudinary.');
-    }
-  };
+  //   try {
+  //     const response = await uploadFile(file);
+  //     if (response.secure_url) {
+  //       setImageUrls(prev => ({ ...prev, [imageKey]: response.secure_url }));
+  //       setIsImageUpdated(prev => ({ ...prev, [imageKey]: true }));
+  //       message.success('Upload hình ảnh thành công!');
+  //     } else {
+  //       message.error('Không nhận được link ảnh từ Cloudinary.');
+  //     }
+  //   } catch (error) {
+  //     message.error('Có lỗi khi tải lên Cloudinary.');
+  //   }
+  // };
 
   const handleSubmit = async (values) => {
     setIsLoading(true)
     try {
-
       const productData = {
         tenSanPham: values.tenSanPham,
         gia: values.gia,
@@ -106,10 +109,11 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible, getProductsByPa
         canhBao: values.canhBao,
         danhMucId: values.danhMucId,
         tonKho: values.tonKho,
-        hinhAnh: [
-          imageUrls.image1 || initialImages.image1,
-          imageUrls.image2 || initialImages.image2
-        ],
+        // hinhAnh: [
+        //   // Chỉ lấy ảnh mới nếu người dùng thực sự thay đổi
+        //   isImageUpdated.image1 ? imageUrls.image1 : initialImages.image1,
+        //   isImageUpdated.image2 ? imageUrls.image2 : initialImages.image2
+        // ].filter(Boolean).join(','),
       };
       console.log('productData::', productData)
 
@@ -129,8 +133,11 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible, getProductsByPa
   }
   const handleClose = () => {
     form.resetFields();
-    setFileList1([]);
-    setFileList2([]);
+    // setFileList1([]);
+    // setFileList2([]);
+    // setImageUrls({ image1: '', image2: '' });
+    // setInitialImages({ image1: '', image2: '' });
+    // setIsImageUpdated({ image1: false, image2: false }); // Reset trạng thái thay đổi ảnh
     onClose();
   };
   return (
@@ -226,7 +233,7 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible, getProductsByPa
               </Form.Item>
             </div>
           </div>
-          <div className='flex gap-4'>
+          {/* <div className='flex gap-4'>
             <div className='w-1/2'>
               <Form.Item
                 name='hinhAnh1'
@@ -296,7 +303,7 @@ const ModalEditProduct = ({ productSelected, onClose, isVisible, getProductsByPa
                 </Upload>
               </Form.Item>
             </div>
-          </div>
+          </div> */}
           <Button
             loading={isLoading}
             onClick={() => form.submit()}

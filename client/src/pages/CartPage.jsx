@@ -3,57 +3,80 @@ import { useEffect, useState } from "react";
 import { CiSquareRemove } from "react-icons/ci";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { cart } from '../db/Cart';
 import PromotionalSectionHome from "../components/Home/PromotionalSectionHome";
+import handleAPI from "../apis/HandleAPI";
+import { useSelector } from "react-redux";
 
 const { confirm } = Modal
 const CartPage = () => {
-  const [dataSource, setDataSource] = useState(cart);
-  const [countProduct, setCountProduct] = useState(0)
-  // so luong san pham noi bang chua cap nhat duojc, nhung chach do chua co api
+
+  const user = useSelector(state => state?.auth?.currentData?.user)
+  const [dataSource, setDataSource] = useState([]);
+  const formatCurrency = (amount) => {
+    return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   useEffect(() => {
-    setCountProduct(cart.length)
-  }, [cart])
-  const onChangeCount = (value, record) => {
-    const updatedData = dataSource.map(item => {
-      if (item.id === record.id) {
-        return {
+    if (user?.id) {
+      getItemsCart(user.id);
+    }
+  }, [user]);
+
+  const getItemsCart = async (id) => {
+    try {
+      const res = await handleAPI(`/khachhang/getCartById?userId=${id}`, '', 'get');
+      if (res.success) {
+        const processedData = res.data.map(item => ({
           ...item,
-          count: value,
-        };
+          hinhAnh: item.hinhAnh?.split(',').filter(img => img.trim()) || []
+        }));
+        setDataSource(processedData);
+      }
+    } catch (err) {
+      console.log('error::', err)
+    }
+  }
+
+  const onChangeCount = (value, record) => {
+    console.log(value, record)
+    // Tạo bản sao của dataSource và cập nhật số lượng
+    const updatedDataSource = dataSource.map((item) => {
+      if (item.idGioHang === record.idGioHang) {
+        return { ...item, soLuong: value };
       }
       return item;
     });
-    setDataSource([...updatedData]);
+    setDataSource(updatedDataSource); // Cập nhật lại dataSource
+
+
   }
 
   const columns = [
     {
       title: 'Tên Sản Phẩm',
-      dataIndex: 'title',
-      key: 'title',
+      dataIndex: 'tenSanPham',
+      key: 'tenSanPham',
       width: 300
     },
     {
       title: 'Ảnh',
-      dataIndex: 'img',
-      key: 'img',
+      dataIndex: 'hinhAnh',
+      key: 'hinhAnh',
       width: 120,
-      render: (img) => <img
+      render: (hinhAnh) => <img
         alt='product'
-        src={img} width={60} height={60} />
+        src={hinhAnh[0]} width={60} height={60} />
     },
     {
       title: 'Giá',
-      dataIndex: 'price',
-      key: 'price',
+      dataIndex: 'gia',
+      key: 'gia',
       width: 120,
-      render: price => `${price.toLocaleString()} VND`,
+      render: price => `${formatCurrency(price)} VND`,
     },
     {
       title: 'Số lượng',
-      dataIndex: 'count',
-      key: 'count',
+      dataIndex: 'soLuong',
+      key: 'soLuong',
       width: 140,
       render: (count, record) =>
         <InputNumber
@@ -68,7 +91,7 @@ const CartPage = () => {
       dataIndex: 'total',
       key: 'total',
       width: 140,
-      render: (_, record) => <p className="text-greenCustom font-medium">{(record.price * record.count).toLocaleString()} VND</p>,
+      render: (_, record) => <p className="text-greenCustom font-medium">{formatCurrency(record.gia * record.soLuong)} VND</p>,
     },
     {
       title: 'Xóa',
@@ -116,7 +139,7 @@ const CartPage = () => {
           <div className="grid grid-cols-12 gap-6">
             <div className="xl:col-span-8 col-span-12 ">
               <div className="flex justify-between">
-                <p className="text-custom text-base">`Có <span className="text-greenCustom">${countProduct}</span> sản phẩm trong giỏ hàng của bạn`</p>
+                <p className="text-custom text-base">`Có <span className="text-greenCustom">{dataSource?.length}</span> sản phẩm trong giỏ hàng của bạn`</p>
                 <Button color="default" variant="filled" className="text-custom">
                   <FaRegTrashCan />
                   Xóa giỏ hàng
@@ -139,7 +162,7 @@ const CartPage = () => {
                   <div className="flex justify-between mt-4">
                     <p className="text-custom text-base font-medium">Tổng giá</p>
                     <p className="text-greenCustom font-semibold text-xl text-right ">
-                      {dataSource.reduce((acc, curr) => acc + curr.price * curr.count, 0).toLocaleString()} VND
+                      {/* {dataSource.reduce((acc, curr) => acc + curr.price * curr.count, 0).toLocaleString()} VND */}
                     </p>
                   </div>
                   <div className="flex justify-between mt-4">

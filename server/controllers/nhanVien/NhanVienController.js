@@ -100,6 +100,8 @@ class NhanVienController {
   async updateProduct(req, res) {
     try {
       const { tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, hinhAnh, tonKho } = req.body;
+      console.log('req.body::', req.body)
+      const imageArray = hinhAnh ? hinhAnh.split(',').map(img => img.trim()) : [];
       const productId = req.query.id;
       ProductModel.updateProductById(
         {
@@ -113,29 +115,37 @@ class NhanVienController {
             });
           }
 
-          const promises = hinhAnh.map((imageSrc) => {
-            return new Promise((resolve, reject) => {
-              ProductModel.updateImageById(productId, imageSrc, (err, result) => {
-                if (err) reject(err);
-                resolve(result);
+          if (imageArray.length > 0) {
+            const promises = imageArray.map((imageSrc) => {
+              return new Promise((resolve, reject) => {
+                ProductModel.updateImageById(productId, imageSrc, (err, result) => {
+                  if (err) reject(err);
+                  resolve(result);
+                })
               })
             })
-          })
-          Promise.all(promises)
-            .then((results) => {
-              return res.status(200).json({
-                success: true,
-                code: 'UPDATE_PRODUCT_SUCCESS',
-                message: 'Cập nhật sản phẩm thành công'
+            Promise.all(promises)
+              .then((results) => {
+                return res.status(200).json({
+                  success: true,
+                  code: 'UPDATE_PRODUCT_SUCCESS',
+                  message: 'Cập nhật sản phẩm thành công'
+                })
               })
-            })
-            .catch((err) => {
-              return res.status(500).json({
-                success: false,
-                code: 'UPDATE_IMAGE_ERROR',
-                message: 'Có lỗi khi cập nhật hình ảnh sản phẩm'
+              .catch((err) => {
+                return res.status(500).json({
+                  success: false,
+                  code: 'UPDATE_IMAGE_ERROR',
+                  message: 'Có lỗi khi cập nhật hình ảnh sản phẩm'
+                })
               })
-            })
+          } else {
+            return res.status(200).json({
+              success: true,
+              code: 'UPDATE_PRODUCT_SUCCESS',
+              message: 'Cập nhật sản phẩm thành công'
+            });
+          }
         }
       )
     } catch (e) {
@@ -183,7 +193,6 @@ class NhanVienController {
       })
     }
   }
-
 
   async getAllProducts(req, res) {
     try {

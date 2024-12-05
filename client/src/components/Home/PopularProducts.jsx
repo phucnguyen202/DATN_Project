@@ -64,7 +64,6 @@ const PopularProducts = () => {
       setIsLoading(true);
       try {
         const res = await handleAPI('/nhanvien/getallproducts', '', 'get');
-        console.log(res);
         if (res.success) {
           const processedData = res.data.map(item => ({
             ...item,
@@ -81,7 +80,6 @@ const PopularProducts = () => {
     getPopularProducts();
   }, [])
 
-  console.log('data::', data)
   const renderCards = (tabkey) => (
     // console.log(tabkey)
     < div >
