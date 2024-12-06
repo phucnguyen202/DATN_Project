@@ -1,4 +1,4 @@
-import { Breadcrumb, Button, InputNumber, Modal, Table } from "antd";
+import { Breadcrumb, Button, InputNumber, message, Modal, Table } from "antd";
 import { useEffect, useState } from "react";
 import { CiSquareRemove } from "react-icons/ci";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -9,12 +9,12 @@ import { useSelector } from "react-redux";
 
 const { confirm } = Modal
 const CartPage = () => {
-
   const user = useSelector(state => state?.auth?.currentData?.user)
   const [dataSource, setDataSource] = useState([]);
   const formatCurrency = (amount) => {
     return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
+
   useEffect(() => {
     if (user?.id) {
       getItemsCart(user.id);
@@ -36,8 +36,7 @@ const CartPage = () => {
     }
   }
 
-  const onChangeCount = (value, record) => {
-    console.log(value, record)
+  const onChangeCount = async (value, record) => {
     // Tạo bản sao của dataSource và cập nhật số lượng
     const updatedDataSource = dataSource.map((item) => {
       if (item.idGioHang === record.idGioHang) {
@@ -46,8 +45,33 @@ const CartPage = () => {
       return item;
     });
     setDataSource(updatedDataSource); // Cập nhật lại dataSource
+    // api cap nhat so luong
+    try {
+      const dataCart = {
+        idGioHang: record.idGioHang,
+        soLuong: value
+      }
+      console.log('dataCart::', dataCart)
+      const res = await handleAPI('/khachhang/updateQuantity', dataCart, 'put')
+      if (res.success) {
+        console.log('res::', res.message)
+      }
+    } catch (err) {
+      console.log('error::', err)
+    }
+  }
 
-
+  const handleDeleteCart = async (id) => {
+    try {
+      const res = await handleAPI(`/khachhang/deleteProductInCart?idGioHang=${id}`, '', 'delete')
+      console.log(res)
+      if (res.success) {
+        message.success(res.message);
+        getItemsCart(user.id);
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const columns = [
@@ -99,17 +123,20 @@ const CartPage = () => {
       align: 'right',
       key: 'buttonContainer',
       width: 100,
-      render: () => (
+      render: (item) => (
+
         <Button
           onClick={() => confirm({
-            title: 'Xóasản phẩm hay không',
+            title: 'Xóa sản phẩm hay không',
             content: 'Bạn có muốn xóa sản phẩm không?',
-            onOk: () => { },
+            onOk: () => { handleDeleteCart(item.idGioHang) },
             onCancel() { },
           })}
           type="text"
-          icon={<CiSquareRemove size={20}
-            className="text-slate-600" />}></Button>
+          icon={< CiSquareRemove size={20} className="text-slate-600" />}
+        >
+
+        </Button >
       )
     },
   ];
@@ -162,7 +189,7 @@ const CartPage = () => {
                   <div className="flex justify-between mt-4">
                     <p className="text-custom text-base font-medium">Tổng giá</p>
                     <p className="text-greenCustom font-semibold text-xl text-right ">
-                      {/* {dataSource.reduce((acc, curr) => acc + curr.price * curr.count, 0).toLocaleString()} VND */}
+                      {formatCurrency(dataSource.reduce((acc, curr) => acc + curr.gia * curr.soLuong, 0))} VND
                     </p>
                   </div>
                   <div className="flex justify-between mt-4">

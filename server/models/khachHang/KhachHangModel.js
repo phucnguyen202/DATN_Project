@@ -39,5 +39,16 @@ const getCartById = (idNguoiDung, callback) => {
   db.query(sql, [idNguoiDung], callback);
 }
 
+// Xóa sản phẩm khỏi giỏ hàng
+const deleteFromCart = (idGioHang, callback) => {
+  const sql = 'DELETE FROM tb_giohang WHERE idGioHang =?';
+  db.query(sql, [idGioHang], callback);
+}
 
-module.exports = { findByProduct, addToCart, getCartById }
+// Cập nhật số lượng sản phẩm trong giỏ hàng
+const updateQuantity = (soLuong, idGioHang, callback) => {
+  const sql = 'UPDATE tb_giohang SET soLuong =? WHERE idGioHang =?';
+  db.query(sql, [soLuong, idGioHang], callback);
+}
+
+module.exports = { findByProduct, addToCart, getCartById, updateQuantity, deleteFromCart }

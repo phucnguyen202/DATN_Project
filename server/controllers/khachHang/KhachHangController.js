@@ -69,6 +69,69 @@ class KhachHangController {
       });
     }
   }
+  async updateQuantityProduct(req, res) {
+    try {
+      const { idGioHang, soLuong } = req.body;
+      KhachHangModel.updateQuantity(soLuong, idGioHang, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'UPDATE_QUANTITY_ERROR',
+            message: 'Cập nhật số lượng thất bại'
+          });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy giỏ hàng để cập nhật'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Cập nhật số lượng sản phẩm thành công'
+        });
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'UPDATE_QUANTITY_ERROR',
+        message: 'Cập nhật số lượng thất bại'
+      })
+    }
+  }
+
+  async deleteProductInCart(req, res) {
+    try {
+      const { idGioHang } = req.query;
+      KhachHangModel.deleteFromCart(idGioHang, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'DELETE_PRODUCT_ERROR',
+            message: 'Xóa sản phẩm khỏi giỏ hàng thất bại'
+          });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy giỏ hàng để cập nhật'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Xóa sản phẩm khỏi giỏ hàng thành công'
+        });
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'DELETE_PRODUCT_ERROR',
+        message: 'Không tìm thấy giỏ hàng để cập nhật'
+      })
+    }
+  }
 }
 
 module.exports = new KhachHangController();

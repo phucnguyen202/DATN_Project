@@ -21,7 +21,7 @@ const CartComponent = () => {
     if (user?.id) {
       getItemsCart(user.id);
     }
-  }, [user]);
+  }, [user, count]);
 
   const getItemsCart = async (id) => {
     try {
