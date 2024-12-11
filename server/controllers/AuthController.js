@@ -120,7 +120,7 @@ class AuthController {
             // Tạo JWT token
             const token = jwt.sign(
               {
-                id: user.id,
+                idNguoiDung: user.idNguoiDung,
                 email: user.email,
                 quyen: user.quyen
               }, process.env.JWT_SECRET);
@@ -167,7 +167,7 @@ class AuthController {
           // Tạo JWT token
           const token = jwt.sign(
             {
-              id: user.id,
+              idNguoiDung: user.idNguoiDung,
               email: user.email,
               quyen: user.quyen
             }, process.env.JWT_SECRET);
@@ -185,6 +185,74 @@ class AuthController {
         message: 'Đăng nhập thất bại',
         error: error.message || error.toString()
       })
+    }
+  }
+
+  async updatePassword(req, res) { }
+
+  async findUserById(req, res) {
+    try {
+      const { idUser } = req.query;
+      User.findUserById(idUser, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'FIND_USER_ERROR',
+            message: 'Tìm người dùng không thành công'
+          });
+        }
+        if (result.length === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy người dùng'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Tìm người dùng thành công',
+          data: result[0]
+        });
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'FIND_USER_ERROR',
+        message: 'Tìm người dùng không thành công'
+      });
+    }
+  }
+  async updateInfo(req, res) {
+    try {
+      const { idUser } = req.query;
+      const { ten, soDT, hinhAnh } = req.body;
+      User.updateUserInfo(idUser, ten, soDT, hinhAnh, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'UPDATE_USER_ERROR',
+            message: 'Cập nhật người dùng không thành công'
+          });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy người dùng'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Cập nhật người dùng thành công',
+          data: result
+        });
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'UPDATE_USER_ERROR',
+        message: 'Cập nhật người dùng không thành công'
+      });
     }
   }
 }

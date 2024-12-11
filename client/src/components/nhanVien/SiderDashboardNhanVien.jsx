@@ -31,7 +31,7 @@ const SiderDashboardNhanVien = () => {
     },
     {
       key: '4',
-      label: <Link className=" font-medium" to={'/dashboard-nhanvien'}>Thông tin cá nhân</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/nhanvien/info-nhanvien'}>Thông tin cá nhân</Link>,
       icon: <AiOutlineUser size={20} />,
     },
     {

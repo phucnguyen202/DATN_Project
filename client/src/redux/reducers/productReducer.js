@@ -1,19 +1,18 @@
-
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  category: null
+  cartCount: 0
 }
 
 const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    // addCategory: (state, action) => {
-    //   state.category = action.payload
-    // },
+    updateCartCount: (state, action) => {
+      state.cartCount = action.payload;
+    }
   }
 })
 
 export const productReducer = productSlice.reducer
-export const { addCategory } = productSlice.actions
+export const { updateCartCount } = productSlice.actions

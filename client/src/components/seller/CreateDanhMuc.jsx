@@ -71,7 +71,7 @@ const CreateDanhMuc = () => {
     try {
       const res = await handleAPI('/admin/danhmuc', value, 'post')
       message.success(res.message)
-      await getAllDanhMuc();
+      getAllDanhMuc();
     } catch (e) {
       message.error(e.message)
     } finally {

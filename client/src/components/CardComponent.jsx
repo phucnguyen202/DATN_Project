@@ -2,13 +2,15 @@ import { Badge, Card, message, Rate, Space, Tooltip, Typography } from 'antd';
 import React from 'react';
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoCartOutline, IoEyeOutline } from "react-icons/io5";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import handleAPI from '../apis/HandleAPI';
+import { updateCartCount } from '../redux/reducers/productReducer';
 const { Title, Text } = Typography;
 
 const CardComponent = (item) => {
   const user = useSelector(state => state?.auth?.currentData?.user)
+  const dispatch = useDispatch();
   const handleAddToCart = async () => {
     try {
       const productData = {
@@ -18,12 +20,15 @@ const CardComponent = (item) => {
       const res = await handleAPI('/khachhang/addtocart', productData, 'post');
       if (res.success) {
         message.success(res.message);
+        const cartRes = await handleAPI(`/khachhang/getCartById?userId=${user.idNguoiDung}`, '', 'get');
+        if (cartRes.success) {
+          dispatch(updateCartCount(cartRes.data.length));
+        }
       }
     } catch (err) {
       message.warning('Sản phẩm đã có trong giỏ hàng');
     }
   }
-
   return (
     <>
       <div className='relative group'>

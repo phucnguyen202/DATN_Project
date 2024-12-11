@@ -5,11 +5,15 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import PromotionalSectionHome from "../components/Home/PromotionalSectionHome";
 import handleAPI from "../apis/HandleAPI";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { updateCartCount } from "../redux/reducers/productReducer";
+import Axios from 'axios';
 const { confirm } = Modal
 const CartPage = () => {
   const user = useSelector(state => state?.auth?.currentData?.user)
+  const cartCount = useSelector(state => state?.product?.cartCount);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const [dataSource, setDataSource] = useState([]);
   const formatCurrency = (amount) => {
     return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -19,9 +23,10 @@ const CartPage = () => {
     if (user?.id) {
       getItemsCart(user.id);
     }
-  }, [user]);
+  }, [user, cartCount]);
 
   const getItemsCart = async (id) => {
+    setLoading(true);
     try {
       const res = await handleAPI(`/khachhang/getCartById?userId=${id}`, '', 'get');
       if (res.success) {
@@ -30,9 +35,12 @@ const CartPage = () => {
           hinhAnh: item.hinhAnh?.split(',').filter(img => img.trim()) || []
         }));
         setDataSource(processedData);
+        dispatch(updateCartCount(res.data.length));
       }
     } catch (err) {
       console.log('error::', err)
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -73,6 +81,9 @@ const CartPage = () => {
       console.log(err)
     }
   }
+  const handlePayment = async () => {
+
+  };
 
   const columns = [
     {
@@ -141,6 +152,8 @@ const CartPage = () => {
     },
   ];
 
+
+
   return (
     <>
       <div>
@@ -166,20 +179,26 @@ const CartPage = () => {
           <div className="grid grid-cols-12 gap-6">
             <div className="xl:col-span-8 col-span-12 ">
               <div className="flex justify-between">
-                <p className="text-custom text-base">`Có <span className="text-greenCustom">{dataSource?.length}</span> sản phẩm trong giỏ hàng của bạn`</p>
+                <p className="text-custom text-base">Có <span className="text-greenCustom">{cartCount}</span> sản phẩm trong giỏ hàng của bạn</p>
                 <Button color="default" variant="filled" className="text-custom">
                   <FaRegTrashCan />
                   Xóa giỏ hàng
                 </Button>
               </div>
               <div className="mt-10">
-                <Table
-                  scroll={{
-                    y: 'calc(900px - 330px)'
-                  }}
-                  dataSource={dataSource}
-                  columns={columns}
-                  rowKey="key" />
+                {
+                  cartCount === 0 ?
+                    <p className="text-custom text-center text-xl">
+                      Không có sản phẩm nào trong giỏ hàng của bạn
+                    </p> :
+                    <Table
+                      loading={loading}
+                      scroll={{ y: 'calc(900px - 330px)' }}
+                      dataSource={dataSource}
+                      columns={columns}
+                      rowKey="key"
+                    />
+                }
               </div>
             </div>
             <div className="xl:col-span-4 col-span-12 ">
@@ -194,10 +213,12 @@ const CartPage = () => {
                   </div>
                   <div className="flex justify-between mt-4">
                     <p className="text-custom text-base font-medium">Phí vận chuyển</p>
-                    <p className="text-customText text-base text-right">0 VND</p>
+                    <p className="text-custom text-sm text-right">Miễn phí vẫn chuyển</p>
                   </div>
                   <div className="mt-10">
-                    <button className='font-medium rounded-md text-lg bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 w-full py-4'>
+                    <button
+                      onClick={handlePayment}
+                      className='font-medium rounded-md text-lg bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 w-full py-4'>
                       Mua ngay
                     </button>
                   </div>

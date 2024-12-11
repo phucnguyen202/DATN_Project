@@ -1,21 +1,23 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, Route, Routes, } from 'react-router-dom'
 import Account_NhaCungCap from './components/Admin/Account_NhaCungCap'
 import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
-import { Account, AccountUser, CreateDanhMuc, CreateProduct, ListProducts } from './components'
+import { Account, AccountUser, CreateDanhMuc, CreateProduct, InfoPersonal, ListProducts } from './components'
 import Main from './layout/Main'
 import { AboutPage, CartPage, ContactPage, DetailPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage } from './pages'
-import { addAuth } from './redux/reducers/authReducer'
+import { addAuth, updateUser } from './redux/reducers/authReducer'
+import handleAPI from './apis/HandleAPI'
 
 function App() {
-  // const user = useSelector(state => state?.auth?.currentData?.user)
+  const user = useSelector(state => state?.auth?.currentData?.user)
   const dispatch = useDispatch()
 
   useEffect(() => {
     getData();
   }, [])
-  const getData = async () => {
+
+  const getData = () => {
     const res = localStorage.getItem('authData');
     res && dispatch(addAuth(JSON.parse(res)));
   }
@@ -41,6 +43,8 @@ function App() {
         <Route path="/" element={<PageNhanVienDashboard />}>
           <Route path="/dashboard/nhanvien/list-products" element={<ListProducts />} />
           <Route path="/dashboard/nhanvien/create-product" element={<CreateProduct />} />
+          <Route path="/dashboard/nhanvien/info-nhanvien" element={<InfoPersonal />} />
+
         </Route>
 
         <Route path="/" element={<PageSellerDashboard />}>

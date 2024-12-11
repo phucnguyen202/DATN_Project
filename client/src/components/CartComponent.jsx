@@ -2,26 +2,27 @@ import { Badge, Dropdown, Space } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { MdOutlineShoppingCart } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import handleAPI from '../apis/HandleAPI';
+import { updateCartCount } from '../redux/reducers/productReducer';
 
 const CartComponent = () => {
   const user = useSelector(state => state?.auth?.currentData?.user)
+  const cartCount = useSelector(state => state?.product?.cartCount);
+  const dispatch = useDispatch();
   const [itemsCart, setItemsCart] = useState([]);
   const [total, setTotal] = useState(0);
-  const [count, setCount] = useState(0);
   const [dataCart, setDataCart] = useState([]);
 
   const formatCurrency = (amount) => {
     return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
-
   useEffect(() => {
-    if (user?.id) {
-      getItemsCart(user.id);
+    if (user?.idNguoiDung) {
+      getItemsCart(user.idNguoiDung);
     }
-  }, [user, count]);
+  }, [user, cartCount]);
 
   const getItemsCart = async (id) => {
     try {
@@ -33,6 +34,7 @@ const CartComponent = () => {
         }));
         setDataCart(processedData);
       }
+      dispatch(updateCartCount(res.data.length));
     } catch (err) {
       console.log('error::', err)
     }
@@ -63,8 +65,6 @@ const CartComponent = () => {
         setItemsCart(items);
         const initialTotal = dataCart?.reduce((sum, item) => sum + (item.gia * item.soLuong), 0);
         setTotal(initialTotal);
-        const count = dataCart?.length;
-        setCount(count);
       }
     }
     if (dataCart) {
@@ -105,7 +105,7 @@ const CartComponent = () => {
         placement="bottomLeft"
       >
         <div className='flex gap-2 items-center'>
-          <Badge color='#3BB77E' count={count} >
+          <Badge color='#3BB77E' count={cartCount} >
             <MdOutlineShoppingCart className='text-[#343a40]' size={22} />
           </Badge>
           <span className='text-sm text-custom font-medium hidden xl:flex'>Giỏ hàng</span>

@@ -15,7 +15,7 @@ const findUserByEmail = (email, callback) => {
 
 // Hàm để tìm người dùng để tạo JWT token
 const findUserForJWT = (email, callback) => {
-  const sql = 'SELECT idNguoiDung AS id, email, ten, quyen, soDT, hinhAnh FROM nguoiDung WHERE email = ?';
+  const sql = 'SELECT idNguoiDung AS idNguoiDung, email, ten, quyen, soDT, hinhAnh FROM nguoidung WHERE email = ?';
   db.query(sql, [email], (err, results) => {
     if (err) {
       return callback(err, null);
@@ -29,4 +29,14 @@ const findUserForJWT = (email, callback) => {
   });
 };
 
-module.exports = { createUser, findUserByEmail, findUserForJWT };
+const findUserById = (userId, callback) => {
+  const sql = 'SELECT * FROM nguoidung WHERE idNguoiDung =?';
+  db.query(sql, [userId], callback);
+}
+
+const updateUserInfo = (idUser, ten, soDT, hinhAnh, callback) => {
+  const sql = 'UPDATE nguoidung SET ten =?, soDT =?, hinhAnh =? WHERE idNguoiDung =?';
+  db.query(sql, [ten, soDT, hinhAnh, idUser], callback);
+}
+
+module.exports = { createUser, findUserByEmail, findUserForJWT, updateUserInfo, findUserById };
