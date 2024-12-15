@@ -5,9 +5,9 @@ import Account_NhaCungCap from './components/Admin/Account_NhaCungCap'
 import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
 import { Account, AccountUser, CreateDanhMuc, CreateProduct, InfoPersonal, ListProducts } from './components'
 import Main from './layout/Main'
-import { AboutPage, CartPage, ContactPage, DetailPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage } from './pages'
-import { addAuth, updateUser } from './redux/reducers/authReducer'
-import handleAPI from './apis/HandleAPI'
+import { AboutPage, CartPage, ContactPage, DetailPage, PaymentPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage } from './pages'
+import { addAuth } from './redux/reducers/authReducer'
+
 
 function App() {
   const user = useSelector(state => state?.auth?.currentData?.user)
@@ -31,6 +31,7 @@ function App() {
           <Route path="/storepage" element={<SellerPage />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
         </Route>
 
         <Route path="/" element={<PageAdmin />}>

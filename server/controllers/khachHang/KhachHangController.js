@@ -133,7 +133,7 @@ class KhachHangController {
     }
   }
 
-  async addProductToGioHang(req, res) {
+  async addProductToOrder(req, res) {
     try {
       const { nguoiDungId, diaChi, tongTien } = req.body;
       console.log(req.body)
@@ -168,6 +168,72 @@ class KhachHangController {
         success: false,
         code: 'CREATE_ORDER_ERROR',
         message: 'Tạo đơn hàng thất bại'
+      });
+    }
+  }
+
+  async getOrderByIdUser(req, res) {
+    try {
+      const { userId } = req.query;
+      KhachHangModel.getOrderById(userId, (err, order) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_ORDER_INFO_ERROR',
+            message: 'Lấy thông tin đơn hàng thất bại'
+          });
+        }
+        if (order.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy đơn hàng này'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Lấy thông tin đơn hàng thành công',
+          data: order
+        });
+      })
+    } catch (e) {
+      return res.status(500).json({
+        success: false,
+        code: 'GET_ORDER_INFO_ERROR',
+        message: 'Lấy thông tin đơn hàng thất bại'
+      });
+    }
+  }
+  async updateAddressOrder(req, res) {
+    try {
+      const { diaChi, idDonHang } = req.body;
+      console.log(req.body);
+      KhachHangModel.updateAddressOrder(diaChi, idDonHang, (err, data) => {
+        console.log(err);
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'UPDATE_ADDRESS_ERROR',
+            message: 'Cập nhật địa chỉ đơn hàng thất bại'
+          });
+        }
+        if (data.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy đơn hàng này'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Cập nhật địa chỉ đơn hàng thành công'
+        });
+      })
+    } catch (e) {
+      return res.status(500).json({
+        success: false,
+        code: 'UPDATE_ADDRESS_ERROR',
+        message: 'Cập nhật địa chỉ đơn hàng thất bại'
       });
     }
   }

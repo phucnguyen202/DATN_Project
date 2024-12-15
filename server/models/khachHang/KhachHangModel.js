@@ -70,6 +70,16 @@ const addOrderDetails = (orderId, nguoiDungId, callback) => {
   db.query(sql, [orderId, nguoiDungId], callback);
 };
 
+const getOrderById = (userId, callback) => {
+  const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId = ?`
+  db.query(sql, [userId], callback);
+}
+
+const updateAddressOrder = (diaChi, idDonHang, callback) => {
+  const sql = `UPDATE tb_donhang SET diaChi = ? WHERE idDonHang = ?`
+  db.query(sql, [diaChi, idDonHang], callback);
+}
+
 const deleteCart = (userId, callback) => {
   const sql = 'DELETE FROM tb_giohang WHERE nguoiDungId =?';
   db.query(sql, [userId], callback);
@@ -79,4 +89,8 @@ const deleteCart = (userId, callback) => {
 //   const sql = 'UPDATE tb_donhang SET trangThai =? WHERE idDonHang =?';
 //   db.query(sql, [trangThai, orderId], callback);
 // }
-module.exports = { findByProduct, addToCart, getCartById, updateQuantity, deleteFromCart, createOrder, addOrderDetails, deleteCart }
+module.exports = {
+  findByProduct, addToCart, getCartById, updateQuantity,
+  updateAddressOrder, getOrderById, deleteFromCart,
+  createOrder, addOrderDetails, deleteCart
+}
