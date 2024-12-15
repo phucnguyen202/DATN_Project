@@ -15,12 +15,13 @@ const CardComponent = (item) => {
     try {
       const productData = {
         idSanPham: item?.item.idSanPham,
-        nguoiDungId: user?.id,
+        nguoiDungId: user?.idNguoiDung,
       }
       const res = await handleAPI('/khachhang/addtocart', productData, 'post');
       if (res.success) {
         message.success(res.message);
-        const cartRes = await handleAPI(`/khachhang/getCartById?userId=${user.idNguoiDung}`, '', 'get');
+        const cartRes = await handleAPI(`/khachhang/getCartById?userId=${user?.idNguoiDung}`, '', 'get');
+        console.log('Cart:::', cartRes)
         if (cartRes.success) {
           dispatch(updateCartCount(cartRes.data.length));
         }

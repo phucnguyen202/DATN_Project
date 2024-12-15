@@ -7,7 +7,7 @@ import PromotionalSectionHome from "../components/Home/PromotionalSectionHome";
 import handleAPI from "../apis/HandleAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCartCount } from "../redux/reducers/productReducer";
-import Axios from 'axios';
+
 const { confirm } = Modal
 const CartPage = () => {
   const user = useSelector(state => state?.auth?.currentData?.user)
@@ -15,13 +15,14 @@ const CartPage = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [dataSource, setDataSource] = useState([]);
+  const [diaChi, setDiaChi] = useState('');
   const formatCurrency = (amount) => {
     return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
   useEffect(() => {
-    if (user?.id) {
-      getItemsCart(user.id);
+    if (user?.idNguoiDung) {
+      getItemsCart(user.idNguoiDung);
     }
   }, [user, cartCount]);
 
@@ -81,10 +82,27 @@ const CartPage = () => {
       console.log(err)
     }
   }
-  const handlePayment = async () => {
-
+  const handleAPIChange = async () => {
+    try {
+      const dataThanhToan = {
+        nguoiDungId: user.idNguoiDung,
+        diaChi: diaChi,
+        tongTien: dataSource.reduce((total, item) => total + item.soLuong * item.gia, 0)
+      }
+      const res = await handleAPI('/khachhang/createOrder', dataThanhToan, 'post');
+      console.log('res:::', res);
+      if (res.success) {
+        message.success('Đặt hàng thành công!');
+        // Xóa gi�� hàng
+        await handleAPI(`/khachhang/deleteCart?userId=${user.idNguoiDung}`, '', 'delete');
+        dispatch(updateCartCount(0));
+        setDataSource([]);
+        setDiaChi('');
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
-
   const columns = [
     {
       title: 'Tên Sản Phẩm',
@@ -152,8 +170,6 @@ const CartPage = () => {
     },
   ];
 
-
-
   return (
     <>
       <div>
@@ -215,11 +231,17 @@ const CartPage = () => {
                     <p className="text-custom text-base font-medium">Phí vận chuyển</p>
                     <p className="text-custom text-sm text-right">Miễn phí vẫn chuyển</p>
                   </div>
+                  <div className="mt-4">
+                    <input
+                      value={diaChi}
+                      onChange={(e) => setDiaChi(e.target.value)}
+                      className="w-full p-4 font-medium text-customText border-[1px] border-green-200 rounded-md outline-none text-sm" type="text" placeholder="Nhập địa chỉ" />
+                  </div>
                   <div className="mt-10">
                     <button
-                      onClick={handlePayment}
+                      onClick={handleAPIChange}
                       className='font-medium rounded-md text-lg bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 w-full py-4'>
-                      Mua ngay
+                      Xác nhận đặt hàng
                     </button>
                   </div>
                 </div>

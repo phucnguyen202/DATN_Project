@@ -132,6 +132,77 @@ class KhachHangController {
       })
     }
   }
+
+  async addProductToGioHang(req, res) {
+    try {
+      const { nguoiDungId, diaChi, tongTien } = req.body;
+      console.log(req.body)
+      KhachHangModel.createOrder(nguoiDungId, diaChi, tongTien, (err, result) => {
+        console.log(err)
+
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'CREATE_ORDER_ERROR',
+            message: 'Tạo đơn hàng thất bại'
+          });
+        }
+        const orderId = result.insertId;
+        KhachHangModel.addOrderDetails(orderId, nguoiDungId, (err, orderDetail) => {
+          if (err) {
+            return res.status(500).json({
+              success: false,
+              code: 'ADD_ORDER_DETAILS_ERROR',
+              message: 'Thêm chi tiết đơn hàng thất bại'
+            });
+          }
+          return res.status(200).json({
+            success: true,
+            message: 'Tạo đơn hàng thành công',
+            data: orderId
+          });
+        })
+      })
+    } catch (e) {
+      return res.status(500).json({
+        success: false,
+        code: 'CREATE_ORDER_ERROR',
+        message: 'Tạo đơn hàng thất bại'
+      });
+    }
+  }
+
+  async deleteCart(req, res) {
+    try {
+      const { userId } = req.query
+      KhachHangModel.deleteCart(userId, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'DELETE_CART_ERROR',
+            message: 'Xóa giỏ hàng thất bại'
+          });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy giỏ hàng để xóa'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Xóa giỏ hàng thành công'
+        })
+      })
+    } catch (e) {
+      return res.status(500).json({
+        success: false,
+        code: 'DELETE_CART_ERROR',
+        message: 'Xóa giỏ hàng thất bại'
+      });
+    }
+  }
 }
 
 module.exports = new KhachHangController();

@@ -51,4 +51,32 @@ const updateQuantity = (soLuong, idGioHang, callback) => {
   db.query(sql, [soLuong, idGioHang], callback);
 }
 
-module.exports = { findByProduct, addToCart, getCartById, updateQuantity, deleteFromCart }
+const createOrder = (nguoiDungId, diaChi, tongTien, callback) => {
+  const sql = `
+    INSERT INTO tb_donhang (nguoiDungId, diaChi, tongTien)
+    VALUES (?, ?, ?)
+  `;
+  db.query(sql, [nguoiDungId, diaChi, tongTien], callback);
+}
+
+const addOrderDetails = (orderId, nguoiDungId, callback) => {
+  const sql = `
+    INSERT INTO tb_chitietdonhang (donHangId, sanPhamId, soLuong, gia, trangThai)
+    SELECT ?, gh.sanPhamId, gh.soLuong, sp.gia, 'Chưa giao'
+    FROM tb_giohang gh
+    JOIN tb_sanpham sp ON gh.sanPhamId = sp.idSanPham
+    WHERE gh.nguoiDungId = ?
+  `;
+  db.query(sql, [orderId, nguoiDungId], callback);
+};
+
+const deleteCart = (userId, callback) => {
+  const sql = 'DELETE FROM tb_giohang WHERE nguoiDungId =?';
+  db.query(sql, [userId], callback);
+}
+
+// const updateOrderStatus = (orderId, trangThai, callback) => {
+//   const sql = 'UPDATE tb_donhang SET trangThai =? WHERE idDonHang =?';
+//   db.query(sql, [trangThai, orderId], callback);
+// }
+module.exports = { findByProduct, addToCart, getCartById, updateQuantity, deleteFromCart, createOrder, addOrderDetails, deleteCart }
