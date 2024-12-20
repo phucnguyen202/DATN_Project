@@ -33,6 +33,7 @@ const PopularProducts = () => {
     getAllCategory();
   }, []);
 
+
   useEffect(() => {
     const getToCategory = () => {
       if (dataSource?.length) {
@@ -58,6 +59,7 @@ const PopularProducts = () => {
     { key: '1', label: 'Tất cả', },
     ...category
   ];
+
 
   useEffect(() => {
     const getPopularProducts = async () => {
@@ -92,6 +94,7 @@ const PopularProducts = () => {
       </div>
     </ div >
   );
+
 
   return (
     <div className="px-4 py-6">

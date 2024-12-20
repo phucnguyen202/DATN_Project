@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Info from '../Info';
 
-const InfoPersonal = () => {
-  const user = useSelector(state => state?.auth?.currentData?.user)
 
+const InfoCustomer = () => {
+  const user = useSelector(state => state?.auth?.currentData?.user)
   return (
     <>
       <Info
@@ -14,4 +14,4 @@ const InfoPersonal = () => {
   );
 }
 
-export default InfoPersonal
+export default InfoCustomer

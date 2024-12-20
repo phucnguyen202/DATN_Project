@@ -71,6 +71,8 @@ const BestSellingProduct = () => {
     }
   };
 
+
+
   const renderCards = (tabkey) => (
     <div>
       <div className='grid grid-cols-12 gap-4'>
@@ -382,6 +384,7 @@ const BestSellingProduct = () => {
       </div>
     </div >
   );
+
   return (
     <div className="px-4 py-6 overflow-hidden">
       <Tabs

@@ -4,7 +4,6 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 const baseURL = import.meta.env.VITE_BASE_URL
-console.log(baseURL)
 const getAccessToken = () => {
   const res = localStorage.getItem('authData')
   return res ? JSON.parse(res).token : ''

@@ -1,19 +1,21 @@
 
+import AccountUser from './Admin/AccountUser';
+import HeaderDashboardCustomer from './customer/HeaderDashboardCustomer';
+import Order_KhachHang from './customer/Order_KhachHang';
+import SiderDashboardCustomer from './customer/SiderDashboardCustomer';
 import BannerHome from "./Home/BannerHome";
-import FeaturedCategories from "./Home/FeaturedCategories";
-import PopularProducts from './Home/PopularProducts';
 import BestSellingProduct from "./Home/BestSellingProduct";
 import DealsOfTheDayHome from "./Home/DealsOfTheDayHome";
-import ProductSectionHome from "./Home/ProductSectionHome"
-import PromotionalSectionHome from "./Home/PromotionalSectionHome"
-import AccountUser from './Admin/AccountUser'
-import CreateProduct from './nhanVien/CreateProduct'
-import ListProducts from './nhanVien/ListProducts'
-import InfoPersonal from './nhanVien/InfoPersonal'
-import Account from './seller/Account'
-import CreateDanhMuc from './seller/CreateDanhMuc'
-export {
-  AccountUser, CreateProduct, ListProducts, Account, CreateDanhMuc,
-  BannerHome, FeaturedCategories, PopularProducts, InfoPersonal,
-  BestSellingProduct, DealsOfTheDayHome, ProductSectionHome, PromotionalSectionHome
-}
+import FeaturedCategories from "./Home/FeaturedCategories";
+import PopularProducts from './Home/PopularProducts';
+import ProductSectionHome from "./Home/ProductSectionHome";
+import PromotionalSectionHome from "./Home/PromotionalSectionHome";
+import CreateProduct from './nhanVien/CreateProduct';
+import InfoPersonal from './nhanVien/InfoPersonal';
+import ListProducts from './nhanVien/ListProducts';
+import Account from './seller/Account';
+import CreateDanhMuc from './seller/CreateDanhMuc';
+import InfoCustomer from './customer/InfoCustomer'
+
+
+export { Account, AccountUser, BannerHome, BestSellingProduct, CreateDanhMuc, CreateProduct, DealsOfTheDayHome, FeaturedCategories, HeaderDashboardCustomer, InfoCustomer, ListProducts, Order_KhachHang, PopularProducts, InfoPersonal, ProductSectionHome, PromotionalSectionHome, SiderDashboardCustomer };

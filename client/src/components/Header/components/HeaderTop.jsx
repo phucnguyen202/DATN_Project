@@ -27,8 +27,8 @@ const HeaderTop = () => {
                 Yêu thích
               </Link>
               <span className='text-sm'>|</span>
-              <Link to="/order-tracking" className="hover:text-customText text-[13px]">
-                Đơn hàng
+              <Link to="/registration/supplier" className="hover:text-customText text-[13px]">
+                Đăng ký nhà cung cấp
               </Link>
             </div>
           </div>

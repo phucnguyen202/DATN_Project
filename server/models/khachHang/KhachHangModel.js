@@ -70,6 +70,25 @@ const addOrderDetails = (orderId, nguoiDungId, callback) => {
   db.query(sql, [orderId, nguoiDungId], callback);
 };
 
+const getOrderDetails = (idDonHang, callback) => {
+  const sql = `
+    SELECT
+        cdh.idChiTietDonHang,
+        cdh.donHangId,
+        cdh.sanPhamId,
+        sp.tenSanPham,
+        sp.gia,
+        cdh.soLuong
+    FROM
+        tb_chitietdonhang cdh
+    JOIN
+        tb_sanpham sp ON cdh.sanPhamId = sp.idSanPham
+    WHERE
+        cdh.donHangId = ?;
+  `
+  db.query(sql, [idDonHang], callback);
+};
+
 const getOrderById = (userId, callback) => {
   const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId = ?`
   db.query(sql, [userId], callback);
@@ -89,8 +108,19 @@ const deleteCart = (userId, callback) => {
 //   const sql = 'UPDATE tb_donhang SET trangThai =? WHERE idDonHang =?';
 //   db.query(sql, [trangThai, orderId], callback);
 // }
+
+
+// đăng ký nhà cung cấp
+const registerSupplier = (nguoiDungId, tenNhaCungCap, diaChi, soDienThoai, callback) => {
+  const sql = `
+    INSERT INTO tb_nhacungcap (nguoiDungId, tenNhaCungCap, diaChi, soDienThoai )
+    VALUES (?,?,?,?);
+  `;
+  db.query(sql, [nguoiDungId, tenNhaCungCap, diaChi, soDienThoai], callback);
+}
+
 module.exports = {
   findByProduct, addToCart, getCartById, updateQuantity,
-  updateAddressOrder, getOrderById, deleteFromCart,
-  createOrder, addOrderDetails, deleteCart
+  updateAddressOrder, getOrderById, deleteFromCart, registerSupplier,
+  createOrder, addOrderDetails, deleteCart, getOrderDetails
 }

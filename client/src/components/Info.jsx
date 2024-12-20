@@ -100,8 +100,9 @@ const Info = ({ user }) => {
             </div>
             <div className="">
               {user?.quyen === 'nhanvien' ?
-                <Tag color="green">Khách hàng</Tag> : user?.quyen === 'nhacungcap' ?
-                  <Tag color="cyan">Nhà cung cấp</Tag> : <Tag color="blue">Chủ cửa hàng</Tag>
+                <Tag color="green">Nhân viên</Tag> : user?.quyen === 'nhacungcap' ?
+                  <Tag color="cyan">Nhà cung cấp</Tag> : user?.quyen === 'khachhang' ?
+                    <Tag color="pink">Khách hàng</Tag> : <Tag color="blue">Chủ cửa hàng</Tag>
               }
             </div>
           </div>

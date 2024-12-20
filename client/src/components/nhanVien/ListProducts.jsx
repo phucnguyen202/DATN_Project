@@ -54,6 +54,7 @@ const ListProducts = () => {
             icon={<CiEdit size={20}
               className="text-slate-600" />}>
           </Button>
+
           <Button
             onClick={() => confirm({
               title: 'Xóa sản phẩm',

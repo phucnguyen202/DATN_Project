@@ -2,6 +2,8 @@
 const KhachHangModel = require('../../models/khachHang/KhachHangModel')
 
 class KhachHangController {
+
+  // thêm sản phẩm vào giỏ hàng
   async addProductToCart(req, res) {
     try {
       const { idSanPham, nguoiDungId } = req.body;
@@ -44,6 +46,7 @@ class KhachHangController {
 
     }
   }
+  // lấy thông tin giỏ hàng theo id người dùng
   async getCartById(req, res) {
     try {
       const { userId } = req.query;
@@ -69,6 +72,8 @@ class KhachHangController {
       });
     }
   }
+
+  // cập nhật số lượng sản phẩm trong giỏ hàng
   async updateQuantityProduct(req, res) {
     try {
       const { idGioHang, soLuong } = req.body;
@@ -101,6 +106,7 @@ class KhachHangController {
     }
   }
 
+  // xóa sản phẩm khỏi giỏ hàng
   async deleteProductInCart(req, res) {
     try {
       const { idGioHang } = req.query;
@@ -133,6 +139,7 @@ class KhachHangController {
     }
   }
 
+  // thêm sản phẩm vào giỏ hàng
   async addProductToOrder(req, res) {
     try {
       const { nguoiDungId, diaChi, tongTien } = req.body;
@@ -172,6 +179,7 @@ class KhachHangController {
     }
   }
 
+  // lấy đơn hàng theo id người dùng
   async getOrderByIdUser(req, res) {
     try {
       const { userId } = req.query;
@@ -204,6 +212,42 @@ class KhachHangController {
       });
     }
   }
+
+  // lấy chi tiết đơn hàng
+  async getDetailOrders(req, res) {
+    const { idDonHang } = req.query;
+    try {
+      KhachHangModel.getOrderDetails(idDonHang, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_DETAIL_ORDERS_ERROR',
+            message: 'Lấy chi tiết đơn hàng thất bại'
+          });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy chi tiết đơn hàng này'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Lấy chi tiết đơn hàng thành công',
+          data: result
+        });
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'GET_DETAIL_ORDERS_ERROR',
+        message: 'Lấy chi tiết đơn hàng thất bại'
+      });
+    }
+  }
+
+  // sửa địa chỉ giao hàng
   async updateAddressOrder(req, res) {
     try {
       const { diaChi, idDonHang } = req.body;
@@ -237,7 +281,7 @@ class KhachHangController {
       });
     }
   }
-
+  // xóa giỏ hàng
   async deleteCart(req, res) {
     try {
       const { userId } = req.query
@@ -266,6 +310,38 @@ class KhachHangController {
         success: false,
         code: 'DELETE_CART_ERROR',
         message: 'Xóa giỏ hàng thất bại'
+      });
+    }
+  }
+
+  // Đăng ký làm nhà cung cấp
+  async registerSupplier(req, res) {
+    try {
+      // const { userId } = req.query
+      // console.log('userId::', typeof userId)
+      // console.log('req.user.idNguoiDung::', typeof req.user.idNguoiDung)
+      const nguoiDungId = req.user.idNguoiDung.toString();
+      const { tenNhaCungCap, diaChi, soDienThoai } = req.body;
+
+      KhachHangModel.registerSupplier(nguoiDungId, tenNhaCungCap, diaChi, soDienThoai, (err, result) => {
+        console.log(err)
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'REGISTER_SUPPLIER_ERROR',
+            message: 'Lỗi khi gửi yêu cầu đăng ký'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Yêu cầu đăng ký làm nhà cung cấp đã được gửi'
+        });
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'REGISTER_SUPPLIER_ERROR',
+        message: 'Lỗi khi gửi yêu cầu đăng ký'
       });
     }
   }

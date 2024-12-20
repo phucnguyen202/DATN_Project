@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 // const JWT_SECRET = 'your_jwt_secret';
 
 class AuthController {
+  // đăng ký tài khoản
   async register(req, res) {
     try {
       const { email, name, password, phone } = req.body
@@ -61,6 +62,7 @@ class AuthController {
     }
   };
 
+  // đăng nhập bằng gg
   async loginWithGoogle(req, res) {
     try {
       const { email, name, googlePhotoUrl } = req.body
@@ -142,6 +144,7 @@ class AuthController {
     }
   }
 
+  // đăng nhập
   async login(req, res) {
     try {
       const { email, password } = req.body
@@ -190,6 +193,7 @@ class AuthController {
 
   async updatePassword(req, res) { }
 
+  // tim người dùng bằng id
   async findUserById(req, res) {
     try {
       const { idUser } = req.query;
@@ -222,6 +226,8 @@ class AuthController {
       });
     }
   }
+
+  // cập nhật thông tin
   async updateInfo(req, res) {
     try {
       const { idUser } = req.query;

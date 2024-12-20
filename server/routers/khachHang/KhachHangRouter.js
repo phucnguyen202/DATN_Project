@@ -1,4 +1,5 @@
 const KhachHangController = require('../../controllers/khachHang/KhachHangController');
+const VerifyToken = require('../../middlewares/VerifyToken');
 const router = require('express').Router();
 
 router.post('/khachhang/addtocart', KhachHangController.addProductToCart);
@@ -8,6 +9,8 @@ router.delete('/khachhang/deleteProductInCart', KhachHangController.deleteProduc
 router.post('/khachhang/createOrder', KhachHangController.addProductToOrder);
 router.delete('/khachhang/deleteCart', KhachHangController.deleteCart);
 router.get('/khachhang/getOrderByIdUser', KhachHangController.getOrderByIdUser);
+router.get('/khachhang/getDetailOrders', KhachHangController.getDetailOrders);
 router.put('/khachhang/updateAddressOrder', KhachHangController.updateAddressOrder);
+router.post('/khachhang/register/supplier', VerifyToken, KhachHangController.registerSupplier);
 
 module.exports = router

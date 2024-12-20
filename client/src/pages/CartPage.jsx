@@ -2,7 +2,8 @@ import { Breadcrumb, Button, InputNumber, message, Modal, Table } from "antd";
 import { useEffect, useState } from "react";
 import { CiSquareRemove } from "react-icons/ci";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import PromotionalSectionHome from "../components/Home/PromotionalSectionHome";
 import handleAPI from "../apis/HandleAPI";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +13,7 @@ const { confirm } = Modal
 const CartPage = () => {
   const user = useSelector(state => state?.auth?.currentData?.user)
   const cartCount = useSelector(state => state?.product?.cartCount);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [dataSource, setDataSource] = useState([]);
@@ -19,7 +21,6 @@ const CartPage = () => {
   const formatCurrency = (amount) => {
     return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
-
   useEffect(() => {
     if (user?.idNguoiDung) {
       getItemsCart(user.idNguoiDung);
@@ -84,20 +85,23 @@ const CartPage = () => {
   }
   const handleAPIChange = async () => {
     try {
-      const dataThanhToan = {
-        nguoiDungId: user.idNguoiDung,
-        diaChi: diaChi,
-        tongTien: dataSource.reduce((total, item) => total + item.soLuong * item.gia, 0)
-      }
-      const res = await handleAPI('/khachhang/createOrder', dataThanhToan, 'post');
-      console.log('res:::', res);
-      if (res.success) {
-        message.success('Đặt hàng thành công!');
-        // Xóa gi�� hàng
-        await handleAPI(`/khachhang/deleteCart?userId=${user.idNguoiDung}`, '', 'delete');
-        dispatch(updateCartCount(0));
-        setDataSource([]);
-        setDiaChi('');
+      if (cartCount > 0) {
+        const dataThanhToan = {
+          nguoiDungId: user.idNguoiDung,
+          diaChi: diaChi,
+          tongTien: dataSource.reduce((total, item) => total + item.soLuong * item.gia, 0)
+        }
+        const res = await handleAPI('/khachhang/createOrder', dataThanhToan, 'post');
+        console.log('res:::', res);
+        if (res.success) {
+          navigate('/payment');
+          await handleAPI(`/khachhang/deleteCart?userId=${user.idNguoiDung}`, '', 'delete');
+          dispatch(updateCartCount(0));
+          setDataSource([]);
+          setDiaChi('');
+        }
+      } else {
+        message.warning('Giỏ hàng trống, vui lòng chọn sản phẩm');
       }
     } catch (err) {
       console.log(err);
@@ -237,12 +241,17 @@ const CartPage = () => {
                       onChange={(e) => setDiaChi(e.target.value)}
                       className="w-full p-4 font-medium text-customText border-[1px] border-green-200 rounded-md outline-none text-sm" type="text" placeholder="Nhập địa chỉ" />
                   </div>
-                  <div className="mt-10">
+                  <div className="mt-10 flex gap-4">
                     <button
                       onClick={handleAPIChange}
                       className='font-medium rounded-md text-lg bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 w-full py-4'>
                       Xác nhận đặt hàng
                     </button>
+                    <Link
+                      to={'/payment'}
+                      className="w-full flex justify-center items-center bg-blue-600 hover:bg-blue-700 font-medium rounded-md text-white text-lg">
+                      Thanh Toán
+                    </Link>
                   </div>
                 </div>
               </div>

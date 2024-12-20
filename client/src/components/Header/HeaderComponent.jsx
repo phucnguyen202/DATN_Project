@@ -23,7 +23,7 @@ const HeaderComponent = () => {
   const navigate = useNavigate()
 
   const dashboardRoutes = {
-    khachhang: '/dashboard-khachhang',
+    khachhang: '/dashboard/customer/order',
     banhang: '/dashboard/seller/taikhoan',
     admin: '/admin/all-account',
     nhacungcap: '/dashboard-nhacungcap',
@@ -77,7 +77,7 @@ const HeaderComponent = () => {
       key: '5',
       icon: <AiOutlineUser className='text-[#343a40]' size={16} />,
       label: (
-        <Link to={user?.quyen === 'banhang' ? '/dashboard-nhabanhang' : '/dashboard-nhacungcap'}>
+        <Link to={user?.quyen === 'banhang' ? '/dashboard-nhabanhang' : user?.quyen === 'khachhang' ? '/dashboard/customer/info-khachhang' : '/dashboard-nhacungcap'}>
           Tài khoản
         </Link>
       ),

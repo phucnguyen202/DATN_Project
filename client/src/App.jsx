@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, Route, Routes, } from 'react-router-dom'
 import Account_NhaCungCap from './components/Admin/Account_NhaCungCap'
 import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
-import { Account, AccountUser, CreateDanhMuc, CreateProduct, InfoPersonal, ListProducts } from './components'
+import { Account, AccountUser, CreateDanhMuc, CreateProduct, InfoCustomer, InfoPersonal, ListProducts, Order_KhachHang } from './components'
 import Main from './layout/Main'
-import { AboutPage, CartPage, ContactPage, DetailPage, PaymentPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage } from './pages'
+import { AboutPage, CartPage, ContactPage, DetailPage, PaymentPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage, PageKhachHangDashboard, SupplierPage } from './pages'
 import { addAuth } from './redux/reducers/authReducer'
-
 
 function App() {
   const user = useSelector(state => state?.auth?.currentData?.user)
   const dispatch = useDispatch()
-
   useEffect(() => {
     getData();
   }, [])
@@ -32,6 +30,8 @@ function App() {
           <Route path='/about' element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/registration/supplier" element={<SupplierPage />} />
+
         </Route>
 
         <Route path="/" element={<PageAdmin />}>
@@ -45,15 +45,16 @@ function App() {
           <Route path="/dashboard/nhanvien/list-products" element={<ListProducts />} />
           <Route path="/dashboard/nhanvien/create-product" element={<CreateProduct />} />
           <Route path="/dashboard/nhanvien/info-nhanvien" element={<InfoPersonal />} />
-
         </Route>
 
         <Route path="/" element={<PageSellerDashboard />}>
           <Route path="/dashboard/seller/taikhoan" element={<Account />} />
           <Route path="/dashboard/seller/danhmuc" element={<CreateDanhMuc />} />
         </Route>
-
-        {/* <Route path="/dashboard-khachhang" element={<AccountUser />} /> */}
+        <Route path='/' element={<PageKhachHangDashboard />}>
+          <Route path="/dashboard/customer/order" element={<Order_KhachHang />} />
+          <Route path="/dashboard/customer/info-khachhang" element={<InfoCustomer />} />
+        </Route>
 
         <Route path="/*" element={<Navigate to="/" replace />} />
         <Route path="/login" element={<LoginPage />} />
