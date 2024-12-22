@@ -1,11 +1,13 @@
 import { Menu, Typography } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import React from 'react'
-import { AiOutlineUser } from 'react-icons/ai'
+import { AiOutlineHome, AiOutlineUser } from 'react-icons/ai'
 import { BiStore } from 'react-icons/bi'
 import { MdUpdate } from 'react-icons/md'
 import { RiBuildingLine } from 'react-icons/ri'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { remoAuth } from '../../redux/reducers/authReducer'
 const { Text } = Typography
 const SiderDashboardAdmin = () => {
   const items = [
@@ -28,8 +30,22 @@ const SiderDashboardAdmin = () => {
       key: '4',
       label: <Link className=" font-medium" to={'/admin/danhmuc'}>Cập nhật danh mục</Link>,
       icon: <MdUpdate size={20} />,
+    },
+    {
+      key: '5',
+      label: <Link className=" font-medium" to={'/'}>Trang chủ</Link>,
+      icon: <AiOutlineHome size={20} />,
     }
   ]
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogOut = async () => {
+    await dispatch(remoAuth());
+    localStorage.removeItem('authData');
+    navigate('/login');
+  };
+
   return (
     <>
       <Sider
@@ -39,12 +55,24 @@ const SiderDashboardAdmin = () => {
         <div className="flex justify-center items-center p-2 gap-2">
           <img
             src={'https://www.niraagayurveda.com/assets/imgs/theme/logo.svg'} alt="" />
-
         </div>
         <Menu
           theme="light"
           items={items}
         />
+
+        <div className="absolute bottom-0 w-full">
+          <Menu theme="light" mode="inline">
+            <Menu.Item
+              key="logout"
+              icon={<LogoutOutlined />}
+              className="font-medium"
+              onClick={handleLogOut}
+            >
+              Đăng xuất
+            </Menu.Item>
+          </Menu>
+        </div>
       </Sider >
     </>
   )

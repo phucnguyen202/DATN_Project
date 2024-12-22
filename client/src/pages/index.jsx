@@ -12,7 +12,8 @@ import ContactPage from "./ContactPage";
 import PaymentPage from "./PayMentPage";
 import PageKhachHangDashboard from './customer/PageKhachHangDashboard'
 import SupplierPage from "./supplier/SupplierPage";
+import PageWishlist from "./PageWishlist";
 export {
-  LoginPage, HomePage, SignupPage, DetailPage, ContactPage, PaymentPage, SupplierPage,
+  LoginPage, HomePage, SignupPage, DetailPage, ContactPage, PaymentPage, SupplierPage, PageWishlist,
   CartPage, SellerPage, AboutPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, PageKhachHangDashboard
 } 

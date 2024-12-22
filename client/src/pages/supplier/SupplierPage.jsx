@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, HomeOutlined, PhoneOutlined } from '@ant-design/icons';
 import handleAPI from '../../apis/HandleAPI';
-import { useSelector } from 'react-redux';
 
 
 const SupplierPage = () => {
   const [form] = Form.useForm();
-
+  const [formSupplier, setFormSupplier] = useState(false);
   const onFinish = async (values) => {
     try {
       const res = await handleAPI(`/khachhang/register/supplier`, values, 'post')
-      console.log('response:', res);
       if (res.success) {
         message.success(res.message);
         form.resetFields();
@@ -27,13 +25,14 @@ const SupplierPage = () => {
   };
   return (
     <>
+
+
       <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl p-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">Đăng ký nhà cung cấp</h2>
+            <h2 className="text-3xl font-bold text-customText">Đăng ký nhà cung cấp</h2>
             <p className="mt-2 text-gray-600">Vui lòng điền đầy đủ thông tin bên dưới</p>
           </div>
-
           <Form
             form={form}
             layout="vertical"
@@ -95,6 +94,15 @@ const SupplierPage = () => {
           </Form>
         </div>
       </div>
+
+
+      {/* <div>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-customText">Đăng ký nhà cung cấp</h2>
+          <p className="mt-2 text-gray-600">Yêu cầu của bạn đã được gửi, Vui lòng đợi phản hồi</p>
+        </div>
+      </div> */}
+
     </>
   )
 }

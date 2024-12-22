@@ -1,13 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { remoAuth } from '../../../redux/reducers/authReducer';
 const HeaderTop = () => {
   const user = useSelector(state => state?.auth?.currentData)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const dashboardRoutes = {
     khachhang: '/dashboard-khachhang',
     banhang: '/dashboard-nhabanhang',
     admin: '/admin/all-account',
     nhacungcap: '/dashboard-nhacungcap',
+  };
+  const handleLogOut = async () => {
+    await dispatch(remoAuth());
+    localStorage.removeItem('authData');
+    navigate('/login');
   };
   return (
     <>
@@ -45,7 +53,9 @@ const HeaderTop = () => {
                 user?.token ? (
                   <>
                     <span className='text-sm'>|</span>
-                    <Link to="/" className="hover:text-customText text-[13px]">
+                    <Link to="/"
+                      onClick={handleLogOut}
+                      className="hover:text-customText text-[13px]">
                       Đăng xuất
                     </Link>
                   </>

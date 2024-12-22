@@ -4,12 +4,7 @@ import React from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { GoBell } from 'react-icons/go'
 
-const items = [
-  {
-    key: 'logout',
-    label: 'Đăng xuất',
-  },
-]
+
 const HeaderDashboardSeller = () => {
 
   return (
@@ -28,10 +23,7 @@ const HeaderDashboardSeller = () => {
           </div>
           <div className="col-span-2 flex items-center justify-end gap-4">
             <Button icon={<GoBell size={20} />} />
-            <Dropdown menu={{ items }}
-              placement="bottomLeft" arrow>
-              <Avatar />
-            </Dropdown>
+            <Avatar />
           </div>
         </div>
       </Header >

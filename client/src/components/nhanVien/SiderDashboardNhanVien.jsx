@@ -1,12 +1,15 @@
 import { Menu, Typography } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import React from 'react'
-import { AiOutlineClockCircle, AiOutlineHistory, AiOutlineHome, AiOutlinePlusCircle, AiOutlineShop, AiOutlineUser } from 'react-icons/ai'
-import { BiListCheck, BiPackage } from 'react-icons/bi'
-import { BsCardChecklist } from 'react-icons/bs'
-import { FiPackage } from 'react-icons/fi';
-import { Link } from 'react-router-dom'
+import { AiOutlineClockCircle, AiOutlineHome, AiOutlinePlusCircle, AiOutlineUser } from 'react-icons/ai'
+import { BiListCheck } from 'react-icons/bi'
+import { FiPackage } from 'react-icons/fi'
+import { Link, useNavigate } from 'react-router-dom'
 const { Text } = Typography
+import { remoAuth } from '../../redux/reducers/authReducer'
+import { useDispatch } from 'react-redux';
+
+
 const SiderDashboardNhanVien = () => {
   const items = [
     {
@@ -40,6 +43,15 @@ const SiderDashboardNhanVien = () => {
       icon: <AiOutlineHome size={20} />,
     }
   ]
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogOut = async () => {
+    await dispatch(remoAuth());
+    localStorage.removeItem('authData');
+    navigate('/login');
+  };
   return (
     <>
       <Sider
@@ -55,6 +67,18 @@ const SiderDashboardNhanVien = () => {
           theme="light"
           items={items}
         />
+        <div className="absolute bottom-0 w-full">
+          <Menu theme="light" mode="inline">
+            <Menu.Item
+              key="logout"
+              icon={<LogoutOutlined />}
+              className="font-medium"
+              onClick={handleLogOut}
+            >
+              Đăng xuất
+            </Menu.Item>
+          </Menu>
+        </div>
       </Sider >
     </>
   )

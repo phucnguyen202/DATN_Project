@@ -7,7 +7,7 @@ class KhachHangController {
   async addProductToCart(req, res) {
     try {
       const { idSanPham, nguoiDungId } = req.body;
-      KhachHangModel.findByProduct(idSanPham, nguoiDungId, (err, result) => {
+      KhachHangModel.findByProductForGioHang(idSanPham, nguoiDungId, (err, result) => {
         if (err) {
           return res.status(500).json({
             success: false,
@@ -342,6 +342,94 @@ class KhachHangController {
         success: false,
         code: 'REGISTER_SUPPLIER_ERROR',
         message: 'Lỗi khi gửi yêu cầu đăng ký'
+      });
+    }
+  }
+
+  // thêm sản phẩm vào danh sách yêu thích
+  async addProductToWishlist(req, res) {
+    try {
+      const { idSanPham, nguoiDungId } = req.body;
+      KhachHangModel.findByProductForWishList(idSanPham, nguoiDungId, (err, result) => {
+        if (err) {
+          return res.status(404).json({
+            success: false,
+            code: 'FIND_PRODUCT_ERROR',
+            message: 'Có lỗi khi tìm sản phẩm'
+          });
+        }
+        if (result.length === 0) {
+          KhachHangModel.addToWishList(idSanPham, nguoiDungId, (err, _) => {
+            if (err) {
+              return res.status(500).json({
+                success: false,
+                code: 'ADD_TO_WISHLIST_ERROR',
+                message: 'Có lỗi khi thêm sản phẩm vào danh sách yêu thích'
+              });
+            }
+            KhachHangModel.updateQuantityWishList(idSanPham, (err, _) => {
+              if (err) {
+                return res.status(500).json({
+                  success: false,
+                  code: 'UPDATE_QUANTITY_ERROR',
+                  message: 'Có lỗi khi cập nhật số lượng sản phẩm trong danh sách yêu thích'
+                });
+              }
+              return res.status(200).json({
+                success: true,
+                message: 'Thêm sản phẩm vào danh sách yêu thích thành công'
+              });
+            })
+          })
+        } else {
+          return res.status(400).json({
+            success: true,
+            message: 'Sản phẩm đã nằm trong danh sách yêu thích'
+          });
+        }
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'ADD_TO_WISHLIST_ERROR',
+        message: 'Có lỗi khi thêm sản phẩm vào danh sách yêu thích'
+      });
+    }
+  }
+
+  // lấy danh sách các sản phẩm yêu thích bằng id người dùng
+
+  async getWishlistProducts(req, res) {
+    try {
+      const nguoiDungId = req.user.idNguoiDung;
+
+      console.log('nguoiDungId::', nguoiDungId);
+      KhachHangModel.getWishListById(nguoiDungId, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_WISHLIST_ERROR',
+            message: 'Lỗi khi lấy danh sách sản phẩm yêu thích'
+          });
+        }
+        if (result.length === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Danh sách sản phẩm yêu thích trống'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Lấy danh sách sản phẩm yêu thích thành công',
+          data: result
+        });
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'GET_WISHLIST_ERROR',
+        message: 'Lỗi khi lấy danh sách sản phẩm yêu thích'
       });
     }
   }

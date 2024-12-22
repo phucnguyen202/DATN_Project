@@ -17,6 +17,8 @@ const HeaderComponent = () => {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const user = useSelector(state => state?.auth?.currentData?.user)
+  const wishListCount = useSelector(state => state?.product?.wishListCount);
+
   const [dataSource, setDataSource] = useState([]);
   const [category, setCategory] = useState([]);
   const dispatch = useDispatch()
@@ -31,10 +33,10 @@ const HeaderComponent = () => {
   };
 
   const handleLogOut = async () => {
-    dispatch(remoAuth())
-    localStorage.setItem('authData', '')
-    navigate('/login')
-  }
+    await dispatch(remoAuth());
+    localStorage.removeItem('authData');
+    navigate('/login');
+  };
 
   const itemsAccount = [
     (user?.quyen === 'admin' || user?.quyen === 'khachhang' || user?.quyen === 'nhanvien' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
@@ -242,12 +244,13 @@ const HeaderComponent = () => {
               />
             </div>
             <div className='col-span-3 hidden max-md:flex xl:flex gap-6 justify-end'>
-              <div className='flex gap-2 items-center'>
-                <Badge color='#3BB77E' count={6} >
+              <Link to={'/wishlist'} className='flex gap-2 items-center cursor-pointer'>
+                <Badge color='#3BB77E' count={wishListCount} >
                   <FaRegHeart className='text-[#343a40]' size={22} />
                 </Badge>
                 <span className='text-sm text-custom max-md:hidden font-medium'>Yêu thích</span>
-              </div>
+              </Link>
+
               <CartComponent />
               <Dropdown
                 className=' cursor-pointer max-md:hidden'

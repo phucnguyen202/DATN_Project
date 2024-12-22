@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  cartCount: 0
+  cartCount: 0,
+  wishListCount: 0,
 }
 
 const productSlice = createSlice({
@@ -10,9 +11,12 @@ const productSlice = createSlice({
   reducers: {
     updateCartCount: (state, action) => {
       state.cartCount = action.payload;
+    },
+    updateWishListCount: (state, action) => {
+      state.wishListCount = action.payload;
     }
   }
 })
 
 export const productReducer = productSlice.reducer
-export const { updateCartCount } = productSlice.actions
+export const { updateCartCount, updateWishListCount } = productSlice.actions

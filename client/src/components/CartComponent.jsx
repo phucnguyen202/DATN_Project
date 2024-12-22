@@ -1,4 +1,4 @@
-import { Badge, Dropdown, Space } from 'antd';
+import { Badge, Dropdown, Empty, Space } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { MdOutlineShoppingCart } from 'react-icons/md';
@@ -8,7 +8,7 @@ import handleAPI from '../apis/HandleAPI';
 import { updateCartCount } from '../redux/reducers/productReducer';
 
 const CartComponent = () => {
-  const user = useSelector(state => state?.auth?.currentData?.user)
+  const user = useSelector(state => state?.auth?.currentData?.user);
   const cartCount = useSelector(state => state?.product?.cartCount);
   const dispatch = useDispatch();
   const [itemsCart, setItemsCart] = useState([]);
@@ -74,6 +74,15 @@ const CartComponent = () => {
 
   const menuItems = [
     ...itemsCart,
+    !cartCount && {
+      key: 'iwueoqwe',
+      label: (
+        <Empty
+          description="Bạn chưa có sản phẩm nào trong giỏ hàng"
+          className="my-8"
+        />
+      )
+    },
     {
       type: 'divider',
     },
