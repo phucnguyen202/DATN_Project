@@ -13,16 +13,15 @@ import { remoAuth } from '../../redux/reducers/authReducer';
 
 
 const HeaderComponent = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector(state => state?.auth?.currentData?.user);
+  const wishListCount = useSelector(state => state?.product?.wishListCount);
   const [current, setCurrent] = useState(0);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const user = useSelector(state => state?.auth?.currentData?.user)
-  const wishListCount = useSelector(state => state?.product?.wishListCount);
-
   const [dataSource, setDataSource] = useState([]);
   const [category, setCategory] = useState([]);
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const dashboardRoutes = {
     khachhang: '/dashboard/customer/order',

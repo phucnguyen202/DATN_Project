@@ -36,7 +36,6 @@ const CardComponent = ({ item }) => {
         idSanPham: item.idSanPham,
         nguoiDungId: user?.idNguoiDung,
       }
-      console.log(productData)
       const res = await handleAPI('/khachhang/addProductToWishlist', productData, 'post');
       if (res.success) {
         message.success(res.message);
@@ -46,7 +45,7 @@ const CardComponent = ({ item }) => {
         }
       }
     } catch (err) {
-      console.log(err)
+      message.warning('Sản phẩm đã có trong mục yêu thích');
     }
   }
 
@@ -72,7 +71,7 @@ const CardComponent = ({ item }) => {
               className="custom-card-meta py-2"
               title={item.tenSanPham} />
             <Space className='flex justify-between py-2'>
-              <Tag color='green'>{item.yeuThich} yêu thích</Tag>
+              <Tag color='pink'>{item.yeuThich} yêu thích</Tag>
               <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
             </Space>
             <Space className='flex justify-between items-center pt-2'>

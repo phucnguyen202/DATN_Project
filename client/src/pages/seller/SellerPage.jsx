@@ -6,11 +6,12 @@ import { FiHeadphones } from 'react-icons/fi';
 import { GrLinkNext, GrLocation } from 'react-icons/gr';
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { IoCartOutline, IoEyeOutline } from 'react-icons/io5';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DealsOfTheDayHome, PromotionalSectionHome } from '../../components';
-const { Title, Text } = Typography;
+const { Text } = Typography;
+
+
 const SellerPage = () => {
-  const param = useParams()
   return (
     <>
       <div>
@@ -32,7 +33,7 @@ const SellerPage = () => {
           </div>
         </div>
         <div className='px-4'>
-          <div className='py-20'>
+          <div className='pt-14 pb-20'>
             <div className='flex justify-center '>
               <h1 className='text-7xl text-customText font-bold'>Cửa hàng Nest Food</h1>
             </div>
@@ -755,7 +756,7 @@ const SellerPage = () => {
 
         </div >
         <PromotionalSectionHome />
-      </div >
+      </div>
     </>
   )
 }

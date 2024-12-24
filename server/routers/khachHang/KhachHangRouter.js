@@ -8,7 +8,8 @@ router.put('/khachhang/updateQuantity', KhachHangController.updateQuantityProduc
 router.delete('/khachhang/deleteProductInCart', KhachHangController.deleteProductInCart);
 router.post('/khachhang/createOrder', KhachHangController.addProductToOrder);
 router.delete('/khachhang/deleteCart', KhachHangController.deleteCart);
-router.get('/khachhang/getOrderByIdUser', KhachHangController.getOrderByIdUser);
+router.get('/khachhang/getOrderByIdAndpayment', KhachHangController.getOrderByIdAndpayment);
+router.get('/khachhang/getAllOrderById', VerifyToken, KhachHangController.getAllOrderById);
 router.get('/khachhang/getDetailOrders', KhachHangController.getDetailOrders);
 router.put('/khachhang/updateAddressOrder', KhachHangController.updateAddressOrder);
 router.post('/khachhang/register/supplier', VerifyToken, KhachHangController.registerSupplier);

@@ -53,7 +53,7 @@ const Order_KhachHang = () => {
       title: 'Thanh toán',
       dataIndex: 'thanhToan',
       key: 'thanhToan',
-      render: (thanhToan) => <Tag color='pink'>{thanhToan}</Tag>
+      render: (thanhToan) => <Tag color={thanhToan === 'Chưa thanh toán' ? 'red' : 'green'}>{thanhToan}</Tag>
     },
     {
       title: 'Trạng thái giao hàng',
@@ -77,37 +77,37 @@ const Order_KhachHang = () => {
             icon={<FiMoreHorizontal size={20}
               className="text-slate-600" />}
           >
-
           </Button>
           <Button
             onClick={() => confirm({
               title: 'Xóa nhà cung cấp',
               content: 'Bạn có muốn xóa nhà cung cấp không?',
-              // onOk: () => handleDeleteSupplier(item._id),
-              // onCancel() { },
+              onOk: () => handleCancelOrder(item.idDonHang),
+              onCancel() { },
             })}
             type="text"
-            icon={<CiSquareRemove size={20}
-              className="text-slate-600" />}></Button>
+          >Hủy hàng</Button>
         </Space >
     }
   ];
 
   useEffect(() => {
-    if (user?.idNguoiDung) {
-      getInfoOrder();
-    }
-  }, [user]);
+    getInfoOrder();
+  }, []);
 
   const getInfoOrder = async () => {
     try {
-      const res = await handleAPI(`/khachhang/getOrderByIdUser?userId=${user?.idNguoiDung} `, '', 'get')
+      const res = await handleAPI(`/khachhang/getAllOrderById `, '', 'get')
       if (res.success) {
         setOrderInfo(res.data)
       }
     } catch (e) {
       console.error(e)
     }
+  }
+
+  const handleCancelOrder = async (id) => {
+    console.log(id)
   }
   return (
     <>

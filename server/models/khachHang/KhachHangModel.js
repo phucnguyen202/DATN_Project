@@ -89,10 +89,19 @@ const getOrderDetails = (idDonHang, callback) => {
   db.query(sql, [idDonHang], callback);
 };
 
-const getOrderById = (userId, callback) => {
-  const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId = ?`
+const getOrderByIdAndpayment = (userId, callback) => {
+  const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId = ? AND thanhToan ='Chưa thanh toán'`
   db.query(sql, [userId], callback);
 }
+const getAllOrderById = (userId, callback) => {
+  const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId =?`
+  db.query(sql, [userId], callback);
+}
+
+const updateOrderStatusDelivered = (idNguoiDung, idDonHang, callback) => {
+
+}
+
 
 const updateAddressOrder = (diaChi, idDonHang, callback) => {
   const sql = `UPDATE tb_donhang SET diaChi = ? WHERE idDonHang = ?`
@@ -104,11 +113,15 @@ const deleteCart = (userId, callback) => {
   db.query(sql, [userId], callback);
 }
 
-// const updateOrderStatus = (orderId, trangThai, callback) => {
-//   const sql = 'UPDATE tb_donhang SET trangThai =? WHERE idDonHang =?';
-//   db.query(sql, [trangThai, orderId], callback);
-// }
-
+// thanh  toán thành công thì cập nhật trạng thai thanh toán
+const updateOrderStatusPayment = (idNguoiDung, idDonHang, callback) => {
+  const sql = `
+    UPDATE tb_donhang
+    SET thanhToan = 'Đã thanh toán'
+    WHERE idDonHang IN (?) AND nguoiDungId = ?;
+  `;
+  db.query(sql, [idDonHang, idNguoiDung], callback);
+}
 
 // đăng ký nhà cung cấp
 const registerSupplier = (nguoiDungId, tenNhaCungCap, diaChi, soDienThoai, callback) => {
@@ -138,10 +151,22 @@ const updateQuantityWishList = (idSanPham, callback) => {
                 WHERE idSanPham = ? `;
   db.query(sql, [idSanPham], callback);
 }
+
 // xóa sản phẩm khoi danh sách yêu thích
+const removeFromFavorites = (sanPhamId, nguoiDungId, callback) => {
+  const sql = `DELETE FROM tb_danhsach_yeuthich  WHERE nguoiDungId = ? AND sanPhamId = ?`
+  db.query(sql, [nguoiDungId, sanPhamId], callback);
+}
+
+// giảm só lượng yêu thích trong bảng sản phẩm
+// const updateQuantityWishList = (idSanPham, callback) => {
+//   const sql = `UPDATE tb_sanpham 
+//                 SET yeuThich = yeuThich + 1 
+//                 WHERE idSanPham = ? `;
+//   db.query(sql, [idSanPham], callback);
+// }
 
 // lấy danh sách yêu thích bằng id người dùng
-
 const getWishListById = (nguoiDungId, callback) => {
   const sql = `
     SELECT 
@@ -164,9 +189,11 @@ const getWishListById = (nguoiDungId, callback) => {
   db.query(sql, [nguoiDungId], callback);
 };
 
+
+
 module.exports = {
   findByProductForGioHang, addToCart, getCartById, updateQuantity,
-  updateAddressOrder, getOrderById, deleteFromCart, registerSupplier,
-  createOrder, addOrderDetails, deleteCart, getOrderDetails,
-  findByProductForWishList, addToWishList, updateQuantityWishList, getWishListById
+  updateAddressOrder, getOrderByIdAndpayment, deleteFromCart, registerSupplier,
+  createOrder, addOrderDetails, deleteCart, getOrderDetails, removeFromFavorites, getAllOrderById,
+  findByProductForWishList, addToWishList, updateQuantityWishList, getWishListById, updateOrderStatusPayment
 }

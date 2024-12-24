@@ -27,7 +27,6 @@ const PageWishlist = () => {
       console.error(e);
     }
   }
-  console.log('wishList::', wishList)
   return (
     <>
       {wishList.length === 0 ? (

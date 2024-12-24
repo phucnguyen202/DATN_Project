@@ -25,10 +25,6 @@ const PaymentPage = () => {
     setPaymentMethod(e.target.value);
   };
 
-  const handlePayment = () => {
-    message.success('Đang chuyển hướng đến cổng thanh toán...');
-  };
-
   useEffect(() => {
     if (user?.idNguoiDung) {
       getInfoOrder();
@@ -37,7 +33,7 @@ const PaymentPage = () => {
 
   const getInfoOrder = async () => {
     try {
-      const res = await handleAPI(`/khachhang/getOrderByIdUser?userId=${user?.idNguoiDung} `, '', 'get')
+      const res = await handleAPI(`/khachhang/getOrderByIdAndpayment?userId=${user?.idNguoiDung} `, '', 'get')
       if (res.success) {
         setOrderInfo(res.data)
       }
@@ -66,6 +62,27 @@ const PaymentPage = () => {
       }
     } catch (e) {
       console.error(e)
+    }
+  };
+
+  const total = orderInfo.reduce((acc, curr) => acc + Number(curr.tongTien), 0);
+  const danhSachIdDonHang = orderInfo.map(order => order.idDonHang);
+
+  const handlePayment = async () => {
+    const data = {
+      amount: total,
+      idDonHang: danhSachIdDonHang,
+      idNguoiDung: user.idNguoiDung,
+    }
+    console.log(data)
+    try {
+      const res = await handleAPI('/payment/zalopay', data, 'post');
+      console.log('res::', res)
+      if (res.return_code === 1) {
+        window.location.href = res.order_url;
+      }
+    } catch (err) {
+      console.log(err)
     }
   };
 
@@ -133,6 +150,12 @@ const PaymentPage = () => {
               {/* Phương thức thanh toán */}
               <div className="md:col-span-1">
                 <Card className="shadow-sm hover:shadow-md transition-shadow sticky top-6">
+                  <div className='mb-6'>
+                    <h2 className="text-xl font-semibold mb-4 text-customText">Tổng tiền các đơn hàng</h2>
+                    <span className="text-xl font-bold text-red-600">
+                      {formatCurrency(total)} VND
+                    </span>
+                  </div>
                   <h2 className="text-xl font-semibold mb-4 text-customText">Phương thức thanh toán</h2>
                   <Radio.Group onChange={handlePaymentMethodChange}
                     value={paymentMethod} className="w-full">
@@ -157,7 +180,6 @@ const PaymentPage = () => {
                       </Radio>
                     </div>
                   </Radio.Group>
-
                   <Button
                     type="primary"
                     size="large"

@@ -180,10 +180,10 @@ class KhachHangController {
   }
 
   // lấy đơn hàng theo id người dùng
-  async getOrderByIdUser(req, res) {
+  async getOrderByIdAndpayment(req, res) {
     try {
       const { userId } = req.query;
-      KhachHangModel.getOrderById(userId, (err, order) => {
+      KhachHangModel.getOrderByIdAndpayment(userId, (err, order) => {
         if (err) {
           return res.status(500).json({
             success: false,
@@ -209,6 +209,39 @@ class KhachHangController {
         success: false,
         code: 'GET_ORDER_INFO_ERROR',
         message: 'Lấy thông tin đơn hàng thất bại'
+      });
+    }
+  }
+  async getAllOrderById(req, res) {
+    try {
+      const nguoiDungId = req.user.idNguoiDung;
+      KhachHangModel.getAllOrderById(nguoiDungId, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_ALL_ORDERS_ERROR',
+            message: 'Lấy tất cả đơn hàng của người dùng thất bại'
+          });
+        }
+        if (result.length === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy đơn hàng nào của người dùng'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Lấy tất cả đơn hàng của người dùng thành công',
+          data: result
+        });
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'GET_ALL_ORDERS_ERROR',
+        message: 'Lấy tất cả đơn hàng của người dùng thất bại'
       });
     }
   }
@@ -398,11 +431,9 @@ class KhachHangController {
   }
 
   // lấy danh sách các sản phẩm yêu thích bằng id người dùng
-
   async getWishlistProducts(req, res) {
     try {
       const nguoiDungId = req.user.idNguoiDung;
-
       console.log('nguoiDungId::', nguoiDungId);
       KhachHangModel.getWishListById(nguoiDungId, (err, result) => {
         if (err) {
@@ -431,6 +462,30 @@ class KhachHangController {
         code: 'GET_WISHLIST_ERROR',
         message: 'Lỗi khi lấy danh sách sản phẩm yêu thích'
       });
+    }
+  }
+
+  // xóa sản phẩm khỏi danh sách yêu thích
+  async removeFromFavorites(req, res) {
+    try {
+      const nguoiDungId = req.user.idNguoiDung;
+      console.log('nguoiDungId::', nguoiDungId);
+      const { sanPhamId } = req.body;
+
+    } catch (err) {
+
+    }
+  }
+
+  // hủy dơn hàng
+  async cancelOrder(req, res) {
+    try {
+      const { idDonHang } = req.query
+
+
+    } catch (err) {
+
+
     }
   }
 }

@@ -56,9 +56,6 @@ const CartComponent = () => {
                   </Space>
                 </div>
               </div>
-              <div>
-                <AiOutlineCloseSquare size={20} className='text-greenCustom' />
-              </div>
             </div>
           )
         }))
