@@ -480,11 +480,35 @@ class KhachHangController {
   // hủy dơn hàng
   async cancelOrder(req, res) {
     try {
-      const { idDonHang } = req.query
-
-
+      const nguoiDungId = req.user.idNguoiDung;
+      const { idDonHang } = req.body
+      console.log(req.body)
+      KhachHangModel.cancelOrder(nguoiDungId, idDonHang, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'CANCEL_ORDER_ERROR',
+            message: 'Không thể hủy đơn hàng, đơn hàng đang được giao hoắc đã xác nhận'
+          });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy đơn hàng này'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Hủy đơn hàng thành công'
+        });
+      })
     } catch (err) {
-
+      return res.status(500).json({
+        success: false,
+        code: 'CANCEL_ORDER_ERROR',
+        message: 'Không thể hủy đơn hàng, đơn hàng đang được giao hoắc đã xác nhận'
+      });
 
     }
   }

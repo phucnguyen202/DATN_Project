@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Button, Modal, Space, Table, Tag } from 'antd';
+import { Button, message, Modal, Space, Table, Tag } from 'antd';
 import { CiSquareRemove } from 'react-icons/ci';
 import { useSelector } from 'react-redux';
 import handleAPI from '../../apis/HandleAPI';
@@ -80,8 +80,8 @@ const Order_KhachHang = () => {
           </Button>
           <Button
             onClick={() => confirm({
-              title: 'Xóa nhà cung cấp',
-              content: 'Bạn có muốn xóa nhà cung cấp không?',
+              title: 'Hủy đơn hàng',
+              content: 'Bạn có muốn hủy đơn hàng không?',
               onOk: () => handleCancelOrder(item.idDonHang),
               onCancel() { },
             })}
@@ -107,7 +107,19 @@ const Order_KhachHang = () => {
   }
 
   const handleCancelOrder = async (id) => {
-    console.log(id)
+    const data = {
+      idDonHang: id
+    }
+    console.log(data)
+    try {
+      const res = await handleAPI('/khachhang/cancelOrder', data, 'post')
+      if (res.success) {
+        message.success(res.message)
+        getInfoOrder()
+      }
+    } catch (e) {
+      message.warning(e.message)
+    }
   }
   return (
     <>

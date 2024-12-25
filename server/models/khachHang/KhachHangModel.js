@@ -13,6 +13,7 @@ const addToCart = (idSanPham, nguoiDungId, callback) => {
   db.query(sql, [nguoiDungId, idSanPham], callback);
 }
 
+// Lấy danh sách sản phẩm theo id
 const getCartById = (idNguoiDung, callback) => {
   const sql = `
   SELECT 
@@ -51,6 +52,7 @@ const updateQuantity = (soLuong, idGioHang, callback) => {
   db.query(sql, [soLuong, idGioHang], callback);
 }
 
+// tạo đơn hàng
 const createOrder = (nguoiDungId, diaChi, tongTien, callback) => {
   const sql = `
     INSERT INTO tb_donhang (nguoiDungId, diaChi, tongTien)
@@ -59,6 +61,7 @@ const createOrder = (nguoiDungId, diaChi, tongTien, callback) => {
   db.query(sql, [nguoiDungId, diaChi, tongTien], callback);
 }
 
+// thêm chi tiết sản phẩm
 const addOrderDetails = (orderId, nguoiDungId, callback) => {
   const sql = `
     INSERT INTO tb_chitietdonhang (donHangId, sanPhamId, soLuong, gia, trangThai)
@@ -70,6 +73,7 @@ const addOrderDetails = (orderId, nguoiDungId, callback) => {
   db.query(sql, [orderId, nguoiDungId], callback);
 };
 
+// lấy  chi tiết đơn hàng theo id
 const getOrderDetails = (idDonHang, callback) => {
   const sql = `
     SELECT
@@ -89,25 +93,56 @@ const getOrderDetails = (idDonHang, callback) => {
   db.query(sql, [idDonHang], callback);
 };
 
+// lấy đơn hàng chưa thanh toán của người dùng
 const getOrderByIdAndpayment = (userId, callback) => {
   const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId = ? AND thanhToan ='Chưa thanh toán'`
   db.query(sql, [userId], callback);
 }
+
+// lấy tất cả đơn hàng của người dùng
 const getAllOrderById = (userId, callback) => {
   const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId =?`
   db.query(sql, [userId], callback);
 }
 
-const updateOrderStatusDelivered = (idNguoiDung, idDonHang, callback) => {
 
+// hủy đơn hàng
+// những đơn hàng chưa được xác nhận và chưa giao thì được hủy
+// những đơn hàng đã được xác nhận và đang giao thì không được hủy
+// những đơn hàng đã giao cũng không được hủy
+const cancelOrder = (nguoiDungId, idDonHang, callback) => {
+  const sqlCheckOrder = `
+    SELECT *
+    FROM tb_donhang
+    WHERE idDonHang = ? AND nguoiDungId = ? AND trangThai = 'Chờ xác nhận' AND trangThaiGiaoHang = 'Chưa giao' , 
+  `
+  db.query(sqlCheckOrder, [idDonHang, nguoiDungId], (err, results) => {
+    if (err) {
+      return callback(err, null);
+    }
+    if (results.length === 0) {
+      return callback(new Error('Đơn hàng không tồn tại hoặc đã chuyển sang trạng thái đã giao'), null);
+    }
+    const sqlCancelOrder = `UPDATE tb_donhang SET trangThai ='Đã hủy' WHERE idDonHang =? AND nguoiDungId=?`
+    db.query(sqlCancelOrder, [idDonHang, nguoiDungId], (err, result) => {
+      if (err) {
+        return callback(err, null);
+      }
+      if (result.affectedRows === 0) {
+        return callback(new Error('Đơn hàng không tồn tại hoặc đã chuyển sang trạng thái đã giao'), null);
+      }
+      return callback(null, { message: 'Đơn hàng đã được hủy thành công' })
+    });
+  })
 }
 
-
+// cập nhật địa chỉ giao hàng
 const updateAddressOrder = (diaChi, idDonHang, callback) => {
   const sql = `UPDATE tb_donhang SET diaChi = ? WHERE idDonHang = ?`
   db.query(sql, [diaChi, idDonHang], callback);
 }
 
+// xóa giỏ hàng
 const deleteCart = (userId, callback) => {
   const sql = 'DELETE FROM tb_giohang WHERE nguoiDungId =?';
   db.query(sql, [userId], callback);
@@ -192,7 +227,7 @@ const getWishListById = (nguoiDungId, callback) => {
 
 
 module.exports = {
-  findByProductForGioHang, addToCart, getCartById, updateQuantity,
+  findByProductForGioHang, addToCart, getCartById, updateQuantity, cancelOrder,
   updateAddressOrder, getOrderByIdAndpayment, deleteFromCart, registerSupplier,
   createOrder, addOrderDetails, deleteCart, getOrderDetails, removeFromFavorites, getAllOrderById,
   findByProductForWishList, addToWishList, updateQuantityWishList, getWishListById, updateOrderStatusPayment

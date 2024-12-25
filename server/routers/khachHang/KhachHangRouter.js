@@ -14,6 +14,7 @@ router.get('/khachhang/getDetailOrders', KhachHangController.getDetailOrders);
 router.put('/khachhang/updateAddressOrder', KhachHangController.updateAddressOrder);
 router.post('/khachhang/register/supplier', VerifyToken, KhachHangController.registerSupplier);
 router.post('/khachhang/addProductToWishlist', KhachHangController.addProductToWishlist);
+router.post('/khachhang/cancelOrder', VerifyToken, KhachHangController.cancelOrder);
 router.get('/khachhang/getWishlistProducts', VerifyToken, KhachHangController.getWishlistProducts);
 
 module.exports = router
