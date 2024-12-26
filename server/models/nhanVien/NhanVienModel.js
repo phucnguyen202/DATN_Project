@@ -51,7 +51,6 @@ const updateImageById = (productId, imageSrc, callback) => {
   db.query(sql, [imageSrc, productId], callback);
 }
 
-
 // Xóa img sản phẩm
 const deleteImagesbyId = (productId, callback) => {
   const deleteImagesSql = 'DELETE FROM tb_hinhsanpham WHERE sanPhamId = ?';
@@ -101,7 +100,19 @@ const getProductById = (productId, callback) => {
   db.query(sql, [productId], callback);
 }
 
+// lấy tất cả đơn hàng mà người đùng đã đặt thanh toán
+const getAllOrderPayment = (callback) => {
+  const sql = `SELECT * FROM tb_donhang WHERE thanhToan ='Đã thanh toán'`
+  db.query(sql, callback);
+}
+
+// cập nhật trạng thái đơn hàng
+const updateOrderStatus = (trangThai, idDonHang, callback) => {
+  const sql = `UPDATE tb_donhang SET trangThai =? WHERE idDonHang =?`;
+  db.query(sql, [trangThai, idDonHang], callback);
+}
+
 module.exports = {
-  updateProductById, updateImageById, getAllProducts, getProductById,
+  updateProductById, updateImageById, getAllProducts, getProductById, getAllOrderPayment, updateOrderStatus,
   addProduct, addImage, getProductsByPage, getTotalProducts, deleteProductById, deleteImagesbyId
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, Route, Routes, } from 'react-router-dom'
 import Account_NhaCungCap from './components/Admin/Account_NhaCungCap'
 import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
-import { Account, AccountUser, CreateDanhMuc, CreateProduct, InfoCustomer, InfoPersonal, ListAccountSupplier, ListProducts, Order_KhachHang } from './components'
+import { Account, AccountUser, CreateDanhMuc, CreateProduct, InfoCustomer, InfoPersonal, ListAccountSupplier, ListProducts, Order_KhachHang, Order_Nhanvien } from './components'
 import Main from './layout/Main'
 import { AboutPage, CartPage, ContactPage, DetailPage, PaymentPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage, PageKhachHangDashboard, SupplierPage, PageWishlist } from './pages'
 import { addAuth } from './redux/reducers/authReducer'
@@ -46,6 +46,8 @@ function App() {
           <Route path="/dashboard/nhanvien/list-products" element={<ListProducts />} />
           <Route path="/dashboard/nhanvien/create-product" element={<CreateProduct />} />
           <Route path="/dashboard/nhanvien/info-nhanvien" element={<InfoPersonal />} />
+          <Route path="/dashboard/nhanvien/order" element={<Order_Nhanvien />} />
+
         </Route>
 
         <Route path="/" element={<PageSellerDashboard />}>

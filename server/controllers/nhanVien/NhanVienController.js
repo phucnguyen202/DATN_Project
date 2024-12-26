@@ -248,7 +248,73 @@ class NhanVienController {
     }
   }
 
+  // lấy nhưng đơn hàng đã thanh toán
+  async getAllOrder(req, res) {
+    try {
+      ProductModel.getAllOrderPayment((err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_ALL_ORDER_ERROR',
+            message: 'Lỗi khi lấy tất cả đơn hàng',
+          });
+        }
+        if (result.length === 0) {
+          return res.status(200).json({
+            success: true,
+            code: 'GET_ALL_ORDER_SUCCESS',
+            message: 'Không có đơn hàng nào',
+            data: result
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          code: 'GET_ALL_ORDER_SUCCESS',
+          message: 'Lấy tất cả đơn hàng thành công',
+          data: result
+        })
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'GET_ALL_ORDER_ERROR',
+        message: 'Lõi khi lấy tất cả đơn hàng',
+      });
+    }
+  }
 
-
+  // cập nhật trạng thái đơn hàng
+  async updateOrderStatus(req, res) {
+    try {
+      const { trangThai, idDonHang } = req.body
+      ProductModel.updateOrderStatus(trangThai, idDonHang, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'UPDATE_ORDER_STATUS_ERROR',
+            message: 'Lỗi khi cập nhật trạng thái đơn hàng',
+          });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy đơn hàng này'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          code: 'UPDATE_ORDER_STATUS_SUCCESS',
+          message: 'Cập nhật trạng thái đơn hàng thành công',
+        })
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'UPDATE_ORDER_STATUS_ERROR',
+        message: 'Lỗi khi cập nhật trạng thái đơn hàng',
+      });
+    }
+  }
 }
 module.exports = new NhanVienController();

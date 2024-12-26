@@ -482,7 +482,6 @@ class KhachHangController {
     try {
       const nguoiDungId = req.user.idNguoiDung;
       const { idDonHang } = req.body
-      console.log(req.body)
       KhachHangModel.cancelOrder(nguoiDungId, idDonHang, (err, result) => {
         if (err) {
           return res.status(500).json({

@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 const { Text } = Typography
 import { remoAuth } from '../../redux/reducers/authReducer'
 import { useDispatch } from 'react-redux';
-
+import { MdOutlineLogout } from "react-icons/md";
 
 const SiderDashboardNhanVien = () => {
   const items = [
@@ -25,6 +25,11 @@ const SiderDashboardNhanVien = () => {
     {
       key: '2',
       label: <Link className=" font-medium" to={'/dashboard-nhanvien'}>Lịch sử bán hàng</Link>,
+      icon: <AiOutlineClockCircle size={20} />,
+    },
+    {
+      key: '7',
+      label: <Link className=" font-medium" to={'/dashboard/nhanvien/order'}>Đơn hàng</Link>,
       icon: <AiOutlineClockCircle size={20} />,
     },
     {
@@ -71,7 +76,7 @@ const SiderDashboardNhanVien = () => {
           <Menu theme="light" mode="inline">
             <Menu.Item
               key="logout"
-              icon={<LogoutOutlined />}
+              icon={<MdOutlineLogout size={20} />}
               className="font-medium"
               onClick={handleLogOut}
             >

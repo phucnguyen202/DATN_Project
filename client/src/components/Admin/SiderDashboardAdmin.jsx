@@ -8,6 +8,7 @@ import { RiBuildingLine } from 'react-icons/ri'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { remoAuth } from '../../redux/reducers/authReducer'
+import { MdOutlineLogout } from "react-icons/md";
 const { Text } = Typography
 const SiderDashboardAdmin = () => {
   const items = [
@@ -65,7 +66,7 @@ const SiderDashboardAdmin = () => {
           <Menu theme="light" mode="inline">
             <Menu.Item
               key="logout"
-              icon={<LogoutOutlined />}
+              icon={<MdOutlineLogout size={20} />}
               className="font-medium"
               onClick={handleLogOut}
             >

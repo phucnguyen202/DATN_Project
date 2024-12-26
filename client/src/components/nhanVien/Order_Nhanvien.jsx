@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
 
-import { Button, message, Modal, Space, Table, Tag } from 'antd';
-import { CiSquareRemove } from 'react-icons/ci';
-import { useSelector } from 'react-redux';
-import handleAPI from '../../apis/HandleAPI';
+import React, { useEffect, useState } from 'react';
+import { Button, message, Modal, Select, Space, Table, Tag } from 'antd';
+import Title from 'antd/es/typography/Title';
 import dayjs from 'dayjs';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import Title from 'antd/es/typography/Title';
+import { useSelector } from 'react-redux';
+import handleAPI from '../../apis/HandleAPI';
 import DetailOrder from '../DetailOrder';
 const { confirm } = Modal
-const Order_KhachHang = () => {
+const Order_Nhanvien = () => {
 
   const user = useSelector(state => state?.auth?.currentData?.user);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +46,17 @@ const Order_KhachHang = () => {
       title: 'Trạng thái',
       dataIndex: 'trangThai',
       key: 'trangThai',
-      render: (trangThai) => <Tag color='blue'>{trangThai}</Tag>
+      render: (trangThai, record) => (
+        <Select
+          defaultValue={trangThai}
+          style={{ width: 160 }}
+          onChange={(value) => handleUpdateStatus(record.idDonHang, value)}
+          options={[
+            { value: 'Đã xác nhận', label: 'Đã xác nhận' },
+            { value: 'Đã từ chối', label: 'Đã từ chối' },
+          ]}
+        />
+      ),
     },
     {
       title: 'Thanh toán',
@@ -97,7 +106,7 @@ const Order_KhachHang = () => {
 
   const getInfoOrder = async () => {
     try {
-      const res = await handleAPI(`/khachhang/getAllOrderById `, '', 'get')
+      const res = await handleAPI(`/nhanvien/getAllOrder `, '', 'get')
       if (res.success) {
         setOrderInfo(res.data)
       }
@@ -107,20 +116,41 @@ const Order_KhachHang = () => {
   }
 
   const handleCancelOrder = async (id) => {
-    const data = {
-      idDonHang: id
-    }
-    console.log(data)
-    try {
-      const res = await handleAPI('/khachhang/cancelOrder', data, 'post')
-      if (res.success) {
-        message.success(res.message)
-        getInfoOrder()
-      }
-    } catch (e) {
-      message.warning(e.message)
-    }
+    // const data = {
+    //   idDonHang: id
+    // }
+    // console.log(data)
+    // try {
+    //   const res = await handleAPI('/khachhang/cancelOrder', data, 'post')
+    //   if (res.success) {
+    //     message.success(res.message)
+    //     getInfoOrder()
+    //   }
+    // } catch (e) {
+    //   message.warning(e.message)
+    // }
   }
+  const handleUpdateStatus = async (idDonHang, newStatus) => {
+    try {
+      const data = {
+        trangThai: newStatus,
+        idDonHang: idDonHang
+      }
+      console.log(data)
+      setIsLoading(true);
+      const res = await handleAPI('/nhanvien/updateOrderStatus', data, 'put');
+      if (res.success) {
+        message.success(res.message);
+        getInfoOrder();// Refresh data
+      } else {
+        message.error(res.message);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <>
       <Table
@@ -145,4 +175,4 @@ const Order_KhachHang = () => {
   )
 }
 
-export default Order_KhachHang
+export default Order_Nhanvien

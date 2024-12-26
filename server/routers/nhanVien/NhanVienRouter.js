@@ -8,5 +8,10 @@ router.delete('/nhanvien/deleteproduct', NhanVienController.deleteProduct);
 router.put('/nhanvien/updateproduct', NhanVienController.updateProduct);
 router.get('/nhanvien/getallproducts', NhanVienController.getAllProducts);
 router.get('/nhanvien/getproductbyid', NhanVienController.getProductById);
+router.get('/nhanvien/getAllOrder', NhanVienController.getAllOrder);
+router.put('/nhanvien/updateOrderStatus', NhanVienController.updateOrderStatus);
+
+
+
 
 module.exports = router

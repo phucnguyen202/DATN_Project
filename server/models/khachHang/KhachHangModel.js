@@ -94,6 +94,7 @@ const getOrderDetails = (idDonHang, callback) => {
 };
 
 // lấy đơn hàng chưa thanh toán của người dùng
+// trong trang payment
 const getOrderByIdAndpayment = (userId, callback) => {
   const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId = ? AND thanhToan ='Chưa thanh toán'`
   db.query(sql, [userId], callback);
@@ -114,7 +115,7 @@ const cancelOrder = (nguoiDungId, idDonHang, callback) => {
   const sqlCheckOrder = `
     SELECT *
     FROM tb_donhang
-    WHERE idDonHang = ? AND nguoiDungId = ? AND trangThai = 'Chờ xác nhận' AND trangThaiGiaoHang = 'Chưa giao' , 
+    WHERE idDonHang = ? AND nguoiDungId = ? AND trangThai = 'Chờ xác nhận' AND trangThaiGiaoHang = 'Chưa giao'
   `
   db.query(sqlCheckOrder, [idDonHang, nguoiDungId], (err, results) => {
     if (err) {

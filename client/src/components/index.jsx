@@ -17,5 +17,9 @@ import Account from './seller/Account';
 import CreateDanhMuc from './seller/CreateDanhMuc';
 import InfoCustomer from './customer/InfoCustomer'
 import ListAccountSupplier from './seller/ListAccountSupplier';
+import Order_Nhanvien from './nhanVien/Order_Nhanvien';
 
-export { Account, ListAccountSupplier, AccountUser, BannerHome, BestSellingProduct, CreateDanhMuc, CreateProduct, DealsOfTheDayHome, FeaturedCategories, HeaderDashboardCustomer, InfoCustomer, ListProducts, Order_KhachHang, PopularProducts, InfoPersonal, ProductSectionHome, PromotionalSectionHome, SiderDashboardCustomer };
+export {
+  Account, ListAccountSupplier, AccountUser, BannerHome, BestSellingProduct, CreateDanhMuc, CreateProduct, DealsOfTheDayHome, FeaturedCategories, HeaderDashboardCustomer, InfoCustomer, ListProducts, Order_KhachHang, PopularProducts, InfoPersonal, ProductSectionHome, PromotionalSectionHome, SiderDashboardCustomer, Order_Nhanvien
+
+};
