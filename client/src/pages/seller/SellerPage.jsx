@@ -35,7 +35,7 @@ const SellerPage = () => {
         <div className='px-4'>
           <div className='pt-14 pb-20'>
             <div className='flex justify-center '>
-              <h1 className='text-7xl text-customText font-bold'>Cửa hàng Nest Food</h1>
+              <h1 className='text-6xl text-customText font-bold'>Cửa hàng Nest Food</h1>
             </div>
             <div className='pt-12 flex justify-center'>
               <div className='border-[1px] rounded-full shadow-lg pl-10'>

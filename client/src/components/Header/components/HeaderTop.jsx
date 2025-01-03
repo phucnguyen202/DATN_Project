@@ -35,7 +35,7 @@ const HeaderTop = () => {
                 Yêu thích
               </Link>
               <span className='text-sm'>|</span>
-              <Link to="/registration/supplier" className="hover:text-customText text-[13px]">
+              <Link to="/registration/registersupplier" className="hover:text-customText text-[13px]">
                 Đăng ký nhà cung cấp
               </Link>
             </div>

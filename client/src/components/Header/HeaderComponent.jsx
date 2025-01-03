@@ -27,8 +27,9 @@ const HeaderComponent = () => {
     khachhang: '/dashboard/customer/order',
     banhang: '/dashboard/seller/taikhoan',
     admin: '/admin/all-account',
-    nhacungcap: '/dashboard-nhacungcap',
-    nhanvien: '/dashboard/nhanvien/list-products'
+    nhacungcap: '/dashboard/supplier/confirm-nhaphang',
+    nhanvien: '/dashboard/nhanvien/list-products',
+    giaohang: '/dashboard/shipper/order'
   };
 
   const handleLogOut = async () => {
@@ -38,7 +39,7 @@ const HeaderComponent = () => {
   };
 
   const itemsAccount = [
-    (user?.quyen === 'admin' || user?.quyen === 'khachhang' || user?.quyen === 'nhanvien' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
+    (user?.quyen === 'admin' || user?.quyen === 'giaohang' || user?.quyen === 'khachhang' || user?.quyen === 'nhanvien' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
       key: '1',
       icon: <AiOutlineSetting className='text-[#343a40]' size={16} />,
       label: (
@@ -167,7 +168,7 @@ const HeaderComponent = () => {
       key: 4,
       label: <Link style={{
         color: '#253D4E'
-      }} className='text-base  font-medium' to='/'>Nhà cung cấp</Link>,
+      }} className='text-base  font-medium' to='/supplier'>Nhà cung cấp</Link>,
     },
     {
       key: 6,

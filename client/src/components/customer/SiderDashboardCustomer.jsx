@@ -14,11 +14,11 @@ const SiderDashboardCustomer = () => {
       label: <Link className=" font-medium" to={'/dashboard/customer/order'}>Đơn hàng</Link>,
       icon: <AiOutlineUser size={20} />,
     },
-    // {
-    //   key: '2',
-    //   label: <Link className=" font-medium" to={'/dashboard/customer/info-khachhang'}>/dashboard/customer/info-khachhang</Link>,
-    //   icon: <RiBuildingLine size={20} />,
-    // },
+    {
+      key: '2',
+      label: <Link className=" font-medium" to={'/dashboard/customer/history'}>Lịch sử mua hàng</Link>,
+      icon: <RiBuildingLine size={20} />,
+    },
     // {
     //   key: '3',
     //   label: <Link className=" font-medium" to={'/dashboard/customer/info-khachhang'}>/dashboard/customer/info-khachhang</Link>,

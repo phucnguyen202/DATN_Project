@@ -35,7 +35,10 @@ const AccountUser = () => {
       render: (quyen) =>
         quyen === 'khachhang' ?
           <Tag color="green">Khách hàng</Tag> : quyen === 'nhacungcap' ?
-            <Tag color="cyan">Nhà cung cấp</Tag> : quyen === 'admin' ? <Tag color="red">Admin</Tag> : <Tag color="blue">Chủ cửa hàng</Tag>
+            <Tag color="cyan">Nhà cung cấp</Tag> : quyen === 'admin' ?
+              <Tag color="red">Admin</Tag> : quyen === 'nhanvien' ?
+                <Tag color="gold">Nhân viên</Tag> : quyen === 'giaohang' ?
+                  <Tag color="purple">Giao hàng</Tag> : <Tag color="blue">Chủ cửa hàng</Tag>
     },
     {
       title: 'Số điện thoại',
@@ -100,7 +103,7 @@ const AccountUser = () => {
         <div className='grid grid-cols-3 mb-4 gap-4'>
           <div className='border-[1px] p-5 rounded-lg col-span-1'>
             <Statistic
-              title="Active"
+              title="Nguời dùng"
               value={11.28}
               precision={2}
               valueStyle={{
@@ -110,7 +113,7 @@ const AccountUser = () => {
               suffix="%"
             />
           </div>
-          <div className='border-[1px] p-5 rounded-lg col-span-1'>
+          {/* <div className='border-[1px] p-5 rounded-lg col-span-1'>
             <Statistic
               title="Active"
               value={11.28}
@@ -134,7 +137,7 @@ const AccountUser = () => {
 
               suffix="%"
             />
-          </div>
+          </div> */}
         </div>
         <Table
           loading={isLoading}

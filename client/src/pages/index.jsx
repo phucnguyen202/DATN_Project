@@ -11,9 +11,13 @@ import PageSellerDashboard from './seller/PageSellerDashboard';
 import ContactPage from "./ContactPage";
 import PaymentPage from "./PayMentPage";
 import PageKhachHangDashboard from './customer/PageKhachHangDashboard'
-import SupplierPage from "./supplier/SupplierPage";
+import RegisterSupplierPage from "./supplier/RegisterSupplierPage";
 import PageWishlist from "./PageWishlist";
+import SupplierPage from "./supplier/SupplierPage";
+import PageSupplierDashboard from './supplier/PageSupplierDashboard'
+import PageShipperDashboard from './shipper/PageShipperDashboard'
+
 export {
-  LoginPage, HomePage, SignupPage, DetailPage, ContactPage, PaymentPage, SupplierPage, PageWishlist,
+  LoginPage, PageShipperDashboard, HomePage, PageSupplierDashboard, SignupPage, DetailPage, ContactPage, PaymentPage, RegisterSupplierPage, PageWishlist, SupplierPage,
   CartPage, SellerPage, AboutPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, PageKhachHangDashboard
 } 

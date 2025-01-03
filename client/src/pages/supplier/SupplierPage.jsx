@@ -1,110 +1,153 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message } from 'antd';
-import { UserOutlined, HomeOutlined, PhoneOutlined } from '@ant-design/icons';
-import handleAPI from '../../apis/HandleAPI';
+import { Typography, Input, Button, Card, Space, Tag, Segmented, Breadcrumb } from 'antd';
+import { SearchOutlined, ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
+const { Title, Text, Paragraph } = Typography;
 
 const SupplierPage = () => {
-  const [form] = Form.useForm();
-  const [formSupplier, setFormSupplier] = useState(false);
-  const onFinish = async (values) => {
-    try {
-      const res = await handleAPI(`/khachhang/register/supplier`, values, 'post')
-      if (res.success) {
-        message.success(res.message);
-        form.resetFields();
-        return;
-      } else {
-        message.error(res.message);
-        return;
-      }
-    } catch (e) {
-      console.error(e);
-      message.error('Có lỗi xảy ra, vui lòng thử lại sau');
-    }
-  };
+  const [posts] = useState([
+    {
+      id: 1,
+      title: 'Bộ sưu tập quần áo mùa hè 2024',
+      supplier: 'Công ty ABC',
+      description: 'Bộ sưu tập mới nhất với nhiều mẫu mã đa dạng, chất liệu cao cấp...',
+      image: 'https://example.com/image1.jpg',
+      categories: ['Thời trang', 'Mùa hè'],
+      minOrder: 100,
+      price: 150000,
+    },
+    {
+      id: 2,
+      title: 'Bộ sưu tập quần áo mùa hè 2024',
+      supplier: 'Công ty ABC',
+      description: 'Bộ sưu tập mới nhất với nhiều mẫu mã đa dạng, chất liệu cao cấp...',
+      image: 'https://example.com/image1.jpg',
+      categories: ['Thời trang', 'Mùa hè'],
+      minOrder: 100,
+      price: 150000,
+    },
+    {
+      id: 3,
+      title: 'Bộ sưu tập quần áo mùa hè 2024',
+      supplier: 'Công ty ABC',
+      description: 'Bộ sưu tập mới nhất với nhiều mẫu mã đa dạng, chất liệu cao cấp...',
+      image: 'https://example.com/image1.jpg',
+      categories: ['Thời trang', 'Mùa hè'],
+      minOrder: 100,
+      price: 150000,
+    },
+    {
+      id: 4,
+      title: 'Bộ sưu tập quần áo mùa hè 2024',
+      supplier: 'Công ty ABC',
+      description: 'Bộ sưu tập mới nhất với nhiều mẫu mã đa dạng, chất liệu cao cấp...',
+      image: 'https://example.com/image1.jpg',
+      categories: ['Thời trang', 'Mùa hè'],
+      minOrder: 100,
+      price: 150000,
+    },
+  ]);
+
   return (
     <>
+      <div className='border-b-[1px]'>
+        <div className='px-4 py-5'>
+          <Breadcrumb
+            items={[
+              {
+                title: <p className='font-medium'>Trang chủ</p>,
+              },
+              {
+                title: <p className='font-medium'>Nhà cung cấp</p>,
+              },
 
-
-      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl p-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-customText">Đăng ký nhà cung cấp</h2>
-            <p className="mt-2 text-gray-600">Vui lòng điền đầy đủ thông tin bên dưới</p>
-          </div>
-          <Form
-            form={form}
-            layout="vertical"
-            onFinish={onFinish}
-            className="space-y-4"
-          >
-            <Form.Item
-              name="tenNhaCungCap"
-              label="Tên nhà cung cấp"
-              rules={[{ required: true, message: 'Vui lòng nhập tên nhà cung cấp!' }]}
-            >
-              <Input
-                prefix={<UserOutlined className="text-gray-400" />}
-                placeholder="Nhập tên nhà cung cấp"
-                className="rounded-lg"
-              />
-            </Form.Item>
-
-            <Form.Item
-              name="diaChi"
-              label="Địa chỉ"
-              rules={[{ required: true, message: 'Vui lòng nhập địa chỉ!' }]}
-            >
-              <Input.TextArea
-                prefix={<HomeOutlined className="text-gray-400" />}
-                placeholder="Nhập địa chỉ"
-                className="rounded-lg"
-                rows={3}
-              />
-            </Form.Item>
-
-            <Form.Item
-              name="soDienThoai"
-              label="Số điện thoại"
-              rules={[
-                { required: true, message: 'Vui lòng nhập số điện thoại!' },
-                { pattern: /^[0-9]{10}$/, message: 'Số điện thoại không hợp lệ!' }
-              ]}
-            >
-              <Input
-                prefix={<PhoneOutlined className="text-gray-400" />}
-                placeholder="Nhập số điện thoại"
-                className="rounded-lg"
-              />
-            </Form.Item>
-
-            <Form.Item className="text-center">
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{
-                  backgroundColor: '#3BB77E'
-                }}
-                className=" w-full rounded-lg h-10 text-lg"
-              >
-                Đăng ký
-              </Button>
-            </Form.Item>
-          </Form>
+            ]}
+          />
         </div>
       </div>
-
-
-      {/* <div>
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-customText">Đăng ký nhà cung cấp</h2>
-          <p className="mt-2 text-gray-600">Yêu cầu của bạn đã được gửi, Vui lòng đợi phản hồi</p>
+      <div className="container mx-auto px-4 py-8">
+        {/* Header Section */}
+        <div className="mb-8">
+          <h1 className='text-6xl text-customText text-center mb-10 mt-6 font-bold'>Sản phẩm từ nhà cung cấp</h1>
+          <div className="max-w-2xl mx-auto">
+            <Input.Search
+              placeholder="Tìm kiếm sản phẩm..."
+              allowClear
+              enterButton={<SearchOutlined />}
+              size="large"
+              className="w-full"
+              onSearch={(value) => console.log(value)}
+            />
+          </div>
         </div>
-      </div> */}
+        {/* Filter Categories */}
+        <div className="mb-8">
+          <Space wrap className="flex justify-center gap-2">
+            <Segmented
+              options={['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']}
+              onChange={(value) => {
+                console.log(value); // string
+              }}
 
+            />
+          </Space>
+        </div>
+
+        {/* Posts Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {posts.map(post => (
+            <Card
+              key={post.id}
+              hoverable
+              className="h-full"
+              cover={
+                <img
+                  alt={post.title}
+                  src={post.image}
+                  className="h-64 w-full object-cover"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/400x300';
+                  }}
+                />
+              }
+              actions={[
+                <Button type="text" icon={<HeartOutlined />}>Lưu</Button>,
+                <Button type="primary" icon={<ShoppingCartOutlined />}>Đặt hàng</Button>
+              ]}
+            >
+              <Card.Meta
+                title={<Title level={4}>{post.title}</Title>}
+                description={
+                  <div className="space-y-3">
+                    <Text strong className="block">
+                      Nhà cung cấp: {post.supplier}
+                    </Text>
+                    <Paragraph ellipsis={{ rows: 2 }} className="text-gray-600">
+                      {post.description}
+                    </Paragraph>
+                    <div className="flex flex-wrap gap-2">
+                      {post.categories.map(cat => (
+                        <Tag key={cat} color="blue">{cat}</Tag>
+                      ))}
+                    </div>
+                    <div className="pt-2">
+                      <Text type="secondary" className="block">
+                        Đơn hàng tối thiểu: {post.minOrder} sản phẩm
+                      </Text>
+                      <Text className="text-red-500 font-semibold text-lg">
+                        Giá: {post.price.toLocaleString('vi-VN')}đ
+                      </Text>
+                    </div>
+                  </div>
+                }
+              />
+            </Card>
+          ))}
+        </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default SupplierPage
+export default SupplierPage;

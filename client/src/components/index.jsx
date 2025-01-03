@@ -18,8 +18,16 @@ import CreateDanhMuc from './seller/CreateDanhMuc';
 import InfoCustomer from './customer/InfoCustomer'
 import ListAccountSupplier from './seller/ListAccountSupplier';
 import Order_Nhanvien from './nhanVien/Order_Nhanvien';
-
+import CreateNhapHang from './seller/CreateNhapHang';
+import HistoryMuaHang from './customer/HistoryMuaHang'
+import HistoryBanHang from './nhanVien/HistoryBanHang'
+import Confirm_nhapHang from './Supplier/Confirm_nhapHang';
+import HistoryXuatHang from './Supplier/HistoryXuatHang';
+import Status_giaoHang from './Shipper/Status_giaoHang';
+import ThongKe from './seller/ThongKe';
+import History_NhapHang from './seller/History_NhapHang'
 export {
-  Account, ListAccountSupplier, AccountUser, BannerHome, BestSellingProduct, CreateDanhMuc, CreateProduct, DealsOfTheDayHome, FeaturedCategories, HeaderDashboardCustomer, InfoCustomer, ListProducts, Order_KhachHang, PopularProducts, InfoPersonal, ProductSectionHome, PromotionalSectionHome, SiderDashboardCustomer, Order_Nhanvien
-
+  Account, Status_giaoHang, History_NhapHang, ThongKe, HistoryMuaHang, HistoryXuatHang, Confirm_nhapHang, HistoryBanHang, ListAccountSupplier, AccountUser, CreateNhapHang, BannerHome, BestSellingProduct,
+  CreateDanhMuc, CreateProduct, DealsOfTheDayHome, FeaturedCategories, HeaderDashboardCustomer, InfoCustomer, ListProducts,
+  Order_KhachHang, PopularProducts, InfoPersonal, ProductSectionHome, PromotionalSectionHome, SiderDashboardCustomer, Order_Nhanvien
 };

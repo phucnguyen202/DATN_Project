@@ -31,7 +31,6 @@ class PaymentController {
       item: JSON.stringify(items),
       embed_data: JSON.stringify(embed_data),
       amount: amount,
-      // amount: 500000,
       description: `Thanh toán đơn hàng #${transID}`,
       bank_code: "",
       callback_url: "https://c3b9-14-245-69-138.ngrok-free.app/v1/api/callback"
@@ -43,20 +42,19 @@ class PaymentController {
 
     try {
       const result = await axios.post(config.endpoint, null, { params: order })
-      console.log('result::', result);
-      if (result.data.return_code === 1) {
-        KhachHangModel.updateOrderStatusPayment(idNguoiDung, idDonHang, (err, result) => {
-          if (err) {
-            console.error("Cập nhật trạng thái đơn hàng thất bại");
-          }
-          return res.status(200).json({
-            success: true,
-            message: 'Thanh toán đơn hàng thành công',
-            data: result.data
-          })
-        });
-      }
-      // return res.status(200).json(result.data);
+      // if (result.data.return_code === 1) {
+      //   KhachHangModel.updateOrderStatusPayment(idNguoiDung, idDonHang, (err, result) => {
+      //     if (err) {
+      //       console.error("Cập nhật trạng thái đơn hàng thất bại");
+      //     }
+      //     return res.status(200).json({
+      //       success: true,
+      //       message: 'Thanh toán đơn hàng thành công',
+      //       data: result.data
+      //     })
+      //   });
+      // }
+      return res.status(200).json(result.data);
     } catch (err) {
       console.log(err);
       return res.status(500).json({ message: 'Internal Server Error' });
@@ -90,8 +88,8 @@ class PaymentController {
         const embedData = JSON.parse(dataJson["embed_data"]); // Lấy embed_data
         const idNguoiDung = embedData.idNguoiDung; // ID người dùng
         const danhSachIdDonHang = embedData.danhSachIdDonHang; // Danh sách ID đơn hàng
-        console.log(danhSachIdDonHang)
-        console.log(idNguoiDung)
+        console.log('danhSachIdDonHang:::', danhSachIdDonHang)
+        console.log('idNguoiDung:::', idNguoiDung)
 
         // Cập nhật trạng thái thanh toán cho các đơn hàng
         // try {

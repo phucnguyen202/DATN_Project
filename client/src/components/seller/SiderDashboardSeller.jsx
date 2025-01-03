@@ -1,23 +1,25 @@
-import { Menu, Typography } from 'antd'
-import Sider from 'antd/es/layout/Sider'
-import React from 'react'
-import { AiOutlineHistory, AiOutlineHome, AiOutlineShop } from 'react-icons/ai'
-import { BiPackage } from 'react-icons/bi'
-import { BsCardChecklist } from 'react-icons/bs'
+import { Menu, Typography } from 'antd';
+import Sider from 'antd/es/layout/Sider';
+import React from 'react';
+import { AiOutlineHistory } from 'react-icons/ai';
+import { BiCoinStack, BiPackage, BiSolidPackage, BiSolidTruck } from 'react-icons/bi';
+import { BsBarChartLineFill, BsCardChecklist, BsTruckFrontFill } from 'react-icons/bs';
 import { MdOutlineLogout } from "react-icons/md";
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-const { Text } = Typography
-import { remoAuth } from '../../redux/reducers/authReducer'
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+const { Text } = Typography;
 const SiderDashboardSeller = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const items = [
     {
       key: '1',
-      label: <Link className=" font-medium"
-      // to={'/dashboard/seller/taikhoan'}
-      >Quản lý tài khoản</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/seller/thongke'}>Thống kế</Link>,
+      icon: <AiOutlineHistory size={20} />,
+    },
+    {
+      key: '7',
+      label: <Link className=" font-medium">Quản lý tài khoản</Link>,
       icon: <BiPackage size={20} />,
       children: [
         { key: '5', label: <Link className=" font-medium" to={'/dashboard/seller/taikhoan'}>Tài khoản nhân viên</Link> },
@@ -26,31 +28,25 @@ const SiderDashboardSeller = () => {
     },
     {
       key: '2',
-      label: <Link className=" font-medium" to={'/dashboard/seller/danhmuc'}>Thêm danh mục</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/seller/danhmuc'}>Quản lý danh mục</Link>,
       icon: <AiOutlineHistory size={20} />,
     },
     {
       key: '3',
-      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Nhập hàng</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/seller/nhaphang'}>Nhập hàng</Link>,
       icon: <BsCardChecklist size={20} />,
     },
     {
       key: '4',
-      label: <Link className=" font-medium" to={'/dashboard-nhabanhang'}>Thông tin gian hàng</Link>,
-      icon: <AiOutlineShop size={20} />,
+      label: <Link className=" font-medium" to={'/dashboard/seller/history'}>Lịch sử bán hàng</Link>,
+      icon: <BiCoinStack size={20} />,
     },
     {
-      key: '7',
-      label: <Link className=" font-medium" to={'/'}>Trang chủ</Link>,
-      icon: <AiOutlineHome size={20} />,
-    }
+      key: '8',
+      label: <Link className=" font-medium" to={'/dashboard/seller/history-nhaphang'}>Lịch sử nhập hàng</Link>,
+      icon: <BiSolidTruck size={20} />,
+    },
   ]
-
-  const handleLogOut = async () => {
-    await dispatch(remoAuth());
-    localStorage.removeItem('authData');
-    navigate('/login');
-  };
   return (
     <>
       <Sider
@@ -73,9 +69,8 @@ const SiderDashboardSeller = () => {
               key="logout"
               icon={<MdOutlineLogout size={20} />}
               className="font-medium"
-              onClick={handleLogOut}
             >
-              Đăng xuất
+              <Link className=" font-medium" to={'/'}>Trang chủ</Link>
             </Menu.Item>
           </Menu>
         </div>

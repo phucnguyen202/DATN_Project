@@ -10,11 +10,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { remoAuth } from '../../redux/reducers/authReducer'
 import { MdOutlineLogout } from "react-icons/md";
 const { Text } = Typography
-const SiderDashboardAdmin = () => {
+const SiderDashboardShipper = () => {
   const items = [
     {
       key: '1',
-      label: <Link className=" font-medium" to={'/admin/all-account'}>Quản lý tài khoản</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/shipper/order'}>Quản lý giao hàng</Link>,
       icon: <AiOutlineUser size={20} />,
     },
     // {
@@ -79,4 +79,4 @@ const SiderDashboardAdmin = () => {
   )
 }
 
-export default SiderDashboardAdmin
+export default SiderDashboardShipper

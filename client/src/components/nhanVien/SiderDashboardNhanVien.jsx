@@ -1,14 +1,12 @@
 import { Menu, Typography } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import React from 'react'
-import { AiOutlineClockCircle, AiOutlineHome, AiOutlinePlusCircle, AiOutlineUser } from 'react-icons/ai'
+import { AiOutlineClockCircle, AiOutlinePlusCircle, AiOutlineUser } from 'react-icons/ai'
 import { BiListCheck } from 'react-icons/bi'
 import { FiPackage } from 'react-icons/fi'
-import { Link, useNavigate } from 'react-router-dom'
+import { MdOutlineLogout } from "react-icons/md"
+import { Link } from 'react-router-dom'
 const { Text } = Typography
-import { remoAuth } from '../../redux/reducers/authReducer'
-import { useDispatch } from 'react-redux';
-import { MdOutlineLogout } from "react-icons/md";
 
 const SiderDashboardNhanVien = () => {
   const items = [
@@ -24,7 +22,7 @@ const SiderDashboardNhanVien = () => {
     },
     {
       key: '2',
-      label: <Link className=" font-medium" to={'/dashboard-nhanvien'}>Lịch sử bán hàng</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/nhanvien/history'}>Lịch sử bán hàng</Link>,
       icon: <AiOutlineClockCircle size={20} />,
     },
     {
@@ -41,22 +39,9 @@ const SiderDashboardNhanVien = () => {
       key: '4',
       label: <Link className=" font-medium" to={'/dashboard/nhanvien/info-nhanvien'}>Thông tin cá nhân</Link>,
       icon: <AiOutlineUser size={20} />,
-    },
-    {
-      key: '5',
-      label: <Link className=" font-medium" to={'/'}>Trang chủ</Link>,
-      icon: <AiOutlineHome size={20} />,
     }
+
   ]
-
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const handleLogOut = async () => {
-    await dispatch(remoAuth());
-    localStorage.removeItem('authData');
-    navigate('/login');
-  };
   return (
     <>
       <Sider
@@ -78,9 +63,8 @@ const SiderDashboardNhanVien = () => {
               key="logout"
               icon={<MdOutlineLogout size={20} />}
               className="font-medium"
-              onClick={handleLogOut}
             >
-              Đăng xuất
+              <Link className=" font-medium" to={'/'}>Trang chủ</Link>
             </Menu.Item>
           </Menu>
         </div>
