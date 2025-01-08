@@ -1,13 +1,18 @@
 const User = require('../models/AuthModel')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { sendVerificationEmail } = require('../commonService/Common.service');
 // const JWT_SECRET = 'your_jwt_secret';
 
+// Hàm tạo OTP ngẫu nhiên 4 chữ số
+
 class AuthController {
+
   // đăng ký tài khoản
   async register(req, res) {
     try {
       const { email, name, password, phone } = req.body
+      // Kiểm tra email đã tồn tại hay chưa
       User.findUserByEmail(email, async (err, result) => {
         if (err) {
           return res.status(500).json({ message: 'Lỗi hệ thống' });
@@ -15,6 +20,8 @@ class AuthController {
         if (result.length > 0) {
           return res.status(400).json({ message: 'Email đã tồn tại' });
         }
+        // Tạo OTP
+        const otpCode = Math.floor(1000 + Math.random() * 9000).toString();
         // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -23,8 +30,11 @@ class AuthController {
           ten: name,
           email: email,
           matkhau: hashedPassword,
-          soDT: phone
+          soDT: phone,
+          otpCode: otpCode,
         };
+        // Gửi email OTP cho người dùng
+        await sendVerificationEmail(email, otpCode);
         User.createUser(newUser, (err, result) => {
           if (err) {
             return res.status(500).json({ message: 'Lỗi khi tạo người dùng' });
@@ -44,6 +54,7 @@ class AuthController {
                 email: user.email,
                 quyen: user.quyen
               }, process.env.JWT_SECRET);
+
             return res.status(201).json({
               message: 'Đăng ký thành công',
               data: {
@@ -61,6 +72,37 @@ class AuthController {
       })
     }
   };
+
+  // verifyEmail
+  // kiểm trả mã OTP
+  async verifyEmail(req, res) {
+    try {
+      const email = req.user.email;
+      const { otpCode } = req.body;
+      console.log('otpCode:::', otpCode);
+      User.getOTP(email, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_NHAP_HANG_ERROR',
+            message: 'Lỗi khi lấy mã OTP'
+          })
+        }
+        // console.log('result:::', result[0].otpCode.toString());
+        if (result[0].otpCode.toString() === otpCode) {
+          return res.status(200).json({
+            success: true,
+            message: 'Đăng ký tài khoản thành công!'
+          })
+        }
+      })
+    } catch (e) {
+      return res.status(500).json({
+        message: 'Lỗi hệ thống',
+        error: e.message || e.toString()
+      })
+    }
+  }
 
   // đăng nhập bằng gg
   async loginWithGoogle(req, res) {

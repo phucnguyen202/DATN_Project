@@ -39,4 +39,14 @@ const updateUserInfo = (idUser, ten, soDT, hinhAnh, callback) => {
   db.query(sql, [ten, soDT, hinhAnh, idUser], callback);
 }
 
-module.exports = { createUser, findUserByEmail, findUserForJWT, updateUserInfo, findUserById };
+// lấy mã otp
+
+const getOTP = (email, callback) => {
+  const sql = `
+      SELECT otpCode 
+      FROM nguoiDung 
+      WHERE email = ?`;
+  db.query(sql, [email], callback);
+}
+
+module.exports = { createUser, getOTP, findUserByEmail, findUserForJWT, updateUserInfo, findUserById };

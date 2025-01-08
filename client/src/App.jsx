@@ -5,7 +5,7 @@ import Account_NhaCungCap from './components/Admin/Account_NhaCungCap'
 import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
 import { Account, AccountUser, Confirm_nhapHang, CreateDanhMuc, CreateNhapHang, CreateNhapHang_nhanVien, CreateProduct, History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, InfoSupplier, ListAccountSupplier, ListProducts, Order_KhachHang, Order_Nhanvien, Status_giaoHang, ThongKe } from './components'
 import Main from './layout/Main'
-import { AboutPage, CartPage, ContactPage, DetailPage, PaymentPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage, PageKhachHangDashboard, RegisterSupplierPage, PageWishlist, SupplierPage, PageSupplierDashboard, PageShipperDashboard } from './pages'
+import { AboutPage, CartPage, ContactPage, DetailPage, PaymentPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage, PageKhachHangDashboard, RegisterSupplierPage, PageWishlist, SupplierPage, PageSupplierDashboard, PageShipperDashboard, OtpCode } from './pages'
 import { addAuth } from './redux/reducers/authReducer'
 
 function App() {
@@ -82,6 +82,7 @@ function App() {
         <Route path="/*" element={<Navigate to="/" replace />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/otp-code" element={<OtpCode />} />
       </Routes>
     </>
   )

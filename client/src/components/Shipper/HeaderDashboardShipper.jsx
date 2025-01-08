@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 
 const HeaderDashboardShipper = () => {
   const user = useSelector(state => state?.auth?.currentData?.user)
-
   return (
     <>
       <Header style={{

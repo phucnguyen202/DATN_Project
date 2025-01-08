@@ -16,8 +16,8 @@ import PageWishlist from "./PageWishlist";
 import SupplierPage from "./supplier/SupplierPage";
 import PageSupplierDashboard from './supplier/PageSupplierDashboard'
 import PageShipperDashboard from './shipper/PageShipperDashboard'
-
+import OtpCode from "./auth/OtpCode";
 export {
-  LoginPage, PageShipperDashboard, HomePage, PageSupplierDashboard, SignupPage, DetailPage, ContactPage, PaymentPage, RegisterSupplierPage, PageWishlist, SupplierPage,
+  LoginPage, OtpCode, PageShipperDashboard, HomePage, PageSupplierDashboard, SignupPage, DetailPage, ContactPage, PaymentPage, RegisterSupplierPage, PageWishlist, SupplierPage,
   CartPage, SellerPage, AboutPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, PageKhachHangDashboard
 } 

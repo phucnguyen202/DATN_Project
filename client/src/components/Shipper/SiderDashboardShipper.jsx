@@ -58,6 +58,7 @@ const SiderDashboardShipper = () => {
             src={'https://www.niraagayurveda.com/assets/imgs/theme/logo.svg'} alt="" />
         </div>
         <Menu
+          defaultSelectedKeys={['1']}
           theme="light"
           items={items}
         />

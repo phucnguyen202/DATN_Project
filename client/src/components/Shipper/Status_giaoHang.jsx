@@ -36,26 +36,26 @@ const Status_giaoHang = () => {
       dataIndex: 'diaChi',
       key: 'diaChi',
     },
-    {
-      title: 'Thời gian đặt hàng',
-      dataIndex: 'thoiGianDatHang',
-      key: 'thoiGianDatHang',
-      render: (thoiGianDatHang) => <p>{dayjs(thoiGianDatHang).format('DD/MM/YYYY HH:mm:ss')}</p>
-    },
-    {
-      title: 'Trạng thái',
-      dataIndex: 'trangThai',
-      key: 'trangThai',
-      render: (trangThai) =>
-        <Tag color='blue'> {trangThai}</Tag>
-      ,
-    },
-    {
-      title: 'Thanh toán',
-      dataIndex: 'thanhToan',
-      key: 'thanhToan',
-      render: (thanhToan) => <Tag color={thanhToan === 'Chưa thanh toán' ? 'red' : 'green'}>{thanhToan}</Tag>
-    },
+    // {
+    //   title: 'Thời gian đặt hàng',
+    //   dataIndex: 'thoiGianDatHang',
+    //   key: 'thoiGianDatHang',
+    //   render: (thoiGianDatHang) => <p>{dayjs(thoiGianDatHang).format('DD/MM/YYYY HH:mm:ss')}</p>
+    // },
+    // {
+    //   title: 'Trạng thái',
+    //   dataIndex: 'trangThai',
+    //   key: 'trangThai',
+    //   render: (trangThai) =>
+    //     <Tag color='blue'> {trangThai}</Tag>
+    //   ,
+    // },
+    // {
+    //   title: 'Thanh toán',
+    //   dataIndex: 'thanhToan',
+    //   key: 'thanhToan',
+    //   render: (thanhToan) => <Tag color={thanhToan === 'Chưa thanh toán' ? 'red' : 'green'}>{thanhToan}</Tag>
+    // },
     {
       title: 'Trạng thái giao hàng',
       dataIndex: 'trangThaiGiaoHang',
@@ -89,15 +89,18 @@ const Status_giaoHang = () => {
               className="text-slate-600" />}
           >
           </Button>
-          {/* <Button
+          <Button
             onClick={() => confirm({
               title: 'Hủy đơn hàng',
               content: 'Bạn có muốn hủy đơn hàng không?',
               onOk: () => handleCancelOrder(item.idDonHang),
               onCancel() { },
             })}
-            type="text"
-          >Hủy hàng</Button> */}
+            style={{
+              backgroundColor: '#3BB77E',
+              color: 'white',
+            }}
+          > Hủy hàng</Button>
         </Space >
     }
   ];
@@ -108,7 +111,7 @@ const Status_giaoHang = () => {
 
   const getInfoOrder = async () => {
     try {
-      const res = await handleAPI(`/nhanvien/getAllOrder `, '', 'get')
+      const res = await handleAPI('/shipper/get-undelivered-orders ', '', 'get')
       if (res.success) {
         setOrderInfo(res.data)
       }
@@ -118,13 +121,13 @@ const Status_giaoHang = () => {
   }
   const handleUpdateStatus = async (idDonHang, newStatus) => {
     try {
+      setIsLoading(true);
       const data = {
-        trangThai: newStatus,
-        idDonHang: idDonHang
+        trangThaiGiaoHang: newStatus,
+        idDonHang: idDonHang,
       }
       console.log(data)
-      setIsLoading(true);
-      const res = await handleAPI('/nhanvien/updateOrderStatus', data, 'put');
+      const res = await handleAPI('/shipper/update-delivery-status', data, 'put');
       if (res.success) {
         message.success(res.message);
         getInfoOrder();// Refresh data
@@ -137,6 +140,7 @@ const Status_giaoHang = () => {
       setIsLoading(false);
     }
   };
+
   return (
     <>
       <Table
