@@ -92,6 +92,10 @@ const ListAccountSupplier = () => {
             <div>
               <Title level={3}>Danh sách tài khoản</Title>
             </div>
+            <div className="flex gap-2">
+              <Button className=" font-medium" icon={<BsFilterSquare size={20} />}>Filters</Button>
+              <Button className=" font-medium" >Download all</Button>
+            </div>
           </div>
         )}
         loading={isLoading}

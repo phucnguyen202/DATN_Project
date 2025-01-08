@@ -32,7 +32,12 @@ const SiderDashboardNhanVien = () => {
     },
     {
       key: '3',
-      label: <Link className=" font-medium" to={'/dashboard-nhanvien'}>Nhập hàng</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/nhanvien/create-nhaphang'}>Nhập hàng</Link>,
+      icon: <FiPackage size={20} />,
+    },
+    {
+      key: '5',
+      label: <Link className=" font-medium" to={'/dashboard/nhanvien/history-nhaphang'}>Lịch sử nhập hàng</Link>,
       icon: <FiPackage size={20} />,
     },
     {

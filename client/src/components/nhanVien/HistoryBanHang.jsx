@@ -7,6 +7,7 @@ import { FiMoreHorizontal } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 import handleAPI from '../../apis/HandleAPI';
 import DetailOrder from '../DetailOrder';
+import { BsFilterSquare } from 'react-icons/bs';
 const { confirm } = Modal
 const HistoryBanHang = () => {
 
@@ -46,30 +47,20 @@ const HistoryBanHang = () => {
       title: 'Trạng thái',
       dataIndex: 'trangThai',
       key: 'trangThai',
-      render: (trangThai, record) => (
-        <Select
-          defaultValue={trangThai}
-          style={{ width: 160 }}
-          onChange={(value) => handleUpdateStatus(record.idDonHang, value)}
-          options={[
-            { value: 'Đã xác nhận', label: 'Đã xác nhận' },
-            { value: 'Đã từ chối', label: 'Đã từ chối' },
-          ]}
-        />
-      ),
+      render: (trangThai) => <Tag color={trangThai === 'Đã xác nhận' && 'cyan'}>{trangThai}</Tag>
     },
     {
       title: 'Thanh toán',
       dataIndex: 'thanhToan',
       key: 'thanhToan',
-      render: (thanhToan) => <Tag color={thanhToan === 'Chưa thanh toán' ? 'red' : 'green'}>{thanhToan}</Tag>
+      render: (thanhToan) => <Tag color={thanhToan === 'Đã thanh toán' && 'green'}>{thanhToan}</Tag>
     },
-    {
-      title: 'Trạng thái giao hàng',
-      dataIndex: 'trangThaiGiaoHang',
-      key: 'trangThaiGiaoHang',
-      render: (trangThaiGiaoHang) => <Tag color='volcano'>{trangThaiGiaoHang}</Tag>
-    },
+    // {
+    //   title: 'Trạng thái giao hàng',
+    //   dataIndex: 'trangThaiGiaoHang',
+    //   key: 'trangThaiGiaoHang',
+    //   render: (trangThaiGiaoHang) => <Tag color='volcano'>{trangThaiGiaoHang}</Tag>
+    // },
     {
       key: 'buttonContainer',
       align: 'right',
@@ -87,15 +78,6 @@ const HistoryBanHang = () => {
               className="text-slate-600" />}
           >
           </Button>
-          {/* <Button
-            onClick={() => confirm({
-              title: 'Hủy đơn hàng',
-              content: 'Bạn có muốn hủy đơn hàng không?',
-              onOk: () => handleCancelOrder(item.idDonHang),
-              onCancel() { },
-            })}
-            type="text"
-          >Hủy hàng</Button> */}
         </Space >
     }
   ];
@@ -114,43 +96,6 @@ const HistoryBanHang = () => {
       console.error(e)
     }
   }
-
-  const handleCancelOrder = async (id) => {
-    // const data = {
-    //   idDonHang: id
-    // }
-    // console.log(data)
-    // try {
-    //   const res = await handleAPI('/khachhang/cancelOrder', data, 'post')
-    //   if (res.success) {
-    //     message.success(res.message)
-    //     getInfoOrder()
-    //   }
-    // } catch (e) {
-    //   message.warning(e.message)
-    // }
-  }
-  const handleUpdateStatus = async (idDonHang, newStatus) => {
-    try {
-      const data = {
-        trangThai: newStatus,
-        idDonHang: idDonHang
-      }
-      console.log(data)
-      setIsLoading(true);
-      const res = await handleAPI('/nhanvien/updateOrderStatus', data, 'put');
-      if (res.success) {
-        message.success(res.message);
-        getInfoOrder();// Refresh data
-      } else {
-        message.error(res.message);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
   return (
     <>
       <Table
@@ -158,6 +103,10 @@ const HistoryBanHang = () => {
           <div className="flex justify-between">
             <div>
               <Title level={3}>Lịch sử bán hàng</Title>
+            </div>
+            <div className="flex gap-2">
+              <Button className=" font-medium" icon={<BsFilterSquare size={20} />}>Filters</Button>
+              <Button className=" font-medium" >Download all</Button>
             </div>
           </div>
         )}

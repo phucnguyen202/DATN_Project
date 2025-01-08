@@ -10,7 +10,7 @@ import { updateUser } from '../redux/reducers/authReducer';
 import { useDispatch } from 'react-redux';
 
 const Info = ({ user }) => {
-  // console.log('user:::', user)
+  console.log('user:::', user)
   const [isEditing, setIsEditing] = useState(false);
   const [form] = Form.useForm();
   const [imageUrl, setImageUrl] = useState(user?.hinhAnh);

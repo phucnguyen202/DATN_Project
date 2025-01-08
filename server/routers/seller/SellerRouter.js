@@ -8,6 +8,9 @@ router.post('/seller/createNhapHang', VerifyToken, SellerController.createNhapHa
 router.get('/seller/getAllNhapHang', SellerController.getAllNhapHang);
 router.get('/seller/getStatistical-day', SellerController.getStatistical_day);
 router.get('/seller/getStatistical-month', SellerController.getStatistical_month);
-
+router.get('/seller/getApprovedSuppliers', VerifyToken, SellerController.getApprovedSuppliers);
+router.get('/seller/get-confirmed-nhaphang', SellerController.getConfirmedNhapHang);
+router.get('/seller/getAlldanhmuc', SellerController.getAllDanhMuc);
+router.post('/seller/danhmuc', VerifyToken, SellerController.cretaeDanhmuc);
 
 module.exports = router

@@ -57,8 +57,8 @@ const CreateDanhMuc = () => {
   const getAllDanhMuc = async () => {
     setIsLoading(true);
     try {
-      const res = await handleAPI('/getAlldanhmuc', '', 'get')
-      res.data && setDataSource(res?.data?.result)
+      const res = await handleAPI('/seller/getAlldanhmuc', '', 'get')
+      res.data && setDataSource(res.data)
     } catch (e) {
       message.error(e.message)
     } finally {
@@ -69,11 +69,14 @@ const CreateDanhMuc = () => {
   const handleCreateDanhMuc = async (value) => {
     setIsLoading(true);
     try {
-      const res = await handleAPI('/admin/danhmuc', value, 'post')
-      message.success(res.message)
-      getAllDanhMuc();
+      const res = await handleAPI('/seller/danhmuc', value, 'post')
+      if (res.success) {
+        message.success(res.message)
+        form.resetFields();
+        getAllDanhMuc();
+      }
     } catch (e) {
-      message.error(e.message)
+      console.error(e.message)
     } finally {
       setIsLoading(false)
     }

@@ -7,6 +7,7 @@ import { FiMoreHorizontal } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 import handleAPI from '../../apis/HandleAPI';
 import DetailOrder from '../DetailOrder';
+import { BsFilterSquare } from 'react-icons/bs';
 const { confirm } = Modal
 const Order_Nhanvien = () => {
 
@@ -132,12 +133,11 @@ const Order_Nhanvien = () => {
   }
   const handleUpdateStatus = async (idDonHang, newStatus) => {
     try {
+      setIsLoading(true);
       const data = {
         trangThai: newStatus,
         idDonHang: idDonHang
       }
-      console.log(data)
-      setIsLoading(true);
       const res = await handleAPI('/nhanvien/updateOrderStatus', data, 'put');
       if (res.success) {
         message.success(res.message);
@@ -159,8 +159,13 @@ const Order_Nhanvien = () => {
             <div>
               <Title level={3}>Danh sách đơn hàng</Title>
             </div>
+            <div className="flex gap-2">
+              <Button className=" font-medium" icon={<BsFilterSquare size={20} />}>Filters</Button>
+              <Button className=" font-medium" >Download all</Button>
+            </div>
           </div>
         )}
+
         loading={isLoading}
         dataSource={orderInfo}
         columns={columns} />

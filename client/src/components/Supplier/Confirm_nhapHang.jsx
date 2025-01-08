@@ -1,28 +1,16 @@
 
-import React, { useEffect, useState } from 'react';
-import { Button, message, Modal, Select, Space, Table, Tag } from 'antd';
+import { Button, message, Modal, Space, Table, Tag } from 'antd';
 import Title from 'antd/es/typography/Title';
 import dayjs from 'dayjs';
-import { FiMoreHorizontal } from 'react-icons/fi';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import handleAPI from '../../apis/HandleAPI';
-import DetailOrder from '../DetailOrder';
 const { confirm } = Modal
 const Confirm_nhapHang = () => {
 
   const user = useSelector(state => state?.auth?.currentData?.user);
   const [isLoading, setIsLoading] = useState(false);
-  const [orderInfo, setOrderInfo] = useState([])
-  const [currentOrder, setCurrentOrder] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const formatCurrency = (amount) => {
-    return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  };
-
-  const data = [
-    { idNhapHang: 2, sanPhamId: 19, soLuong: 100, ngayTao: '2024-12-27 21:45:4', trangThai: 'Chờ xử lý', ghiChu: 'Sản phẩm phải chát lượng' },
-    { idNhapHang: 3, sanPhamId: 20, soLuong: 100, ngayTao: '2024-12-28 21:45:4', trangThai: 'Chờ xử lý', ghiChu: 'Sản phẩm phải chát lượng' }
-  ]
+  const [confirmData, setConfirmData] = useState([])
 
   const columns = [
     {
@@ -50,17 +38,7 @@ const Confirm_nhapHang = () => {
       title: 'Trạng thái',
       dataIndex: 'trangThai',
       key: 'trangThai',
-      render: (trangThai, record) => (
-        <Select
-          defaultValue={trangThai}
-          style={{ width: 160 }}
-          onChange={(value) => handleUpdateStatus(record.idDonHang, value)}
-          options={[
-            { value: 'Đã xác nhận', label: 'Đã xác nhận' },
-            { value: 'Đã từ chối', label: 'Đã từ chối' },
-          ]}
-        />
-      ),
+      render: (trangThai) => <Tag color={trangThai === 'Chờ xử lý' ? 'lime' : trangThai === 'Đã từ chối' ? 'red' : 'green'}>{trangThai}</Tag>
     },
     {
       title: 'Ghi chú',
@@ -75,79 +53,88 @@ const Confirm_nhapHang = () => {
       dataIndex: '',
       render: (item) =>
         <Space>
-          {/* <Button type="text"
-            onClick={() => {
-              setIsModalOpen(true)
-              setCurrentOrder(item?.idDonHang)
-            }}
-            icon={<FiMoreHorizontal size={20}
-              className="text-slate-600" />}
-          >
-          </Button> */}
+          <Button
+            onClick={() => confirm({
+              title: 'Xác nhận đơn hàng',
+              content: 'Bạn có muốn xác nhận đơn hàng không?',
+              onOk: () => confirm_NhapHang(item.idNhapHang),
+              onCancel() { },
+            })}
+            color="primary"
+            variant="filled">
+            Xác nhận
+          </Button>
           <Button
             onClick={() => confirm({
               title: 'Hủy đơn hàng',
               content: 'Bạn có muốn hủy đơn hàng không?',
-              onOk: () => handleCancelOrder(item.idDonHang),
+              onOk: () => handleCancelOrder(item.idNhapHang),
               onCancel() { },
             })}
             type="text"
-          >Hủy nhập hàng</Button>
+          >Hủy</Button>
         </Space >
     }
   ];
 
+
+
   useEffect(() => {
-    getInfoOrder();
+    getConfirmNhapHang();
   }, []);
 
-  const getInfoOrder = async () => {
+  const getConfirmNhapHang = async () => {
+    setIsLoading(true)
     try {
-      const res = await handleAPI(`/nhanvien/getAllOrder `, '', 'get')
+      const res = await handleAPI('/supplier/get-all-nhaphang-byid', '', 'get')
       if (res.success) {
-        setOrderInfo(res.data)
+        setConfirmData(res.data)
+      }
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const confirm_NhapHang = async (idNhapHang) => {
+    const data = {
+      trangThai: 'Đã duyệt',
+      idNhapHang: idNhapHang
+    }
+    try {
+      setIsLoading(true)
+      const res = await handleAPI('/supplier/update-status-nhaphang', data, 'put')
+      if (res.success) {
+        message.success(res.message)
+        getConfirmNhapHang()
+      } else {
+        message.error(res.message)
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+  const handleCancelOrder = async (idNhapHang) => {
+    const data = {
+      trangThai: 'Đã từ chối',
+      idNhapHang: idNhapHang
+    }
+    try {
+      setIsLoading(true)
+      const res = await handleAPI('/supplier/cancel-nhaphang', data, 'put')
+      if (res.success) {
+        message.success('Đã hủy yêu cầu nhập hàng thành công')
+        getConfirmNhapHang()
+      } else {
+        console.log("Lỗi")
       }
     } catch (e) {
       console.error(e)
     }
   }
 
-  const handleCancelOrder = async (id) => {
-    // const data = {
-    //   idDonHang: id
-    // }
-    // console.log(data)
-    // try {
-    //   const res = await handleAPI('/khachhang/cancelOrder', data, 'post')
-    //   if (res.success) {
-    //     message.success(res.message)
-    //     getInfoOrder()
-    //   }
-    // } catch (e) {
-    //   message.warning(e.message)
-    // }
-  }
-  const handleUpdateStatus = async (idDonHang, newStatus) => {
-    try {
-      const data = {
-        trangThai: newStatus,
-        idDonHang: idDonHang
-      }
-      console.log(data)
-      setIsLoading(true);
-      const res = await handleAPI('/nhanvien/updateOrderStatus', data, 'put');
-      if (res.success) {
-        message.success(res.message);
-        getInfoOrder();// Refresh data
-      } else {
-        message.error(res.message);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
   return (
     <>
       <Table
@@ -159,15 +146,8 @@ const Confirm_nhapHang = () => {
           </div>
         )}
         loading={isLoading}
-        dataSource={data}
+        dataSource={confirmData}
         columns={columns} />
-      <DetailOrder
-        currentOrder={currentOrder}
-        onClose={() => {
-          setIsModalOpen(false)
-        }}
-        isVisible={isModalOpen}
-      />
     </>
   )
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, Route, Routes, } from 'react-router-dom'
 import Account_NhaCungCap from './components/Admin/Account_NhaCungCap'
 import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
-import { Account, AccountUser, Confirm_nhapHang, CreateDanhMuc, CreateNhapHang, CreateProduct, History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, ListAccountSupplier, ListProducts, Order_KhachHang, Order_Nhanvien, Status_giaoHang, ThongKe } from './components'
+import { Account, AccountUser, Confirm_nhapHang, CreateDanhMuc, CreateNhapHang, CreateNhapHang_nhanVien, CreateProduct, History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, InfoSupplier, ListAccountSupplier, ListProducts, Order_KhachHang, Order_Nhanvien, Status_giaoHang, ThongKe } from './components'
 import Main from './layout/Main'
 import { AboutPage, CartPage, ContactPage, DetailPage, PaymentPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage, PageKhachHangDashboard, RegisterSupplierPage, PageWishlist, SupplierPage, PageSupplierDashboard, PageShipperDashboard } from './pages'
 import { addAuth } from './redux/reducers/authReducer'
@@ -48,6 +48,8 @@ function App() {
           <Route path="/dashboard/nhanvien/info-nhanvien" element={<InfoPersonal />} />
           <Route path="/dashboard/nhanvien/order" element={<Order_Nhanvien />} />
           <Route path="/dashboard/nhanvien/history" element={<HistoryBanHang />} />
+          <Route path="/dashboard/nhanvien/create-nhaphang" element={<CreateNhapHang_nhanVien />} />
+          <Route path="/dashboard/nhanvien/history-nhaphang" element={<History_NhapHang />} />
         </Route>
 
         <Route path="/" element={<PageSellerDashboard />}>
@@ -63,6 +65,7 @@ function App() {
         <Route path="/" element={<PageSupplierDashboard />}>
           <Route path="/dashboard/supplier/confirm-nhaphang" element={<Confirm_nhapHang />} />
           <Route path="/dashboard/supplier/history" element={<HistoryXuatHang />} />
+          <Route path="/dashboard/supplier/info" element={<InfoSupplier />} />
         </Route>
 
         <Route path="/" element={<PageShipperDashboard />}>

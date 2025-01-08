@@ -31,7 +31,7 @@ const SiderDashboardSupplier = () => {
     },
     {
       key: '5',
-      label: <Link className=" font-medium" to={'/'}>Thôn tin cá nhân</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/supplier/info'}>Thôn tin cá nhân</Link>,
       icon: <AiOutlineUser size={20} />,
     }
   ]

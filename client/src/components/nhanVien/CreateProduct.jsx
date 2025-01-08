@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { HiOutlinePlus } from "react-icons/hi";
 import handleAPI from '../../apis/HandleAPI';
 import uploadFile from '../../configs/Cloudinary';
+
 const CreateProduct = () => {
   const [form] = Form.useForm()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [dataCategory, setDataCategory] = useState([]);
   const [fileList1, setFileList1] = useState([]);
   const [fileList2, setFileList2] = useState([]);
@@ -171,7 +172,6 @@ const CreateProduct = () => {
               </Form.Item>
             </div>
           </div>
-
           <div className='flex gap-4'>
             <div className='w-1/2'>
               <Form.Item

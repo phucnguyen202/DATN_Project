@@ -4,8 +4,11 @@ import React from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { GoBell } from 'react-icons/go'
 
+import { useSelector } from 'react-redux';
 
 const HeaderDashboardNhanVien = () => {
+  const user = useSelector(state => state?.auth?.currentData?.user)
+
   return (
     <>
       <Header style={{
@@ -22,7 +25,7 @@ const HeaderDashboardNhanVien = () => {
           </div>
           <div className="col-span-2 flex items-center justify-end gap-4">
             <Button icon={<GoBell size={20} />} />
-            <Avatar />
+            <Avatar src={user?.hinhAnh} />
           </div>
         </div>
       </Header >

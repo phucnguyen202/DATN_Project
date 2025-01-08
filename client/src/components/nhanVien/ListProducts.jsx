@@ -68,7 +68,10 @@ const ListProducts = () => {
         </Space >
     }
   ];
-
+  useEffect(() => {
+    const { current, pageSize } = pagination
+    getProductsByPage(current, pageSize)
+  }, [])
   const handleDeleteProduct = async (id) => {
     setIsLoading(true);
     try {
@@ -96,10 +99,7 @@ const ListProducts = () => {
     });
     getProductsByPage(current, pageSize)
   }
-  useEffect(() => {
-    const { current, pageSize } = pagination
-    getProductsByPage(current, pageSize)
-  }, [])
+
 
   const getProductsByPage = async (page, limit) => {
     setIsLoading(true);
@@ -150,7 +150,7 @@ const ListProducts = () => {
           productSelected={productSelected}
           getProductsByPage={getProductsByPage}
           onClose={() => {
-            setProductSelected(undefined)
+            setProductSelected('')
             setIsVisibleModalEdit(false)
           }}
           isVisible={isVisibleModalEdit}

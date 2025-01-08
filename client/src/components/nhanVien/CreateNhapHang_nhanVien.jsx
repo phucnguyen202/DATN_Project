@@ -1,13 +1,13 @@
-import { Button, Form, InputNumber, message, Select, Table, Tag } from 'antd';
+import { Button, Form, InputNumber, message, Modal, Select, Table, Tag } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import handleAPI from '../../apis/HandleAPI';
-
-const CreateNhapHang = () => {
+import { BsFilterSquare } from 'react-icons/bs';
+import Title from 'antd/es/typography/Title';
+const { confirm } = Modal
+const CreateNhapHang_nhanVien = () => {
   const [form] = Form.useForm()
-  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const [dataSupplier, setDataSupplier] = useState([]);
@@ -55,38 +55,48 @@ const CreateNhapHang = () => {
       dataIndex: 'ghiChu',
       key: 'ghiChu',
     },
-    // {
-    //   key: 'buttonContainer',
-    //   align: 'right',
-    //   title: 'Actions',
-    //   width: 100,
-    //   dataIndex: '',
-    //   render: (item) =>
-    //     <Space>
-    //       <Button type="text"
-    //         // onClick={() => {
-    //         //   setIsModalOpen(true);
-    //         // }}
-    //         icon={<CiEdit size={20}
-    //           className="text-slate-600" />}></Button>
-    //       <Button
-    //         // onClick={() => confirm({
-    //         //   title: 'Xóa nhà cung cấp',
-    //         //   content: 'Bạn có muốn xóa nhà cung cấp không?',
-    //         //   // onOk: () => handleDeleteSupplier(item._id),
-    //         //   // onCancel() { },
-    //         // })}
-    //         type="text"
-    //         icon={<CiSquareRemove size={20}
-    //           className="text-slate-600" />}></Button>
-    //     </Space >
-    // }
+    {
+      key: 'buttonContainer',
+      align: 'right',
+      title: 'Actions',
+      width: 100,
+      dataIndex: '',
+      render: (item) =>
+        item.trangThai === 'Đã duyệt' ? (
+          <Button
+            onClick={() => confirm({
+              title: 'Xác nhận nhập hàng',
+              content: 'Bạn có muốn xác nhận nhập hàng không?',
+              onOk: () => confirm_nhaHang(item?.idNhapHang),
+              onCancel() { },
+            })}
+            style={{
+              marginTop: '20px',
+              backgroundColor: '#3BB77E',
+              color: 'white',
+            }}>
+            Xác nhận
+          </Button>
+        ) : null // Không hiển thị nút nếu trạng thái không phải "Đã duyệt"
+    }
   ];
 
   useEffect(() => {
     getAllNhapHang();
     getApprovedSuppliers();
   }, []);
+
+  const confirm_nhaHang = async (id) => {
+    try {
+      const res = await handleAPI(`/nhanvien/confirm-nhaphang?idnhaphang=${id}`, '', 'post');
+      if (res.success) {
+        message.success(res.message);
+        getAllNhapHang();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   const getApprovedSuppliers = async () => {
     try {
@@ -112,7 +122,6 @@ const CreateNhapHang = () => {
   }
 
   const handleCreateNhapHang = async (value) => {
-    console.log(value)
     setIsLoading(true);
     try {
       const res = await handleAPI('/seller/createNhapHang', value, 'post')
@@ -127,7 +136,6 @@ const CreateNhapHang = () => {
       setIsLoading(false)
     }
   }
-  console.log(dataSource)
   return (
     <>
       <div >
@@ -216,8 +224,8 @@ const CreateNhapHang = () => {
             title={() => (
               <div className="flex justify-between">
                 {/* <div>
-                <Title level={3}>Lịch sử nhập hàng</Title>
-              </div> */}
+                  <Title level={3}>Lịch sử nhập hàng</Title>
+                </div> */}
                 <div className="flex gap-2">
                   <Button className=" font-medium" icon={<BsFilterSquare size={20} />}>Filters</Button>
                   <Button className=" font-medium" >Download all</Button>
@@ -233,4 +241,4 @@ const CreateNhapHang = () => {
   )
 }
 
-export default CreateNhapHang
+export default CreateNhapHang_nhanVien

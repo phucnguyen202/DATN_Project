@@ -10,7 +10,7 @@ router.get('/nhanvien/getallproducts', NhanVienController.getAllProducts);
 router.get('/nhanvien/getproductbyid', NhanVienController.getProductById);
 router.get('/nhanvien/getAllOrder', NhanVienController.getAllOrder);
 router.put('/nhanvien/updateOrderStatus', NhanVienController.updateOrderStatus);
-
+router.post('/nhanvien/confirm-nhaphang', NhanVienController.confirmNhapHang);
 
 
 

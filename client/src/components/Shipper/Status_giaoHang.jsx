@@ -116,22 +116,6 @@ const Status_giaoHang = () => {
       console.error(e)
     }
   }
-
-  const handleCancelOrder = async (id) => {
-    // const data = {
-    //   idDonHang: id
-    // }
-    // console.log(data)
-    // try {
-    //   const res = await handleAPI('/khachhang/cancelOrder', data, 'post')
-    //   if (res.success) {
-    //     message.success(res.message)
-    //     getInfoOrder()
-    //   }
-    // } catch (e) {
-    //   message.warning(e.message)
-    // }
-  }
   const handleUpdateStatus = async (idDonHang, newStatus) => {
     try {
       const data = {

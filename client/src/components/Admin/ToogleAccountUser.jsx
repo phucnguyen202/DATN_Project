@@ -9,7 +9,6 @@ const ToogleAccountUser = ({ isModalOpen, handleOk, handleCancel }) => {
       <Modal title="Cập nhật tài khoản"
         open={isModalOpen}
         onOk={handleOk} onCancel={handleCancel}>
-
         <Form
           layout='horizontal' form={form}
           size='large'

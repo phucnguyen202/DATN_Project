@@ -109,16 +109,6 @@ const ThongKe = () => {
       <div>
         <h2 className="text-2xl font-bold text-customText mb-4">Thống kê doanh thu cửa hàng</h2>
         <Row gutter={24}>
-          <Col span={24} style={{ marginBottom: "24px" }}>
-            <Card title="Chi tiết doanh thu theo ngày">
-              <Table
-                dataSource={dailyRevenueData}
-                columns={columns}
-                loading={loading}
-                pagination={{ pageSize: 5 }}
-              />
-            </Card>
-          </Col>
           <Col span={24}>
             <Card title="Biểu đồ doanh thu theo tháng" >
               <ResponsiveContainer width="100%" height={300}>
@@ -133,7 +123,16 @@ const ThongKe = () => {
               </ResponsiveContainer>
             </Card>
           </Col>
-
+          <Col span={24} style={{ marginBottom: "24px" }}>
+            <Card title="Chi tiết doanh thu theo ngày">
+              <Table
+                dataSource={dailyRevenueData}
+                columns={columns}
+                loading={loading}
+                pagination={{ pageSize: 5 }}
+              />
+            </Card>
+          </Col>
         </Row>
       </div>
 

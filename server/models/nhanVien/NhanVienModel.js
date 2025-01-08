@@ -45,6 +45,7 @@ const updateProductById = (product, productId, callback) => {
   const sql = 'UPDATE tb_sanpham SET tenSanPham =?, gia =?, moTa =?, dongGoiGiaoHang =?, deXuat =?, canhBao =?, danhMucId =?, tonKho =? WHERE idSanPham =?';
   db.query(sql, [tenSanPham, gia, moTa, dongGoiGiaoHang, deXuat, canhBao, danhMucId, tonKho, productId], callback);
 }
+
 // update ảnh sản phẩm
 const updateImageById = (productId, imageSrc, callback) => {
   const sql = 'UPDATE tb_hinhsanpham SET hinhAnh =? WHERE sanPhamId =?';
@@ -57,9 +58,54 @@ const deleteImagesbyId = (productId, callback) => {
   db.query(deleteImagesSql, [productId], callback);
 }
 //  xóa sản phẩm bằng id
+// đang bị lỗi nên vì sản phẩm bên trong chi tiết sản phảm nữa
 const deleteProductById = (productId, callback) => {
-  const deleteProductSql = 'DELETE FROM tb_sanpham WHERE idSanPham = ?'
-  db.query(deleteProductSql, [productId], callback);
+  // const deleteProductSql = 'DELETE FROM tb_sanpham WHERE idSanPham = ?'
+  // db.query(deleteProductSql, [productId], callback);
+  const deleteDetailsSql = `
+    DELETE FROM tb_chitietdonhang
+    WHERE sanPhamId = ?;
+  `;
+  const deleteFavoritesSql = `
+    DELETE FROM tb_danhsach_yeuthich
+    WHERE sanPhamId = ?;
+  `;
+  const deleteProductSql = `
+    DELETE FROM tb_sanpham
+    WHERE idSanPham = ?;
+  `;
+
+  // Thực hiện xóa trong giao dịch
+  db.beginTransaction((err) => {
+    if (err) {
+      return callback(err); // Lỗi khi bắt đầu giao dịch
+    }
+    // Bước 1: Xóa chi tiết đơn hàng
+    db.query(deleteDetailsSql, [productId], (err) => {
+      if (err) {
+        return db.rollback(() => callback(err)); // Hủy giao dịch nếu lỗi
+      }
+      // Bước 2: Xóa sản phẩm khỏi danh sách yêu thích
+      db.query(deleteFavoritesSql, [productId], (err) => {
+        if (err) {
+          return db.rollback(() => callback(err)); // Hủy giao dịch nếu lỗi
+        }
+        // Bước 3: Xóa sản phẩm khỏi bảng tb_sanpham
+        db.query(deleteProductSql, [productId], (err) => {
+          if (err) {
+            return db.rollback(() => callback(err)); // Hủy giao dịch nếu lỗi
+          }
+          // Hoàn tất giao dịch
+          db.commit((err) => {
+            if (err) {
+              return db.rollback(() => callback(err)); // Hủy giao dịch nếu commit lỗi
+            }
+            callback(null, { message: 'Xóa sản phẩm và các dữ liệu liên quan thành công!' });
+          });
+        });
+      });
+    });
+  });
 }
 
 //lấy tất cả sản phẩm
@@ -112,7 +158,43 @@ const updateOrderStatus = (trangThai, idDonHang, callback) => {
   db.query(sql, [trangThai, idDonHang], callback);
 }
 
+// xác nhận nhập hàng
+const confirm_nhapHang = (idNhapHang, callback) => {
+  const sql = `
+    UPDATE tb_nhapHang
+    SET xacNhan = 'Đã xác nhận'
+    WHERE idNhapHang = ?
+  `;
+  db.query(sql, [idNhapHang], (err, result) => {
+    if (err) {
+      return callback(err);
+    }
+    const sqlGetSanPham = `
+      SELECT sanPhamId, soLuong
+      FROM tb_nhaphang
+      WHERE idNhapHang = ? `
+    db.query(sqlGetSanPham, [idNhapHang], (err, sanPham) => {
+      if (err) {
+        return callback(err);
+      }
+      if (sanPham.length > 0) {
+        const { sanPhamId, soLuong } = sanPham[0];
+        // Cập nhật tồn kho trong bảng tb_sanPham
+        const sqlUpdateTonKho = `
+          UPDATE tb_sanpham
+          SET tonKho = CAST(tonKho AS SIGNED) + ?
+          WHERE idSanPham = ?
+        `;
+        db.query(sqlUpdateTonKho, [soLuong, sanPhamId], callback);
+      } else {
+        return callback(new Error('Không tìm thấy sản phẩm tương ứng với idNhapHang!'));
+      }
+    });
+  })
+  // Nếu trạng thái được cập nhật thành công, tiếp tục xử lý tồn kho
+
+}
 module.exports = {
   updateProductById, updateImageById, getAllProducts, getProductById, getAllOrderPayment, updateOrderStatus,
-  addProduct, addImage, getProductsByPage, getTotalProducts, deleteProductById, deleteImagesbyId
+  addProduct, addImage, getProductsByPage, getTotalProducts, deleteProductById, deleteImagesbyId, confirm_nhapHang
 }

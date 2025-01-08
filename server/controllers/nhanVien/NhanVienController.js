@@ -51,7 +51,7 @@ class NhanVienController {
 
   async getProducts(req, res) {
     try {
-      const page = parseInt(req.query.page) || 1; // trang hiện tại
+      const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || 10;
       const offset = (page - 1) * limit;
       ProductModel.getTotalProducts((err, result) => {
@@ -170,6 +170,7 @@ class NhanVienController {
           });
         }
         ProductModel.deleteProductById(id, (err, result) => {
+          console.log(err)
           if (err) {
             return res.status(500).json({
               success: false,
@@ -313,6 +314,40 @@ class NhanVienController {
         success: false,
         code: 'UPDATE_ORDER_STATUS_ERROR',
         message: 'Lỗi khi cập nhật trạng thái đơn hàng',
+      });
+    }
+  }
+  // Nhân viên xác nhận nhập hàng từ nhà cung cấp
+  async confirmNhapHang(req, res) {
+    try {
+      const { idnhaphang } = req.query
+      console.log('idnhaphang:::', idnhaphang)
+      ProductModel.confirm_nhapHang(idnhaphang, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'UPDATE_NHAP_HANG_ERROR',
+            message: 'Lỗi khi xác nhận nhập hàng từ nhà cung cấp',
+          });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy nhập hàng này'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          code: 'UPDATE_NHAP_HANG_SUCCESS',
+          message: 'Xác nhận nhập hàng từ nhà cung cấp thành công',
+        })
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'UPDATE_NHAP_HANG_ERROR',
+        message: 'Lỗi khi xác nhận nhập hàng từ nhà cung cấp',
       });
     }
   }
