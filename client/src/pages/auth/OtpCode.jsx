@@ -24,7 +24,7 @@ const OtpCode = () => {
         navigate('/')
       }
     } catch (e) {
-      console.error(e)
+      message.error("Mã OTP không đúng")
     }
 
   }

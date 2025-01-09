@@ -33,7 +33,7 @@ class PaymentController {
       amount: amount,
       description: `Thanh toán đơn hàng #${transID}`,
       bank_code: "",
-      callback_url: "https://c3b9-14-245-69-138.ngrok-free.app/v1/api/callback"
+      callback_url: "https://e12f-14-245-69-138.ngrok-free.app/v1/api/callback"
     };
 
     // appid|app_trans_id|appuser|amount|apptime|embeddata|item
@@ -42,18 +42,9 @@ class PaymentController {
 
     try {
       const result = await axios.post(config.endpoint, null, { params: order })
-      // if (result.data.return_code === 1) {
-      //   KhachHangModel.updateOrderStatusPayment(idNguoiDung, idDonHang, (err, result) => {
-      //     if (err) {
-      //       console.error("Cập nhật trạng thái đơn hàng thất bại");
-      //     }
-      //     return res.status(200).json({
-      //       success: true,
-      //       message: 'Thanh toán đơn hàng thành công',
-      //       data: result.data
-      //     })
-      //   });
-      // }
+      if (result.data.return_code === 1) {
+        await KhachHangModel.updateOrderStatusPayment(idNguoiDung, idDonHang);
+      }
       return res.status(200).json(result.data);
     } catch (err) {
       console.log(err);
@@ -90,17 +81,6 @@ class PaymentController {
         const danhSachIdDonHang = embedData.danhSachIdDonHang; // Danh sách ID đơn hàng
         console.log('danhSachIdDonHang:::', danhSachIdDonHang)
         console.log('idNguoiDung:::', idNguoiDung)
-
-        // Cập nhật trạng thái thanh toán cho các đơn hàng
-        // try {
-        //   await KhachHangModel.updateOrderStatusPayment(idNguoiDung, danhSachIdDonHang); // Truyền cả hai vào model
-        //   result.return_code = 1;
-        //   result.return_message = "success";
-        // } catch (err) {
-        //   console.error("Error updating order status:", err);
-        //   result.return_code = 0;
-        //   result.return_message = "Failed to update order status";
-        // }
         result.return_code = 1; // Thành công
         result.return_message = "success";
       }

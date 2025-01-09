@@ -7,22 +7,14 @@ import { AiOutlineUpload } from 'react-icons/ai';
 import uploadFile from '../configs/Cloudinary';
 import handleAPI from '../apis/HandleAPI';
 import { updateUser } from '../redux/reducers/authReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Info = ({ user }) => {
-  console.log('user:::', user)
   const [isEditing, setIsEditing] = useState(false);
+  // const user = useSelector(state => state?.auth?.currentData?.user)
   const [form] = Form.useForm();
   const [imageUrl, setImageUrl] = useState(user?.hinhAnh);
   const dispatch = useDispatch()
-  // useEffect(() => {
-  //   if (user) {
-  //     form.setFieldsValue({
-  //       ten: user.ten,
-  //       soDT: user.soDT,
-  //     });
-  //   }
-  // }, [user, form])
 
   const handleSubmit = async (values) => {
     try {

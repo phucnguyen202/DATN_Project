@@ -13,7 +13,7 @@ class AuthController {
         if (err) {
           return res.status(500).json({ message: 'Lỗi hệ thống' });
         }
-        if (result.length > 0) {
+        if (result) {
           return res.status(400).json({ message: 'Email đã tồn tại' });
         }
         // Tạo OTP
@@ -75,7 +75,6 @@ class AuthController {
     try {
       const email = req.user.email;
       const { otpCode } = req.body;
-      console.log('otpCode:::', otpCode);
       User.getOTP(email, (err, result) => {
         if (err) {
           return res.status(500).json({
@@ -84,7 +83,6 @@ class AuthController {
             message: 'Lỗi khi lấy mã OTP'
           })
         }
-        // console.log('result:::', result[0].otpCode.toString());
         if (result[0].otpCode.toString() === otpCode) {
           return res.status(200).json({
             success: true,
@@ -173,10 +171,11 @@ class AuthController {
         if (err) {
           return res.status(500).json({ message: 'Lỗi hệ thống' });
         }
-        if (result.length === 0) {
+        if (result === undefined) {
           return res.status(404).json({ message: 'Không tìm thấy người dùng' });
         }
-        const isMatch = await bcrypt.compare(password, result[0].matKhau);
+        console.log(result.matKhau)
+        const isMatch = await bcrypt.compare(password, result.matKhau);
         if (!isMatch) {
           return res.status(401).json({ message: 'Đăng nhập thất bại' });
         }

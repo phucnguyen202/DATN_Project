@@ -57,7 +57,7 @@ const CardComponent = ({ item }) => {
             hoverable
           >
             <img
-              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
+              className='group-hover:hidden w-[235px] h-[235px] transform transition-transform duration-1000 ease-in-out hover:scale-110'
               src={item.hinhAnh[0]}
               alt=""
             />
@@ -66,7 +66,8 @@ const CardComponent = ({ item }) => {
               src={item.hinhAnh[1]}
               alt=""
             />
-            <Text type="secondary">{item.tenDanhMuc}</Text>
+
+            <Text className='mt-4' type="secondary">{item.tenDanhMuc}</Text>
             <Card.Meta
               className="custom-card-meta py-2"
               title={item.tenSanPham} />

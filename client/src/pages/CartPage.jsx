@@ -83,25 +83,30 @@ const CartPage = () => {
       console.log(err)
     }
   }
+  console.log(diaChi)
   const handleAPIChange = async () => {
     try {
-      if (cartCount > 0) {
-        const dataThanhToan = {
-          nguoiDungId: user.idNguoiDung,
-          diaChi: diaChi,
-          tongTien: dataSource.reduce((total, item) => total + item.soLuong * item.gia, 0)
-        }
-        const res = await handleAPI('/khachhang/createOrder', dataThanhToan, 'post');
-        console.log('res:::', res);
-        if (res.success) {
-          navigate('/payment');
-          await handleAPI(`/khachhang/deleteCart?userId=${user.idNguoiDung}`, '', 'delete');
-          dispatch(updateCartCount(0));
-          setDataSource([]);
-          setDiaChi('');
-        }
+      if (diaChi === '') {
+        message.warning('Vui lòng nhập địa chỉ giao hàng');
       } else {
-        message.warning('Giỏ hàng trống, vui lòng chọn sản phẩm');
+        if (cartCount > 0) {
+          const dataThanhToan = {
+            nguoiDungId: user.idNguoiDung,
+            diaChi: diaChi,
+            tongTien: dataSource.reduce((total, item) => total + item.soLuong * item.gia, 0)
+          }
+          const res = await handleAPI('/khachhang/createOrder', dataThanhToan, 'post');
+          console.log('res:::', res);
+          if (res.success) {
+            navigate('/payment');
+            await handleAPI(`/khachhang/deleteCart?userId=${user.idNguoiDung}`, '', 'delete');
+            dispatch(updateCartCount(0));
+            setDataSource([]);
+            setDiaChi('');
+          }
+        } else {
+          message.warning('Giỏ hàng trống, vui lòng chọn sản phẩm');
+        }
       }
     } catch (err) {
       console.log(err);

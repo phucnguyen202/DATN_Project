@@ -32,6 +32,7 @@ const PopularProducts = () => {
     };
     getAllCategory();
   }, []);
+
   useEffect(() => {
     const getToCategory = () => {
       if (dataSource?.length) {

@@ -3,7 +3,7 @@ import Sider from 'antd/es/layout/Sider'
 import React from 'react'
 import { AiOutlineUser } from 'react-icons/ai'
 import { BiStore } from 'react-icons/bi'
-import { MdUpdate } from 'react-icons/md'
+import { MdOutlineLogout, MdUpdate } from 'react-icons/md'
 import { RiBuildingLine } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
 const { Text } = Typography
@@ -45,6 +45,17 @@ const SiderDashboardCustomer = () => {
           theme="light"
           items={items}
         />
+        <div className="absolute bottom-0 w-full">
+          <Menu theme="light" mode="inline">
+            <Menu.Item
+              key="logout"
+              icon={<MdOutlineLogout size={20} />}
+              className="font-medium"
+            >
+              <Link className=" font-medium" to={'/'}>Trang chủ</Link>
+            </Menu.Item>
+          </Menu>
+        </div>
       </Sider >
     </>
   )
