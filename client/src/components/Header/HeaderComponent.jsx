@@ -16,6 +16,7 @@ const HeaderComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(state => state?.auth?.currentData?.user);
+  console.log(user)
   const wishListCount = useSelector(state => state?.product?.wishListCount);
   const [current, setCurrent] = useState(0);
   const [open, setOpen] = useState(false);

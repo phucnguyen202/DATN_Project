@@ -72,6 +72,37 @@ const ListProducts = () => {
     const { current, pageSize } = pagination
     getProductsByPage(current, pageSize)
   }, [])
+
+  const handleTableChange = (pagination) => {
+    const { current, pageSize } = pagination
+    setPagination({
+      current,
+      pageSize,
+      total: pagination.total,
+    });
+    getProductsByPage(current, pageSize)
+  }
+
+  const getProductsByPage = async (page, limit) => {
+    setIsLoading(true);
+    try {
+      const res = await handleAPI(`/nhanvien/getproduct?page=${page}&limit=${limit}`, '', 'get')
+      console.log('resres:::', res)
+      if (res && res.success) {
+        setDataSource(res.data.products);
+        setPagination({
+          ...pagination,
+          current: res.data.page,
+          total: res.data.totalProducts
+        });
+      }
+    } catch (e) {
+      message.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   const handleDeleteProduct = async (id) => {
     setIsLoading(true);
     try {
@@ -86,36 +117,6 @@ const ListProducts = () => {
       message.error(e.message);
     }
     finally {
-      setIsLoading(false);
-    }
-  }
-
-  const handleTableChange = (pagination) => {
-    const { current, pageSize } = pagination
-    setPagination({
-      current,
-      pageSize,
-      total: pagination.total,
-    });
-    getProductsByPage(current, pageSize)
-  }
-
-
-  const getProductsByPage = async (page, limit) => {
-    setIsLoading(true);
-    try {
-      const res = await handleAPI(`/nhanvien/getproduct?page=${page}&limit=${limit}`, '', 'get')
-      if (res && res.success) {
-        setDataSource(res.data.products);
-        setPagination({
-          ...pagination,
-          current: res.data.page,
-          total: res.data.totalProducts
-        });
-      }
-    } catch (e) {
-      message.error(e);
-    } finally {
       setIsLoading(false);
     }
   }
@@ -150,7 +151,7 @@ const ListProducts = () => {
           productSelected={productSelected}
           getProductsByPage={getProductsByPage}
           onClose={() => {
-            setProductSelected('')
+            setProductSelected(null)
             setIsVisibleModalEdit(false)
           }}
           isVisible={isVisibleModalEdit}

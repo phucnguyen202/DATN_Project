@@ -3,11 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { sendVerificationEmail } = require('../commonService/Common.service');
 // const JWT_SECRET = 'your_jwt_secret';
-
-// Hàm tạo OTP ngẫu nhiên 4 chữ số
-
 class AuthController {
-
   // đăng ký tài khoản
   async register(req, res) {
     try {
@@ -39,7 +35,7 @@ class AuthController {
           if (err) {
             return res.status(500).json({ message: 'Lỗi khi tạo người dùng' });
           }
-          User.findUserForJWT(email, async (err, user) => {
+          User.findUserForJWT(email, (err, user) => {
             if (err) {
               return res.status(500).json({ message: 'Lỗi khi tạo JWT token' });
             }
@@ -108,75 +104,58 @@ class AuthController {
   async loginWithGoogle(req, res) {
     try {
       const { email, name, googlePhotoUrl } = req.body
-      User.findUserByEmail(email, async (err, result) => {
-        if (err) {
-          return res.status(500).json({ message: 'Lỗi hệ thống' });
-        }
-        if (result.length > 0) {
-          User.findUserForJWT(email, async (err, user) => {
-            if (err) {
-              return res.status(500).json({ message: 'Lỗi khi tạo JWT token' });
-            }
-            // Kiểm tra xem user có tồn tại không
-            if (!user) {
-              return res.status(404).json({ message: 'Không tìm thấy người dùng' });
-            }
-            // Tạo JWT token
-            const token = jwt.sign(
-              {
-                id: user.id,
-                email: user.email,
-                quyen: user.quyen
-              }, process.env.JWT_SECRET);
-            return res.status(201).json({
-              message: 'Đăng nhập thành công',
-              data: {
-                user,
-                token
-              }
-            });
-          })
-        }
+      User.findUserByEmail(email, async (err, user) => {
+        if (user) {
+          // Tạo JWT token
+          const token = jwt.sign(
+            {
+              idNguoiDung: user.idNguoiDung,
+              email: user.email,
+              quyen: user.quyen
+            }, process.env.JWT_SECRET);
 
-        const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
-        // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(generatedPassword, salt);
-        // Tạo người dùng mới
-        const newUser = {
-          ten: name,
-          email: email,
-          matkhau: hashedPassword,
-          hinhAnh: googlePhotoUrl
-        };
-        User.createUser(newUser, (err, result) => {
-          if (err) {
-            return res.status(500).json({ message: 'Lỗi khi tạo người dùng' });
-          }
-          User.findUserForJWT(email, async (err, user) => {
-            if (err) {
-              return res.status(500).json({ message: 'Lỗi khi tạo JWT token' });
+          return res.status(201).json({
+            message: 'Đăng nhập thành công',
+            data: {
+              user,
+              token
             }
-            // Kiểm tra xem user có tồn tại không
-            if (!user) {
-              return res.status(404).json({ message: 'Không tìm thấy người dùng' });
+          });
+        }
+        if (user == undefined) {
+          const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+          // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+          const salt = await bcrypt.genSalt(10);
+          const hashedPassword = await bcrypt.hash(generatedPassword, salt);
+          // Tạo người dùng mới
+          const newUser = {
+            ten: name,
+            email: email,
+            matkhau: hashedPassword,
+            hinhAnh: googlePhotoUrl
+          };
+          User.createUser(newUser, (err, result) => {
+            if (result.affectedRows > 0) {
+              User.findUserForJWT(email, (err, data) => {
+                //Tạo JWT token
+                const token = jwt.sign(
+                  {
+                    idNguoiDung: data.idNguoiDung,
+                    email: data.email,
+                    quyen: data.quyen
+                  }, process.env.JWT_SECRET
+                );
+                return res.status(201).json({
+                  message: 'Đăng nhập thành công',
+                  data: {
+                    user: data,
+                    token
+                  }
+                });
+              })
             }
-            // Tạo JWT token
-            const token = jwt.sign(
-              {
-                idNguoiDung: user.idNguoiDung,
-                email: user.email,
-                quyen: user.quyen
-              }, process.env.JWT_SECRET);
-            return res.status(201).json({
-              message: 'Đăng nhập thành công',
-              data: {
-                user,
-                token
-              }
-            });
           })
-        })
+        }
       })
     } catch (error) {
       return res.status(500).json({

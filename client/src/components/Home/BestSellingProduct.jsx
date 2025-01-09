@@ -10,9 +10,9 @@ import { IoCartOutline, IoEyeOutline } from "react-icons/io5";
 const { Title, Text } = Typography;
 const operations = <Title level={2} style={{ margin: '0px', color: '#253D4E' }} className='max-md:hidden'>Sản Phẩm Bán Chạy</Title>
 const items = [
-  { key: '1', label: 'Nổi bật', },
-  { key: '2', label: 'Phổ biến' },
-  { key: '3', label: 'Mới thêm' },
+  { key: '1', label: <p className='text-base'>Nổi bật</p> },
+  { key: '2', label: <p className='text-base'>Phổ biến</p> },
+  { key: '3', label: <p className='text-base'>Mới thêm</p> },
 ];
 
 const BestSellingProduct = () => {

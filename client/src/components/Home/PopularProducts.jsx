@@ -32,15 +32,13 @@ const PopularProducts = () => {
     };
     getAllCategory();
   }, []);
-
-
   useEffect(() => {
     const getToCategory = () => {
       if (dataSource?.length) {
         const items = dataSource.map((item, index) => (
           {
             key: `${item.idDanhMuc}`,
-            label: `${item.tenDanhMuc}`
+            label: <p className='text-base'>{item.tenDanhMuc}</p>
           }
         ))
         setCategory(items);

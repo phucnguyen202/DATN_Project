@@ -43,7 +43,7 @@ const createNhapHang = (sanPhamId, soLuong, ghiChu, nhaCungCapId, callback) => {
   db.query(sql, [sanPhamId, soLuong, ghiChu, nhaCungCapId], callback);
 };
 
-// lây danh sách nhập hàng
+// lấy danh sách nhập hàng
 const getAllNhapHang = (callback) => {
   const sql = `
   SELECT 
