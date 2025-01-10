@@ -541,6 +541,52 @@ class KhachHangController {
       });
     }
   }
+
+  // tìm kiếm sản phẩm theo tên
+  async searchProducts(req, res) {
+    const { query } = req.query;
+    if (!query) {
+      return res.status(400).json({
+        success: false,
+        code: 'INVALID_QUERY',
+        message: 'Yêu cầu tìm kiếm không hợp lệ'
+      });
+    }
+    KhachHangModel.searchProducts(query, (err, result) => {
+      console.log(err)
+      if (err) {
+        return res.status(500).json({
+          success: false,
+          code: 'SEARCH_PRODUCTS_ERROR',
+          message: 'Lỗi khi tìm kiếm sản phẩm'
+        });
+      }
+      if (result.length === 0) {
+        return res.status(404).json({
+          success: false,
+          code: 'NOT_FOUND',
+          message: 'Không tìm thấy sản phẩm nào với tên tương ứng'
+        });
+      }
+      KhachHangModel.searchByCategory(query, (err, relatedResults) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'SEARCH_PRODUCTS_ERROR',
+            message: 'Lỗi khi tìm kiếm sản phẩm theo danh mục'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Tìm kiếm sản phẩm thành công',
+          data: {
+            searchResults: result,
+            relatedResults: relatedResults
+          }
+        })
+      })
+    })
+  }
 }
 
 module.exports = new KhachHangController();

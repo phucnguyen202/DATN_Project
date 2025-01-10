@@ -238,7 +238,8 @@ const getRelatedProducts = (idSanPham, callback) => {
         sp.*,
         dm.tenDanhMuc,
         GROUP_CONCAT(hsp.hinhAnh) AS hinhAnh
-      FROM tb_sanpham sp
+      FROM 
+      tb_sanpham sp
       LEFT JOIN 
         tb_hinhsanpham hsp ON sp.idSanPham = hsp.sanPhamId
       LEFT JOIN 
@@ -252,8 +253,46 @@ const getRelatedProducts = (idSanPham, callback) => {
   db.query(sql, [idSanPham, idSanPham], callback);
 }
 
+//Tìm kiếm theo tên sản phẩm
+const searchProducts = (query, callback) => {
+  // Tìm kiếm sản phẩm theo tên
+  const sql = `
+  SELECT 
+      sp.*, 
+      dm.tenDanhMuc, 
+      GROUP_CONCAT(hsp.hinhAnh) AS hinhAnh
+  FROM 
+      tb_sanpham sp
+    LEFT JOIN 
+      tb_hinhsanpham hsp ON sp.idSanPham = hsp.sanPhamId
+    LEFT JOIN 
+      tb_danhMuc dm ON sp.danhMucId = dm.idDanhMuc
+    WHERE 
+      sp.tenSanPham LIKE ? OR sp.tenSanPham = ?
+    GROUP BY 
+      sp.idSanPham
+     `;
+  db.query(sql, [`%${query}%`, query], (err, results) => {
+    if (err) return callback(err, null);
+    callback(null, results);
+  });
+}
+
+//Tìm kiếm các sản phẩm cùng danh mục
+const searchByCategory = (query, callback) => {
+  const sql = `
+  SELECT * 
+  FROM tb_sanpham 
+  WHERE 
+  danhMucId IN (SELECT danhMucId FROM tb_sanpham WHERE tenSanPham LIKE ?) LIMIT 10`;
+  db.query(sql, [`%${query}%`], (err, results) => {
+    if (err) return callback(err, null);
+    callback(null, results);
+  });
+};
+
 module.exports = {
-  findByProductForGioHang, addToCart, getRelatedProducts, getCartById, updateQuantity, cancelOrder,
+  findByProductForGioHang, addToCart, getRelatedProducts, getCartById, updateQuantity, cancelOrder, searchProducts, searchByCategory,
   updateAddressOrder, getOrderByIdAndpayment, deleteFromCart, registerSupplier,
   createOrder, addOrderDetails, deleteCart, getOrderDetails, removeFromFavorites, getAllOrderById,
   findByProductForWishList, addToWishList, updateQuantityWishList, getWishListById, updateOrderStatusPayment

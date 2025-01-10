@@ -10,13 +10,13 @@ import CartComponent from '../CartComponent';
 import DrawerMobile from './components/DrawerMobile';
 import HeaderTop from './components/HeaderTop';
 import { remoAuth } from '../../redux/reducers/authReducer';
+import SearchComponent from '../SearchComponent';
 
 
 const HeaderComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(state => state?.auth?.currentData?.user);
-  console.log(user)
   const wishListCount = useSelector(state => state?.product?.wishListCount);
   const [current, setCurrent] = useState(0);
   const [open, setOpen] = useState(false);
@@ -236,13 +236,7 @@ const HeaderComponent = () => {
                 </a>
               </Dropdown>
               <span className='w-[1px] h-6 bg-slate-300'></span>
-              <Input
-                style={{ border: 'none', }}
-                variant="borderless"
-                className='py-3 text-customText placeholder-[#a74040]'
-                placeholder="Tìm kiếm sản phẩm..."
-                suffix={<BiSearch className="text-slate-500" size={25} />}
-              />
+              <SearchComponent />
             </div>
             <div className='col-span-3 hidden max-md:flex xl:flex gap-6 justify-end'>
               <Link to={'/wishlist'} className='flex gap-2 items-center cursor-pointer'>

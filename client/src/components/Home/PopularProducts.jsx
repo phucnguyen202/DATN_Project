@@ -9,7 +9,6 @@ const { Title, Text } = Typography;
 const operations = <Title level={2} style={{ margin: '0px', color: '#253D4E' }} className='max-md:hidden'>Sản Phẩm Phổ Biến</Title>
 
 const PopularProducts = () => {
-
   const [activeTab, setActiveTab] = useState('1');
   const [dataSource, setDataSource] = useState([]);
   const [category, setCategory] = useState([]);
@@ -80,9 +79,8 @@ const PopularProducts = () => {
     };
     getPopularProducts();
   }, [])
-  console.log(data)
+
   const renderCards = (tabkey) => (
-    // console.log(tabkey)
     < div >
       <div className='grid max-md:grid-cols-1 grid-cols-3 xl:grid-cols-5 gap-4'>
         {
