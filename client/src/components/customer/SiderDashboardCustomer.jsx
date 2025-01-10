@@ -42,6 +42,7 @@ const SiderDashboardCustomer = () => {
 
         </div>
         <Menu
+          defaultSelectedKeys={['1']}
           theme="light"
           items={items}
         />

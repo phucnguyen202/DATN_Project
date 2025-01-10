@@ -54,6 +54,7 @@ const CartPage = () => {
       }
       return item;
     });
+
     setDataSource(updatedDataSource); // Cập nhật lại dataSource
     // api cap nhat so luong
     try {
@@ -61,7 +62,6 @@ const CartPage = () => {
         idGioHang: record.idGioHang,
         soLuong: value
       }
-      console.log('dataCart::', dataCart)
       const res = await handleAPI('/khachhang/updateQuantity', dataCart, 'put')
       if (res.success) {
         console.log('res::', res.message)
@@ -83,7 +83,6 @@ const CartPage = () => {
       console.log(err)
     }
   }
-  console.log(diaChi)
   const handleAPIChange = async () => {
     try {
       if (diaChi === '') {
@@ -96,7 +95,6 @@ const CartPage = () => {
             tongTien: dataSource.reduce((total, item) => total + item.soLuong * item.gia, 0)
           }
           const res = await handleAPI('/khachhang/createOrder', dataThanhToan, 'post');
-          console.log('res:::', res);
           if (res.success) {
             navigate('/payment');
             await handleAPI(`/khachhang/deleteCart?userId=${user.idNguoiDung}`, '', 'delete');

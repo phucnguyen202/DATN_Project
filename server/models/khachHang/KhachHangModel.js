@@ -124,7 +124,13 @@ const cancelOrder = (nguoiDungId, idDonHang, callback) => {
     if (results.length === 0) {
       return callback(new Error('Đơn hàng không tồn tại hoặc đã chuyển sang trạng thái đã giao'), null);
     }
-    const sqlCancelOrder = `UPDATE tb_donhang SET trangThai ='Đã hủy' WHERE idDonHang =? AND nguoiDungId=?`
+    const sqlCancelOrder = `
+    UPDATE 
+      tb_donhang 
+    SET 
+      trangThai ='Đã hủy', thanhToan= 'Chưa thanh toán'
+    WHERE 
+      idDonHang =? AND nguoiDungId=?`
     db.query(sqlCancelOrder, [idDonHang, nguoiDungId], (err, result) => {
       if (err) {
         return callback(err, null);
@@ -225,10 +231,29 @@ const getWishListById = (nguoiDungId, callback) => {
   db.query(sql, [nguoiDungId], callback);
 };
 
-
+// lây danh sách sản phẩm liên quan
+const getRelatedProducts = (idSanPham, callback) => {
+  const sql = `
+      SELECT 
+        sp.*,
+        dm.tenDanhMuc,
+        GROUP_CONCAT(hsp.hinhAnh) AS hinhAnh
+      FROM tb_sanpham sp
+      LEFT JOIN 
+        tb_hinhsanpham hsp ON sp.idSanPham = hsp.sanPhamId
+      LEFT JOIN 
+        tb_danhMuc dm ON sp.danhMucId = dm.idDanhMuc
+      WHERE 
+        sp.danhMucId = (SELECT danhMucId FROM tb_sanpham WHERE idSanPham = ?) 
+      AND sp.idSanPham != ?
+      GROUP BY 
+        sp.idSanPham
+    `;
+  db.query(sql, [idSanPham, idSanPham], callback);
+}
 
 module.exports = {
-  findByProductForGioHang, addToCart, getCartById, updateQuantity, cancelOrder,
+  findByProductForGioHang, addToCart, getRelatedProducts, getCartById, updateQuantity, cancelOrder,
   updateAddressOrder, getOrderByIdAndpayment, deleteFromCart, registerSupplier,
   createOrder, addOrderDetails, deleteCart, getOrderDetails, removeFromFavorites, getAllOrderById,
   findByProductForWishList, addToWishList, updateQuantityWishList, getWishListById, updateOrderStatusPayment

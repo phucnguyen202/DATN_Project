@@ -26,7 +26,7 @@ const HeaderComponent = () => {
 
   const dashboardRoutes = {
     khachhang: '/dashboard/customer/order',
-    banhang: '/dashboard/seller/taikhoan',
+    banhang: '/dashboard/seller/thongke',
     admin: '/admin/all-account',
     nhacungcap: '/dashboard/supplier/confirm-nhaphang',
     nhanvien: '/dashboard/nhanvien/list-products',

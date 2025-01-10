@@ -46,6 +46,7 @@ class KhachHangController {
 
     }
   }
+
   // lấy thông tin giỏ hàng theo id người dùng
   async getCartById(req, res) {
     try {
@@ -350,9 +351,6 @@ class KhachHangController {
   // Đăng ký làm nhà cung cấp
   async registerSupplier(req, res) {
     try {
-      // const { userId } = req.query
-      // console.log('userId::', typeof userId)
-      // console.log('req.user.idNguoiDung::', typeof req.user.idNguoiDung)
       const nguoiDungId = req.user.idNguoiDung.toString();
       const { tenNhaCungCap, diaChi, soDienThoai } = req.body;
 
@@ -434,7 +432,6 @@ class KhachHangController {
   async getWishlistProducts(req, res) {
     try {
       const nguoiDungId = req.user.idNguoiDung;
-      console.log('nguoiDungId::', nguoiDungId);
       KhachHangModel.getWishListById(nguoiDungId, (err, result) => {
         if (err) {
           return res.status(500).json({
@@ -469,7 +466,6 @@ class KhachHangController {
   async removeFromFavorites(req, res) {
     try {
       const nguoiDungId = req.user.idNguoiDung;
-      console.log('nguoiDungId::', nguoiDungId);
       const { sanPhamId } = req.body;
 
     } catch (err) {
@@ -509,6 +505,40 @@ class KhachHangController {
         message: 'Không thể hủy đơn hàng, đơn hàng đang được giao hoắc đã xác nhận'
       });
 
+    }
+  }
+
+  // lấy danh sách sản phẩm liên quan
+  async getRelatedProducts(req, res) {
+    try {
+      const { idSanPham } = req.query
+      KhachHangModel.getRelatedProducts(idSanPham, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_RELATED_PRODUCTS_ERROR',
+            message: 'Lỗi khi lấy danh sách sản phẩm liên quan'
+          });
+        }
+        if (result.length === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy sản phẩm nào liên quan'
+          });
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Lấy danh sách sản phẩm liên quan thành công',
+          data: result
+        });
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'GET_RELATED_PRODUCTS_ERROR',
+        message: 'Lỗi khi lấy danh sách sản phẩm liên quan'
+      });
     }
   }
 }

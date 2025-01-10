@@ -21,13 +21,13 @@ const SiderDashboardNhanVien = () => {
       icon: <AiOutlinePlusCircle size={20} />,
     },
     {
-      key: '2',
-      label: <Link className=" font-medium" to={'/dashboard/nhanvien/history'}>Lịch sử bán hàng</Link>,
+      key: '7',
+      label: <Link className=" font-medium" to={'/dashboard/nhanvien/order'}>Đơn hàng</Link>,
       icon: <AiOutlineClockCircle size={20} />,
     },
     {
-      key: '7',
-      label: <Link className=" font-medium" to={'/dashboard/nhanvien/order'}>Đơn hàng</Link>,
+      key: '2',
+      label: <Link className=" font-medium" to={'/dashboard/nhanvien/history'}>Lịch sử bán hàng</Link>,
       icon: <AiOutlineClockCircle size={20} />,
     },
     {

@@ -76,15 +76,13 @@ const HistoryMuaHang = () => {
               className="text-slate-600" />}
           >
           </Button>
-          <Button
-            onClick={() => confirm({
-              title: 'Hủy đơn hàng',
-              content: 'Bạn có muốn hủy đơn hàng không?',
-              onOk: () => handleCancelOrder(item.idDonHang),
-              onCancel() { },
-            })}
-            type="text"
-          >Hủy hàng</Button>
+          {item.trangThai === 'Đã hủy' &&
+            <Button
+              style={{
+                backgroundColor: '#FDC040',
+              }}
+              onClick={() => navigate('/payment')}>Mua lại</Button>
+          }
         </Space >
     }
   ];

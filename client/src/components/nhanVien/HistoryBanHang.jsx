@@ -47,7 +47,7 @@ const HistoryBanHang = () => {
       title: 'Trạng thái',
       dataIndex: 'trangThai',
       key: 'trangThai',
-      render: (trangThai) => <Tag color={trangThai === 'Đã xác nhận' && 'cyan'}>{trangThai}</Tag>
+      render: (trangThai) => <Tag color={trangThai === 'Đã xác nhận' ? 'cyan' : trangThai === 'Chờ xác nhận' ? 'orange' : 'red'}>{trangThai}</Tag>
     },
     {
       title: 'Thanh toán',

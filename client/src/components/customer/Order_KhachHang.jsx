@@ -8,10 +8,12 @@ import dayjs from 'dayjs';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import Title from 'antd/es/typography/Title';
 import DetailOrder from '../DetailOrder';
+import { useNavigate } from 'react-router-dom';
 const { confirm } = Modal
 const Order_KhachHang = () => {
 
   const user = useSelector(state => state?.auth?.currentData?.user);
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [orderInfo, setOrderInfo] = useState([])
   const [currentOrder, setCurrentOrder] = useState(null);
@@ -78,15 +80,33 @@ const Order_KhachHang = () => {
               className="text-slate-600" />}
           >
           </Button>
-          <Button
-            onClick={() => confirm({
-              title: 'Hủy đơn hàng',
-              content: 'Bạn có muốn hủy đơn hàng không?',
-              onOk: () => handleCancelOrder(item.idDonHang),
-              onCancel() { },
-            })}
-            type="text"
-          >Hủy hàng</Button>
+          {
+            item.thanhToan === 'Chưa thanh toán' && (
+              <Button
+                style={{
+                  backgroundColor: '#3BB77E',
+                  color: 'white',
+                }}
+                onClick={() => navigate('/payment')}
+              >Thanh toán</Button>
+            )
+          }
+          {
+            item.thanhToan === 'Đã thanh toán' && (
+              <Button
+                style={{
+                  backgroundColor: '#3BB77E',
+                  color: 'white',
+                }}
+                onClick={() => confirm({
+                  title: 'Hủy đơn hàng',
+                  content: 'Bạn có muốn hủy đơn hàng không?',
+                  onOk: () => handleCancelOrder(item),
+                  onCancel() { },
+                })}
+              >Hủy hàng</Button>
+            )
+          }
         </Space >
     }
   ];
@@ -106,9 +126,9 @@ const Order_KhachHang = () => {
     }
   }
 
-  const handleCancelOrder = async (id) => {
+  const handleCancelOrder = async (item) => {
     const data = {
-      idDonHang: id
+      idDonHang: item.idDonHang
     }
     console.log(data)
     try {

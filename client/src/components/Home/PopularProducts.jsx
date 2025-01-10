@@ -80,7 +80,7 @@ const PopularProducts = () => {
     };
     getPopularProducts();
   }, [])
-
+  console.log(data)
   const renderCards = (tabkey) => (
     // console.log(tabkey)
     < div >

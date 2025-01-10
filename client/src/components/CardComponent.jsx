@@ -9,8 +9,9 @@ import { updateCartCount, updateWishListCount } from '../redux/reducers/productR
 const { Title, Text } = Typography;
 
 const CardComponent = ({ item }) => {
-  const user = useSelector(state => state?.auth?.currentData?.user)
+  const user = useSelector(state => state?.auth?.currentData?.user);
   const dispatch = useDispatch();
+
   const handleAddToCart = async () => {
     try {
       const productData = {
@@ -62,7 +63,7 @@ const CardComponent = ({ item }) => {
               alt=""
             />
             <img
-              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
+              className='group-hover:block hidden w-[235px] h-[235px] transform transition-transform duration-700 ease-in-out hover:scale-110'
               src={item.hinhAnh[1]}
               alt=""
             />
@@ -94,7 +95,7 @@ const CardComponent = ({ item }) => {
           </Tooltip>
           <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
             <Link
-              to={`/detail/${item.idSanPham}`}
+              to={`/detail/${item.idSanPham}/${item.tenSanPham}`}
               className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></Link>
           </Tooltip>
         </div>

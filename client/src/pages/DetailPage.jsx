@@ -1,45 +1,101 @@
-import { Badge, Breadcrumb, Card, Checkbox, Divider, Input, InputNumber, message, Rate, Slider, Space, Tabs, Tag, Tooltip, Typography } from 'antd';
+import { Breadcrumb, Checkbox, Divider, Input, InputNumber, message, Rate, Slider, Space, Tabs, Tag, Typography } from 'antd';
+import { useEffect, useState } from 'react';
 import { CiFilter } from "react-icons/ci";
 import { IoMdHeartEmpty } from 'react-icons/io';
-import { IoCartOutline, IoEyeOutline } from 'react-icons/io5';
+import { IoCartOutline } from 'react-icons/io5';
 import { Link, useParams } from 'react-router-dom';
-import PromotionalSectionHome from '../components/Home/PromotionalSectionHome';
 import handleAPI from '../apis/HandleAPI';
-import { useEffect, useState } from 'react';
+import CardComponent from '../components/CardComponent';
+import PromotionalSectionHome from '../components/Home/PromotionalSectionHome';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCartCount, updateWishListCount } from '../redux/reducers/productReducer';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
 const DetailPage = () => {
   const param = useParams()
+  const dispatch = useDispatch();
+  const user = useSelector(state => state?.auth?.currentData?.user);
   const [data, setData] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    const getDetailProduct = async () => {
-      setIsLoading(true);
-      try {
-        const res = await handleAPI(`/nhanvien/getproductbyid?id=${param?.idproduct}`, '', 'get');
-        console.log("res:::", res.data[0]);
-        if (res.success) {
-          setData(res.data[0]);
-          if (res.data[0]?.hinhAnh) {
-            const imageArray = res.data[0].hinhAnh.split(',').map(img => img.trim());
-            setImages(imageArray);
-          }
-        }
-      } catch (e) {
-        message.error(e.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
     getDetailProduct()
-
+    getrelatedproducts()
   }, [])
 
-  console.log("data:::", data);
+  const getDetailProduct = async () => {
+    setIsLoading(true);
+    try {
+      const res = await handleAPI(`/nhanvien/getproductbyid?id=${param?.idproduct}`, '', 'get');
+      if (res.success) {
+        setData(res.data[0]);
+        if (res.data[0]?.hinhAnh) {
+          const imageArray = res.data[0].hinhAnh.split(',').map(img => img.trim());
+          setImages(imageArray);
+        }
+      }
+    } catch (e) {
+      message.error(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const getrelatedproducts = async () => {
+    try {
+      const res = await handleAPI(`/khachhang/get-related-products?idSanPham=${param?.idproduct}`, '', 'get');
+      if (res.success) {
+        const processedData = res.data.map(item => ({
+          ...item,
+          hinhAnh: item.hinhAnh?.split(',').filter(img => img.trim()) || []
+        }));
+        setRelatedProducts(processedData);
+      }
+    } catch (e) {
+      console.log("error::", e);
+    }
+  }
+
+  const handleAddToCart = async () => {
+    try {
+      const productData = {
+        idSanPham: data?.idSanPham,
+        nguoiDungId: user?.idNguoiDung,
+      }
+      const res = await handleAPI('/khachhang/addtocart', productData, 'post');
+      if (res.success) {
+        message.success(res.message);
+        const cartRes = await handleAPI(`/khachhang/getCartById?userId=${user?.idNguoiDung}`, '', 'get');
+        if (cartRes.success) {
+          dispatch(updateCartCount(cartRes.data.length));
+        }
+      }
+    } catch (err) {
+      message.warning('Sản phẩm đã có trong giỏ hàng');
+    }
+  }
+  const handleProductToWishlist = async () => {
+    try {
+      const productData = {
+        idSanPham: data?.idSanPham,
+        nguoiDungId: user?.idNguoiDung,
+      }
+      const res = await handleAPI('/khachhang/addProductToWishlist', productData, 'post');
+      if (res.success) {
+        message.success(res.message);
+        const wishList = await handleAPI('/khachhang/getWishlistProducts', '', 'get');
+        if (wishList.success) {
+          dispatch(updateWishListCount(wishList.data.length));
+        }
+      }
+    } catch (err) {
+      message.warning('Sản phẩm đã có trong mục yêu thích');
+    }
+  }
 
   const items = [
     {
@@ -150,6 +206,7 @@ const DetailPage = () => {
   const formatCurrency = (amount) => {
     return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
+
   return (
     <div className=''>
       <div className='border-b-[1px]'>
@@ -157,13 +214,13 @@ const DetailPage = () => {
           <Breadcrumb
             items={[
               {
-                title: <p className='font-medium'>Home</p>,
+                title: <p className='font-medium'>Trang chủ</p>,
               },
               {
-                title: <Link className='font-medium' to={'/product'}>Products</Link>,
+                title: <Link className='font-medium' to={'/product'}>Sản phẩm</Link>,
               },
               {
-                title: <p className='font-medium text-greenCustom'>Application List</p>,
+                title: <p className='font-medium text-greenCustom'>{param.info}</p>,
               }
             ]}
           />
@@ -183,7 +240,7 @@ const DetailPage = () => {
                       <div className='border-[1px] rounded-md'>
                         <img className='rounded-md' src={images[1]} alt="" />
                       </div>
-                      <div className='border-[1px] rounded-md'>
+                      {/* <div className='border-[1px] rounded-md'>
                         <img className='rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-5.jpg" alt="" />
                       </div>
                       <div className='border-[1px] rounded-md'>
@@ -191,7 +248,7 @@ const DetailPage = () => {
                       </div>
                       <div className='border-[1px] rounded-md'>
                         <img className='rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-7.jpg" alt="" />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -215,7 +272,7 @@ const DetailPage = () => {
                     <p className='text-lg pb-6 text-custom'>{data?.moTa}</p>
                     <p className='pb-6 text-custom'><b>Size/weight:</b> 1kg</p>
                     <div className='flex gap-2 items-center'>
-                      <div>
+                      {/* <div>
                         <InputNumber
                           style={{
                             paddingTop: '10px',
@@ -228,12 +285,15 @@ const DetailPage = () => {
                           size="large"
                         // onChange={onChange}
                         />
-                      </div>
-                      <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 p-5'>
+                      </div> */}
+                      <button
+                        onClick={handleAddToCart}
+                        className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 p-5'>
                         <IoCartOutline size={20} />
                         Add To Cart
                       </button>
                       <button
+                        onClick={handleProductToWishlist}
                         className={`${data?.yeuThich === 0 ? ' text-customText bg-slate-200' : 'text-[#cf1322] bg-[#f8bfbb]'}  rounded-sm p-5 `}>
                         <IoMdHeartEmpty size={20} />
                       </button>
@@ -255,178 +315,11 @@ const DetailPage = () => {
                   <div className="border-b border-gray-200 mt-2"></div>
                 </div>
                 <div className='grid grid-cols-4 max-md:grid-cols-1 gap-6 mt-10'>
-                  <div className='relative group'>
-                    <Link to={`/detail/${123}`}>
-                      <Badge.Ribbon text={'sale'}>
-                        <Card
-                          hoverable
-                        >
-                          <img
-                            className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                            src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                            alt=""
-                          />
-                          <img
-                            className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                            src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                            alt=""
-                          />
-                          <Text type="secondary">Snack</Text>
-                          <Card.Meta
-                            className="custom-card-meta py-2"
-                            title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                          <Space className='flex justify-between py-2'>
-                            <Rate value={3} className='text-sm' />
-                            <Text type="secondary">By <span className='text-greenCustom'>NestFood</span> </Text>
-                          </Space>
-                          <Space className='flex justify-between items-center pt-2'>
-                            <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                              <IoCartOutline size={17} />
-                              Add
-                            </button>
-                          </Space>
-                        </Card>
-                      </Badge.Ribbon>
-                      <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                        <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                          <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                        </Tooltip>
-                        <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                          <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                        </Tooltip>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className='relative group'>
-                    <Link to={`/detail/${123}`}>
-                      <Badge.Ribbon text={'sale'}>
-                        <Card
-                          hoverable
-                        >
-                          <img
-                            className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                            src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                            alt=""
-                          />
-                          <img
-                            className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                            src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                            alt=""
-                          />
-                          <Text type="secondary">Snack</Text>
-                          <Card.Meta
-                            className="custom-card-meta py-2"
-                            title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                          <Space className='flex justify-between py-2'>
-                            <Rate value={3} className='text-sm' />
-                            <Text type="secondary">By <span className='text-greenCustom'>NestFood</span> </Text>
-                          </Space>
-                          <Space className='flex justify-between items-center pt-2'>
-                            <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                              <IoCartOutline size={17} />
-                              Add
-                            </button>
-                          </Space>
-                        </Card>
-                      </Badge.Ribbon>
-                      <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                        <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                          <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                        </Tooltip>
-                        <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                          <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                        </Tooltip>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className='relative group'>
-                    <Link to={`/detail/${123}`}>
-                      <Badge.Ribbon text={'sale'}>
-                        <Card
-                          hoverable
-                        >
-                          <img
-                            className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                            src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                            alt=""
-                          />
-                          <img
-                            className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                            src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                            alt=""
-                          />
-                          <Text type="secondary">Snack</Text>
-                          <Card.Meta
-                            className="custom-card-meta py-2"
-                            title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                          <Space className='flex justify-between py-2'>
-                            <Rate value={3} className='text-sm' />
-                            <Text type="secondary">By <span className='text-greenCustom'>NestFood</span> </Text>
-                          </Space>
-                          <Space className='flex justify-between items-center pt-2'>
-                            <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                              <IoCartOutline size={17} />
-                              Add
-                            </button>
-                          </Space>
-                        </Card>
-                      </Badge.Ribbon>
-                      <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                        <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                          <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                        </Tooltip>
-                        <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                          <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                        </Tooltip>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className='relative group'>
-                    <Link to={`/detail/${123}`}>
-                      <Badge.Ribbon text={'sale'}>
-                        <Card
-                          hoverable
-                        >
-                          <img
-                            className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                            src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                            alt=""
-                          />
-                          <img
-                            className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                            src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                            alt=""
-                          />
-                          <Text type="secondary">Snack</Text>
-                          <Card.Meta
-                            className="custom-card-meta py-2"
-                            title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                          <Space className='flex justify-between py-2'>
-                            <Rate value={3} className='text-sm' />
-                            <Text type="secondary">By <span className='text-greenCustom'>NestFood</span> </Text>
-                          </Space>
-                          <Space className='flex justify-between items-center pt-2'>
-                            <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                              <IoCartOutline size={17} />
-                              Add
-                            </button>
-                          </Space>
-                        </Card>
-                      </Badge.Ribbon>
-                      <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                        <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                          <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                        </Tooltip>
-                        <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                          <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                        </Tooltip>
-                      </div>
-                    </Link>
-                  </div>
+                  {
+                    relatedProducts && relatedProducts.map((item, index) => (
+                      <CardComponent key={index} item={item} />
+                    ))
+                  }
                 </div>
               </div>
             </div>
