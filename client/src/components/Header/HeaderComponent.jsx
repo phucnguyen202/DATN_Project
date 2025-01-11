@@ -40,7 +40,8 @@ const HeaderComponent = () => {
   };
 
   const itemsAccount = [
-    (user?.quyen === 'admin' || user?.quyen === 'giaohang' || user?.quyen === 'khachhang' || user?.quyen === 'nhanvien' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
+    (user?.quyen === 'admin' || user?.quyen === 'giaohang' || user?.quyen === 'khachhang' ||
+      user?.quyen === 'nhanvien' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') && {
       key: '1',
       icon: <AiOutlineSetting className='text-[#343a40]' size={16} />,
       label: (
@@ -165,6 +166,7 @@ const HeaderComponent = () => {
         className='text-base  font-medium' to='/storepage'>Cửa hàng</Link>,
       key: 3,
     },
+    (user?.quyen === 'nhanvien' || user?.quyen === 'banhang' || user?.quyen === 'nhacungcap') &&
     {
       key: 4,
       label: <Link style={{

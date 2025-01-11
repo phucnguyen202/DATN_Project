@@ -213,9 +213,13 @@ class KhachHangController {
       });
     }
   }
+
   async getAllOrderById(req, res) {
     try {
       const nguoiDungId = req.user.idNguoiDung;
+
+      console.log(nguoiDungId);
+      console.log(req.user);
       KhachHangModel.getAllOrderById(nguoiDungId, (err, result) => {
         if (err) {
           return res.status(500).json({

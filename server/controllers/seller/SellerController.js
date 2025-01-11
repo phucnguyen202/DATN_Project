@@ -123,8 +123,8 @@ class SellerController {
   // gủi yêu cầu nhập hàng
   async createNhapHang(req, res) {
     try {
-      const { sanPhamId, soLuong, ghiChu, nhaCungCapId } = req.body;
-      SellerModel.createNhapHang(sanPhamId, soLuong, ghiChu, nhaCungCapId, (err, result) => {
+      const { tenSanPham, soLuong, ghiChu, nhaCungCapId } = req.body;
+      SellerModel.createNhapHang(tenSanPham, soLuong, ghiChu, nhaCungCapId, (err, result) => {
         if (err) {
           return res.status(500).json({
             success: false,

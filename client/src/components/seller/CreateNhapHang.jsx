@@ -1,4 +1,4 @@
-import { Button, Form, InputNumber, message, Select, Table, Tag } from 'antd';
+import { Button, Form, Input, InputNumber, message, Select, Table, Tag } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
@@ -19,9 +19,9 @@ const CreateNhapHang = () => {
       key: 'idNhapHang',
     },
     {
-      title: 'ID sản phẩm',
-      dataIndex: 'sanPhamId',
-      key: 'sanPhamId',
+      title: 'Tên sản phẩm',
+      dataIndex: 'tenSanPham',
+      key: 'tenSanPham',
     },
     {
       title: 'Tên nhà cung cấp',
@@ -128,7 +128,10 @@ const CreateNhapHang = () => {
       setIsLoading(false)
     }
   }
-  console.log(dataSource)
+
+
+
+
   return (
     <>
       <div >
@@ -143,14 +146,13 @@ const CreateNhapHang = () => {
               <Form.Item
                 className="block font-medium mb-2"
                 layout="vertical"
-                label="Mã sản phẩm"
-                name="sanPhamId"
+                label="Tên sản phẩm"
+                name="tenSanPham"
                 rules={[
-                  { required: true, message: "Vui lòng nhập mã sản phẩm" },
-                  { type: "number", message: "Mã sản phẩm phải là số" },
+                  { required: true, message: "Vui lòng nhập tên sản phẩm" },
                 ]}
               >
-                <InputNumber placeholder="Nhập mã sản phẩm" style={{ width: "100%" }} />
+                <Input placeholder="Nhập tên sản phẩm" style={{ width: "100%" }} />
               </Form.Item>
             </div>
             <div className='w-1/3'>

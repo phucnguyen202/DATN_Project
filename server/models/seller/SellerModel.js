@@ -37,10 +37,10 @@ const assignSupplierRole = (nguoiDungId, callback) => {
 };
 
 // tạo phiếu nhập hàng
-const createNhapHang = (sanPhamId, soLuong, ghiChu, nhaCungCapId, callback) => {
-  const sql = `INSERT INTO tb_nhaphang (sanPhamId, soLuong, ghiChu, nhaCungCapId)
+const createNhapHang = (tenSanPham, soLuong, ghiChu, nhaCungCapId, callback) => {
+  const sql = `INSERT INTO tb_nhaphang (tenSanPham, soLuong, ghiChu, nhaCungCapId)
   VALUES (?, ?, ?, ?)`;
-  db.query(sql, [sanPhamId, soLuong, ghiChu, nhaCungCapId], callback);
+  db.query(sql, [tenSanPham, soLuong, ghiChu, nhaCungCapId], callback);
 };
 
 // lấy danh sách nhập hàng

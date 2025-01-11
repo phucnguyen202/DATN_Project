@@ -86,7 +86,20 @@ const PaymentPage = () => {
   }
 
   const payWithMoMo = async () => {
-
+    const data = {
+      tongTien: total,
+      idDonHang: danhSachIdDonHang,
+      idNguoiDung: user.idNguoiDung,
+    }
+    try {
+      const res = await handleAPI('/payment/momo', data, 'post');
+      console.log('res::', res)
+      if (res.resultCode === 0) {
+        window.location.href = res.payUrl;
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
   const payWithVNPay = async () => {
 

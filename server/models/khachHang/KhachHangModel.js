@@ -101,9 +101,9 @@ const getOrderByIdAndpayment = (userId, callback) => {
 }
 
 // lấy tất cả đơn hàng của người dùng
-const getAllOrderById = (userId, callback) => {
-  const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId =?`
-  db.query(sql, [userId], callback);
+const getAllOrderById = (nguoiDungId, callback) => {
+  const sql = `SELECT * FROM tb_donhang WHERE nguoiDungId = ?`
+  db.query(sql, [nguoiDungId], callback);
 }
 
 // hủy đơn hàng

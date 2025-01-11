@@ -36,6 +36,7 @@ class AuthController {
             return res.status(500).json({ message: 'Lỗi khi tạo người dùng' });
           }
           User.findUserForJWT(email, (err, user) => {
+            console.log('userdangky', user);
             if (err) {
               return res.status(500).json({ message: 'Lỗi khi tạo JWT token' });
             }
@@ -46,7 +47,7 @@ class AuthController {
             // Tạo JWT token
             const token = jwt.sign(
               {
-                id: user.id,
+                id: user.idNguoiDung,
                 email: user.email,
                 quyen: user.quyen
               }, process.env.JWT_SECRET);
@@ -186,7 +187,6 @@ class AuthController {
             message: 'Không tìm thấy người dùng'
           });
         }
-        console.log('result:::', result);
         const isMatch = await bcrypt.compare(password, result.matKhau);
         if (!isMatch) {
           return res.status(401).json({
@@ -195,6 +195,7 @@ class AuthController {
           });
         }
         User.findUserForJWT(email, async (err, user) => {
+          console.log('user:::', user);
           if (err) {
             return res.status(500).json({
               success: false,
