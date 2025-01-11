@@ -136,6 +136,39 @@ class SupplierController {
     }
   }
 
+  // lấy danh sách sản phẩm từ nhà cung cấp
+  async getAllProductSupplier(req, res) {
+    try {
+      SupplierModel.getAllProductSupplier((err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            code: 'GET_ALL_PRODUCT_SUPPLIER_ERROR',
+            message: 'Lỗi khi lấy danh sách sản phẩm nhà cung cấp'
+          })
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({
+            success: false,
+            code: 'NOT_FOUND',
+            message: 'Không tìm thấy sản phẩm nào'
+          })
+        }
+        return res.status(200).json({
+          success: true,
+          message: 'Lấy danh sách sản phẩm nhà cung cấp thành công',
+          data: result
+        })
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'GET_ALL_PRODUCT_SUPPLIER_ERROR',
+        message: 'Lỗi khi lấy danh sách sản phẩm nhà cung cấp'
+      })
+    }
+  }
+
 }
 
 

@@ -20,6 +20,11 @@ const SiderDashboardSupplier = () => {
       icon: <AiOutlineHistory size={20} />,
     },
     {
+      key: '6',
+      label: <Link className=" font-medium" to={'/dashboard/supplier/list-product'}>Danh sách sản phẩm</Link>,
+      icon: <BsCardChecklist size={20} />,
+    },
+    {
       key: '3',
       label: <Link className=" font-medium" to={'/dashboard/supplier/confirm-nhaphang'}>Dề xuất danh mục</Link>,
       icon: <BsCardChecklist size={20} />,

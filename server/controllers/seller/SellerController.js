@@ -477,7 +477,7 @@ class SellerController {
           message: 'Bạn không có quyền truy cập',
         })
       }
-      SellerModel.deleteUser(idNguoiDung, (err, date) => {
+      SellerModel.deleteUser(idNguoiDung, (err, data) => {
         if (err) {
           return res.status(500).json({
             success: false,
@@ -485,7 +485,7 @@ class SellerController {
             message: 'Lỗi khi xóa người dùng'
           })
         }
-        if (date.affectedRows === 0) {
+        if (data.affectedRows === 0) {
           return res.status(404).json({
             success: false,
             code: 'NOT_FOUND',

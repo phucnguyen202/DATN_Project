@@ -38,14 +38,37 @@ const cancelNhapHang = (trangThai, idNhapHang, callback) => {
   db.query(sql, [trangThai, idNhapHang], callback);
 }
 
-// taoj sanr pham
+// tao san pham
 const createProductSupplier = (product, callback) => {
   const { tenSanPhamNCC, gia, moTa, danhMucId, soLuong, hinhAnh, nguoiDungId } = product;
   const sql = 'INSERT INTO tb_sanpham_nhacungcap (tenSanPhamNCC, gia, moTa, danhMucId, soLuong, hinhAnh, nguoiDungId) VALUES (?, ?, ?, ?, ?, ?, ?)';
   db.query(sql, [tenSanPhamNCC, gia, moTa, danhMucId, soLuong, hinhAnh, nguoiDungId], callback);
 }
 
+// lay danh sach sanr pham
+const getAllProductSupplier = (callback) => {
+  const sql = `
+   SELECT 
+      sp.*,
+      nc.idNhaCungCap,
+      nc.tenNhaCungCap,
+      nc.diaChi,
+      nc.soDienThoai,
+      dm.tenDanhMuc
+    FROM 
+      tb_sanpham_nhacungcap sp
+    JOIN 
+      tb_nhacungcap nc 
+      ON sp.nguoiDungId = nc.nguoiDungId
+    LEFT JOIN 
+      tb_danhmuc dm 
+      ON sp.danhMucId = dm.idDanhMuc
+  `
+  db.query(sql, callback);
+}
+
+// update san pham
 
 module.exports = {
-  getAllNhapHangById, updateStatusNhapHang, cancelNhapHang, createProductSupplier
+  getAllNhapHangById, getAllProductSupplier, updateStatusNhapHang, cancelNhapHang, createProductSupplier
 }

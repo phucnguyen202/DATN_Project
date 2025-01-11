@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, Route, Routes, } from 'react-router-dom'
 import Account_NhaCungCap from './components/Admin/Account_NhaCungCap'
 import Account_Nhabanhang from './components/Admin/Account_Nhabanhang'
-import { Account, AccountUser, Confirm_nhapHang, Create_product_Supplier, CreateDanhMuc, CreateNhapHang, CreateNhapHang_nhanVien, CreateProduct, History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, InfoSupplier, ListAccountSupplier, ListProducts, Order_KhachHang, Order_Nhanvien, Status_giaoHang, ThongKe } from './components'
+import { Account, AccountUser, Confirm_nhapHang, Create_product_Supplier, CreateDanhMuc, CreateNhapHang, CreateNhapHang_nhanVien, CreateProduct, History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, InfoSupplier, ListAccountSupplier, ListProducts, ListProducts_Supplier, Order_KhachHang, Order_Nhanvien, Status_giaoHang, ThongKe } from './components'
 import Main from './layout/Main'
 import { AboutPage, CartPage, ContactPage, DetailPage, PaymentPage, HomePage, LoginPage, PageAdmin, PageNhanVienDashboard, PageSellerDashboard, SellerPage, SignupPage, PageKhachHangDashboard, RegisterSupplierPage, PageWishlist, SupplierPage, PageSupplierDashboard, PageShipperDashboard, OtpCode } from './pages'
 import { addAuth } from './redux/reducers/authReducer'
@@ -67,6 +67,7 @@ function App() {
           <Route path="/dashboard/supplier/history" element={<HistoryXuatHang />} />
           <Route path="/dashboard/supplier/info" element={<InfoSupplier />} />
           <Route path="/dashboard/supplier/create-product" element={<Create_product_Supplier />} />
+          <Route path="/dashboard/supplier/list-product" element={<ListProducts_Supplier />} />
         </Route>
 
         <Route path="/" element={<PageShipperDashboard />}>

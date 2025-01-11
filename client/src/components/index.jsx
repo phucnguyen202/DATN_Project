@@ -28,12 +28,13 @@ import Status_giaoHang from './Shipper/Status_giaoHang';
 import Confirm_nhapHang from './Supplier/Confirm_nhapHang';
 import HistoryXuatHang from './Supplier/HistoryXuatHang';
 import InfoSupplier from './Supplier/InfoSupplier';
-import Create_product_Supplier from './Supplier/Create_product_Supplier'
+import Create_product_Supplier from './Supplier/Create_product_Supplier';
+import ListProducts_Supplier from './Supplier/ListProducts_Supplier'
 export {
   Account, AccountUser, BannerHome, BestSellingProduct, Confirm_nhapHang, CreateDanhMuc, CreateNhapHang,
   CreateNhapHang_nhanVien, CreateProduct, DealsOfTheDayHome, FeaturedCategories, HeaderDashboardCustomer,
   History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, InfoSupplier,
   ListAccountSupplier, ListProducts, Order_KhachHang, Order_Nhanvien, PopularProducts, ProductSectionHome,
-  PromotionalSectionHome, SiderDashboardCustomer, Status_giaoHang, ThongKe, Create_product_Supplier
+  PromotionalSectionHome, SiderDashboardCustomer, Status_giaoHang, ThongKe, Create_product_Supplier, ListProducts_Supplier
 };
 
