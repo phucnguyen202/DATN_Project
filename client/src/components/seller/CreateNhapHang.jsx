@@ -178,10 +178,10 @@ const CreateNhapHang = () => {
                 rules={[
                   { required: true, message: "Vui lòng chọn nhà cung cấp" },
                 ]}
-                label={<p className="block text-gray-700 font-medium">Danh mục sản phẩm</p>}
+                label={<p className="block text-gray-700 font-medium">Danh mục nhà cung cấp</p>}
               >
                 <Select
-                  placeholder='Chọn danh mục sản phẩm'
+                  placeholder='Chọn nhà cung cấp'
                 >
                   {
                     dataSupplier && dataSupplier.map((item, index) => (

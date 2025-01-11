@@ -88,7 +88,7 @@ const Order_Nhanvien = () => {
               className="text-slate-600" />}
           >
           </Button>
-          <Button
+          {/* <Button
             onClick={() => confirm({
               title: 'Hủy đơn hàng',
               content: 'Bạn có muốn hủy đơn hàng không?',
@@ -96,7 +96,7 @@ const Order_Nhanvien = () => {
               onCancel() { },
             })}
             type="text"
-          >Hủy hàng</Button>
+          >Hủy hàng</Button> */}
         </Space >
     }
   ];

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form, Input, message, Space, Table } from 'antd';
+import { Button, Form, Input, message, Modal, Space, Table } from 'antd';
 import { CiEdit, CiSquareRemove } from 'react-icons/ci';
 import { useDispatch } from 'react-redux';
 import handleAPI from "../../apis/HandleAPI";
 
-
+const { confirm } = Modal
 const CreateDanhMuc = () => {
   const [form] = Form.useForm()
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editDanhMuc, setEditDanhMuc] = useState(null);
+  const [danhMucInput, setDanhMucInput] = useState('');
   const columns = [
     {
       title: '#',
@@ -30,19 +32,21 @@ const CreateDanhMuc = () => {
       dataIndex: '',
       render: (item) =>
         <Space>
-          <Button type="text"
-            // onClick={() => {
-            //   setIsModalOpen(true);
-            // }}
+          <Button
+            type="text"
+            onClick={() => {
+              showModal()
+              setEditDanhMuc(item)
+            }}
             icon={<CiEdit size={20}
               className="text-slate-600" />}></Button>
           <Button
-            // onClick={() => confirm({
-            //   title: 'Xóa nhà cung cấp',
-            //   content: 'Bạn có muốn xóa nhà cung cấp không?',
-            //   // onOk: () => handleDeleteSupplier(item._id),
-            //   // onCancel() { },
-            // })}
+            onClick={() => confirm({
+              title: 'Xóa danh mục sản phẩm',
+              content: 'Bạn có muốn xóa danh mục sản phẩm không?',
+              onOk: () => handleDeleteDanhMuc(item.idDanhMuc),
+              onCancel() { },
+            })}
             type="text"
             icon={<CiSquareRemove size={20}
               className="text-slate-600" />}></Button>
@@ -50,9 +54,46 @@ const CreateDanhMuc = () => {
     }
   ];
 
+  // cap nhatj dah muc
+  const handleOk = async () => {
+    try {
+      const data = {
+        tenDanhMuc: danhMucInput,
+        idDanhMuc: editDanhMuc?.idDanhMuc
+      }
+      const res = await handleAPI('/seller/updateDanhMuc', data, 'put');
+      if (res.success) {
+        message.success(res.message)
+        setIsModalOpen(false);
+        getAllDanhMuc();
+      }
+    } catch (e) {
+      console.error(e.message)
+    }
+  };
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     getAllDanhMuc();
   }, []);
+
+  const handleDeleteDanhMuc = async (id) => {
+    console.log(id)
+    try {
+      const res = await handleAPI(`/seller/deletedanhmuc?idDanhMuc=${id}`, '', 'delete');
+      if (res.success) {
+        message.success(res.message)
+        getAllDanhMuc();
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   const getAllDanhMuc = async () => {
     setIsLoading(true);
@@ -114,6 +155,14 @@ const CreateDanhMuc = () => {
             columns={columns} />
         </div>
       </div>
+      <Modal title="Cập nhật danh mục"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}>
+        <Input
+          defaultValue={editDanhMuc?.tenDanhMuc}
+          onChange={(e) => setDanhMucInput(e.target.value)} />
+      </Modal>
     </>
   )
 }

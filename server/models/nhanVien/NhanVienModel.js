@@ -60,8 +60,6 @@ const deleteImagesbyId = (productId, callback) => {
 //  xóa sản phẩm bằng id
 // đang bị lỗi nên vì sản phẩm bên trong chi tiết sản phảm nữa
 const deleteProductById = (productId, callback) => {
-  // const deleteProductSql = 'DELETE FROM tb_sanpham WHERE idSanPham = ?'
-  // db.query(deleteProductSql, [productId], callback);
   const deleteDetailsSql = `
     DELETE FROM tb_chitietdonhang
     WHERE sanPhamId = ?;

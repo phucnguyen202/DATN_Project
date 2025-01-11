@@ -24,13 +24,14 @@ const SocialLogin = () => {
         email: resultFromGoogle?.user?.email,
         googlePhotoUrl: resultFromGoogle?.user?.photoURL
       }
-      console.log(value);
       const res = await handleAPI('/auth/loginWithGoogle', value, 'post')
-      res.data && dispatch(addAuth(res.data))
-      message.success(res.message)
-      navigate('/')
+      if (res.success) {
+        dispatch(addAuth(res.data))
+        message.success(res.message)
+        navigate('/')
+      }
     } catch (e) {
-      message.success(e.message)
+      message.error(e.message)
     }
   }
 

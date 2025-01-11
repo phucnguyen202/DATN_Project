@@ -128,14 +128,123 @@ const findByDanhMuc = (tenDanhMuc, callback) => {
   const sql = 'SELECT * FROM tb_danhmuc WHERE tenDanhMuc = ?';
   db.query(sql, [tenDanhMuc], callback);
 };
+
+// lấy danh sách danh mục
 const getAllDanhMuc = (callback) => {
   const sql = 'SELECT * FROM tb_danhmuc';
   db.query(sql, callback);
 }
+
+// thêm danh mục
 const addDanhMuc = (tenDanhMuc, callback) => {
   const sql = 'INSERT INTO tb_danhmuc (tenDanhMuc) VALUES (?)';
   db.query(sql, tenDanhMuc, callback);
 }
+
+// xóa danh mục
+const deleteDanhMuc = (idDanhMuc, callback) => {
+  const sql = ` DELETE FROM tb_danhmuc WHERE idDanhMuc =?`
+  db.query(sql, [idDanhMuc], callback);
+}
+
+// sửa danh mục
+const updateDanhMuc = (idDanhMuc, tenDanhMuc, callback) => {
+  const sql = `UPDATE tb_danhmuc SET tenDanhMuc =? WHERE idDanhMuc =?`
+  db.query(sql, [tenDanhMuc, idDanhMuc], callback);
+}
+
+// lấy danh sách người dùng
+const getAllUsers = (callback) => {
+  const sql = 'SELECT * FROM nguoidung';
+  db.query(sql, callback);
+};
+
+// update quyền cho người dùng
+const updateStatusQuyen = (idNguoiDung, quyen, callback) => {
+  const sql = `UPDATE nguoidung SET quyen =? WHERE idNguoiDung =?`
+  db.query(sql, [quyen, idNguoiDung], callback);
+}
+
+// xóa người dùng
+const deleteUser = (idNguoiDung, callback) => {
+  const deleteSupplierSql = `
+    DELETE FROM tb_nhacungcap
+    WHERE nguoiDungId = ?;
+  `;
+  const deleteFavoritesSql = `
+    DELETE FROM tb_danhsach_yeuthich
+    WHERE nguoiDungId = ?;
+  `;
+  const deleteOrdersSql = `
+    DELETE FROM tb_donhang
+    WHERE nguoiDungId = ?;
+  `;
+  const deleteCartSql = `
+    DELETE FROM tb_giohang
+    WHERE nguoiDungId = ?;
+  `;
+  const deleteUserSql = `
+    DELETE FROM tb_nguoidung
+    WHERE idNguoiDung = ?;
+  `;
+
+  db.beginTransaction((err) => {
+    if (err) {
+      return callback(err);
+    }
+    // Bước 1: Xóa trong bảng tb_nhacungcap
+    db.query(deleteFavoritesSql, [idNguoiDung], (err) => {
+      if (err) {
+        return db.rollback(() => callback(err)); // Hủy giao dịch nếu lỗi
+      }
+      // Bước 2: Xóa trong bảng tb_danhsach_yeuthich
+      db.query(deleteFavoritesSql, [idNguoiDung], (err) => {
+        if (err) {
+          return db.rollback(() => callback(err)); // Hủy giao dịch nếu lỗi
+        }
+        // Bước 3: Xóa trong bảng tb_donhang
+        db.query(deleteOrdersSql, [idNguoiDung], (err) => {
+          if (err) {
+            return db.rollback(() => callback(err)); // Hủy giao dịch nếu lỗi
+          }
+          // Bước 4: Xóa trong bảng tb_giohang
+          db.query(deleteCartSql, [userId], (err) => {
+            if (err) {
+              return db.rollback(() => callback(err)); // Hủy giao dịch nếu lỗi
+            }
+            // Bước 5: Xóa trong bảng tb_nguoidung
+            db.query(deleteUserSql, [userId], (err) => {
+              if (err) {
+                return db.rollback(() => callback(err)); // Hủy giao dịch nếu lỗi
+              }
+              // Hoàn tất giao dịch
+              db.commit((err) => {
+                if (err) {
+                  return db.rollback(() => callback(err)); // Hủy giao dịch nếu commit lỗi
+                }
+                callback(null, { message: 'Xóa người dùng và các dữ liệu liên quan thành công!' });
+              });
+            })
+          })
+        })
+
+      })
+
+    })
+  });
+}
+
+// cập nhật trang thái tài khoản
+const updateStatusTaiKhoan = (idNguoiDung, callback) => {
+  console.log(idNguoiDung)
+  const sql = `UPDATE nguoidung SET trangThai = 'bicam' WHERE idNguoiDung =?`
+  db.query(sql, [idNguoiDung], callback);
+}
+
+// cập nhật vai trò nhà cung cấp
 module.exports = {
-  getAllAccountSupplier, findByDanhMuc, getAllDanhMuc, addDanhMuc, getStatistical_month, getApprovedSuppliers, getConfirmedNhapHang, updateSupplierStatus, assignSupplierRole, createNhapHang, getAllNhapHang, getStatistical_day
+  getAllAccountSupplier, updateStatusQuyen, getAllUsers, updateDanhMuc,
+  deleteDanhMuc, findByDanhMuc, getAllDanhMuc, addDanhMuc, getStatistical_month,
+  getApprovedSuppliers, getConfirmedNhapHang, updateSupplierStatus, assignSupplierRole,
+  createNhapHang, getAllNhapHang, getStatistical_day, deleteUser, updateStatusTaiKhoan
 }

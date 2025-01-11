@@ -103,21 +103,23 @@ class AuthController {
     try {
       const { email, name, googlePhotoUrl } = req.body
       User.findUserByEmail(email, async (err, user) => {
+        if (user.trangThai === 'bicam') {
+          return res.status(400).json({
+            success: false,
+            message: 'Tài khoản đã bị khoá'
+          });
+        }
         if (user) {
           // Tạo JWT token
-          const token = jwt.sign(
-            {
-              idNguoiDung: user.idNguoiDung,
-              email: user.email,
-              quyen: user.quyen
-            }, process.env.JWT_SECRET);
-
+          const token = jwt.sign({
+            idNguoiDung: user.idNguoiDung,
+            email: user.email,
+            quyen: user.quyen
+          }, process.env.JWT_SECRET);
           return res.status(201).json({
+            success: true,
             message: 'Đăng nhập thành công',
-            data: {
-              user,
-              token
-            }
+            data: { user, token }
           });
         }
         if (user == undefined) {
@@ -144,6 +146,7 @@ class AuthController {
                   }, process.env.JWT_SECRET
                 );
                 return res.status(201).json({
+                  success: true,
                   message: 'Đăng nhập thành công',
                   data: {
                     user: data,
@@ -157,6 +160,7 @@ class AuthController {
       })
     } catch (error) {
       return res.status(500).json({
+        success: false,
         message: 'Đăng nhập thất bại',
         error: error.message || error.toString()
       })
@@ -169,19 +173,33 @@ class AuthController {
       const { email, password } = req.body
       User.findUserByEmail(email, async (err, result) => {
         if (err) {
-          return res.status(500).json({ message: 'Lỗi hệ thống' });
+          return res.status(500).json(
+            {
+              success: false,
+              message: 'Lỗi hệ thống'
+            }
+          );
         }
         if (result === undefined) {
-          return res.status(404).json({ message: 'Không tìm thấy người dùng' });
+          return res.status(404).json({
+            success: false,
+            message: 'Không tìm thấy người dùng'
+          });
         }
-        console.log(result.matKhau)
+        console.log('result:::', result);
         const isMatch = await bcrypt.compare(password, result.matKhau);
         if (!isMatch) {
-          return res.status(401).json({ message: 'Đăng nhập thất bại' });
+          return res.status(401).json({
+            success: false,
+            message: 'Đăng nhập thất bại'
+          });
         }
         User.findUserForJWT(email, async (err, user) => {
           if (err) {
-            return res.status(500).json({ message: 'Lỗi khi tạo JWT token' });
+            return res.status(500).json({
+              success: false,
+              message: 'Lỗi khi tạo JWT token'
+            });
           }
           // Kiểm tra xem user có tồn tại không
           if (!user) {
@@ -195,6 +213,7 @@ class AuthController {
               quyen: user.quyen
             }, process.env.JWT_SECRET);
           return res.status(201).json({
+            success: true,
             message: 'Đăng nhập thành công',
             data: {
               user,
@@ -205,6 +224,7 @@ class AuthController {
       })
     } catch (error) {
       return res.status(500).json({
+        success: false,
         message: 'Đăng nhập thất bại',
         error: error.message || error.toString()
       })

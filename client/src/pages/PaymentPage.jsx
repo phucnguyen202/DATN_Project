@@ -68,13 +68,12 @@ const PaymentPage = () => {
   const total = orderInfo.reduce((acc, curr) => acc + Number(curr.tongTien), 0);
   const danhSachIdDonHang = orderInfo.map(order => order.idDonHang);
 
-  const handlePayment = async () => {
+  const payWithZaloPay = async () => {
     const data = {
       amount: total,
       idDonHang: danhSachIdDonHang,
       idNguoiDung: user.idNguoiDung,
     }
-    console.log(data)
     try {
       const res = await handleAPI('/payment/zalopay', data, 'post');
       console.log('res::', res)
@@ -84,8 +83,31 @@ const PaymentPage = () => {
     } catch (err) {
       console.log(err)
     }
-  };
+  }
 
+  const payWithMoMo = async () => {
+
+  }
+  const payWithVNPay = async () => {
+
+  }
+  console.log(paymentMethod)
+  const handlePayment = async () => {
+    switch (paymentMethod) {
+      case "momo":
+        payWithMoMo();
+        break;
+      case "vnpay":
+        payWithVNPay();
+        break;
+      case "zalopay":
+        payWithZaloPay();
+        break;
+      default:
+        message.error('Vui lòng chọn phương thức thanh toán');
+        break;
+    }
+  };
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       {
@@ -157,7 +179,8 @@ const PaymentPage = () => {
                     </span>
                   </div>
                   <h2 className="text-xl font-semibold mb-4 text-customText">Phương thức thanh toán</h2>
-                  <Radio.Group onChange={handlePaymentMethodChange}
+                  <Radio.Group
+                    onChange={handlePaymentMethodChange}
                     value={paymentMethod} className="w-full">
                     <div className="space-y-4">
                       <Radio value="momo" className="w-full">

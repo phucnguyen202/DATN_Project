@@ -106,7 +106,6 @@ const getAllOrderById = (userId, callback) => {
   db.query(sql, [userId], callback);
 }
 
-
 // hủy đơn hàng
 // những đơn hàng chưa được xác nhận và chưa giao thì được hủy
 // những đơn hàng đã được xác nhận và đang giao thì không được hủy
@@ -155,7 +154,7 @@ const deleteCart = (userId, callback) => {
   db.query(sql, [userId], callback);
 }
 
-// thanh  toán thành công thì cập nhật trạng thai thanh toán
+// thanh toán thành công thì cập nhật trạng thai thanh toán
 const updateOrderStatusPayment = (idNguoiDung, idDonHang, callback) => {
   const sql = `
     UPDATE tb_donhang
