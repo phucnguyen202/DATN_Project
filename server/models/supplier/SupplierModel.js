@@ -38,6 +38,14 @@ const cancelNhapHang = (trangThai, idNhapHang, callback) => {
   db.query(sql, [trangThai, idNhapHang], callback);
 }
 
+// taoj sanr pham
+const createProductSupplier = (product, callback) => {
+  const { tenSanPhamNCC, gia, moTa, danhMucId, soLuong, hinhAnh, nguoiDungId } = product;
+  const sql = 'INSERT INTO tb_sanpham_nhacungcap (tenSanPhamNCC, gia, moTa, danhMucId, soLuong, hinhAnh, nguoiDungId) VALUES (?, ?, ?, ?, ?, ?, ?)';
+  db.query(sql, [tenSanPhamNCC, gia, moTa, danhMucId, soLuong, hinhAnh, nguoiDungId], callback);
+}
+
+
 module.exports = {
-  getAllNhapHangById, updateStatusNhapHang, cancelNhapHang
+  getAllNhapHangById, updateStatusNhapHang, cancelNhapHang, createProductSupplier
 }

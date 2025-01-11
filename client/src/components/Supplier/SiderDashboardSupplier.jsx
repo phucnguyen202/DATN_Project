@@ -16,7 +16,7 @@ const SiderDashboardSupplier = () => {
     },
     {
       key: '2',
-      label: <Link className=" font-medium" to={'/dashboard/supplier/confirm-nhaphang'}>Đăng thông tin sản phẩm</Link>,
+      label: <Link className=" font-medium" to={'/dashboard/supplier/create-product'}>Đăng thông tin sản phẩm</Link>,
       icon: <AiOutlineHistory size={20} />,
     },
     {

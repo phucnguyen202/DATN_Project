@@ -7,6 +7,7 @@ const router = require('express').Router();
 router.get('/supplier/get-all-nhaphang-byid', VerifyToken, SupplierController.getAllNhapHangById);
 router.put('/supplier/update-status-nhaphang', SupplierController.updateStatusNhapHang);
 router.put('/supplier/cancel-nhaphang', SupplierController.cancelNhapHang);
+router.post('/supplier/create-product-supplier', SupplierController.createProductSupplier);
 
 
 module.exports = router

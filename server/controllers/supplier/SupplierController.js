@@ -107,6 +107,35 @@ class SupplierController {
       });
     }
   }
+
+  // tạo sản phẩm nhà cung cấp
+  async createProductSupplier(req, res) {
+    // const { tenSanPhamNCC, gia, moTa, danhMucId, soLuong, hinhAnh, nguoiDungId } = req.body
+    const product = req.body
+    try {
+      SupplierModel.createProductSupplier(product, (err, result) => {
+        if (err) {
+          console.log(err)
+          return res.status(500).json({
+            success: false,
+            code: 'CREATE_PRODUCT_SUPPLIER_ERROR',
+            message: 'Lỗi khi tạo sản phẩm nhà cung cấp'
+          })
+        }
+        return res.status(201).json({
+          success: true,
+          message: 'Tạo sản phẩm nhà cung cấp thành công',
+        })
+      })
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        code: 'CREATE_PRODUCT_SUPPLIER_ERROR',
+        message: 'Lỗi khi tạo sản phẩm nhà cung cấp'
+      })
+    }
+  }
+
 }
 
 

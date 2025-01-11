@@ -41,6 +41,11 @@ const SiderDashboardSeller = () => {
       label: <Link to={'/dashboard/seller/taikhoan'} className=" font-medium">Quản lý tài khoản</Link>,
       icon: <BiPackage size={20} />,
     },
+    {
+      key: '5',
+      label: <Link to={'/dashboard/seller/account/supplier'} className=" font-medium">Nhà cung cấp</Link>,
+      icon: <BiPackage size={20} />,
+    },
   ]
   return (
     <>
