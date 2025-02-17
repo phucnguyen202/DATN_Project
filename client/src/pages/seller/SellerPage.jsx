@@ -1,5 +1,5 @@
 import { Badge, Breadcrumb, Card, Checkbox, Rate, Select, Slider, Space, Tooltip, Typography } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CiFilter } from 'react-icons/ci';
 import { FaFacebookF, FaInstagram, FaPinterest, FaTwitter } from 'react-icons/fa6';
 import { FiHeadphones } from 'react-icons/fi';
@@ -8,10 +8,37 @@ import { IoMdHeartEmpty } from 'react-icons/io';
 import { IoCartOutline, IoEyeOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { DealsOfTheDayHome, PromotionalSectionHome } from '../../components';
+import handleAPI from '../../apis/HandleAPI';
+import CardComponent from '../../components/CardComponent';
 const { Text } = Typography;
 
 
 const SellerPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const getPopularProducts = async () => {
+      setIsLoading(true);
+      try {
+        const res = await handleAPI('/nhanvien/getallproducts', '', 'get');
+        console.log(res);
+        if (res.success) {
+          const processedData = res.data.map(item => ({
+            ...item,
+            hinhAnh: item.hinhAnh?.split(',').filter(img => img.trim()) || []
+          }));
+          setData(processedData);
+        }
+      } catch (e) {
+        message.error(e.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getPopularProducts();
+  }, [])
+
   return (
     <>
       <div>
@@ -173,7 +200,7 @@ const SellerPage = () => {
               </div>
               <div className='col-span-10'>
                 <div className='flex justify-between items-center mb-8'>
-                  <p className='font-medium text-custom'>Có <span className='text-greenCustom'>29</span> sản phẩm dành cho bạn!</p>
+                  <p className='font-medium text-custom'>Có <span className='text-greenCustom'>{data?.length}</span> sản phẩm dành cho bạn!</p>
                   <div className='flex gap-4'>
                     <div>
                       <Select
@@ -228,523 +255,12 @@ const SellerPage = () => {
                   </div>
                 </div>
                 <div>
-                  <div className='grid grid-cols-5 gap-4'>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
-                    <div className='relative group'>
-                      <Link to={`/detail/${123}`}>
-                        <Badge.Ribbon text={'sale'}>
-                          <Card
-                            hoverable
-                          >
-                            <img
-                              className='group-hover:hidden transform transition-transform duration-1000 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-1.jpg"
-                              alt=""
-                            />
-                            <img
-                              className='group-hover:block hidden transform transition-transform duration-700 ease-in-out hover:scale-110'
-                              src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
-                              alt=""
-                            />
-                            <Text type="secondary">Snack</Text>
-                            <Card.Meta
-                              className="custom-card-meta py-2"
-                              title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
-                            <Space className='flex justify-between py-2'>
-                              <Rate value={3} className='text-xs' />
-                              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
-                            </Space>
-                            <Space className='flex justify-between items-center pt-2'>
-                              <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                              <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
-                                <IoCartOutline size={17} />
-                                Add
-                              </button>
-                            </Space>
-                          </Card>
-                        </Badge.Ribbon>
-                        <div className=' opacity-0 group-hover:opacity-100 transition duration-300 absolute flex top-28 left-1/2 transform -translate-x-1/2 '>
-                          <Tooltip placement="topLeft" color='#3BB77E' title={'Thêm vào yêu thích'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoMdHeartEmpty size={16} /></button>
-                          </Tooltip>
-                          <Tooltip placement="top" color='#3BB77E' title={'Chi tiết'}>
-                            <button className=' flex justify-center items-center gap-2 font-medium rounded-md bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-2 px-3'><IoEyeOutline size={16} /></button>
-                          </Tooltip>
-                        </div>
-                      </Link>
-                    </div>
+                  <div className='grid grid-cols-4 gap-4'>
+                    {
+                      data?.length > 0 && data.map((item, index) => (
+                        <CardComponent key={index} item={item} />
+                      ))
+                    }
                   </div>
                 </div>
                 <div>

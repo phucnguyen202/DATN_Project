@@ -75,7 +75,20 @@ const RegisterSupplierPage = () => {
                 className="rounded-lg"
               />
             </Form.Item>
-
+            <Form.Item
+              name="maMinhChung"
+              label="Mã minh chứng"
+              rules={[
+                { required: true, message: 'Vui lòng nhập mã!' },
+                { pattern: /^[0-9]{10}$/, message: 'Mã không hợp lệ!' }
+              ]}
+            >
+              <Input
+                prefix={<PhoneOutlined className="text-gray-400" />}
+                placeholder="Nhập mã"
+                className="rounded-lg"
+              />
+            </Form.Item>
             <Form.Item className="text-center">
               <Button
                 type="primary"

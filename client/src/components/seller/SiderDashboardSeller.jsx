@@ -1,7 +1,7 @@
 import { Menu, Typography } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import React from 'react';
-import { AiOutlineHistory } from 'react-icons/ai';
+import { AiOutlineFileProtect, AiOutlineHistory, AiOutlineIdcard } from 'react-icons/ai';
 import { BiCoinStack, BiPackage, BiSolidTruck } from 'react-icons/bi';
 import { BsCardChecklist } from 'react-icons/bs';
 import { MdOutlineLogout } from "react-icons/md";
@@ -19,7 +19,7 @@ const SiderDashboardSeller = () => {
     {
       key: '2',
       label: <Link className=" font-medium" to={'/dashboard/seller/danhmuc'}>Quản lý danh mục</Link>,
-      icon: <AiOutlineHistory size={20} />,
+      icon: <AiOutlineFileProtect size={20} />,
     },
     {
       key: '3',
@@ -44,7 +44,7 @@ const SiderDashboardSeller = () => {
     {
       key: '5',
       label: <Link to={'/dashboard/seller/account/supplier'} className=" font-medium">Nhà cung cấp</Link>,
-      icon: <BiPackage size={20} />,
+      icon: <AiOutlineIdcard size={20} />,
     },
   ]
   return (

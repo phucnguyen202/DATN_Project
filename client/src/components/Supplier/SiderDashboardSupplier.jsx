@@ -1,7 +1,7 @@
 import { Menu, Typography } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import React from 'react'
-import { AiOutlineHistory, AiOutlineShop, AiOutlineUser } from 'react-icons/ai'
+import { AiOutlineCarryOut, AiOutlineEdit, AiOutlineHistory, AiOutlineShop, AiOutlineUser } from 'react-icons/ai'
 import { BsCardChecklist } from 'react-icons/bs'
 import { MdOutlineLogout } from "react-icons/md"
 import { Link } from 'react-router-dom'
@@ -17,7 +17,7 @@ const SiderDashboardSupplier = () => {
     {
       key: '2',
       label: <Link className=" font-medium" to={'/dashboard/supplier/create-product'}>Đăng thông tin sản phẩm</Link>,
-      icon: <AiOutlineHistory size={20} />,
+      icon: <AiOutlineEdit size={20} />,
     },
     {
       key: '6',
@@ -26,8 +26,8 @@ const SiderDashboardSupplier = () => {
     },
     {
       key: '3',
-      label: <Link className=" font-medium" to={'/dashboard/supplier/confirm-nhaphang'}>Dề xuất danh mục</Link>,
-      icon: <BsCardChecklist size={20} />,
+      label: <Link className=" font-medium" to={'/dashboard/supplier/suggested-list'}>Dề xuất danh mục</Link>,
+      icon: <AiOutlineCarryOut size={20} />,
     },
     {
       key: '4',

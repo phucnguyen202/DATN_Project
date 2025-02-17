@@ -7,7 +7,9 @@ class KhachHangController {
   async addProductToCart(req, res) {
     try {
       const { idSanPham, nguoiDungId } = req.body;
+      console.log(req.body)
       KhachHangModel.findByProductForGioHang(idSanPham, nguoiDungId, (err, result) => {
+        console.log(err)
         if (err) {
           return res.status(500).json({
             success: false,
@@ -17,6 +19,7 @@ class KhachHangController {
         }
         if (result.length === 0) {
           KhachHangModel.addToCart(idSanPham, nguoiDungId, (err, result) => {
+            console.log(err)
             if (err) {
               return res.status(500).json({
                 success: false,

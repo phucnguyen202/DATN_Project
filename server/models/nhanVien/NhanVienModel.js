@@ -150,10 +150,40 @@ const getAllOrderPayment = (callback) => {
   db.query(sql, callback);
 }
 
-// cập nhật trạng thái đơn hàng
+// cập nhật trạng thái đơn hàng, phần này vẫn chưa có trừ đơn hàng trong tonKho
 const updateOrderStatus = (trangThai, idDonHang, callback) => {
   const sql = `UPDATE tb_donhang SET trangThai =? WHERE idDonHang =?`;
-  db.query(sql, [trangThai, idDonHang], callback);
+  // Cập nhật trạng thái đơn hàng
+  db.query(sql, [trangThai, idDonHang], (err, result) => {
+    if (err) {
+      return callback(err);
+    }
+    // Nếu trạng thái là "Đã xác nhận", tiến hành trừ tồn kho
+    if (trangThai === 'Đã xác nhận') {
+      const sqlGetItems = `SELECT sanPhamId, soLuong FROM tb_chitietdonhang WHERE donHangId = ?`;
+      db.query(sqlGetItems, [idDonHang], (err, items) => {
+        // console.log('items::::', items)
+        if (err) return callback(err);
+        // Trừ tồn kho cho từng sản phẩm trong đơn hàng
+        const updateStock = items.map(item => {
+          return new Promise((resolve, reject) => {
+            const sqlUpdateStock = `UPDATE tb_sanpham SET tonKho = tonKho - ? WHERE idSanPham = ?`;
+            db.query(sqlUpdateStock, [item.soLuong, item.sanPhamId], (err, res) => {
+              if (err) reject(err);
+              else resolve(res);
+            });
+          });
+        });
+        // Chờ tất cả các cập nhật tồn kho hoàn thành
+        Promise.all(updateStock)
+          .then(() => callback(null, "Cập nhật trạng thái và trừ tồn kho thành công"))
+          .catch(callback);
+      })
+    } else {
+      // Nếu không cần trừ tồn kho
+      callback(null, "Cập nhật trạng thái đơn hàng thành công");
+    }
+  });
 }
 
 // xác nhận nhập hàng

@@ -35,6 +35,11 @@ const DetailOrder = ({ isVisible, onClose, currentOrder }) => {
       key: 'donHangId',
     },
     {
+      title: 'ID sản phẩm',
+      dataIndex: 'sanPhamId',
+      key: 'sanPhamId',
+    },
+    {
       title: 'Tên sản phẩm',
       dataIndex: 'tenSanPham',
       key: 'tenSanPham',

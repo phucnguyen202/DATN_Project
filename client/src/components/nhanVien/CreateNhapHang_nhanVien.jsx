@@ -1,4 +1,4 @@
-import { Button, Form, InputNumber, message, Modal, Select, Table, Tag } from 'antd';
+import { Button, Form, Input, InputNumber, message, Modal, Select, Table, Tag } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
@@ -18,9 +18,9 @@ const CreateNhapHang_nhanVien = () => {
       key: 'idNhapHang',
     },
     {
-      title: 'ID sản phẩm',
-      dataIndex: 'sanPhamId',
-      key: 'sanPhamId',
+      title: 'Tên sản phẩm',
+      dataIndex: 'tenSanPham',
+      key: 'tenSanPham',
     },
     {
       title: 'Tên nhà cung cấp',
@@ -150,14 +150,13 @@ const CreateNhapHang_nhanVien = () => {
               <Form.Item
                 className="block font-medium mb-2"
                 layout="vertical"
-                label="Mã sản phẩm"
-                name="sanPhamId"
+                label="Tên sản phẩm"
+                name="tenSanPham"
                 rules={[
-                  { required: true, message: "Vui lòng nhập mã sản phẩm" },
-                  { type: "number", message: "Mã sản phẩm phải là số" },
+                  { required: true, message: "Vui lòng nhập tên sản phẩm" },
                 ]}
               >
-                <InputNumber placeholder="Nhập mã sản phẩm" style={{ width: "100%" }} />
+                <Input placeholder="Nhập tên sản phẩm" style={{ width: "100%" }} />
               </Form.Item>
             </div>
             <div className='w-1/3'>
@@ -199,7 +198,6 @@ const CreateNhapHang_nhanVien = () => {
               </Form.Item>
             </div>
           </div>
-
           <Form.Item
             className='block  font-medium mb-2'
             layout="vertical"
@@ -221,17 +219,17 @@ const CreateNhapHang_nhanVien = () => {
         </Form>
         <div className='mt-10'>
           <Table
-            title={() => (
-              <div className="flex justify-between">
-                {/* <div>
-                  <Title level={3}>Lịch sử nhập hàng</Title>
-                </div> */}
-                <div className="flex gap-2">
-                  <Button className=" font-medium" icon={<BsFilterSquare size={20} />}>Filters</Button>
-                  <Button className=" font-medium" >Download all</Button>
-                </div>
-              </div>
-            )}
+            // title={() => (
+            //   <div className="flex justify-between">
+            //     {/* <div>
+            //       <Title level={3}>Lịch sử nhập hàng</Title>
+            //     </div> */}
+            //     <div className="flex gap-2">
+            //       <Button className=" font-medium" icon={<BsFilterSquare size={20} />}>Filters</Button>
+            //       <Button className=" font-medium" >Download all</Button>
+            //     </div>
+            //   </div>
+            // )}
             loading={isLoading}
             dataSource={dataSource}
             columns={columns} />

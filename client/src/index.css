@@ -27,9 +27,9 @@ body {
   position: relative !important;
 }
 
-.ant-menu-item{
+.ant-menu-item {
   display: flex !important;
-  align-items:center !important;
+  align-items: center !important;
 }
 
 /*
@@ -110,7 +110,7 @@ body {
 .custom-card-meta .ant-card-meta-title {
   /* Giới hạn chiều cao của title để hiển thị tối đa 2 dòng */
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   /* Số dòng muốn hiển thị */
   -webkit-box-orient: vertical;
   overflow: hidden;

@@ -94,10 +94,10 @@ const Order_KhachHang = () => {
           {
             item.thanhToan === 'Đã thanh toán' && (
               <Button
-                style={{
-                  backgroundColor: '#3BB77E',
-                  color: 'white',
-                }}
+                // style={{
+                //   backgroundColor: '#3BB77E',
+                //   color: 'white',
+                // }}
                 onClick={() => confirm({
                   title: 'Hủy đơn hàng',
                   content: 'Bạn có muốn hủy đơn hàng không?',

@@ -5,6 +5,7 @@ import { AiOutlineClockCircle, AiOutlinePlusCircle, AiOutlineUser } from 'react-
 import { BiListCheck } from 'react-icons/bi'
 import { FiPackage } from 'react-icons/fi'
 import { MdOutlineLogout } from "react-icons/md"
+import { RiFileHistoryLine } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
 const { Text } = Typography
 
@@ -28,7 +29,7 @@ const SiderDashboardNhanVien = () => {
     {
       key: '2',
       label: <Link className=" font-medium" to={'/dashboard/nhanvien/history'}>Lịch sử bán hàng</Link>,
-      icon: <AiOutlineClockCircle size={20} />,
+      icon: <RiFileHistoryLine size={20} />,
     },
     {
       key: '3',

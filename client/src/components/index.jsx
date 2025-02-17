@@ -30,8 +30,9 @@ import HistoryXuatHang from './Supplier/HistoryXuatHang';
 import InfoSupplier from './Supplier/InfoSupplier';
 import Create_product_Supplier from './Supplier/Create_product_Supplier';
 import ListProducts_Supplier from './Supplier/ListProducts_Supplier'
+import Suggested_List from './Supplier/Suggested_List'
 export {
-  Account, AccountUser, BannerHome, BestSellingProduct, Confirm_nhapHang, CreateDanhMuc, CreateNhapHang,
+  Account, AccountUser, BannerHome, BestSellingProduct, Confirm_nhapHang, CreateDanhMuc, CreateNhapHang, Suggested_List,
   CreateNhapHang_nhanVien, CreateProduct, DealsOfTheDayHome, FeaturedCategories, HeaderDashboardCustomer,
   History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, InfoSupplier,
   ListAccountSupplier, ListProducts, Order_KhachHang, Order_Nhanvien, PopularProducts, ProductSectionHome,
