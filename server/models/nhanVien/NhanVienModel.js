@@ -144,9 +144,9 @@ const getProductById = (productId, callback) => {
   db.query(sql, [productId], callback);
 }
 
-// lấy tất cả đơn hàng mà người đùng đã đặt thanh toán
+// lấy tất cả đơn hàng mà người đùng đã đặt thanh toán và trang thái đã xác nhận
 const getAllOrderPayment = (callback) => {
-  const sql = `SELECT * FROM tb_donhang WHERE thanhToan ='Đã thanh toán'`
+  const sql = `SELECT * FROM tb_donhang WHERE thanhToan ='Đã thanh toán' AND trangThai = 'Đã xác nhận'`
   db.query(sql, callback);
 }
 

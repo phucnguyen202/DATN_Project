@@ -1,6 +1,5 @@
 import { Badge, Dropdown, Empty, Space } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';

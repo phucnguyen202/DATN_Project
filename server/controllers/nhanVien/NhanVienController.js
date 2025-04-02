@@ -249,7 +249,7 @@ class NhanVienController {
     }
   }
 
-  // lấy nhưng đơn hàng đã thanh toán
+  // lấy nhưng đơn hàng đã thanh toán, trang thái đã xác nhận
   async getAllOrder(req, res) {
     try {
       ProductModel.getAllOrderPayment((err, result) => {
