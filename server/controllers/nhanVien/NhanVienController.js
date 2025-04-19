@@ -323,6 +323,7 @@ class NhanVienController {
       const { idnhaphang } = req.query
       console.log('idnhaphang:::', idnhaphang)
       ProductModel.confirm_nhapHang(idnhaphang, (err, result) => {
+        console.log("err::::", err)
         if (err) {
           return res.status(500).json({
             success: false,

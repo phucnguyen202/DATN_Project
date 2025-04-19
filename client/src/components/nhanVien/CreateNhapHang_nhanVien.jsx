@@ -62,7 +62,7 @@ const CreateNhapHang_nhanVien = () => {
       width: 100,
       dataIndex: '',
       render: (item) =>
-        item.trangThai === 'Đã duyệt' ? (
+        item.trangThai === 'Đã duyệt' && "Đã xác nhận" ? null : (
           <Button
             onClick={() => confirm({
               title: 'Xác nhận nhập hàng',
@@ -77,7 +77,7 @@ const CreateNhapHang_nhanVien = () => {
             }}>
             Xác nhận
           </Button>
-        ) : null // Không hiển thị nút nếu trạng thái không phải "Đã duyệt"
+        ) // Không hiển thị nút nếu trạng thái không phải "Đã duyệt"
     }
   ];
 
