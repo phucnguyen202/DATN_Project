@@ -31,7 +31,7 @@ const ContactPage = () => {
         <div className="">
           {/* Header */}
           <div className="text-center mb-10">
-            <h1 className="text-7xl font-bold text-customText">Liên hệ với Nest Food</h1>
+            <h1 className="text-7xl font-bold text-customText">Liên hệ với VIET GREEN</h1>
             <p className="text-lg text-custom mt-2">
               Mang đến sự hài lòng và đồng hành cùng bạn trong từng trải nghiệm mua sắm.
             </p>

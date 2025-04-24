@@ -53,7 +53,7 @@ const SellerPage = () => {
                   title: <p className='font-medium'>Cửa hàng</p>,
                 },
                 {
-                  title: <Link className='font-medium'>Nest Food</Link>,
+                  title: <Link className='font-medium'>VIET GREEN</Link>,
                 }
               ]}
             />
@@ -62,7 +62,7 @@ const SellerPage = () => {
         <div className='px-4'>
           <div className='pt-14 pb-20'>
             <div className='flex justify-center '>
-              <h1 className='text-6xl text-customText font-bold'>Cửa hàng Nest Food</h1>
+              <h1 className='text-6xl text-customText font-bold'>Cửa hàng VIET GREEN</h1>
             </div>
             <div className='pt-12 flex justify-center'>
               <div className='border-[1px] rounded-full shadow-lg pl-10'>
@@ -75,11 +75,11 @@ const SellerPage = () => {
             <div className='grid grid-cols-12 gap-4'>
               <div className='col-span-2 gap-4 flex flex-col'>
                 <div className='bg-[#d1e8f2] p-4 rounded-xl'>
-                  <div className='flex justify-center mb-10 mt-6'>
-                    <img src="https://www.niraagayurveda.com/assets/imgs/vendor/vendor-16.png" alt="" />
+                  <div className='flex justify-center'>
+                    <img className='bg-cover w-full' src="../../../public/logo.png" alt="" />
                   </div>
                   <p className='text-sm text-custom '>20/10/2024</p>
-                  <p className='font-semibold text-3xl '>Nest Food</p>
+                  <p className='font-semibold text-3xl '>VIET GREEN</p>
                   <p className='text-sm text-custom'>Người theo dõi: <span className=' text-greenCustom'>30</span></p>
                   <p className='text-sm text-customText font-medium my-6'>Got a smooth, buttery spread in your fridge? Chances are good that it's Good Chef. This brand made Lionto's list of the most popular grocery brands across the country.</p>
                   <div className='mb-6'>

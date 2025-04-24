@@ -10,7 +10,7 @@ const FooterComponent = () => {
       <div className='border-b-[1px] border-green-200'>
         <div className='grid xl:grid-cols-5 grid-cols-3 max-md:grid-cols-2 gap-4 px-4 my-12'>
           <div>
-            <img className='mb-4' src="https://www.niraagayurveda.com/assets/imgs/theme/logo.svg" alt="" />
+            <img className='mb-4' src="https://viet-green.vn/wp-content/uploads/2019/03/shop_logo_v1_2.png" alt="" />
             <p className='text-lg mb-7'>Awesome grocery store website template</p>
             <div>
               <div className='flex items-center gap-3 mb-2'>

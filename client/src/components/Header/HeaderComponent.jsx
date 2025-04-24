@@ -219,7 +219,8 @@ const HeaderComponent = () => {
             </div>
             <div className='col-span-7 md:col-span-3 xl:col-span-2 max-md:justify-center flex items-center'>
               <Link to='/'>
-                <img className=' w-[150px] md:w-[180px]' src="https://www.niraagayurveda.com/assets/imgs/theme/logo.svg" alt="" />
+                {/* <img className=' w-[150px] md:w-[180px]' src="https://www.niraagayurveda.com/assets/imgs/theme/logo.svg" alt="" /> */}
+                <img className=' w-[150px] md:w-[180px]' src="https://viet-green.vn/wp-content/uploads/2019/03/shop_logo_v1_2.png" alt="" />
               </Link>
             </div>
             <div

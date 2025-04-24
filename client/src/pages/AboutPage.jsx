@@ -94,10 +94,10 @@ const AboutPage = () => {
               </div>
               <div className='col-span-1'>
                 <div className='mt-8'>
-                  <p className="text-4xl text-customText font-bold pb-3">Welcome to Nest Food</p>
+                  <p className="text-4xl text-customText font-bold pb-3">Welcome to VIET GREEN</p>
                 </div>
                 <div className='mt-4'>
-                  <p className='text-custom font-medium'>Tại Nest Food, chúng tôi luôn đặt khách hàng lên hàng đầu, nỗ lực không ngừng để mang đến những sản phẩm nông sản sạch và chất lượng nhất. Chúng tôi hiểu rằng sự hài lòng của khách hàng là thành quả lớn nhất, nhưng để đạt được điều đó, cần rất nhiều tâm huyết và sự cống hiến. Mọi việc chúng tôi làm đều xuất phát từ mong muốn mang lại giá trị thực sự, để mỗi sản phẩm không chỉ là thực phẩm sạch mà còn là niềm tin và sự an tâm khi đến tay khách hàng.</p>
+                  <p className='text-custom font-medium'>Tại VIET GREEN, chúng tôi luôn đặt khách hàng lên hàng đầu, nỗ lực không ngừng để mang đến những sản phẩm nông sản sạch và chất lượng nhất. Chúng tôi hiểu rằng sự hài lòng của khách hàng là thành quả lớn nhất, nhưng để đạt được điều đó, cần rất nhiều tâm huyết và sự cống hiến. Mọi việc chúng tôi làm đều xuất phát từ mong muốn mang lại giá trị thực sự, để mỗi sản phẩm không chỉ là thực phẩm sạch mà còn là niềm tin và sự an tâm khi đến tay khách hàng.</p>
                 </div>
                 <div className='mt-8'>
                   <p className='text-custom font-medium'>Chúng tôi tin rằng nông sản sạch không chỉ là thực phẩm, mà còn là cách kết nối con người với thiên nhiên và với nhau. Từ khâu chọn lọc hạt giống đến khi thu hoạch và giao tận tay khách hàng, mọi quy trình đều được thực hiện với sự tận tâm và trách nhiệm. Mục tiêu của chúng tôi không chỉ là cung cấp sản phẩm chất lượng, mà còn lan tỏa lối sống xanh, lành mạnh đến từng bữa ăn và từng gia đình.</p>
@@ -144,7 +144,7 @@ const AboutPage = () => {
               <div className='grid grid-cols-3 gap-8'>
                 <div className='col-span-1'>
                   <h3 className='text-2xl font-bold text-customText mb-6'>Chúng tôi là ai</h3>
-                  <p className='text-base text-custom font-medium'>Chúng tôi là Nest Food, chuyên cung cấp nông sản sạch, tươi ngon, an toàn cho sức khỏe. Cam kết mang đến sản phẩm chất lượng và dịch vụ tốt nhất cho mọi gia đình.</p>
+                  <p className='text-base text-custom font-medium'>Chúng tôi là VIET GREEN, chuyên cung cấp nông sản sạch, tươi ngon, an toàn cho sức khỏe. Cam kết mang đến sản phẩm chất lượng và dịch vụ tốt nhất cho mọi gia đình.</p>
                 </div>
                 <div className='col-span-1'>
                   <h3 className='text-2xl font-bold text-customText mb-6'>Lịch sử của chung tôi</h3>
@@ -183,7 +183,7 @@ const AboutPage = () => {
                     </div>
                     <div className='absolute z-10 bottom-[-120px] left-12 group-hover:-translate-y-2 transition-transform transform duration-300 ease-in-out'>
                       <div className='shadow-lg px-20 py-10 bg-white rounded-xl'>
-                        <h2 className="text-3xl text-center text-customText font-bold pb-2">Mr. Khoa</h2>
+                        <h2 className="text-3xl text-center text-customText font-bold pb-2">Mr. Phuc</h2>
                         <p className='text-base text-center text-custom font-medium'>CEO & Co-Founder</p>
                         <div className='flex gap-4 mt-3'>
                           <Link className=''><BiLogoFacebook className='text-greenCustom ' size={18} /></Link>
@@ -202,7 +202,7 @@ const AboutPage = () => {
                     </div>
                     <div className='absolute z-10 bottom-[-120px]  left-12 group-hover:-translate-y-2 transition-transform transform duration-300 ease-in-out'>
                       <div className='shadow-lg px-20 py-10 bg-white rounded-xl'>
-                        <h2 className="text-3xl text-center text-customText font-bold pb-2">Mr. Khoa</h2>
+                        <h2 className="text-3xl text-center text-customText font-bold pb-2">Mr. Phuc</h2>
                         <p className='text-base text-center text-custom font-medium'>Head Engineer</p>
                         <div className='flex gap-4 mt-3'>
                           <Link className=''><BiLogoFacebook className='text-greenCustom ' size={18} /></Link>
