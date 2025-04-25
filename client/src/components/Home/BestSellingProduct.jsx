@@ -19,7 +19,9 @@ const BestSellingProduct = () => {
   const [activeTab, setActiveTab] = useState('1');
   const [sold, setSold] = useState(90); // initial value
   const total = 120; // total items
-
+  const formatCurrency = (amount) => {
+    return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   const handleSliderChange = (value) => {
     setSold(value);
   };
@@ -108,15 +110,14 @@ const BestSellingProduct = () => {
                       alt=""
                     />
                   </div>
-
                   <Text type="secondary">Snack</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
-                    title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                    title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
                   <Rate value={3} className='text-sm mt-6' />
                   <div className='flex gap-3 items-center'>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom  font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(200000)} VNĐ</Text>
+                    <Text className='text-slate-400 font-medium text-xs'><s>{formatCurrency(300000)} VNĐ</s> </Text>
                   </div>
                   <Progress
                     percent={(sold / total) * 100}
@@ -169,11 +170,12 @@ const BestSellingProduct = () => {
                   <Text type="secondary">Snack</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
-                    title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                    title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
                   <Rate value={3} className='text-sm mt-6' />
                   <div className='flex gap-3 items-center'>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-slate-400 font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(200000)} VNĐ</Text>
+                    <Text className='text-slate-400 font-medium text-xs'><s>{formatCurrency(300000)} VNĐ</s> </Text>
+
                   </div>
                   <Progress
                     percent={(sold / total) * 100}
@@ -226,11 +228,12 @@ const BestSellingProduct = () => {
                   <Text type="secondary">Snack</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
-                    title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                    title="SHạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
                   <Rate value={3} className='text-sm mt-6' />
                   <div className='flex gap-3 items-center'>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-slate-400 font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(200000)} VNĐ</Text>
+                    <Text className='text-slate-400 font-medium text-xs'><s>{formatCurrency(300000)} VNĐ</s> </Text>
+
                   </div>
                   <Progress
                     percent={(sold / total) * 100}
@@ -283,11 +286,11 @@ const BestSellingProduct = () => {
                   <Text type="secondary">Snack</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
-                    title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                    title="SHạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
                   <Rate value={3} className='text-sm mt-6' />
                   <div className='flex gap-3 items-center'>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-slate-400 font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(200000)} VNĐ</Text>
+                    <Text className='text-slate-400 font-medium text-xs'><s>{formatCurrency(300000)} VNĐ</s> </Text>
                   </div>
                   <Progress
                     percent={(sold / total) * 100}
@@ -340,11 +343,11 @@ const BestSellingProduct = () => {
                   <Text type="secondary">Snack</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
-                    title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                    title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
                   <Rate value={3} className='text-sm mt-6' />
                   <div className='flex gap-3 items-center'>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-slate-400 font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(200000)} VNĐ</Text>
+                    <Text className='text-slate-400 font-medium text-xs'><s>{formatCurrency(300000)} VNĐ</s> </Text>
                   </div>
                   <Progress
                     percent={(sold / total) * 100}

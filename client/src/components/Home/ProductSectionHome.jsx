@@ -3,6 +3,9 @@ import React from 'react';
 
 const { Title, Text } = Typography;
 const ProductSectionHome = () => {
+  const formatCurrency = (amount) => {
+    return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   return (
     <>
       <div className='xl:mt-28 lg:mt-[164px] max-md:py-6 px-4 pb-4'>
@@ -20,14 +23,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-1.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -35,14 +38,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-2.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -50,14 +53,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-3.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -76,14 +79,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-4.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -91,14 +94,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-5.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -106,14 +109,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-6.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -130,16 +133,31 @@ const ProductSectionHome = () => {
             <div className='mt-10 flex flex-col gap-4'>
               <div className='flex gap-4 hover:-translate-y-2 transition-transform transform duration-300 ease-in-out'>
                 <div className='w-32'>
-                  <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-7.jpg" alt="" />
+                  <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-9.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
+                  </Space>
+                </div>
+              </div>
+              <div className='flex gap-4 hover:-translate-y-2 transition-transform transform duration-300 ease-in-out'>
+                <div className='w-32'>
+                  <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-7.jpg" alt="" />
+                </div>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
+                  <Space className=''>
+                    <Rate value={3} className='text-sm' />
+                  </Space>
+                  <Space className=''>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -147,29 +165,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-8.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
-                  </Space>
-                </div>
-              </div>
-              <div className='flex gap-4 hover:-translate-y-2 transition-transform transform duration-300 ease-in-out'>
-                <div className='w-32'>
-                  <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-9.jpg" alt="" />
-                </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
-                  <Space className=''>
-                    <Rate value={3} className='text-sm' />
-                  </Space>
-                  <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -188,14 +191,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-10.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -203,14 +206,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-11.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>
@@ -218,14 +221,14 @@ const ProductSectionHome = () => {
                 <div className='w-32'>
                   <img className='w-full h-full rounded-md' src="https://www.niraagayurveda.com/assets/imgs/shop/thumbnail-12.jpg" alt="" />
                 </div>
-                <div>
-                  <h5 className='text-customText font-bold'>Seeds of Change Organic Quinoa, Brown, & Red Rice</h5>
+                <div className='w-full'>
+                  <h5 className='text-customText line-clamp-2 font-bold'>Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan.</h5>
                   <Space className=''>
                     <Rate value={3} className='text-sm' />
                   </Space>
                   <Space className=''>
-                    <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
-                    <Text className='text-custom font-medium text-sm'>$14.99</Text>
+                    <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(20000)} VNĐ</Text>
+                    <Text className='text-custom font-medium text-sm'><s>{formatCurrency(30000)} VNĐ</s></Text>
                   </Space>
                 </div>
               </div>

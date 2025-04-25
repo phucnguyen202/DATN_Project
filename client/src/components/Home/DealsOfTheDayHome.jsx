@@ -3,6 +3,9 @@ import React from 'react';
 import { IoCartOutline } from "react-icons/io5";
 const { Title, Text } = Typography;
 const DealsOfTheDayHome = () => {
+  const formatCurrency = (amount) => {
+    return amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   return (
     <>
       <div className="px-4 py-6">
@@ -34,13 +37,13 @@ const DealsOfTheDayHome = () => {
               <Card hoverable>
                 <Card.Meta
                   className="custom-card-meta py-2"
-                  title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                  title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
                 <Space className='flex justify-between py-2'>
                   <Rate value={3} className='text-sm' />
-                  <Text type="secondary">By <span className='text-greenCustom'>NestFood</span> </Text>
+                  <Text type="secondary">By <span className='text-greenCustom'>Viet Green</span> </Text>
                 </Space>
                 <Space className='flex justify-between items-center pt-2'>
-                  <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                  <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(30000)} VNĐ</Text>
                   <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
                     <IoCartOutline size={17} />
                     Add
@@ -75,13 +78,13 @@ const DealsOfTheDayHome = () => {
               <Card hoverable>
                 <Card.Meta
                   className="custom-card-meta py-2"
-                  title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                  title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
                 <Space className='flex justify-between py-2'>
                   <Rate value={3} className='text-sm' />
-                  <Text type="secondary">By <span className='text-greenCustom'>NestFood</span> </Text>
+                  <Text type="secondary">By <span className='text-greenCustom'>Viet Green</span> </Text>
                 </Space>
                 <Space className='flex justify-between items-center pt-2'>
-                  <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                  <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(30000)} VNĐ</Text>
                   <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
                     <IoCartOutline size={17} />
                     Add
@@ -116,13 +119,13 @@ const DealsOfTheDayHome = () => {
               <Card hoverable>
                 <Card.Meta
                   className="custom-card-meta py-2"
-                  title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                  title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
                 <Space className='flex justify-between py-2'>
                   <Rate value={3} className='text-sm' />
-                  <Text type="secondary">By <span className='text-greenCustom'>NestFood</span> </Text>
+                  <Text type="secondary">By <span className='text-greenCustom'>Viet Green</span> </Text>
                 </Space>
                 <Space className='flex justify-between items-center pt-2'>
-                  <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                  <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(30000)} VNĐ</Text>
                   <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
                     <IoCartOutline size={17} />
                     Add
@@ -157,13 +160,13 @@ const DealsOfTheDayHome = () => {
               <Card hoverable>
                 <Card.Meta
                   className="custom-card-meta py-2"
-                  title="Seeds of Change Organic Quinoa, Brown, & Red Rice" />
+                  title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
                 <Space className='flex justify-between py-2'>
                   <Rate value={3} className='text-sm' />
-                  <Text type="secondary">By <span className='text-greenCustom'>NestFood</span> </Text>
+                  <Text type="secondary">By <span className='text-greenCustom'>Viet Green</span> </Text>
                 </Space>
                 <Space className='flex justify-between items-center pt-2'>
-                  <Text className='text-greenCustom font-medium text-lg'>$14.99</Text>
+                  <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(30000)} VNĐ</Text>
                   <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
                     <IoCartOutline size={17} />
                     Add
