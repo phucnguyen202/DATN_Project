@@ -1,14 +1,12 @@
-import { Avatar, Button, Dropdown, Input } from 'antd'
+import { Avatar, Button, Input } from 'antd'
 import { Header } from 'antd/es/layout/layout'
 import React from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { GoBell } from 'react-icons/go'
+import { useSelector } from 'react-redux'
 
-import { useSelector } from 'react-redux';
-
-const HeaderDashboardSeller = () => {
+const HeaderDashboar = () => {
   const user = useSelector(state => state?.auth?.currentData?.user)
-
   return (
     <>
       <Header style={{
@@ -33,4 +31,4 @@ const HeaderDashboardSeller = () => {
   )
 }
 
-export default HeaderDashboardSeller
+export default HeaderDashboar

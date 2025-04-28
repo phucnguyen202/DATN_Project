@@ -1,6 +1,5 @@
 
 import AccountUser from './Admin/AccountUser';
-import HeaderDashboardCustomer from './customer/HeaderDashboardCustomer';
 import HistoryMuaHang from './customer/HistoryMuaHang';
 import InfoCustomer from './customer/InfoCustomer';
 import Order_KhachHang from './customer/Order_KhachHang';
@@ -26,16 +25,15 @@ import ListAccountSupplier from './seller/ListAccountSupplier';
 import ThongKe from './seller/ThongKe';
 import Status_giaoHang from './Shipper/Status_giaoHang';
 import Confirm_nhapHang from './Supplier/Confirm_nhapHang';
+import Create_product_Supplier from './Supplier/Create_product_Supplier';
 import HistoryXuatHang from './Supplier/HistoryXuatHang';
 import InfoSupplier from './Supplier/InfoSupplier';
-import Create_product_Supplier from './Supplier/Create_product_Supplier';
-import ListProducts_Supplier from './Supplier/ListProducts_Supplier'
-import Suggested_List from './Supplier/Suggested_List'
+import ListProducts_Supplier from './Supplier/ListProducts_Supplier';
+import Suggested_List from './Supplier/Suggested_List';
 export {
-  Account, AccountUser, BannerHome, BestSellingProduct, Confirm_nhapHang, CreateDanhMuc, CreateNhapHang, Suggested_List,
-  CreateNhapHang_nhanVien, CreateProduct, DealsOfTheDayHome, FeaturedCategories, HeaderDashboardCustomer,
+  Account, AccountUser, BannerHome, BestSellingProduct, Confirm_nhapHang, Create_product_Supplier, CreateDanhMuc, CreateNhapHang, CreateNhapHang_nhanVien, CreateProduct, DealsOfTheDayHome, FeaturedCategories,
   History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, InfoSupplier,
-  ListAccountSupplier, ListProducts, Order_KhachHang, Order_Nhanvien, PopularProducts, ProductSectionHome,
-  PromotionalSectionHome, SiderDashboardCustomer, Status_giaoHang, ThongKe, Create_product_Supplier, ListProducts_Supplier
+  ListAccountSupplier, ListProducts, ListProducts_Supplier, Order_KhachHang, Order_Nhanvien, PopularProducts, ProductSectionHome,
+  PromotionalSectionHome, SiderDashboardCustomer, Status_giaoHang, Suggested_List, ThongKe
 };
 
