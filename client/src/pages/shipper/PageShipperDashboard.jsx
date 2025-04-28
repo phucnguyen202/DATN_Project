@@ -3,7 +3,6 @@ import { Content } from 'antd/es/layout/layout'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import HeaderDashboar from '../../components/HeaderDashboar'
-import SiderDashboardShipper from '../../components/Shipper/SiderDashboardShipper'
 import SiderDashboard from '../../components/SiderDashboard'
 
 
@@ -39,7 +38,7 @@ const PageShipperDashboard = () => {
     <>
       <Layout>
         <Affix offsetTop={0}>
-          <SiderDashboard />
+          <SiderDashboard items={items} />
         </Affix>
         <Layout>
           <Affix offsetTop={0}>

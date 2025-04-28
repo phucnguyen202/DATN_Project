@@ -2,8 +2,6 @@ import { Affix, Layout } from "antd"
 
 import { Outlet } from "react-router-dom"
 import { Content } from "antd/es/layout/layout"
-import SiderDashboardAdmin from "../../components/Admin/SiderDashboardAdmin"
-import { useState } from "react"
 import HeaderDashboar from "../../components/HeaderDashboar"
 import SiderDashboard from "../../components/SiderDashboard"
 

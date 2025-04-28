@@ -3,7 +3,6 @@ import AccountUser from './Admin/AccountUser';
 import HistoryMuaHang from './customer/HistoryMuaHang';
 import InfoCustomer from './customer/InfoCustomer';
 import Order_KhachHang from './customer/Order_KhachHang';
-import SiderDashboardCustomer from './customer/SiderDashboardCustomer';
 import BannerHome from "./Home/BannerHome";
 import BestSellingProduct from "./Home/BestSellingProduct";
 import DealsOfTheDayHome from "./Home/DealsOfTheDayHome";
@@ -34,6 +33,6 @@ export {
   Account, AccountUser, BannerHome, BestSellingProduct, Confirm_nhapHang, Create_product_Supplier, CreateDanhMuc, CreateNhapHang, CreateNhapHang_nhanVien, CreateProduct, DealsOfTheDayHome, FeaturedCategories,
   History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, InfoSupplier,
   ListAccountSupplier, ListProducts, ListProducts_Supplier, Order_KhachHang, Order_Nhanvien, PopularProducts, ProductSectionHome,
-  PromotionalSectionHome, SiderDashboardCustomer, Status_giaoHang, Suggested_List, ThongKe
+  PromotionalSectionHome, Status_giaoHang, Suggested_List, ThongKe
 };
 
