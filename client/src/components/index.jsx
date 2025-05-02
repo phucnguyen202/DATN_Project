@@ -12,6 +12,7 @@ import ProductSectionHome from "./Home/ProductSectionHome";
 import PromotionalSectionHome from "./Home/PromotionalSectionHome";
 import CreateNhapHang_nhanVien from './nhanVien/CreateNhapHang_nhanVien';
 import CreateProduct from './nhanVien/CreateProduct';
+import DealsOfTheDay from './nhanVien/DealsOfTheDay';
 import HistoryBanHang from './nhanVien/HistoryBanHang';
 import InfoPersonal from './nhanVien/InfoPersonal';
 import ListProducts from './nhanVien/ListProducts';
@@ -30,7 +31,7 @@ import InfoSupplier from './Supplier/InfoSupplier';
 import ListProducts_Supplier from './Supplier/ListProducts_Supplier';
 import Suggested_List from './Supplier/Suggested_List';
 export {
-  Account, AccountUser, BannerHome, BestSellingProduct, Confirm_nhapHang, Create_product_Supplier, CreateDanhMuc, CreateNhapHang, CreateNhapHang_nhanVien, CreateProduct, DealsOfTheDayHome, FeaturedCategories,
+  Account, AccountUser, BannerHome, BestSellingProduct, Confirm_nhapHang, Create_product_Supplier, CreateDanhMuc, CreateNhapHang, CreateNhapHang_nhanVien, CreateProduct, DealsOfTheDay, DealsOfTheDayHome, FeaturedCategories,
   History_NhapHang, HistoryBanHang, HistoryMuaHang, HistoryXuatHang, InfoCustomer, InfoPersonal, InfoSupplier,
   ListAccountSupplier, ListProducts, ListProducts_Supplier, Order_KhachHang, Order_Nhanvien, PopularProducts, ProductSectionHome,
   PromotionalSectionHome, Status_giaoHang, Suggested_List, ThongKe

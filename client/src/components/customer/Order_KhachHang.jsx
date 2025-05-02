@@ -122,7 +122,6 @@ const Order_KhachHang = () => {
         setOrderInfo(res.data)
       }
     } catch (e) {
-      console.error(e)
     }
   }
 

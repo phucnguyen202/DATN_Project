@@ -16,8 +16,8 @@ const SignupPage = () => {
     try {
       const res = await handleAPI('/auth/register', value, 'post')
       res.data && dispatch(addAuth(res.data))
-      // message.success(res.message)
       navigate('/otp-code')
+      // navigate('/')
     } catch (e) {
       console.error(e.message)
     } finally {

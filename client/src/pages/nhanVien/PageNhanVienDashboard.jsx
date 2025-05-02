@@ -2,6 +2,7 @@ import { Affix, Layout, Typography } from 'antd'
 import { Content } from 'antd/es/layout/layout'
 import { AiOutlineClockCircle, AiOutlinePlusCircle, AiOutlineUser } from 'react-icons/ai'
 import { BiListCheck } from 'react-icons/bi'
+import { FaIdeal } from "react-icons/fa"
 import { FiPackage } from 'react-icons/fi'
 import { RiFileHistoryLine } from 'react-icons/ri'
 import { Link, Outlet } from 'react-router-dom'
@@ -13,14 +14,19 @@ const { Text } = Typography
 const PageNhanVienDashboard = () => {
   const items = [
     {
-      key: '6',
+      key: '1',
       label: <Link className=" font-medium" to={'/dashboard/nhanvien/list-products'}>Danh sách sản phẩm</Link>,
       icon: <BiListCheck size={20} />,
     },
     {
-      key: '1',
+      key: '6',
       label: <Link className=" font-medium" to={'/dashboard/nhanvien/create-product'}>Tạo sản phẩm</Link>,
       icon: <AiOutlinePlusCircle size={20} />,
+    },
+    {
+      key: '8',
+      label: <Link className=" font-medium" to={'/dashboard/nhanvien/deals-of-the-day'}>Tạo khuyến mãi</Link>,
+      icon: < FaIdeal size={20} />,
     },
     {
       key: '7',

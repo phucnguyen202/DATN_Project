@@ -1,9 +1,12 @@
 import { Affix, Layout } from 'antd'
 import { Content } from 'antd/es/layout/layout'
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import HeaderDashboar from '../../components/HeaderDashboar'
 import SiderDashboard from '../../components/SiderDashboard'
+import { AiOutlineUser } from 'react-icons/ai'
+import { RiBuildingLine } from 'react-icons/ri'
+import { MdUpdate } from 'react-icons/md'
 
 const PageKhachHangDashboard = () => {
   const items = [

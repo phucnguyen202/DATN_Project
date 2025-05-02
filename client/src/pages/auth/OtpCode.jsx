@@ -1,21 +1,35 @@
-import React, { useState } from 'react'
-import handleAPI from '../../apis/HandleAPI';
+import { Input, message } from 'antd';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
-
+import handleAPI from '../../apis/HandleAPI';
 const OtpCode = () => {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState(["", "", "", ""]);
-  const handleOtpChange = (e, index) => {
-    const newOtp = [...otp];
-    newOtp[index] = e.target.value;
-    setOtp(newOtp);
-  }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const otpCode = otp.join('');
+  // const [otp, setOtp] = useState(["", "", "", ""]);
+  // const handleOtpChange = (e, index) => {
+  //   const newOtp = [...otp];
+  //   newOtp[index] = e.target.value;
+  //   setOtp(newOtp);
+  // }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const otpCode = otp.join('');
+  //   const data = {
+  //     otpCode: otpCode,
+  //   }
+  //   try {
+  //     const res = await handleAPI('/auth/verify-email', data, 'post')
+  //     if (res.success) {
+  //       message.success(res.message)
+  //       navigate('/')
+  //     }
+  //   } catch (e) {
+  //     message.error("Mã OTP không đúng")
+  //   }
+  // }
+
+  const onChange = async (text) => {
     const data = {
-      otpCode: otpCode,
+      otpCode: text,
     }
     try {
       const res = await handleAPI('/auth/verify-email', data, 'post')
@@ -23,11 +37,13 @@ const OtpCode = () => {
         message.success(res.message)
         navigate('/')
       }
-    } catch (e) {
+    } catch {
       message.error("Mã OTP không đúng")
     }
-
-  }
+  };
+  const sharedProps = {
+    onChange,
+  };
   return (
     <>
       <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12">
@@ -42,40 +58,10 @@ const OtpCode = () => {
               </div>
             </div>
             <div>
-              <form onSubmit={handleSubmit}>
-                <div className="flex flex-col space-y-16">
-                  <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
-                    {otp.map((digit, index) => (
-                      <div className="w-16 h-16" key={index}>
-                        <input
-                          className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                          type="text"
-                          value={digit}
-                          onChange={(e) => handleOtpChange(e, index)}
-                          maxLength="1"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-col space-y-5">
-                    <div>
-                      <button
-                        style={{
-                          backgroundColor: '#3BB77E',
-                          color: 'white',
-                        }}
-                        className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5  border-none text-sm font-bold shadow-sm"
-                      >
-                        Xác minh tài khoản
-                      </button>
-                    </div>
-
-                    <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                      <p>Không nhận được mã?</p> <a className="flex flex-row items-center text-blue-600" href="http://" target="_blank" rel="noopener noreferrer">Gửi lại</a>
-                    </div>
-                  </div>
-                </div>
-              </form>
+              <div className="flex justify-center">
+                <Input.OTP length={4}
+                  formatter={str => str.toUpperCase()} {...sharedProps} />
+              </div>
             </div>
           </div>
         </div>
