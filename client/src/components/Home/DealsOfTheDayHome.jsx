@@ -46,7 +46,7 @@ const DealsOfTheDayHome = () => {
                   <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(30000)} VNĐ</Text>
                   <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
                     <IoCartOutline size={17} />
-                    Add
+                    Thêm
                   </button>
                 </Space>
               </Card>
@@ -87,7 +87,7 @@ const DealsOfTheDayHome = () => {
                   <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(30000)} VNĐ</Text>
                   <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
                     <IoCartOutline size={17} />
-                    Add
+                    Thêm
                   </button>
                 </Space>
               </Card>
@@ -128,7 +128,7 @@ const DealsOfTheDayHome = () => {
                   <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(30000)} VNĐ</Text>
                   <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
                     <IoCartOutline size={17} />
-                    Add
+                    Thêm
                   </button>
                 </Space>
               </Card>
@@ -169,7 +169,7 @@ const DealsOfTheDayHome = () => {
                   <Text className='text-greenCustom font-medium text-lg'>{formatCurrency(30000)} VNĐ</Text>
                   <button className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
                     <IoCartOutline size={17} />
-                    Add
+                    Thêm
                   </button>
                 </Space>
               </Card>

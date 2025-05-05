@@ -1,61 +1,61 @@
 
 export const featuredCategoriesDB = [
   {
-    title: 'Cake & Milk',
+    title: 'Bánh & Sữa',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-13.png',
     items: 26,
     color: '#fffceb'
   },
   {
-    title: 'Oganic Kiwi',
+    title: 'quả Kiwi',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-12.png',
     items: 28,
     color: '#ecffec'
   },
   {
-    title: 'Peach',
+    title: 'quả đào',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-11.png',
     items: 14,
     color: '#feefea'
   },
   {
-    title: 'Red Apple',
+    title: 'quả táo',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-9.png',
     items: 54,
     color: '#fff3eb'
   },
   {
-    title: 'Snack',
+    title: 'Đồ ăn vặt',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-3.png',
     items: 56,
     color: '#fff3ff'
   },
   {
-    title: 'Vegetables',
+    title: 'Rau sạch',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-1.png',
     items: 72,
     color: '#f2fce4'
   },
   {
-    title: 'Strawberry',
+    title: 'quả dâu',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-2.png',
     items: 36,
     color: '#feefea'
   },
   {
-    title: 'Black plum',
+    title: 'quả mận đen',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-4.png',
     items: 123,
     color: '#fffceb'
   },
   {
-    title: 'Custard apple',
+    title: 'quả mãng cầu xiêm',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-5.png',
     items: 34,
     color: '#feefea'
   },
   {
-    title: 'Coffe & Tea',
+    title: 'cà phê & trà',
     img: 'https://www.niraagayurveda.com/assets/imgs/shop/cat-14.png',
     items: 89,
     color: '#ecffec'

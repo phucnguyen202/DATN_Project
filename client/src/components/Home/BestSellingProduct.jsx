@@ -81,10 +81,10 @@ const BestSellingProduct = () => {
         <div className='col-span-3 relative max-md:hidden'>
           <div className='banner_bestSellingProduct h-[490px] xl:h-[520px] rounded-xl '>
             <div className=' absolute py-8 px-9'>
-              <p className='font-semibold text-customText text-5xl mb-12'> Bring nature<br /> into your<br />home</p>
+              <p className='font-semibold text-customText text-5xl mb-8'> VietGreen<br /> Sống theo cách<br />xanh nhất</p>
               <Button
-                className=" text-slate-50  bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
-                icon={<GrFormNextLink size={20} />}>Shop Now</Button>
+                className=" text-slate-40  bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
+                icon={<GrFormNextLink size={20} />}>Mua Ngay</Button>
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@ const BestSellingProduct = () => {
                       alt=""
                     />
                   </div>
-                  <Text type="secondary">Snack</Text>
+                  <Text type="secondary">Đồ ăn vặt</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
                     title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
@@ -139,7 +139,7 @@ const BestSellingProduct = () => {
                   </div>
                   <button className=' w-full flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 p-3'>
                     <IoCartOutline size={17} />
-                    Add To Cart
+                    Thêm vào giỏ hàng
                   </button>
                 </Card>
               </Badge.Ribbon>
@@ -167,7 +167,7 @@ const BestSellingProduct = () => {
                     src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
                     alt=""
                   /> */}
-                  <Text type="secondary">Snack</Text>
+                  <Text type="secondary">Đồ ăn vặt</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
                     title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
@@ -197,7 +197,7 @@ const BestSellingProduct = () => {
                   </div>
                   <button className=' w-full flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 p-3'>
                     <IoCartOutline size={17} />
-                    Add To Cart
+                    Thêm vào giỏ hàng
                   </button>
                 </Card>
               </Badge.Ribbon>
@@ -225,7 +225,7 @@ const BestSellingProduct = () => {
                     src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
                     alt=""
                   /> */}
-                  <Text type="secondary">Snack</Text>
+                  <Text type="secondary">Đồ ăn vặt</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
                     title="SHạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
@@ -255,7 +255,7 @@ const BestSellingProduct = () => {
                   </div>
                   <button className=' w-full flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 p-3'>
                     <IoCartOutline size={17} />
-                    Add To Cart
+                    Thêm vào giỏ hàng
                   </button>
                 </Card>
               </Badge.Ribbon>
@@ -283,7 +283,7 @@ const BestSellingProduct = () => {
                     src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
                     alt=""
                   /> */}
-                  <Text type="secondary">Snack</Text>
+                  <Text type="secondary">Đồ ăn vặt</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
                     title="SHạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
@@ -312,7 +312,7 @@ const BestSellingProduct = () => {
                   </div>
                   <button className=' w-full flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 p-3'>
                     <IoCartOutline size={17} />
-                    Add To Cart
+                    Thêm vào giỏ hàng
                   </button>
                 </Card>
               </Badge.Ribbon>
@@ -340,7 +340,7 @@ const BestSellingProduct = () => {
                     src="https://www.niraagayurveda.com/assets/imgs/shop/product-1-2.jpg"
                     alt=""
                   /> */}
-                  <Text type="secondary">Snack</Text>
+                  <Text type="secondary">Đồ ăn vặt</Text>
                   <Card.Meta
                     className="custom-card-meta py-2"
                     title="Hạt điều sạch được thu hoạch từ nông trại uy tín, sau đó được rang với muối tự nhiên để giữ trọn hương vị thơm ngon và độ giòn tan." />
@@ -369,7 +369,7 @@ const BestSellingProduct = () => {
                   </div>
                   <button className=' w-full flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50 p-3'>
                     <IoCartOutline size={17} />
-                    Add To Cart
+                    Thêm vào giỏ hàng
                   </button>
                 </Card>
               </Badge.Ribbon>

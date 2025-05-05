@@ -23,7 +23,7 @@ const FooterComponent = () => {
               </div>
               <div className='flex items-center gap-3 mb-2'>
                 <FiSend size={20} className='text-greenCustom' />
-                <p className='text-lg'><b className='text-customText'>Email:</b> sale@Nest.com</p>
+                <p className='text-lg'><b className='text-customText'>Email:</b> sale@VietGreen.com</p>
               </div>
               <div className='flex items-center gap-3 mb-2'>
                 <TbClockHour4 size={20} className='text-greenCustom' />
@@ -87,7 +87,7 @@ const FooterComponent = () => {
       <div className='py-8 px-4'>
         <div className='grid xl:grid-cols-3 grid-cols-2  max-md:grid-cols-1'>
           <div className='max-md:text-center'>
-            <p className='text-base text-custom'>© 2022, <b className='text-greenCustom'>Nest</b> - HTML Ecommerce Template <br />All rights reserved</p>
+            <p className='text-base text-custom'>© 2025, <b className='text-greenCustom'>VietGreen</b> - HTML Ecommerce Template <br />All rights reserved</p>
           </div>
           <div className='max-md:hidden lg:hidden xl:block'>
             <div className='flex justify-between items-center'>

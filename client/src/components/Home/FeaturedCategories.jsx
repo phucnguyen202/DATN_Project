@@ -109,7 +109,7 @@ const FeaturedCategories = () => {
                 <p
                   style={{ margin: '0px' }}
                   className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
-                  Tươi mới hàng ngày &amp; <br />
+                  Củ tươi mới &amp; <br />
                   Sạch sẽ với sản phẩm của chúng tôi
                 </p>
                 <Button
@@ -131,7 +131,7 @@ const FeaturedCategories = () => {
                 <p
                   style={{ margin: '0px' }}
                   className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
-                  Làm bữa sáng của bạn lành mạnh và dễ dàng
+                  Đồ uống dinh dưỡng tốt cho sức khỏe
                 </p>
                 <Button
                   className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"
@@ -153,7 +153,7 @@ const FeaturedCategories = () => {
                 <p
                   style={{ margin: '0px' }}
                   className="!text-customText text-lg xl:text-2xl font-semibold h-[84px] xl:h-[95px]">
-                  Sản phẩm hữu cơ tốt nhất trực tuyến
+                  Sản phẩm hữu cơ tốt nhất thị trường
                 </p>
                 <Button
                   className="text-slate-50 bg-customBg hover:bg-customBg lg:text-xs xl:mt-6 mt-2"

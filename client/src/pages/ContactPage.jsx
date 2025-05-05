@@ -42,7 +42,7 @@ const ContactPage = () => {
               <ul className="text-customText mt-2 flex flex-col gap-4">
                 <li><strong>Địa chỉ:</strong>48 Cao Thắng, Thanh Bình, Hải Châu, Đà Nẵng, Việt Nam </li>
                 <li><strong>Điện thoại:</strong> 0987 654 321</li>
-                <li><strong>Email:</strong> support@nestfood.vn</li>
+                <li><strong>Email:</strong> support@VietGreen.vn</li>
               </ul>
             </div>
             <div className='col-span-1'>

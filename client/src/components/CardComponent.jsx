@@ -74,7 +74,7 @@ const CardComponent = ({ item }) => {
               title={item.tenSanPham} />
             <Space className='flex justify-between py-2'>
               <Tag color='pink'>{item.yeuThich} yêu thích</Tag>
-              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>NestFood</span> </Link>
+              <Link to={`/storepage/NestFood`} className='text-custom'>By <span className='text-greenCustom'>VietGreen</span> </Link>
             </Space>
             <Space className='flex justify-between items-center pt-2'>
               <Text className='text-greenCustom font-medium text-lg'>{item.gia} VNĐ</Text>
@@ -82,7 +82,7 @@ const CardComponent = ({ item }) => {
                 onClick={handleAddToCart}
                 className=' flex justify-center items-center gap-2 font-medium rounded-sm bg-[#DEF9EC] text-greenCustom hover:bg-customBg hover:text-slate-50  py-1 px-3'>
                 <IoCartOutline size={17} />
-                Add
+                Thêm
               </button>
             </Space>
           </Card>
